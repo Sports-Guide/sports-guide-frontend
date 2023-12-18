@@ -15,12 +15,52 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js,.jsx .",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier . --write",
+    "prepare": "husky install",
+    "commit": "cz",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "airbnb",
+      "airbnb/hooks",
+      "prettier",
+      "plugin:storybook/recommended"
+    ],
+    "rules": {
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "react/react-in-jsx-scope": "off",
+      "import/prefer-default-export": "off",
+      "react/function-component-definition": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/no-unescaped-entities": "off",
+      "react/button-has-type": "off"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*",
+          "src/stories/**/*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off",
+          "import/no-extraneous-dependencies": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -34,5 +74,25 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "3.1.1"
+  },
+  "lint-staged": {
+		"*.{js,jsx}": [
+			"npm run lint"
+		],
+		"*.{js,jsx,css,md,html,json}": [
+			"npm run format"
+		]
+	},
+  "config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
 }
