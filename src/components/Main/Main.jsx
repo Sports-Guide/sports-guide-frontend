@@ -1,13 +1,10 @@
-import { Button } from '../Button/Button';
 import './Main.scss';
+import { Form } from '../Form/Form';
 
 export function Main() {
 	return (
 		<main>
-			<form>
-				<input />
-				<Button label="Найти" />
-			</form>
+			<Form label="Найти" />
 		</main>
 	);
 }
