@@ -10,7 +10,6 @@ export function Header({ onLogIn, onLogOut, loggedIn }) {
 			) : (
 				<Button onClick={onLogIn} label="Войти" />
 			)}
-			<h1>Привет</h1>
 		</header>
 	);
 }
