@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.scss';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
@@ -11,11 +11,13 @@ export function App() {
 		<div className="app">
 			<div className="page__container">
 				<Header />
-				<Routes>
-					<Route path="/" element={<Main />} />
-					<Route path="/profile" element={<Profile />} />
-					<Route path="/card" element={<Card />} />
-				</Routes>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<Main />} />
+						<Route path="/profile" element={<Profile />} />
+						<Route path="/card" element={<Card />} />
+					</Routes>
+				</BrowserRouter>
 				<Footer />
 			</div>
 		</div>
