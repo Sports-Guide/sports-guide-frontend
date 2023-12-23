@@ -10,15 +10,15 @@ export function App() {
 	return (
 		<div className="app">
 			<div className="page__container">
-				<Header />
 				<BrowserRouter>
+					<Header />
 					<Routes>
 						<Route path="/" element={<Main />} />
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/card" element={<Card />} />
 					</Routes>
+					<Footer />
 				</BrowserRouter>
-				<Footer />
 			</div>
 		</div>
 	);
