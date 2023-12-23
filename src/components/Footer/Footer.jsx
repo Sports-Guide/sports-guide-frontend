@@ -5,6 +5,7 @@ export function Footer() {
 		<footer className="footer">
 			<h1>Всем Приветпше</h1>
 			<p> Пробуем изменения</p>
+			<p>Test</p>
 			<p className="footer__copyright">© 2022</p>
 		</footer>
 	);
