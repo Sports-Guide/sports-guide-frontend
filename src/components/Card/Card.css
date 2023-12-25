@@ -1,0 +1,40 @@
+.leaflet-popup {
+	width: 320px;
+	height: 366px;
+	padding: 15px;
+}
+
+.leaflet-popup-content-wrapper {
+	background-color: #c7c7c7;
+}
+
+.leaflet-popup-tip {
+	background-color: #c7c7c7;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+}
+
+.chat-container {
+	display: flex;
+}
+
+.card-container {
+	margin-top: 40px;
+	padding: 0;
+}
+
+.card-photo {
+	width: 100%;
+}
+
+.card-title {
+	margin: 0;
+}
+
+.card-adress {
+	margin: 0;
+}

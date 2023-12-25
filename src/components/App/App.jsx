@@ -4,7 +4,6 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { Main } from '../Main/Main';
 import { Profile } from '../Profile/Profile';
-import { Card } from '../Card/Card';
 
 export function App() {
 	return (
@@ -15,7 +14,6 @@ export function App() {
 					<Routes>
 						<Route path="/" element={<Main />} />
 						<Route path="/profile" element={<Profile />} />
-						<Route path="/card" element={<Card />} />
 					</Routes>
 					<Footer />
 				</BrowserRouter>
