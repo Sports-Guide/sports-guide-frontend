@@ -1,0 +1,37 @@
+.button-kinds-of-sports {
+	width: 169px;
+	height: 56px;
+	padding: 16px, 20px, 16px, 20px;
+	border-radius: 12px;
+	border:
+		2px solid linear-gradient(0deg, #aaaaaa, #aaaaaa),
+		linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+	background: rgba(255, 255, 255, 0.5);
+	font-family: Inter;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	gap: 8px;
+    padding-left: 20px;
+    
+
+}
+
+
+.football{
+    background-image: url(../../images/ball_football.svg);
+}
+
+.bascetball{
+    background-image: url(../../images/ball-basketball.svg);
+}
+
+.ball{
+    background-repeat: no-repeat;
+    background-position: 15% 55%;
+}
