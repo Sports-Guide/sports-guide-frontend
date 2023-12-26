@@ -4,7 +4,7 @@ import { Icon } from 'leaflet';
 import './Map.css';
 import 'leaflet/dist/leaflet.css';
 import customIconImage from '../../images/location.png';
-import Card from '../Card/Card';
+import { Card } from '../Card/Card';
 
 const MapComponent = () => {
 	const position = [55.75242311607481, 37.613489794839005];
