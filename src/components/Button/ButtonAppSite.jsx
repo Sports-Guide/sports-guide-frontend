@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import './ButtonAppSite.scss';
 
 export function ButtonAppSite({ onClick, type, disabled, label }) {
 	return (
-		<button
+		<NavLink
 			className="button-app"
 			onClick={onClick}
 			type={type}
 			disabled={disabled}
+			to="/app-area"
 		>
 			{label}
-		</button>
+		</NavLink>
 	);
 }
 
