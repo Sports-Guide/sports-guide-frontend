@@ -1,5 +1,50 @@
 .footer {
 	background-color: lightgrey;
-	padding: 10px;
 	color: black;
+	display: flex;
+	width: 100%;
+	padding: 32px 56px;
+	align-items: center;
+	gap: 64px;
+}
+
+.footer__logo {
+	width: 81px;
+	height: 81px;
+}
+
+.footer__container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer__nav {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	list-style: none;
+}
+
+.footer__nav-link {
+	color: black;
+	font-family: Inter;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 20px;
+	text-decoration: none;
+	transition: opacity 0.3s ease;
+}
+
+.footer__nav-link:hover {
+	opacity: 0.7;
+}
+
+.footer__title {
+	color: #000;
+	font-family: Inter;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
 }
