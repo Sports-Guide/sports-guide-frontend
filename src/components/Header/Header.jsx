@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+
 import { Button } from '../Button/Button';
+import { ButtonAppSite } from '../Button/ButtonAppSite';
+import { ButtonMap } from '../Button/ButtonMap';
 import logo from '../../images/logo.svg';
 import './Header.scss';
 
@@ -9,24 +11,20 @@ export function Header({ onLogIn, onLogOut, loggedIn }) {
 	return (
 		<header className="header">
 			<div className="header__container">
-				<img className="logo" src={logo} alt="" />
-				<nav className="menu">
-					<NavLink to="/" className="menu__link">
-						Домой
-					</NavLink>
-					<NavLink to="/reviews" className="menu__link">
-						Обзоры эмодзи
-					</NavLink>
-					<NavLink to="/about-me" className="menu__link">
-						Обо мне
-					</NavLink>
-				</nav>
+				<div className="header__logo">
+					<img className="logo" src={logo} alt="" />
+					<h4 className="header__title">Спортивный Гид</h4>
+				</div>
+				<div className="header__buttons">
+					<ButtonMap label="Москва" />
+					{loggedIn ? (
+						<Button onClick={onLogOut} label="Выйти" />
+					) : (
+						<Button onClick={onLogIn} label="Войти" />
+					)}
+					<ButtonAppSite label="Добавить площадку" />
+				</div>
 			</div>
-			{loggedIn ? (
-				<Button onClick={onLogOut} label="Выйти" />
-			) : (
-				<Button onClick={onLogIn} label="Войти" />
-			)}
 		</header>
 	);
 }

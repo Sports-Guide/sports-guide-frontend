@@ -1,8 +1,44 @@
 .header {
 	display: flex;
-	border: 1px solid red;
 	background-color: lightgrey;
 	padding: 10px;
 	height: 100px;
 	color: black;
+}
+
+.header__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.header__logo {
+	margin-top: 4px;
+	margin-left: 40px;
+	display: flex;
+	align-items: center;
+
+	.logo {
+		margin-right: 13px;
+	}
+
+	.header__title {
+		font-family: Inter;
+		font-size: 16px;
+		font-weight: 600;
+		line-height: 19px;
+		letter-spacing: 0em;
+		text-align: left;
+	}
+}
+
+.header__buttons {
+	margin-right: 47px;
+	display: flex;
+	width: 457px;
+	height: 54px;
+	gap: 36px;
+	
+
 }
