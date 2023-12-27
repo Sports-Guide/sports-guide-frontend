@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.scss';
 import { Header } from '../Header/Header';
@@ -10,6 +11,20 @@ import Register from '../Register/Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 export function App() {
+	const [isEditing, setIsEditing] = React.useState(false);
+
+	const handleEditButtonClick = () => {
+		setIsEditing(true);
+	};
+
+	const handleDeleteAccount = () => {
+		console.log('Аккаунт удален');
+	};
+
+	const handleLogOut = () => {
+		console.log('Вы вышли из аккаунта');
+	};
+
 	return (
 		<div className="app">
 			<BrowserRouter>
@@ -18,7 +33,17 @@ export function App() {
 					<Routes>
 						<Route path="/" element={<Main />} />
 						<Route path="/app-area" element={<AreaApp />} />
-						<Route path="/profile" element={<Profile />} />
+						<Route
+							path="/profile"
+							element={
+								<Profile
+									onEditProfile={handleEditButtonClick}
+									isEditing={isEditing}
+									onDelete={handleDeleteAccount}
+									onLogOut={handleLogOut}
+								/>
+							}
+						/>
 						<Route path="/signin" element={<Login />} />
 						<Route path="/signup" element={<Register />} />
 						<Route path="*" element={<NotFoundPage />} />

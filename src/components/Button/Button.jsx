@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import './Button.scss';
 
-export function Button({ onClick, type, disabled, label }) {
+export function Button({ className, onClick, type, disabled, label }) {
 	return (
 		<button
-			className="button"
+			className={`button ${className}`}
 			onClick={onClick}
 			type={type}
 			disabled={disabled}
@@ -15,8 +15,16 @@ export function Button({ onClick, type, disabled, label }) {
 }
 
 Button.propTypes = {
+	className: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,
-	type: PropTypes.string.isRequired,
+	type: PropTypes.string,
 	disabled: PropTypes.bool.isRequired,
-	label: PropTypes.string.isRequired,
+	label: PropTypes.string,
 };
+
+Button.defaultProps = {
+	label: null,
+	type: 'button',
+};
+
+export default Button;

@@ -1,17 +1,13 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '../Button/Button';
-import { Input } from '../Input/Input';
 import './Form.scss';
 
-export function Form({ label }) {
-	return (
-		<form>
-			<Input />
-			<Button label={label} />
-		</form>
-	);
+export function Form({ children }) {
+	return <form className="form form_place_profile">{children}</form>;
 }
 
 Form.propTypes = {
-	label: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
 };
+
+export default Form;
