@@ -12,8 +12,8 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 export function App() {
 	return (
 		<div className="app">
-			<div className="page__container">
-				<BrowserRouter>
+			<BrowserRouter>
+				<div className="page__container">
 					<Header />
 					<Routes>
 						<Route path="/" element={<Main />} />
@@ -24,8 +24,8 @@ export function App() {
 						<Route path="*" element={<NotFoundPage />} />
 					</Routes>
 					<Footer />
-				</BrowserRouter>
-			</div>
+				</div>
+			</BrowserRouter>
 		</div>
 	);
 }

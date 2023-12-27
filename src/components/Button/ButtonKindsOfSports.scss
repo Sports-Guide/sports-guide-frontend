@@ -13,25 +13,22 @@
 	line-height: 20px;
 	letter-spacing: 0em;
 	text-align: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	gap: 8px;
-    padding-left: 20px;
-    
-
+	padding-left: 20px;
 }
 
-
-.football{
-    background-image: url(../../images/ball_football.svg);
+.football {
+	background-image: url(../../images/ball_football.svg);
 }
 
-.bascetball{
-    background-image: url(../../images/ball-basketball.svg);
+.bascetball {
+	background-image: url(../../images/ball-basketball.svg);
 }
 
-.ball{
-    background-repeat: no-repeat;
-    background-position: 15% 55%;
+.ball {
+	background-repeat: no-repeat;
+	background-position: 15% 55%;
 }
