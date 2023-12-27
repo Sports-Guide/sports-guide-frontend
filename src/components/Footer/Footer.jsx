@@ -1,7 +1,26 @@
 import './Footer.scss';
-import logo from '../../images/logo.svg';
 
 export function Footer() {
+	return (
+		<footer className="footer">
+			<div className="footer__container">
+				<p className="footer__copyright">
+					&copy; {new Date().getFullYear()} Спортивный гид
+				</p>
+				<a
+					className="footer__nav-link"
+					href="###"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Правила
+				</a>
+			</div>
+		</footer>
+	);
+}
+
+/* export function Footer() {
 	return (
 		<footer className="footer">
 			<img
@@ -40,4 +59,4 @@ export function Footer() {
 			</div>
 		</footer>
 	);
-}
+} */
