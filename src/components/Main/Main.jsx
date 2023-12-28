@@ -6,7 +6,7 @@ export function Main() {
 	return (
 		<main>
 			<Form label="Найти" />
-			<MapComponent />
+			<MapComponent className="map-container_place_main" />
 		</main>
 	);
 }

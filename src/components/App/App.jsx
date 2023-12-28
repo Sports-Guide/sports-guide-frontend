@@ -9,6 +9,7 @@ import { AreaApp } from '../Area/AreaApp';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import { SportsGround } from '../SportsGround/SportsGround';
 
 export function App() {
 	const [isEditing, setIsEditing] = React.useState(false);
@@ -44,6 +45,7 @@ export function App() {
 								/>
 							}
 						/>
+						<Route path="/sports-ground" element={<SportsGround />} />
 						<Route path="/signin" element={<Login />} />
 						<Route path="/signup" element={<Register />} />
 						<Route path="*" element={<NotFoundPage />} />

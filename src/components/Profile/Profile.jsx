@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Profile.scss';
 import { Form } from '../Form/Form';
-import MapComponent from '../Map/Map';
 import FormTitle from '../FormTitle/FormTitle';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
@@ -97,8 +96,6 @@ export function Profile({ isEditing, onEditProfile, onDelete, onLogOut }) {
 						<Button className="button-y" onClick={onLogOut} label="Выйти" />
 					</div>
 				</div>
-
-				<MapComponent className="map-container_place_profile" />
 			</section>
 		</main>
 	);

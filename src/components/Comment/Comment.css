@@ -1,0 +1,5 @@
+.comment {
+	text-align: left;
+	display: flex;
+	gap: 20px;
+}

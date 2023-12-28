@@ -1,4 +1,30 @@
 .leaflet-container {
-	height: 911px;
-	width: 800px;
+	height: 100%;
+	width: 100%;
+}
+
+/* .leaflet-control-container {
+	position: absolute;
+	top: 0;
+	right: -150px;
+	z-index: 2000;
+}
+
+.leaflet-control-attribution {
+	display: none;
+} */
+
+.map-container {
+	margin: 0 auto;
+}
+
+.map-container_place_main {
+	width: 1120px;
+	height: 820px;
+	margin: 90px auto 90px;
+}
+
+.map-container_place_sport {
+	width: 399px;
+	height: 645px;
 }
