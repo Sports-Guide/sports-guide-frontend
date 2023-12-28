@@ -1,168 +1,165 @@
 .profile__header {
-  display: flex;
-  justify-content: space-between;
-  /* padding-left: 145px; */
-  padding: 50px 45px 50px 145px;
-  background-color: #b4b4b4;
+	display: flex;
+	justify-content: space-between;
+	/* padding-left: 145px; */
+	padding: 50px 45px 50px 145px;
+	background-color: #b4b4b4;
 }
 
 .profile__user {
-  display: flex;
+	display: flex;
 }
 
 .profile__avatar {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  margin-right: 20px;
+	position: relative;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	background-size: cover;
+	background-position: center;
+	margin-right: 20px;
 }
 
 .profile__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 14px;
 }
 
 .profile__name {
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 43.57px;
-  margin: 0;
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 43.57px;
+	margin: 0;
 }
 
 .profile__status {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 24.2px;
-  margin: 0;
-  text-align: left;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 24.2px;
+	margin: 0;
+	text-align: left;
 }
 
 .profile__edit-button {
-  width: 43px;
-  height: 43px;
-  background-color: transparent;
-  background-image: url(../../images/edit-icon.png);
-  background-position: 50%;
-  border: none;
-  align-self: flex-end;
+	width: 43px;
+	height: 43px;
+	background-color: transparent;
+	background-image: url(../../images/edit-icon.png);
+	background-position: 50%;
+	border: none;
+	align-self: flex-end;
 }
 
 .profile__container {
-  display: flex;
-  justify-content: space-between;
-  padding: 80px;
+	display: flex;
+	justify-content: space-between;
+	padding: 80px;
 }
 
 .profile__info-block {
-  
 }
 
 .form_place_profile {
-  color: #767676;
-  width: 220px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+	color: #767676;
+	width: 220px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 }
 
 .form__title_place_profile {
-  color: black;
-  text-align: left;
-  margin: 0 0 18px ;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 20px;
+	color: black;
+	text-align: left;
+	margin: 0 0 18px;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 20px;
 }
 
 .form__button_place_profile {
-  width: 27px;
-  height: 27px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: transparent;
-  border: none;
-  background-image: url(../../images/edit-icon.png);
-  /* background-position: 50%; */
-  /* background-repeat: no-repeat; */
-  background-size: contain;
-  padding: 0;
+	width: 27px;
+	height: 27px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: transparent;
+	border: none;
+	background-image: url(../../images/edit-icon.png);
+	/* background-position: 50%; */
+	/* background-repeat: no-repeat; */
+	background-size: contain;
+	padding: 0;
 }
 
 .form__button_password-edit {
-  background-image: url(../../images/check-icon.png);
-
+	background-image: url(../../images/check-icon.png);
 }
 
 .profile__input-title {
-  text-align: left;
-  margin: 0;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 16px;
+	text-align: left;
+	margin: 0;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 16px;
 }
 
 .profile__caption {
-  width: 100%;
-  border: 2px solid #aaa;
-  border-radius: 4px;
-  height: 32px;
-  text-align: left;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18px;
-  padding: 0;
-  margin: 0;
-  align-items: center;
+	width: 100%;
+	border: 2px solid #aaa;
+	border-radius: 4px;
+	height: 32px;
+	text-align: left;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 18px;
+	padding: 0;
+	margin: 0;
+	align-items: center;
 }
 
 .input_place_profile {
-
 }
 
 .error_place_profile {
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: left;
-  width: 100%;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 16px;
+	text-align: left;
+	width: 100%;
 }
 
 .title {
-  text-align: left;
-  color: black;
+	text-align: left;
+	color: black;
 }
 
 .button__container {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
 }
 
 .button-y {
-  border: none;
-  border-radius: 10px;
-  width: 200px;
-  height: 30px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  color: #fff;
-  background-color: #aaa;
+	border: none;
+	border-radius: 10px;
+	width: 200px;
+	height: 30px;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff;
+	background-color: #aaa;
 }
 
 .favourites__container {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
 }
 
 .jd {
-  margin: 0;
-  text-align: left;
+	margin: 0;
+	text-align: left;
 }

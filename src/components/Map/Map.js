@@ -1,4 +1,5 @@
 import React from 'react';
+import MarkerClusterGroup from 'react-leaflet-cluster';
 import { MapContainer, Popup, TileLayer, Marker } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import './Map.css';
@@ -35,14 +36,16 @@ const MapComponent = () => {
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 			/>
-			{markers.map((marker) => (
-				<Marker position={marker.geocode} icon={customIcon}>
-					<Popup>
-						{/* <h2>{marker.popUp}</h2> */}
-						<Card />
-					</Popup>
-				</Marker>
-			))}
+			<MarkerClusterGroup>
+				{markers.map((marker) => (
+					<Marker position={marker.geocode} icon={customIcon}>
+						<Popup>
+							{/* <h2>{marker.popUp}</h2> */}
+							<Card />
+						</Popup>
+					</Marker>
+				))}
+			</MarkerClusterGroup>
 		</MapContainer>
 	);
 };
