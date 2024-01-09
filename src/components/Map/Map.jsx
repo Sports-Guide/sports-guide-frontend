@@ -1,8 +1,7 @@
 import React from 'react';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import PropTypes from 'prop-types';
-import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
-import { MapContainer, Popup, TileLayer, Marker, useMap } from 'react-leaflet';
+import { MapContainer, Popup, TileLayer, Marker } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import './Map.css';
 import 'leaflet/dist/leaflet.css';
@@ -13,34 +12,13 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder/dist/Control.Geocoder';
 import markers from '../../constants/markers';
 
-const MapComponent = ({ className }) => {
+const MapComponent = ({ className, children }) => {
 	const position = [55.75242311607481, 37.613489794839005];
 
 	const customIcon = new Icon({
 		iconUrl: customIconImage,
 		iconSize: [38, 38],
 	});
-
-	const AddSearchControl = () => {
-		const map = useMap();
-
-		React.useEffect(() => {
-			const provider = new OpenStreetMapProvider();
-			const searchControl = new GeoSearchControl({
-				provider,
-				autoCompleteDelay: 300,
-				showMarker: false,
-				retainZoomLevel: false,
-				style: 'bar',
-			});
-
-			map.addControl(searchControl);
-
-			return () => map.removeControl(searchControl);
-		}, [map]);
-
-		return null;
-	};
 
 	return (
 		<div className={`map-container ${className}`}>
@@ -50,9 +28,7 @@ const MapComponent = ({ className }) => {
 				center={position}
 				scrollWheelZoom={false}
 			>
-				<div className="search-container">
-					<AddSearchControl />
-				</div>
+				<div className="search-container">{children}</div>
 				<TileLayer
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -74,6 +50,7 @@ const MapComponent = ({ className }) => {
 
 MapComponent.propTypes = {
 	className: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
 };
 
 export default MapComponent;
