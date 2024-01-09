@@ -1,0 +1,29 @@
+.media {
+	display: flex;
+	justify-content: space-between;
+}
+
+.photo-container {
+	width: 750px;
+	height: 645px;
+}
+
+.page-title {
+	text-align: left;
+}
+
+.sports-ground {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.nav-link {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+.adress {
+	text-align: left;
+}
