@@ -1,12 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './SportsGround.css';
 import { Button } from '../Button/Button';
 import MapComponent from '../Map/Map';
 import { Comment } from '../Comment/Comment';
+import { Form } from '../Form/Form';
+import { Input } from '../Input/Input';
 
-export function SportsGround() {
+export function SportsGround({ onCommentSubmit }) {
 	const comments = [
 		{
 			author: 'John',
@@ -34,7 +36,6 @@ export function SportsGround() {
 			<p className="adress">
 				Россия, Москва, Южный административный округ, район Зябликово
 			</p>
-			<Button />
 			<div className="media">
 				<div className="photo-container">
 					<image className="photo" />
@@ -56,9 +57,22 @@ export function SportsGround() {
 						/>
 					))}
 				</div>
+				<Form className="comment-form">
+					<Input className="comment-input" placeholder="Напишите сообщение" />
+					<span className="comment-caption">0 / 2000 символов</span>
+					<Button
+						className="comment-submit-button"
+						onClick={onCommentSubmit}
+						label="Отправить"
+					/>
+				</Form>
 			</div>
 		</main>
 	);
 }
+
+SportsGround.propTypes = {
+	onCommentSubmit: PropTypes.func.isRequired,
+};
 
 export default SportsGround;
