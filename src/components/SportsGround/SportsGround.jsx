@@ -7,6 +7,10 @@ import MapComponent from '../Map/Map';
 import { Comment } from '../Comment/Comment';
 import { Form } from '../Form/Form';
 import { Input } from '../Input/Input';
+import { Slider } from '../Slider/Slider';
+import ImageF from '../../images/Kavkazskie_gory.jpg';
+import ImageT from '../../images/Moench_2339.jpg';
+import ImageTh from '../../images/1b5ff838-4a02-11ed-933f-3a23cf4bb419.1220x600.jpeg';
 
 export function SportsGround({ onCommentSubmit }) {
 	const comments = [
@@ -38,7 +42,11 @@ export function SportsGround({ onCommentSubmit }) {
 			</p>
 			<div className="media">
 				<div className="photo-container">
-					<image className="photo" />
+					<Slider>
+						<img className="photo" alt="mountains" src={ImageF} />
+						<img className="photo" alt="mountains" src={ImageT} />
+						<img className="photo" alt="mountains" src={ImageTh} />
+					</Slider>
 				</div>
 				<MapComponent className="map-container_place_sport" />
 			</div>
