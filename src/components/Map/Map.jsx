@@ -43,8 +43,13 @@ const MapComponent = ({ className, children }) => {
 };
 
 MapComponent.propTypes = {
-	className: PropTypes.string.isRequired,
-	children: PropTypes.node.isRequired,
+	className: PropTypes.string,
+	children: PropTypes.node,
+};
+
+MapComponent.defaultProps = {
+	className: 'map',
+	children: null,
 };
 
 export default MapComponent;
