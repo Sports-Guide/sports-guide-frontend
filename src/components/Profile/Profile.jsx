@@ -5,8 +5,17 @@ import { Form } from '../Form/Form';
 import FormTitle from '../FormTitle/FormTitle';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
+import { Popup } from '../Popup/Popup';
 
-export function Profile({ isEditing, onEditProfile, onDelete, onLogOut }) {
+export function Profile({
+	isEditing,
+	onEditProfile,
+	onDelete,
+	onLogOut,
+	onPopupOpen,
+	isOpen,
+	onClose,
+}) {
 	return (
 		<main className="profile">
 			<section className="profile__container">
@@ -93,10 +102,43 @@ export function Profile({ isEditing, onEditProfile, onDelete, onLogOut }) {
 								label="Удалить аккаунт"
 							/>
 						) : null}
-						<Button className="button-y" onClick={onLogOut} label="Выйти" />
+						{/* <Button className="button-y" onClick={onLogOut} label="Выйти" /> */}
+						<Button className="button-y" onClick={onPopupOpen} label="Выйти" />
 					</div>
 				</div>
 			</section>
+			<Popup isOpen={isOpen} onClose={onClose} title="Выход">
+				<h3 className="popup__title">Вы хотите выйти из профиля?</h3>
+				<div className="popup__button-container">
+					<Button
+						className="popup__button popup__button-y"
+						onClick={onLogOut}
+						label="Да"
+					/>
+					<Button
+						className="popup__button popup__button-n"
+						onClick={onClose}
+						label="Нет"
+					/>
+				</div>
+			</Popup>
+			<Popup isOpen={isOpen} onClose={onClose} title="Удаление аккаунта">
+				<h3 className="popup__title">
+					Вы действительно хотите удалить аккаунт?
+				</h3>
+				<div className="popup__button-container">
+					<Button
+						className="popup__button popup__button-y"
+						onClick={onLogOut}
+						label="Да"
+					/>
+					<Button
+						className="popup__button popup__button-n"
+						onClick={onClose}
+						label="Нет"
+					/>
+				</div>
+			</Popup>
 		</main>
 	);
 }
@@ -106,6 +148,9 @@ Profile.propTypes = {
 	onEditProfile: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,
+	onPopupOpen: PropTypes.func.isRequired,
+	isOpen: PropTypes.bool.isRequired,
+	onClose: PropTypes.func.isRequired,
 };
 
 export default Profile;

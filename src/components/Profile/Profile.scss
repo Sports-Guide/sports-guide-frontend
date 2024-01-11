@@ -163,3 +163,43 @@
 	margin: 0;
 	text-align: left;
 }
+
+.popup__title {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 32px;
+	text-align: center;
+	color: #000;
+	margin: 0;
+	padding-top: 24px;
+}
+
+.popup__button-container {
+	display: flex;
+	max-width: calc(174px * 2 + 70px);
+	justify-content: space-between;
+	padding: 48px 0 108px;
+	margin: 0 auto;
+}
+
+.popup__button {
+	font-family: inherit;
+	border: none;
+	outline: none;
+	padding: 0;
+	text-align: center;
+	width: 174px;
+	height: 54px;
+	font-weight: 700;
+	line-height: 18px;
+}
+
+.popup__button-n {
+	border: 2px solid #898989;
+}
+
+.popup__button-y {
+	background-color: #898989;
+	color: #fff;
+	font-size: 16px;
+}
