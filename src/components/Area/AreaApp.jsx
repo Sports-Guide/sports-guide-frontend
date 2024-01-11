@@ -7,10 +7,10 @@ import MapComponent from '../Map/Map';
 export function AreaApp() {
 	return (
 		<div className="area-app">
-			<NavLink className="area-app__link" to="/">
-				&larr; К выбору площадки
-			</NavLink>
 			<div className="area-app__information">
+				<NavLink className="area-app__link" to="/">
+					&larr; К выбору площадки
+				</NavLink>
 				<h2 className="area-app__title">Добавление площадки</h2>
 				<p className="area-app__subtitle">Основная информация</p>
 				<form action="" className="input-container">
@@ -32,7 +32,7 @@ export function AreaApp() {
 							placeholder="Россия, Москва, Южный административный округ, район Зябликово"
 						/>
 					</label>
-					<MapComponent />
+					<MapComponent className="map-container_place_area-app" />
 					<div className="kinds-of-sports">
 						<h3 className="kinds-of-sports__title">Виды спорта</h3>
 						<div className="kinds-of-sports__buttons">

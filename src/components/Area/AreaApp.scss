@@ -1,4 +1,7 @@
 .area-app {
+	border: 1px solid green;
+	padding-left: 50px;
+	color: rgba(81, 81, 81, 1);
 }
 .area-app__link {
 	font-family: Inter;
@@ -9,17 +12,52 @@
 	text-align: left;
 	color: rgba(81, 81, 81, 1);
 	text-decoration: none;
+	margin: 0;
+
+
 }
 
 .area-app__information {
+	border: 1px solid red;
+	display: flex;
+	flex-direction: column;
+
+	width: 913px;
+	gap: 64px;
 }
 .area-app__title {
+	margin: 0;
+	font-family: Inter;
+	font-size: 48px;
+	font-weight: 700;
+	line-height: 56px;
+	letter-spacing: 0em;
+	text-align: left;
 }
 .area-app__subtitle {
+	margin: 0;
+	font-family: Inter;
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 56px;
+	letter-spacing: 0em;
+	text-align: left;
 }
 .input-container {
+	border: 1px solid yellow;
+	display: flex;
+	flex-direction: column;
 }
 .input-container__label {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	font-family: Inter;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: left;
 }
 .input-container__input {
 }

@@ -16,12 +16,7 @@ const MapComponent = ({ className, children }) => {
 
 	return (
 		<div className={`map-container ${className}`}>
-			<MapContainer
-				className={`map ${className}`}
-				zoom={14}
-				center={position}
-				scrollWheelZoom={false}
-			>
+			<MapContainer zoom={14} center={position} scrollWheelZoom={false}>
 				<div className="search-container">{children}</div>
 				<TileLayer
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
