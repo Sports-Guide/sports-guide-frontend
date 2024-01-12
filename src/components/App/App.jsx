@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.scss';
 import { Header } from '../Header/Header';
@@ -12,7 +12,11 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { SportsGround } from '../SportsGround/SportsGround';
 
 export function App() {
-	const [isEditing, setIsEditing] = React.useState(false);
+	const [isEditing, setIsEditing] = useState(false);
+	// состояния попапов
+	const [isDeleteAccountPopupOpen, setDeleteAccountPopupOpen] = useState(false);
+	const [isLogoutConfirmationPopupOpen, setLogoutConfirmationPopupOpen] =
+		useState(false);
 
 	const handleEditButtonClick = () => {
 		setIsEditing(true);
@@ -25,6 +29,34 @@ export function App() {
 	const handleLogOut = () => {
 		console.log('Вы вышли из аккаунта');
 	};
+
+	// создаём обработчики для открытия попапов
+	const handleDeleteAccountBtnClick = () => {
+		setDeleteAccountPopupOpen(true);
+	};
+	const handleLogOutClick = () => {
+		setLogoutConfirmationPopupOpen(true);
+	};
+
+	// функция закрытия всех попапов
+	const closeAllPopups = () => {
+		setDeleteAccountPopupOpen(false);
+		setLogoutConfirmationPopupOpen(false);
+	};
+
+	// закрываем попапы по Esc
+	useEffect(() => {
+		const closeWithEsc = (e) => {
+			if (e.key === 'Escape') {
+				closeAllPopups();
+			}
+		};
+		document.addEventListener('keydown', closeWithEsc);
+		// удаляем событие при размонтировании компонента
+		return () => {
+			document.removeEventListener('keydown', closeWithEsc);
+		};
+	}, [isDeleteAccountPopupOpen, isLogoutConfirmationPopupOpen]);
 
 	return (
 		<div className="app">
@@ -42,6 +74,11 @@ export function App() {
 									isEditing={isEditing}
 									onDelete={handleDeleteAccount}
 									onLogOut={handleLogOut}
+									onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
+									onLogoutPopupOpen={handleLogOutClick}
+									isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
+									isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
+									onClose={closeAllPopups}
 								/>
 							}
 						/>

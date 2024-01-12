@@ -12,8 +12,10 @@ export function Profile({
 	onEditProfile,
 	onDelete,
 	onLogOut,
-	onPopupOpen,
-	isOpen,
+	onDeleteAccountPopupOpen,
+	onLogoutPopupOpen,
+	isLogoutPopupOpen,
+	isDeleteAccountPopupOpen,
 	onClose,
 }) {
 	return (
@@ -98,16 +100,19 @@ export function Profile({
 						{isEditing ? (
 							<Button
 								className="button-y"
-								onClick={onDelete}
+								onClick={onDeleteAccountPopupOpen}
 								label="Удалить аккаунт"
 							/>
 						) : null}
-						{/* <Button className="button-y" onClick={onLogOut} label="Выйти" /> */}
-						<Button className="button-y" onClick={onPopupOpen} label="Выйти" />
+						<Button
+							className="button-y"
+							onClick={onLogoutPopupOpen}
+							label="Выйти"
+						/>
 					</div>
 				</div>
 			</section>
-			<Popup isOpen={isOpen} onClose={onClose} title="Выход">
+			<Popup isOpen={isLogoutPopupOpen} onClose={onClose} title="Выход">
 				<h3 className="popup__title">Вы хотите выйти из профиля?</h3>
 				<div className="popup__button-container">
 					<Button
@@ -122,14 +127,18 @@ export function Profile({
 					/>
 				</div>
 			</Popup>
-			<Popup isOpen={isOpen} onClose={onClose} title="Удаление аккаунта">
+			<Popup
+				isOpen={isDeleteAccountPopupOpen}
+				onClose={onClose}
+				title="Удаление аккаунта"
+			>
 				<h3 className="popup__title">
 					Вы действительно хотите удалить аккаунт?
 				</h3>
 				<div className="popup__button-container">
 					<Button
 						className="popup__button popup__button-y"
-						onClick={onLogOut}
+						onClick={onDelete}
 						label="Да"
 					/>
 					<Button
@@ -148,8 +157,10 @@ Profile.propTypes = {
 	onEditProfile: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,
-	onPopupOpen: PropTypes.func.isRequired,
-	isOpen: PropTypes.bool.isRequired,
+	onDeleteAccountPopupOpen: PropTypes.func.isRequired,
+	onLogoutPopupOpen: PropTypes.func.isRequired,
+	isLogoutPopupOpen: PropTypes.bool.isRequired,
+	isDeleteAccountPopupOpen: PropTypes.bool.isRequired,
 	onClose: PropTypes.func.isRequired,
 };
 
