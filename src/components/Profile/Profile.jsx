@@ -27,11 +27,17 @@ export function Profile({
 							label="Личные данные"
 							className="form__title_place_profile"
 						/>
-						<Button
-							className="form__button_place_profile"
-							onClick={onEditProfile}
-						/>
-						<p className="profile__input-title">Логин</p>
+						<div className="form__personal-data-header-container">
+							<h2 className="form__personal-data-title">Имя и почта</h2>
+							<Button
+								className="form__button_place_profile"
+								onClick={onEditProfile}
+								label="Редактировать"
+							/>
+						</div>
+
+						<p className="profile__input-title">Никнейм</p>
+						{/* <p className="profile__input-title">Логин</p> */}
 						{isEditing ? (
 							<Input
 								className="input_place_profile"
@@ -44,7 +50,11 @@ export function Profile({
 						) : (
 							<p className="profile__caption profile__caption_name">login</p>
 						)}
-						<span className="error error_place_profile">Error</span>
+						{/* <span className="error error_place_profile">Error</span> */}
+						<span className="error error_place_profile">
+							Никнейм должен быть не менее 2 символов, включать латинские буквы,
+							может содержать цифры и другие символы
+						</span>
 						<p className="profile__input-title">Почта</p>
 						{isEditing ? (
 							<Input
@@ -58,17 +68,25 @@ export function Profile({
 						) : (
 							<p className="profile__caption profile__caption_name">login</p>
 						)}
-						<span className="error error_place_profile">Error</span>
+						{/* <span className="error error_place_profile">Error</span> */}
+						<span className="error error_place_profile">
+							Введите корректный email. Пример: user@mail.ru
+						</span>
 					</Form>
 					<FormTitle
-						label="Изменить пароль"
+						// label="Изменить пароль"
+						label="Пароль"
 						className="form__title_place_profile"
 					/>
 					<button
-						className="form__button form__button_place_profile form__button_password-edit"
-						aria-label="edit"
-					/>
-					<p className="profile__input-title">Старый пароль</p>
+						// className="form__button form__button_place_profile form__button_password-edit"
+						className="form__button form__button_password-edit"
+						// aria-label="edit"
+						aria-label="Изменить пароль"
+					>
+						Изменить пароль
+					</button>
+					{/* <p className="profile__input-title">Старый пароль</p>
 					{isEditing ? (
 						<Input
 							className="input_place_profile"
@@ -90,13 +108,25 @@ export function Profile({
 							name="login"
 							placeholder="Введите пароль"
 							minLength="2"
-							maxLength="25"
-						/>
+							maxLength="25" */}
+					{/* />
 					) : (
 						<p className="profile__caption profile__caption_name">********</p>
 					)}
-					<span className="error error_place_profile">Error</span>
+					<span className="error error_place_profile">Error</span> */}
 					<div className="button__container">
+						<Button
+							className="profile__button-logout"
+							onClick={onLogoutPopupOpen}
+							label="Выйти из аккаунта"
+						/>
+						<Button
+							className="profile__button-account-delete"
+							onClick={onDeleteAccountPopupOpen}
+							label="Удалить аккаунт"
+						/>
+					</div>
+					{/* <div className="button__container">
 						{isEditing ? (
 							<Button
 								className="button-y"
@@ -104,12 +134,8 @@ export function Profile({
 								label="Удалить аккаунт"
 							/>
 						) : null}
-						<Button
-							className="button-y"
-							onClick={onLogoutPopupOpen}
-							label="Выйти"
-						/>
-					</div>
+						<Button className="button-y" onClick={onLogoutPopupOpen} label="Выйти" />
+					</div> */}
 				</div>
 			</section>
 			<Popup isOpen={isLogoutPopupOpen} onClose={onClose} title="Выход">

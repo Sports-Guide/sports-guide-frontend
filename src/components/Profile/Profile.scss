@@ -54,48 +54,107 @@
 
 .profile__container {
 	display: flex;
-	justify-content: space-between;
-	padding: 80px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 62px 0 158px;
 }
+// .profile__container {
+// 	display: flex;
+// 	justify-content: space-between;
+// 	padding: 80px;
+// } прошлые стили (оставляю, пока макет не утверждён)
 
-.profile__info-block {
-}
+// .profile__info-block {
+// }
 
 .form_place_profile {
 	color: #767676;
-	width: 220px;
+	width: 480px;
+	// width: 220px; прошлый стиль
 	display: flex;
 	flex-direction: column;
-	position: relative;
+	// position: relative; прошлый стиль
 }
 
 .form__title_place_profile {
-	color: black;
+	color: #000;
 	text-align: left;
-	margin: 0 0 18px;
+	padding-top: calc(48px - 16px);
+	margin: 0 0 24px;
+	// margin: 0 0 18px;
 	font-weight: 600;
-	font-size: 20px;
+	font-size: 24px;
+	// font-size: 20px; прошлый стиль
 	line-height: 20px;
 }
 
-.form__button_place_profile {
-	width: 27px;
-	height: 27px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	background-color: transparent;
-	border: none;
-	background-image: url(../../images/edit-icon.png);
-	/* background-position: 50%; */
-	/* background-repeat: no-repeat; */
-	background-size: contain;
-	padding: 0;
+.form__personal-data-header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
 }
 
-.form__button_password-edit {
-	background-image: url(../../images/check-icon.png);
+.form__personal-data-title {
+	margin: 0;
+	color: #000;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
 }
+
+.form__button_place_profile {
+	color: #1478FF;
+	border-bottom: solid 1px;
+	padding: 0;
+	font-family: Inter;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	text-align: left;
+}
+// .form__button_place_profile {
+// 	width: 27px;
+// 	height: 27px;
+// 	position: absolute;
+// 	top: 0;
+// 	right: 0;
+// 	background-color: transparent;
+// 	border: none;
+// 	background-image: url(../../images/edit-icon.png);
+// 	/* background-position: 50%; */
+// 	/* background-repeat: no-repeat; */
+// 	background-size: contain;
+// 	padding: 0;
+// }
+
+.form__button_password-edit {
+	width: 157px;
+	height: 44px;
+	display: flex;
+    align-items: center;
+	justify-content: center;
+	background-color: #E9E9E9;
+	border: none;
+	outline: none;
+	color: #030303;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	border-radius: 8px;
+	padding: 0;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+}
+
+// .form__button_password-edit {
+// 	background-image: url(../../images/check-icon.png);
+// }
 
 .profile__input-title {
 	text-align: left;
@@ -103,13 +162,16 @@
 	font-weight: 600;
 	font-size: 14px;
 	line-height: 16px;
+	padding-bottom: 4px;
 }
 
 .profile__caption {
 	width: 100%;
+	height: 48px;
+	display: flex;
 	border: 2px solid #aaa;
 	border-radius: 4px;
-	height: 32px;
+	// height: 32px; прошлый стиль
 	text-align: left;
 	font-weight: 400;
 	font-size: 16px;
@@ -117,18 +179,32 @@
 	padding: 0;
 	margin: 0;
 	align-items: center;
+	color: #111;
+	padding: 15px;
 }
 
-.input_place_profile {
-}
+// profile__caption_name есть в разметке, но в стилях нет. Если не нужен - убрать
+
+// .input_place_profile {
+// }
 
 .error_place_profile {
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 16px;
+	height: calc(16px * 2);
 	text-align: left;
 	width: 100%;
+	color: #F92E2E;
+	margin-bottom: 16px;
 }
+// .error_place_profile {
+// 	font-weight: 400;
+// 	font-size: 12px;
+// 	line-height: 16px;
+// 	text-align: left;
+// 	width: 100%;
+// }
 
 .title {
 	text-align: left;
@@ -138,7 +214,46 @@
 .button__container {
 	display: flex;
 	flex-direction: column;
-	gap: 32px;
+	gap: 28px;
+	padding-top: 106px;
+}
+// .button__container {
+// 	display: flex;
+// 	flex-direction: column;
+// 	gap: 32px;
+// }
+
+.profile__button-logout {
+	width: 166px;
+	height: 44px;
+	border: solid 2px #6D6D6D;
+	outline: none;
+	padding: 0;
+	background-color: transparent;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	color: #6D6D6D;
+    text-align: center;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	font-family: system-ui;
+}
+
+.profile__button-account-delete {
+	border-bottom: #6D6D6D 1px solid;
+	text-decoration: none;
+	width: fit-content;
+	color: #6D6D6D;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 22px;
+	text-align: left;
+	font-family: system-ui;
+	padding: 0;
 }
 
 .button-y {
