@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Form.scss';
 
-export function Form({ children }) {
-	return <form className="form form_place_profile">{children}</form>;
+export function Form({ children, className }) {
+	return <form className={`form ${className}`}>{children}</form>;
 }
 
 Form.propTypes = {
 	children: PropTypes.node.isRequired,
+	className: PropTypes.string.isRequired,
 };
 
 export default Form;

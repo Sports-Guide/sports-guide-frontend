@@ -20,7 +20,7 @@ export function Profile({
 		<main className="profile">
 			<section className="profile__container">
 				<div className="profile__info-block">
-					<Form>
+					<Form className="form_place_profile">
 						<FormTitle
 							label="Личные данные"
 							className="form__title_place_profile"

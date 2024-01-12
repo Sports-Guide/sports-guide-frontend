@@ -1,5 +1,50 @@
 .comment {
-	text-align: left;
+	width: 100%;
+	height: 180px;
+	padding: 32px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+	border-radius: 10px;
+	background-color: #f6f6f6;
+}
+
+.comment-content {
 	display: flex;
 	gap: 20px;
+}
+
+.comment-icon {
+	width: 72px;
+	height: 72px;
+}
+
+.comment-info {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	text-align: left;
+}
+
+.comment-author {
+	margin: 0;
+}
+
+.comment-date {
+	margin: 0;
+}
+
+.comment-submit {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.comment-caption {
+	color: #aaa;
+	font-family: Inter;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px; /* 100% */
 }
