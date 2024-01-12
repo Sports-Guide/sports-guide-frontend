@@ -8,9 +8,7 @@ import { Comment } from '../Comment/Comment';
 import { Form } from '../Form/Form';
 import { Input } from '../Input/Input';
 import { Slider } from '../Slider/Slider';
-import ImageF from '../../images/Kavkazskie_gory.jpg';
-import ImageT from '../../images/Moench_2339.jpg';
-import ImageTh from '../../images/1b5ff838-4a02-11ed-933f-3a23cf4bb419.1220x600.jpeg';
+import { photos } from '../../constants/SliderConstants';
 
 export function SportsGround({ onCommentSubmit }) {
 	const comments = [
@@ -33,29 +31,42 @@ export function SportsGround({ onCommentSubmit }) {
 
 	return (
 		<main className="sports-ground">
-			<NavLink to="/" className="nav-link">
-				К выбору площадки
+			<NavLink to="/" className="sports-ground__link">
+				← К выбору площадки
 			</NavLink>
-			<h1 className="page-title">Футбольное поле</h1>
-			<p className="adress">
-				Россия, Москва, Южный административный округ, район Зябликово
-			</p>
-			<div className="media">
-				<div className="photo-container">
-					<Slider>
-						<img className="photo" alt="mountains" src={ImageF} />
-						<img className="photo" alt="mountains" src={ImageT} />
-						<img className="photo" alt="mountains" src={ImageTh} />
-					</Slider>
+			<h1 className="sports-ground__title">Спортивная площадка</h1>
+			<div className="sports-ground__adress-container">
+				<div className="sports-ground__adress-icon" />
+				<p className="sports-ground__adress">
+					Россия, Москва, Южный административный округ, район Зябликово
+				</p>
+			</div>
+			{/* <div className="photo-container"> */}
+			<Slider>
+				{photos.map((photo) => (
+					<img
+						className="sports-ground__photo"
+						src={photo.photoUrl}
+						alt="Площадка"
+					/>
+				))}
+			</Slider>
+			{/* </div> */}
+			<div className="category-section">
+				<h2 className="category-title">Виды спорта</h2>
+				<div className="category-container">
+					<div className="category">
+						<div className="category-icon" />
+						<p className="category-name">Футбол</p>
+					</div>
+					<div className="category">
+						<div className="category-icon" />
+						<p className="category-name">Баскетбол</p>
+					</div>
 				</div>
-				<MapComponent className="map-container_place_sport" />
 			</div>
-			<div>
-				<Button />
-				<Button />
-			</div>
-			<div>
-				<h2>Комментарии</h2>
+			<div className="comments-section">
+				<h2 className="comments-title">Комментарии</h2>
 				<div className="comments-container">
 					{comments.map((comment) => (
 						<Comment
@@ -65,15 +76,23 @@ export function SportsGround({ onCommentSubmit }) {
 						/>
 					))}
 				</div>
-				<Form className="comment-form">
-					<Input className="comment-input" placeholder="Напишите сообщение" />
-					<span className="comment-caption">0 / 2000 символов</span>
-					<Button
-						className="comment-submit-button"
-						onClick={onCommentSubmit}
-						label="Отправить"
+				<Form className="form_place_comments">
+					<Input
+						className="comment-input"
+						placeholder="Напишите сообщение"
+						type="text"
+						name="comments"
 					/>
+					<div className="comment-submit">
+						<span className="comment-caption">0 / 2000 символов</span>
+						<Button
+							className="comment-submit-button"
+							onClick={onCommentSubmit}
+							label="Отправить"
+						/>
+					</div>
 				</Form>
+				<MapComponent className="map-container_place_sport" />
 			</div>
 		</main>
 	);

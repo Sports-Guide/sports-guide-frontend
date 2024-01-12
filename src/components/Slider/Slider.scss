@@ -1,14 +1,16 @@
 .slider-container {
-	height: 450px;
-	width: 650px;
+	width: 861px;
+	height: 400px;
 	display: flex;
 	align-items: center;
+	margin-top: 20px;
 }
 
 .slider-window {
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
+	border-radius: 10px;
 }
 
 .images-container {
