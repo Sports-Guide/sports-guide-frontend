@@ -17,10 +17,13 @@ export function App() {
 	const [isDeleteAccountPopupOpen, setDeleteAccountPopupOpen] = useState(false);
 	const [isLogoutConfirmationPopupOpen, setLogoutConfirmationPopupOpen] =
 		useState(false);
+	const [isPasswordEditPopupOpen, setIsPasswordEditPopupOpen] = useState(false);
 
-	const handleEditButtonClick = () => {
-		setIsEditing(true);
-	};
+	const handleEditButtonClick = () =>
+		isEditing ? setIsEditing(false) : setIsEditing(true);
+	// const handleEditButtonClick = () => {
+	// 	setIsEditing(true);
+	// };
 
 	const handleDeleteAccount = () => {
 		console.log('Аккаунт удален');
@@ -31,6 +34,9 @@ export function App() {
 	};
 
 	// создаём обработчики для открытия попапов
+	const handlePasswordEditBtnClick = () => {
+		setIsPasswordEditPopupOpen(true);
+	};
 	const handleDeleteAccountBtnClick = () => {
 		setDeleteAccountPopupOpen(true);
 	};
@@ -38,10 +44,15 @@ export function App() {
 		setLogoutConfirmationPopupOpen(true);
 	};
 
+	const handleChangePassword = () => {
+		console.log('Пароль изменен');
+	};
+
 	// функция закрытия всех попапов
 	const closeAllPopups = () => {
 		setDeleteAccountPopupOpen(false);
 		setLogoutConfirmationPopupOpen(false);
+		setIsPasswordEditPopupOpen(false);
 	};
 
 	// закрываем попапы по Esc
@@ -56,7 +67,11 @@ export function App() {
 		return () => {
 			document.removeEventListener('keydown', closeWithEsc);
 		};
-	}, [isDeleteAccountPopupOpen, isLogoutConfirmationPopupOpen]);
+	}, [
+		isDeleteAccountPopupOpen,
+		isLogoutConfirmationPopupOpen,
+		isPasswordEditPopupOpen,
+	]);
 
 	return (
 		<div className="app">
@@ -72,12 +87,15 @@ export function App() {
 								<Profile
 									onEditProfile={handleEditButtonClick}
 									isEditing={isEditing}
+									onEditPassword={handlePasswordEditBtnClick}
 									onDelete={handleDeleteAccount}
 									onLogOut={handleLogOut}
 									onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
 									onLogoutPopupOpen={handleLogOutClick}
 									isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
 									isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
+									isPasswordEditPopupOpen={isPasswordEditPopupOpen}
+									onChangePasswordSubmit={handleChangePassword}
 									onClose={closeAllPopups}
 								/>
 							}

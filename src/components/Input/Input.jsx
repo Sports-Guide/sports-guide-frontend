@@ -22,6 +22,7 @@ export function Input({
 			name={name}
 			minLength={minLength}
 			maxLength={maxLength}
+			autoComplete="off"
 		/>
 	);
 }

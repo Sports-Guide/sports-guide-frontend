@@ -1,17 +1,17 @@
 .comment-input {
-  width: 100%;
-  min-height:150px;
-  border: none;
-  border-radius: 8px;
-  padding: 24px;
-  background-color: #EFEDED;
+	width: 100%;
+	min-height: 150px;
+	border: none;
+	border-radius: 8px;
+	padding: 24px;
+	background-color: #efeded;
 }
 
 .comment-input::placeholder {
-  color: #898787;
-  font-family: Inter;
-  font-size: 26px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px; /* 76.923% */
+	color: #898787;
+	font-family: Inter;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 20px; /* 76.923% */
 }
