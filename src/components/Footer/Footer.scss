@@ -1,9 +1,9 @@
 .footer {
 	background-color: lightgrey;
-	color: black;
+	color: #030303;
 	display: flex;
 	width: 100%;
-	padding: 32px 56px;
+	padding: 16px 200px;
 	align-items: center;
 	gap: 64px;
 }
@@ -16,21 +16,21 @@
 }
 
 .footer__copyright {
-	font-family: Inter;
-	font-size: 16px;
+	font-family: Roboto;
+	font-size: 14px;
+	font-style: normal;
 	font-weight: 400;
-	line-height: 19px;
-	letter-spacing: 0em;
+	line-height: normal;
 	text-align: left;
 }
 
 .footer__nav-link {
-	color: black;
-	font-family: Inter;
-	font-size: 12px;
+	font-family: Roboto;
+	color: #030303;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 20px;
+	line-height: normal;
 	text-decoration: none;
 	transition: opacity 0.3s ease;
 }
