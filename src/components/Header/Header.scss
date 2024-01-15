@@ -1,8 +1,9 @@
 .header {
 	display: flex;
-	background-color: lightgrey;
+	justify-content: center;
+	background-color: rgba(252, 252, 252, 1);
 	padding: 10px;
-	height: 100px;
+	height: 68px;
 	color: black;
 }
 
@@ -10,12 +11,13 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 100%;
+	width: 80%;
 }
 
 .header__logo {
-	margin-top: 4px;
-	margin-left: 40px;
+	margin-top: 7px;
+	margin-left: 46px;
+	height: 100%;
 	display: flex;
 	align-items: center;
 
@@ -24,19 +26,17 @@
 	}
 
 	.header__title {
-		font-family: Inter;
-		font-size: 16px;
-		font-weight: 600;
-		line-height: 19px;
+		font-family: Garet;
+		font-size: 20px;
+		font-weight: 850;
+		line-height: 28px;
 		letter-spacing: 0em;
 		text-align: left;
 	}
 }
 
 .header__buttons {
-	margin-right: 47px;
 	display: flex;
-	width: 457px;
-	height: 54px;
-	gap: 36px;
+	align-items: center;
+	width: 422px;
 }

@@ -12,7 +12,7 @@ export function ButtonMap({ onClick, type, disabled, label }) {
 				className="button-container__marker"
 			/>
 			<button
-				className="button"
+				className="button-map"
 				onClick={onClick}
 				type={type}
 				disabled={disabled}

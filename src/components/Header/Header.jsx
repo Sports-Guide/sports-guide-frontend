@@ -13,7 +13,7 @@ export function Header({ onLogIn, onLogOut, loggedIn, onAreaApp }) {
 			<div className="header__container">
 				<div className="header__logo">
 					<img className="logo" src={logo} alt="" />
-					<h4 className="header__title">Спортивный Гид</h4>
+					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
 				</div>
 				<div className="header__buttons">
 					<ButtonMap label="Москва" />
