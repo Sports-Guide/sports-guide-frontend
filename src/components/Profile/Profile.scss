@@ -187,14 +187,14 @@
 }
 
 .form__button_submit_changes {
-	color: #FCFCFC;
-	background-color: #1478FF;
+	color: #fcfcfc;
+	background-color: #1478ff;
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 20px;
 	text-align: center;
-    width: fit-content;
-    padding: 10px 20px;
+	width: fit-content;
+	padding: 10px 20px;
 }
 
 // profile__caption_name есть в разметке, но в стилях нет. Если не нужен - убрать
@@ -338,7 +338,7 @@
 	flex-direction: column;
 	max-width: 480px;
 	margin: 0 auto 84px;
-    padding: 32px 0 0;
+	padding: 32px 0 0;
 }
 
 .popup__change-password-label {
@@ -378,7 +378,7 @@
 }
 
 .popup__form-error_active {
-	color: #F92E2E;
+	color: #f92e2e;
 	visibility: 1;
 }
 
@@ -386,8 +386,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #D2D2D2;
-	color: #FFF;
+	background-color: #d2d2d2;
+	color: #fff;
 	width: 400px;
 	height: 54px;
 	margin: 32px auto 0;

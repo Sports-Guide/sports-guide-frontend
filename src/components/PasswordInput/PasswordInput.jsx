@@ -19,34 +19,31 @@ export const PasswordInput = ({
 	};
 
 	return (
-		<>
+		<div className="password-input-container">
 			<label className="password-label" htmlFor={htmlFor}>
 				{label}
 			</label>
-			<div className="password-input-container">
-				<input
-					className="password-input"
-					type={showPassword ? 'text' : 'password'}
-					id={idName}
-					name={name}
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					minLength={minLength}
-					maxLength={maxLength}
-					placeholder="*********"
-					autoComplete="off"
-				/>
-				<span className="password-error password-error_active">
-					{errorMessage}
-				</span>
-				<button
-					className="password-show-hide-button"
-					type="button"
-					onClick={togglePasswordVisibility}
-					aria-label="show-hide-password"
-				/>
-			</div>
-		</>
+			<input
+				className="password-input"
+				type={showPassword ? 'text' : 'password'}
+				id={idName}
+				name={name}
+				value={password}
+				onChange={(e) => setPassword(e.target.value)}
+				minLength={minLength}
+				maxLength={maxLength}
+				autoComplete="off"
+			/>
+			<span className="password-error password-error_active">
+				{errorMessage}
+			</span>
+			<button
+				className="password-show-hide-button"
+				type="button"
+				onClick={togglePasswordVisibility}
+				aria-label="show-hide-password"
+			/>
+		</div>
 	);
 };
 

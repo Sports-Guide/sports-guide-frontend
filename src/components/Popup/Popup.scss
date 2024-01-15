@@ -5,6 +5,7 @@
 	position: fixed;
 	align-items: center;
 	justify-content: center;
+	
 	top: 0;
 	left: 0;
 	z-index: 350;
@@ -26,6 +27,7 @@
 	-o-transition:
 		opacity 0.7s ease,
 		visibility 0.2s ease;
+		
 }
 
 .popup_opened {
@@ -35,16 +37,18 @@
 
 .popup__container {
 	width: 33.6vw;
-	width: 730px;
+	width: 529px;
 	// max-width: 730px;
 	// min-width: 282px; // уточнить
-	background-color: #f7f7f7;
-	border-radius: 10px;
+	border-radius: var(--md, 16px);
+	background: var(--Background_secondary, #FCFCFC);
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	-ms-border-radius: 10px;
 	-o-border-radius: 10px;
-	margin: 195px auto 0;
+	padding: 36px 52px;
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	color: #000;
 	box-sizing: border-box;
@@ -75,13 +79,14 @@
 }
 
 .popup__header {
-	color: #000;
-	font-size: 40px;
-	font-weight: 700;
-	line-height: 48px;
-	text-align: center;
-	padding-top: 64px;
 	margin: 0;
+	color: var(--Text_main, #030303);
+	text-align: center;
+	font-family: Garet;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 850;
+	line-height: 36px;
 }
 
 // добавить media queries

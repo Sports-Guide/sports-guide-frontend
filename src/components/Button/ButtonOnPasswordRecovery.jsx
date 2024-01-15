@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types';
-import './ButtonLoginSite.scss';
+import { NavLink } from 'react-router-dom';
+import './ButtonOnPasswordRecovery.scss';
 
-export function ButtonLoginSite({ onClick, type, disabled, label }) {
+export function ButtonOnPasswordRecovery({ onClick, type, disabled, label }) {
 	return (
-		<button
-			className="button-login-site"
+		<NavLink
+			className="popup__login-form-link-recover"
 			onClick={onClick}
 			type={type}
 			disabled={disabled}
 		>
 			{label}
-		</button>
+		</NavLink>
 	);
 }
 
-ButtonLoginSite.propTypes = {
+ButtonOnPasswordRecovery.propTypes = {
 	onClick: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
 	disabled: PropTypes.bool.isRequired,

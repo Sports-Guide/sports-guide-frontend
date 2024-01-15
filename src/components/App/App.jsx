@@ -17,6 +17,8 @@ export function App() {
 	const [isDeleteAccountPopupOpen, setDeleteAccountPopupOpen] = useState(false);
 	const [isLogoutConfirmationPopupOpen, setLogoutConfirmationPopupOpen] =
 		useState(false);
+	const [isOnLogInPopUpOpen, setOnLogInPopUpOpen] = useState(false);
+	const [isOnRegisterPopUpOpen, setOnRegisterPopUpOpen] = useState(false);
 	const [isPasswordEditPopupOpen, setIsPasswordEditPopupOpen] = useState(false);
 
 	const handleEditButtonClick = () =>
@@ -44,6 +46,16 @@ export function App() {
 		setLogoutConfirmationPopupOpen(true);
 	};
 
+	const handleOnLogInClick = () => {
+		setOnLogInPopUpOpen(true);
+		setOnRegisterPopUpOpen(false);
+	};
+
+	const handleOpenSignUpPopUp = () => {
+		setOnRegisterPopUpOpen(true);
+		setOnLogInPopUpOpen(false);
+	};
+
 	const handleChangePassword = () => {
 		console.log('Пароль изменен');
 	};
@@ -53,6 +65,8 @@ export function App() {
 		setDeleteAccountPopupOpen(false);
 		setLogoutConfirmationPopupOpen(false);
 		setIsPasswordEditPopupOpen(false);
+		setOnLogInPopUpOpen(false);
+		setOnRegisterPopUpOpen(false);
 	};
 
 	// закрываем попапы по Esc
@@ -71,13 +85,15 @@ export function App() {
 		isDeleteAccountPopupOpen,
 		isLogoutConfirmationPopupOpen,
 		isPasswordEditPopupOpen,
+		isOnLogInPopUpOpen,
+		isOnRegisterPopUpOpen,
 	]);
 
 	return (
 		<div className="app">
 			<BrowserRouter>
 				<div className="page__container">
-					<Header />
+					<Header onLogIn={handleOnLogInClick} />
 					<Routes>
 						<Route path="/" element={<Main />} />
 						<Route path="/app-area" element={<AreaApp />} />
@@ -101,10 +117,21 @@ export function App() {
 							}
 						/>
 						<Route path="/sports-ground" element={<SportsGround />} />
-						<Route path="/signin" element={<Login />} />
-						<Route path="/signup" element={<Register />} />
 						<Route path="*" element={<NotFoundPage />} />
 					</Routes>
+					<Login
+						isOnLogInPopUpOpen={isOnLogInPopUpOpen}
+						onClose={closeAllPopups}
+						toSignUpPopUp={handleOpenSignUpPopUp}
+						/* onLogin={handleLogin}
+					onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
+					 */
+					/>
+					<Register
+						isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
+						onClose={closeAllPopups}
+						toSignInPopUp={handleOnLogInClick}
+					/>
 					<Footer />
 				</div>
 			</BrowserRouter>
