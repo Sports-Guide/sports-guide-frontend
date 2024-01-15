@@ -29,12 +29,6 @@ export function Profile({
 		setPasswordButtonClicked(!isPasswordButtonClicked);
 	};
 
-	// const onSubmitNameAndEmail = (e) => {
-	// 	e.preventDefault();
-	// 	// handleUpdateUser(name, email);
-	// 	// убрать evt, т.к. react-hook-form уже предусматрвает это
-	// };
-
 	const onSubmitPassword = (e) => {
 		e.preventDefault();
 		// onChangePasswordSubmit();
@@ -113,7 +107,7 @@ export function Profile({
 					</div>
 				</nav>
 				<div className="profile__personal-info">
-					<Form className="form_place_profile">
+					<article className="form_place_profile">
 						<FormTitle
 							label="Личные данные"
 							className="form__title_place_profile"
@@ -123,7 +117,7 @@ export function Profile({
 							onEditAvatar={onEditAvatar}
 							onEditProfile={onEditProfile}
 						/>
-					</Form>
+					</article>
 				</div>
 			</section>
 			<Popup

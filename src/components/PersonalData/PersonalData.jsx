@@ -1,11 +1,21 @@
 import React from 'react';
-// import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import './PersonalData.scss';
-import { Input } from '../Input/Input';
+import { Form } from '../Form/Form';
 import { Button } from '../Button/Button';
 
 export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
+	const {
+		register,
+		formState: { errors, isValid },
+		handleSubmit,
+	} = useForm({ mode: 'onChange' });
+
+	const onSubmit = (data) => {
+		onEditProfile(data);
+	};
+
 	return (
 		<>
 			<div className="profile__personal-info-container">
@@ -26,35 +36,71 @@ export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
 				</div>
 			</div>
 			{isEditing ? (
-				<div className="profile__change-info-container">
-					<Input
-						className="profile__input profile__input_login"
+				<Form
+					className="profile__change-info-container"
+					onSubmit={handleSubmit(onSubmit)}
+				>
+					<input
+						className={`profile__input ${
+							errors?.login && 'profile__input_error'
+						}`}
+						{...register('login', {
+							pattern: {
+								value: /^[a-zA-Zа-яА-Я0-9_]{2,20}$/,
+								message:
+									'Никнейм может содержать латинские буквы, цифры и другие символы',
+							},
+							minLength: {
+								value: 2,
+								message: 'Никнейм должен быть не менее 2 символов',
+							},
+							maxLength: {
+								value: 20,
+								message: 'Никнейм должен быть не более 20 символов',
+							},
+							required: 'Поле не может быть пустым',
+						})}
 						type="text"
-						name="login"
-						value="User1234"
+						// value="User1234"
 						// value={currentUser.login}
 						placeholder="Никнейм"
-						minLength="6"
-						maxLength="20"
 					/>
-					<span className="error error_place_profile">
-						Никнейм должен быть не менее 2 символов, включать латинские буквы,
-						может содержать цифры и другие символы
-					</span>
-					<Input
-						className="profile__input profile__input_email"
+					{errors?.login && (
+						<span className="error error_place_profile">
+							{errors?.login?.message ||
+								'Никнейм должен быть не менее 2 символов, включать латинские буквы, может содержать цифры и другие символы'}
+						</span>
+					)}
+					<input
+						className={`profile__input ${
+							errors?.email && 'profile__input_error'
+						}`}
+						{...register('email', {
+							pattern: {
+								value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+								message: 'Введите корректный email. Пример: user@mail.ru',
+							},
+							minLength: {
+								value: 6,
+								message: 'Почта должна содержать не менее 6 символов',
+							},
+							maxLength: {
+								value: 50,
+								message: 'Почта не должна превышать 50 символов',
+							},
+							required: 'Поле не может быть пустым',
+						})}
 						type="email"
-						name="email"
-						value="mail@example.ru"
+						// value="mail@example.ru"
 						// value={currentUser.email}
 						placeholder="E-mail"
-						minLength="6"
-						maxLength="50"
 					/>
-					<span className="error error_place_profile">
-						Введите корректный email. Пример: user@mail.ru
-					</span>
-				</div>
+					{errors?.email && (
+						<span className="error error_place_profile">
+							{errors?.email?.message}
+						</span>
+					)}
+				</Form>
 			) : (
 				<div className="profile__info-container">
 					<p className="profile__field-title">Никнейм</p>
@@ -63,10 +109,11 @@ export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
 					<p className="profile__field-name">mail@example.ru</p>
 				</div>
 			)}
-
 			<Button
 				className="profile__change-button"
+				type={isEditing ? 'submit' : 'button'}
 				onClick={onEditProfile}
+				disabled={!isValid}
 				label={isEditing ? 'Сохранить изменения' : 'Изменить данные'}
 			/>
 		</>
