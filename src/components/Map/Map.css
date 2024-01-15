@@ -32,8 +32,8 @@
 }
 
 .map-container_place_area-app {
-	width: 913px;
-	height: 400px;
-	border-radius: 10px;
-	border: 2px solid rgba(170, 170, 170, 1);
+	width: 724px;
+	height: 340px;
+	border-radius: 8px;
+	margin-top: 10px;
 }

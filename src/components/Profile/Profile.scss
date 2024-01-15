@@ -1,7 +1,12 @@
+.profile {
+	width: 100%;
+	height: 100vh;
+	background-color: #f2f3f7;
+}
+
 .profile__header {
 	display: flex;
 	justify-content: space-between;
-	/* padding-left: 145px; */
 	padding: 50px 45px 50px 145px;
 	background-color: #b4b4b4;
 }
@@ -54,46 +59,100 @@
 
 .profile__container {
 	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: space-between;
-	padding: 62px 0 158px;
+	width: calc(415px + 593px + 32px);
+	justify-content: center;
+	padding: 62px 0 0;
+	margin: 0 auto;
+	column-gap: 32px;
 }
-// .profile__container {
-// 	display: flex;
-// 	justify-content: space-between;
-// 	padding: 80px;
-// } прошлые стили (оставляю, пока макет не утверждён)
 
-// .profile__info-block {
-// }
+.profile__navigation {
+	width: 415px;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px 24px;
+}
+
+.profile__menu {
+	display: flex;
+	flex-direction: column;
+	background-color: #fcfcfc;
+	padding: 16px;
+	border-radius: 12px;
+	gap: 4px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	-ms-border-radius: 12px;
+	-o-border-radius: 12px;
+}
+
+.profile__menu-button {
+	display: flex;
+	width: 100%;
+	height: 48px;
+	padding: 0 0 0 24px;
+	align-items: center;
+	// font-family: "Roboto", sans-serif, system-ui;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	background-color: transparent;
+	color: #737a8e;
+	outline: none;
+	border: none;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	cursor: pointer;
+}
+
+.profile__menu-button_active {
+	background-color: #f2f3f7;
+}
+
+.profile__menu-button_inactive {
+	background-color: transparent;
+}
+
+.profile__menu-button-icon {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
+}
+
+.profile__personal-info {
+	display: flex;
+	height: fit-content;
+	width: 593px;
+	flex-direction: column;
+	background-color: #fcfcfc;
+	padding: 24px;
+	border-radius: 12px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	-ms-border-radius: 12px;
+	-o-border-radius: 12px;
+}
 
 .form_place_profile {
 	color: #767676;
 	width: 480px;
-	// width: 220px; прошлый стиль
 	display: flex;
 	flex-direction: column;
-	// position: relative; прошлый стиль
 }
 
 .form__title_place_profile {
-	color: #000;
+	color: #030303;
 	text-align: left;
-	padding-top: calc(48px - 16px);
-	margin: 0 0 48px;
-	// margin: 0 0 18px;
-	font-weight: 600;
-	font-size: 32px;
-	// font-size: 20px; прошлый стиль
-	line-height: 20px;
-}
-
-.form__personal-data-header-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 16px;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 28px;
+	margin: 0 0 16px;
 }
 
 .form__personal-data-title {
@@ -118,30 +177,6 @@
 	-o-border-radius: 8px;
 }
 
-.form__button_place_profile {
-	color: #1478ff;
-	border-bottom: solid 1px;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 20px;
-	text-align: left;
-	padding: 0;
-}
-// .form__button_place_profile {
-// 	width: 27px;
-// 	height: 27px;
-// 	position: absolute;
-// 	top: 0;
-// 	right: 0;
-// 	background-color: transparent;
-// 	border: none;
-// 	background-image: url(../../images/edit-icon.png);
-// 	/* background-position: 50%; */
-// 	/* background-repeat: no-repeat; */
-// 	background-size: contain;
-// 	padding: 0;
-// }
-
 .form__button_password-edit {
 	width: 157px;
 	height: 44px;
@@ -155,37 +190,6 @@
 	line-height: 20px;
 }
 
-// .form__button_password-edit {
-// 	background-image: url(../../images/check-icon.png);
-// }
-
-.profile__input-title {
-	text-align: left;
-	margin: 0;
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 16px;
-	padding-bottom: 4px;
-}
-
-.profile__input {
-	width: 100%;
-	height: 48px;
-	display: flex;
-	border: 2px solid #aaa;
-	border-radius: 4px;
-	// height: 32px; прошлый стиль
-	text-align: left;
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 18px;
-	padding: 0;
-	margin: 0;
-	align-items: center;
-	color: #111;
-	padding: 15px;
-}
-
 .form__button_submit_changes {
 	color: #fcfcfc;
 	background-color: #1478ff;
@@ -196,29 +200,6 @@
 	width: fit-content;
 	padding: 10px 20px;
 }
-
-// profile__caption_name есть в разметке, но в стилях нет. Если не нужен - убрать
-
-// .input_place_profile {
-// }
-
-.error_place_profile {
-	font-weight: 400;
-	font-size: 12px;
-	line-height: 16px;
-	height: calc(16px * 2);
-	text-align: left;
-	width: 100%;
-	color: #f92e2e;
-	margin-bottom: 16px;
-}
-// .error_place_profile {
-// 	font-weight: 400;
-// 	font-size: 12px;
-// 	line-height: 16px;
-// 	text-align: left;
-// 	width: 100%;
-// }
 
 .title {
 	text-align: left;
@@ -231,23 +212,19 @@
 	gap: 28px;
 	padding-top: 106px;
 }
-// .button__container {
-// 	display: flex;
-// 	flex-direction: column;
-// 	gap: 32px;
-// }
 
 .profile__button-logout {
-	width: 166px;
+	width: 100%;
 	height: 44px;
-	border: solid 2px #6d6d6d;
 	outline: none;
+	border: none;
 	padding: 0;
 	background-color: transparent;
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 20px;
-	color: #6d6d6d;
+	color: #1478ff;
+	background-color: #e5f0ff;
 	text-align: center;
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -258,16 +235,20 @@
 }
 
 .profile__button-account-delete {
-	border-bottom: #6d6d6d 1px solid;
 	text-decoration: none;
-	width: fit-content;
-	color: #6d6d6d;
-	font-size: 18px;
+	outline: none;
+	border: none;
+	background-color: transparent;
+	width: 100%;
+	height: 36px;
+	color: #737a8e;
+	font-size: 14px;
 	font-weight: 700;
-	line-height: 22px;
-	text-align: left;
+	line-height: 20px;
+	text-align: center;
 	font-family: system-ui;
-	padding: 0;
+	padding: 4px 0 0 0;
+	cursor: pointer;
 }
 
 .button-y {
@@ -339,14 +320,6 @@
 	max-width: 480px;
 	margin: 0 auto 84px;
 	padding: 32px 0 0;
-}
-
-.popup__change-password-label {
-	color: #767676;
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 16px;
-	text-align: left;
 }
 
 .popup__change-password-input {

@@ -1,9 +1,8 @@
 import React from 'react';
 import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
-import { ButtonKindsOfSports } from '../Button/ButtonKindsOfSports';
 import MapComponent from '../Map/Map';
-import addPictures from '../../images/icon-plus.svg';
+import addPictures from '../../images/Camera.svg';
 import { ButtonAppSite } from '../Button/ButtonAppSite';
 
 export function AreaApp(onAreaApp) {
@@ -11,53 +10,40 @@ export function AreaApp(onAreaApp) {
 		<div className="area-app">
 			<div className="area-app__information">
 				<NavLink className="area-app__link" to="/">
-					&larr; К выбору площадки
+					К выбору площадки
 				</NavLink>
 				<h2 className="area-app__title">Добавление площадки</h2>
-				<p className="area-app__subtitle">Основная информация</p>
-				<form action="" className="input-container">
-					<label htmlFor="name-site" className="input-container__label">
-						Название площадки*
-						<input
-							type="text"
-							className="input-container__input"
-							name="name-site"
-							placeholder="Например, Футбольное поле"
-						/>
-					</label>
-					<label htmlFor="name-site" className="input-container__label">
-						Адрес площадки
-						<input
-							type="text"
-							className="input-container__input"
-							name="name-site"
-							placeholder="Россия, Москва, Южный административный округ, район Зябликово"
-						/>
-					</label>
-					<MapComponent className="map-container_place_area-app" />
+				<form className="addition-area">
 					<div className="kinds-of-sports">
 						<h3 className="kinds-of-sports__title">Виды спорта</h3>
-						<form className="input-container">
-							<label htmlFor="name-site" className="input-container__label">
-								Название площадки*
-								<input
-									type="text"
-									className="input-container__input"
-									name="name-site"
-									placeholder="Например, Футбольное поле"
-								/>
-							</label>
-						</form>
-						<div className="kinds-of-sports__buttons">
-							<ButtonKindsOfSports ball="football" label="Футбол" />
-							<ButtonKindsOfSports ball="bascetball" label="Баскетбол" />
-							<ButtonKindsOfSports ball="football" label="Волейбол" />
-							<ButtonKindsOfSports ball="bascetball" label="Каток" />
-							<ButtonKindsOfSports ball="bascetball" label="Тренажеры" />
-						</div>
+						<label htmlFor="category-select" className="kinds-of-sports__label">
+							Выберите категории спорта из списка
+							<select
+								name="category"
+								id="category-select"
+								className="kinds-of-sports__add"
+							>
+								<option value="">- </option>
+								<option value="workout">workout</option>
+								<option value="football">Футбол</option>
+								<option value="basketball">Баскетбал</option>
+								<option value="Cycling">Велоспорт</option>
+							</select>
+						</label>
+					</div>
+					<div className="location">
+						<h3 className="locatin__title">Расположение</h3>
+						<label htmlFor="text" className="location__label">
+							Адрес площадки
+							<input type="text" id="text" className="location__adress" />
+						</label>
+						<MapComponent className="map-container_place_area-app" />
 					</div>
 					<div className="foto">
 						<h3 className="foto__title">Фотографии</h3>
+						<p className="foto__subtitle">
+							Добавьте актуальные изображения площадки
+						</p>
 						<div className="foto__container">
 							<label htmlFor="add-file" className="foto__file-label">
 								<input
@@ -76,7 +62,14 @@ export function AreaApp(onAreaApp) {
 							</label>
 						</div>
 					</div>
-					<ButtonAppSite onClick={onAreaApp} label="Добавить площадку" />
+					<div className="app-area">
+						<h3 className="area-app__title">Добавление площадки</h3>
+						<p className="area-app__subtitle">
+							Перед публикацией площадка будет проверена модерацией нашего
+							сервиса. Это может занять некоторое время.
+						</p>
+						<ButtonAppSite onClick={onAreaApp} label="Добавить площадку" />
+					</div>
 				</form>
 			</div>
 		</div>

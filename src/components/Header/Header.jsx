@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { ButtonLoginSite } from '../Button/ButtonLoginSite';
 import { Button } from '../Button/Button';
 import { ButtonAppSite } from '../Button/ButtonAppSite';
@@ -11,10 +12,10 @@ export function Header({ onLogIn, onLogOut, loggedIn, onAreaApp }) {
 	return (
 		<header className="header">
 			<div className="header__container">
-				<div className="header__logo">
+				<Link to="/" className="header__logo">
 					<img className="logo" src={logo} alt="" />
-					<h4 className="header__title">Спортивный Гид</h4>
-				</div>
+					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
+				</Link>
 				<div className="header__buttons">
 					<ButtonMap label="Москва" />
 					{loggedIn ? (

@@ -5,7 +5,7 @@
 	position: fixed;
 	align-items: center;
 	justify-content: center;
-	
+
 	top: 0;
 	left: 0;
 	z-index: 350;
@@ -27,7 +27,6 @@
 	-o-transition:
 		opacity 0.7s ease,
 		visibility 0.2s ease;
-		
 }
 
 .popup_opened {
@@ -41,7 +40,7 @@
 	// max-width: 730px;
 	// min-width: 282px; // уточнить
 	border-radius: var(--md, 16px);
-	background: var(--Background_secondary, #FCFCFC);
+	background: var(--Background_secondary, #fcfcfc);
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	-ms-border-radius: 10px;

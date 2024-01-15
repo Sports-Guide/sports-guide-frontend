@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.scss';
-import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
+import { Routes, Route } from 'react-router-dom';
 import { Main } from '../Main/Main';
 import { Profile } from '../Profile/Profile';
 import { AreaApp } from '../Area/AreaApp';
@@ -10,6 +7,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { SportsGround } from '../SportsGround/SportsGround';
+import Layuot from '../Layout/Layout';
 
 export function App() {
 	const [isEditing, setIsEditing] = useState(false);
@@ -23,9 +21,6 @@ export function App() {
 
 	const handleEditButtonClick = () =>
 		isEditing ? setIsEditing(false) : setIsEditing(true);
-	// const handleEditButtonClick = () => {
-	// 	setIsEditing(true);
-	// };
 
 	const handleDeleteAccount = () => {
 		console.log('Аккаунт удален');
@@ -39,6 +34,7 @@ export function App() {
 	const handlePasswordEditBtnClick = () => {
 		setIsPasswordEditPopupOpen(true);
 	};
+
 	const handleDeleteAccountBtnClick = () => {
 		setDeleteAccountPopupOpen(true);
 	};
@@ -57,6 +53,9 @@ export function App() {
 	};
 
 	const handleChangePassword = () => {
+		if (isEditing) {
+			setIsEditing(false);
+		} else setIsEditing(true);
 		console.log('Пароль изменен');
 	};
 
@@ -91,10 +90,12 @@ export function App() {
 
 	return (
 		<div className="app">
-			<BrowserRouter>
-				<div className="page__container">
-					<Header onLogIn={handleOnLogInClick} />
-					<Routes>
+			<div className="page__container">
+				<Routes>
+					<Route
+						path="/"
+						element={<Layuot handleOnLogInClick={handleOnLogInClick} />}
+					>
 						<Route path="/" element={<Main />} />
 						<Route path="/app-area" element={<AreaApp />} />
 						<Route
@@ -117,24 +118,24 @@ export function App() {
 							}
 						/>
 						<Route path="/sports-ground" element={<SportsGround />} />
+
 						<Route path="*" element={<NotFoundPage />} />
-					</Routes>
-					<Login
-						isOnLogInPopUpOpen={isOnLogInPopUpOpen}
-						onClose={closeAllPopups}
-						toSignUpPopUp={handleOpenSignUpPopUp}
-						/* onLogin={handleLogin}
-					onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
-					 */
-					/>
-					<Register
-						isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
-						onClose={closeAllPopups}
-						toSignInPopUp={handleOnLogInClick}
-					/>
-					<Footer />
-				</div>
-			</BrowserRouter>
+					</Route>
+				</Routes>
+				<Login
+					isOnLogInPopUpOpen={isOnLogInPopUpOpen}
+					onClose={closeAllPopups}
+					toSignUpPopUp={handleOpenSignUpPopUp}
+					/* onLogin={handleLogin}
+			onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
+			 */
+				/>
+				<Register
+					isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
+					onClose={closeAllPopups}
+					toSignInPopUp={handleOnLogInClick}
+				/>
+			</div>
 		</div>
 	);
 }

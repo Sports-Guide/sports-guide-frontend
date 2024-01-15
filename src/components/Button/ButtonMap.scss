@@ -1,9 +1,19 @@
 .button-container {
 	display: flex;
 	align-items: center;
+	margin-right: 26px;
 }
 .button-container__marker {
-	width: 24px;
-	height: 24px;
-	padding: 2px, 5px, 2px, 5px;
+	width: 16px;
+	height: 16px;
+}
+
+.button-map {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 20px;
+	border: none;
+	background: rgba(252, 252, 252, 1);
 }
