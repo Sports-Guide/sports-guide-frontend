@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import './Profile.scss';
 import { Form } from '../Form/Form';
 import FormTitle from '../FormTitle/FormTitle';
-import { PersonalData } from '../PersonalData/PersonalData';
+import { PersonalData } from './PersonalData';
+import { PasswordData } from './PasswordData';
 import { Button } from '../Button/Button';
-// import { Input } from '../Input/Input';
 import { Popup } from '../Popup/Popup';
-import { PasswordInput } from '../PasswordInput/PasswordInput';
 
 export function Profile({
 	isEditing,
 	onEditProfile,
-	onEditAvatar,
-	// onEditPassword, // не удалять, надо будет добавить
+	// onEditAvatar, // сделаю позже
+	onEditPassword,
 	onDelete,
 	onLogOut,
 	isLogoutPopupOpen,
@@ -24,16 +23,16 @@ export function Profile({
 }) {
 	// добавить логику на сравнение полей Никнейм и Почта: если совпадают, поля неактивны
 
-	const [isPasswordButtonClicked, setPasswordButtonClicked] = useState(false);
-	const togglePasswordButton = () => {
-		setPasswordButtonClicked(!isPasswordButtonClicked);
+	const [isPasswordMenuOpened, setPasswordMenuOpened] = useState(false);
+	const togglePasswordMenu = () => {
+		setPasswordMenuOpened(!isPasswordMenuOpened);
 	};
 
-	const onSubmitPassword = (e) => {
-		e.preventDefault();
-		// onChangePasswordSubmit();
-		// убрать evt, т.к. react-hook-form уже предусматрвает это
-	};
+	// const onSubmitPassword = (e) => {
+	// 	e.preventDefault();
+	// 	// onChangePasswordSubmit();
+	// 	// убрать evt, т.к. react-hook-form уже предусматрвает это
+	// };
 
 	return (
 		<main className="profile">
@@ -42,11 +41,11 @@ export function Profile({
 					<div className="profile__menu">
 						<button
 							className={`profile__menu-button ${
-								isPasswordButtonClicked
+								isPasswordMenuOpened
 									? 'profile__menu-button_inactive'
 									: 'profile__menu-button_active'
 							}`}
-							onClick={togglePasswordButton}
+							onClick={togglePasswordMenu}
 							type="button"
 							aria-label="Личные данные"
 						>
@@ -68,11 +67,11 @@ export function Profile({
 						</button>
 						<button
 							className={`profile__menu-button ${
-								isPasswordButtonClicked
+								isPasswordMenuOpened
 									? 'profile__menu-button_active'
 									: 'profile__menu-button_inactive'
 							}`}
-							onClick={togglePasswordButton}
+							onClick={togglePasswordMenu}
 							type="button"
 							aria-label="Пароль"
 						>
@@ -94,16 +93,19 @@ export function Profile({
 						</button>
 					</div>
 					<div className="profile__menu">
-						<Button
+						<button
 							className="profile__button-logout"
 							onClick={onLogOut}
-							label="Выйти"
-						/>
-						<Button
+							type="button"
+						>
+							Выйти
+						</button>
+						<button
 							className="profile__button-account-delete"
 							onClick={onDelete}
-							label="Удалить аккаунт"
-						/>
+						>
+							Удалить аккаунт
+						</button>
 					</div>
 				</nav>
 				<div className="profile__personal-info">
@@ -114,10 +116,31 @@ export function Profile({
 						/>
 						<PersonalData
 							isEditing={isEditing}
-							onEditAvatar={onEditAvatar}
+							// onEditAvatar={onEditAvatar}
 							onEditProfile={onEditProfile}
 						/>
 					</article>
+					{!isPasswordMenuOpened ? (
+						<>
+							<FormTitle
+								label="Личные данные"
+								className="form__title_place_profile"
+							/>
+							<PersonalData
+								isEditing={isEditing}
+								// onEditAvatar={onEditAvatar}
+								onEditProfile={onEditProfile}
+							/>
+						</>
+					) : (
+						<>
+							<FormTitle label="Пароль" className="form__title_place_profile" />
+							<PasswordData
+								onEditPassword={onEditPassword}
+								isEditing={isEditing}
+							/>
+						</>
+					)}
 				</div>
 			</section>
 			<Popup
@@ -128,41 +151,7 @@ export function Profile({
 				<Form
 					className="popup__change-password-form"
 					onSubmit={onChangePasswordSubmit}
-				>
-					<PasswordInput
-						label="Старый пароль"
-						htmlFor="currentPasswordInput"
-						idName="currentPasswordInput"
-						name="current-password"
-						minLength="2"
-						maxLength="25"
-						errorMessage="Неверный пароль"
-					/>
-					<PasswordInput
-						label="Новый пароль"
-						htmlFor="newPasswordInput"
-						idName="newPasswordInput"
-						name="new-password"
-						minLength="2"
-						maxLength="25"
-						errorMessage="Пароль должен быть не менее 6 символов, включать латинские буквы 
-					в верхнем и нижнем регистре, может содержать цифры и другие символы"
-					/>
-					<PasswordInput
-						label="Повторите пароль"
-						htmlFor="repeatPasswordInput"
-						idName="repeatPasswordInput"
-						name="repeat-password"
-						minLength="2"
-						maxLength="25"
-						errorMessage="Пароли не совпадают"
-					/>
-					<Button
-						className="popup__button popup__change-password-button"
-						onClick={onSubmitPassword}
-						label="Сохранить "
-					/>
-				</Form>
+				/>
 			</Popup>
 			<Popup isOpen={isLogoutPopupOpen} onClose={onClose} title="Выход">
 				<h3 className="popup__title">Вы хотите выйти из профиля?</h3>
@@ -207,8 +196,8 @@ export function Profile({
 Profile.propTypes = {
 	isEditing: PropTypes.bool.isRequired,
 	onEditProfile: PropTypes.func.isRequired,
-	onEditAvatar: PropTypes.func.isRequired,
-	// onEditPassword: PropTypes.func.isRequired,
+	// onEditAvatar: PropTypes.func.isRequired,
+	onEditPassword: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,
 	isLogoutPopupOpen: PropTypes.bool.isRequired,
