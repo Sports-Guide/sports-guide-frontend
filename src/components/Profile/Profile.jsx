@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import './Profile.scss';
 import { Form } from '../Form/Form';
 import FormTitle from '../FormTitle/FormTitle';
+import { PersonalData } from '../PersonalData/PersonalData';
 import { Button } from '../Button/Button';
-import { Input } from '../Input/Input';
+// import { Input } from '../Input/Input';
 import { Popup } from '../Popup/Popup';
 import { PasswordInput } from '../PasswordInput/PasswordInput';
 
 export function Profile({
 	isEditing,
 	onEditProfile,
+	onEditAvatar,
 	// onEditPassword, // не удалять, надо будет добавить
 	onDelete,
 	onLogOut,
@@ -27,11 +29,11 @@ export function Profile({
 		setPasswordButtonClicked(!isPasswordButtonClicked);
 	};
 
-	const onSubmitNameAndEmail = (e) => {
-		e.preventDefault();
-		// handleUpdateUser(name, email);
-		// убрать evt, т.к. react-hook-form уже предусматрвает это
-	};
+	// const onSubmitNameAndEmail = (e) => {
+	// 	e.preventDefault();
+	// 	// handleUpdateUser(name, email);
+	// 	// убрать evt, т.к. react-hook-form уже предусматрвает это
+	// };
 
 	const onSubmitPassword = (e) => {
 		e.preventDefault();
@@ -116,49 +118,11 @@ export function Profile({
 							label="Личные данные"
 							className="form__title_place_profile"
 						/>
-						<div className="form__personal-data-header-container">
-							<h2 className="form__personal-data-title">Имя и почта</h2>
-							<Button
-								className="form__button_place_profile"
-								onClick={onEditProfile}
-								label={isEditing ? 'Отменить редактирование' : 'Редактировать'}
-							/>
-						</div>
-						<p className="profile__input-title">Никнейм</p>
-						<Input
-							className="profile__input profile__input_name"
-							type="text"
-							name="login"
-							value="login"
-							placeholder="Введите имя"
-							minLength="6"
-							maxLength="20"
+						<PersonalData
+							isEditing={isEditing}
+							onEditAvatar={onEditAvatar}
+							onEditProfile={onEditProfile}
 						/>
-						<span className="error error_place_profile">
-							Никнейм должен быть не менее 2 символов, включать латинские буквы,
-							может содержать цифры и другие символы
-						</span>
-						<p className="profile__input-title">Почта</p>
-						<Input
-							className="profile__input profile__input_email"
-							type="email"
-							name="email"
-							value="adress@pochta.com"
-							placeholder="Введите почту"
-							minLength="6"
-							maxLength="50"
-						/>
-						<span className="error error_place_profile">
-							Введите корректный email. Пример: user@mail.ru
-						</span>
-						{isEditing && (
-							<Button
-								className="form__button form__button_submit_changes"
-								onClick={onSubmitNameAndEmail}
-								type="submit"
-								label="Сохранить изменения"
-							/>
-						)}
 					</Form>
 				</div>
 			</section>
@@ -249,6 +213,7 @@ export function Profile({
 Profile.propTypes = {
 	isEditing: PropTypes.bool.isRequired,
 	onEditProfile: PropTypes.func.isRequired,
+	onEditAvatar: PropTypes.func.isRequired,
 	// onEditPassword: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,
