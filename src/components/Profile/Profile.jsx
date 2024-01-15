@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Profile.scss';
 import { Form } from '../Form/Form';
@@ -22,6 +22,11 @@ export function Profile({
 }) {
 	// добавить логику на сравнение полей Никнейм и Почта: если совпадают, поля неактивны
 
+	const [isPasswordButtonClicked, setPasswordButtonClicked] = useState(false);
+	const togglePasswordButton = () => {
+		setPasswordButtonClicked(!isPasswordButtonClicked);
+	};
+
 	const onSubmitNameAndEmail = (e) => {
 		e.preventDefault();
 		// handleUpdateUser(name, email);
@@ -40,7 +45,13 @@ export function Profile({
 				<nav className="profile__navigation">
 					<div className="profile__menu">
 						<button
-							className="profile__menu-button profile__menu-button_active"
+							className={`profile__menu-button ${
+								isPasswordButtonClicked
+									? 'profile__menu-button_inactive'
+									: 'profile__menu-button_active'
+							}`}
+							onClick={togglePasswordButton}
+							type="button"
 							aria-label="Личные данные"
 						>
 							<svg
@@ -60,7 +71,13 @@ export function Profile({
 							Личные данные
 						</button>
 						<button
-							className="profile__menu-button profile__menu-button_active"
+							className={`profile__menu-button ${
+								isPasswordButtonClicked
+									? 'profile__menu-button_active'
+									: 'profile__menu-button_inactive'
+							}`}
+							onClick={togglePasswordButton}
+							type="button"
 							aria-label="Пароль"
 						>
 							<svg

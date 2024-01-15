@@ -1,32 +1,35 @@
 @font-face {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  src: url("./Roboto-regular.woff2") format("woff2"),
-    url("./Roboto-regular.woff") format("woff");
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url('./Roboto-regular.woff2') format('woff2'),
+		url('./Roboto-regular.woff') format('woff');
 }
 
 @font-face {
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 700;
-  src: url("./Roboto-Bold.woff2") format("woff2"),
-    url("./Roboto-Bold.woff") format("woff");
-}
-
-
- @font-face {
-  font-family: "Garet";
-  font-style: normal;
-  font-weight: 400;
-  src: url("./Garet-Book.woff2") format("woff2"),
-    url("./Garet-Book.woff") format("woff");
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		url('./Roboto-Bold.woff2') format('woff2'),
+		url('./Roboto-Bold.woff') format('woff');
 }
 
 @font-face {
-  font-family: "Garet";
-  font-style: normal;
-  font-weight: 850;
-  src: url("./Garet-Heavy.woff2") format("woff2"),
-    url("./Garet-Heavy.woff") format("woff");
+	font-family: 'Garet';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url('./Garet-Book.woff2') format('woff2'),
+		url('./Garet-Book.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Garet';
+	font-style: normal;
+	font-weight: 850;
+	src:
+		url('./Garet-Heavy.woff2') format('woff2'),
+		url('./Garet-Heavy.woff') format('woff');
 }

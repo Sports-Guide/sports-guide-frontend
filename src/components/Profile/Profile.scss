@@ -13,7 +13,6 @@
 	background-color: #b4b4b4;
 }
 
-
 .profile__user {
 	display: flex;
 }
@@ -67,7 +66,7 @@
 	justify-content: center;
 	padding: 62px 0 0;
 	margin: 0 auto;
-    column-gap: 32px;
+	column-gap: 32px;
 }
 
 .profile__navigation {
@@ -81,7 +80,7 @@
 .profile__menu {
 	display: flex;
 	flex-direction: column;
-	background-color: #FCFCFC;
+	background-color: #fcfcfc;
 	padding: 16px;
 	border-radius: 12px;
 	gap: 4px;
@@ -98,6 +97,7 @@
 	padding: 0 0 0 24px;
 	align-items: center;
 	background-color: transparent;
+	color: #737A8E;
 	outline: none;
 	border: none;
 	font-family: system-ui;
@@ -124,7 +124,7 @@
 .profile__personal-info {
 	display: flex;
 	flex-direction: column;
-	background-color: #FCFCFC;
+	background-color: #fcfcfc;
 	padding: 24px;
 	border-radius: 12px;
 	-webkit-border-radius: 12px;
@@ -291,8 +291,8 @@
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 20px;
-	background-color: #E5F0FF;
-	color: #1478FF;
+	background-color: #e5f0ff;
+	color: #1478ff;
 	text-align: center;
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -306,7 +306,7 @@
 	text-decoration: none;
 	width: 100%;
 	height: 36px;
-	color: #737A8E;
+	color: #737a8e;
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 20px;
