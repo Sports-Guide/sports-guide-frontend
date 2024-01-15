@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.scss';
-import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
+import { Routes, Route } from 'react-router-dom';
 import { Main } from '../Main/Main';
 import { Profile } from '../Profile/Profile';
 import { AreaApp } from '../Area/AreaApp';
@@ -10,6 +7,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { SportsGround } from '../SportsGround/SportsGround';
+import Layuot from '../Layout/Layout';
 
 export function App() {
 	const [isEditing, setIsEditing] = useState(false);
@@ -74,41 +72,35 @@ export function App() {
 	]);
 
 	return (
-		<div className="app">
-			<BrowserRouter>
-				<div className="page__container">
-					<Header />
-					<Routes>
-						<Route path="/" element={<Main />} />
-						<Route path="/app-area" element={<AreaApp />} />
-						<Route
-							path="/profile"
-							element={
-								<Profile
-									onEditProfile={handleEditButtonClick}
-									isEditing={isEditing}
-									onEditPassword={handlePasswordEditBtnClick}
-									onDelete={handleDeleteAccount}
-									onLogOut={handleLogOut}
-									onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
-									onLogoutPopupOpen={handleLogOutClick}
-									isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
-									isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
-									isPasswordEditPopupOpen={isPasswordEditPopupOpen}
-									onChangePasswordSubmit={handleChangePassword}
-									onClose={closeAllPopups}
-								/>
-							}
+		<Routes>
+			<Route path="/" element={<Layuot />}>
+				<Route index element={<Main />} />
+				<Route path="app-area" element={<AreaApp />} />
+				<Route
+					path="profile"
+					element={
+						<Profile
+							onEditProfile={handleEditButtonClick}
+							isEditing={isEditing}
+							onEditPassword={handlePasswordEditBtnClick}
+							onDelete={handleDeleteAccount}
+							onLogOut={handleLogOut}
+							onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
+							onLogoutPopupOpen={handleLogOutClick}
+							isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
+							isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
+							isPasswordEditPopupOpen={isPasswordEditPopupOpen}
+							onChangePasswordSubmit={handleChangePassword}
+							onClose={closeAllPopups}
 						/>
-						<Route path="/sports-ground" element={<SportsGround />} />
-						<Route path="/signin" element={<Login />} />
-						<Route path="/signup" element={<Register />} />
-						<Route path="*" element={<NotFoundPage />} />
-					</Routes>
-					<Footer />
-				</div>
-			</BrowserRouter>
-		</div>
+					}
+				/>
+				<Route path="sports-ground" element={<SportsGround />} />
+				<Route path="signin" element={<Login />} />
+				<Route path="signup" element={<Register />} />
+				<Route path="*" element={<NotFoundPage />} />
+			</Route>
+		</Routes>
 	);
 }
 
