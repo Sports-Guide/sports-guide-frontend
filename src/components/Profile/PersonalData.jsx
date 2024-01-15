@@ -3,9 +3,12 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import './PersonalData.scss';
 import { Form } from '../Form/Form';
-import { Button } from '../Button/Button';
 
-export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
+export function PersonalData({
+	isEditing,
+	// onEditAvatar, // сделаю позже
+	onEditProfile,
+}) {
 	const {
 		register,
 		formState: { errors, isValid },
@@ -17,12 +20,12 @@ export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
 	};
 
 	return (
-		<>
+		<form className="form_place_profile">
 			<div className="profile__personal-info-container">
 				<button
 					type="button"
 					className="profile__avatar-button"
-					onClick={onEditAvatar}
+					// onClick={onEditAvatar}
 				>
 					{/* <img 
                     // src={currentUser.avatar}
@@ -109,20 +112,21 @@ export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
 					<p className="profile__field-name">mail@example.ru</p>
 				</div>
 			)}
-			<Button
+			<button
 				className="profile__change-button"
 				type={isEditing ? 'submit' : 'button'}
 				onClick={onEditProfile}
 				disabled={!isValid}
-				label={isEditing ? 'Сохранить изменения' : 'Изменить данные'}
-			/>
-		</>
+			>
+				{isEditing ? 'Сохранить изменения' : 'Изменить данные'}
+			</button>
+		</form>
 	);
 }
 
 PersonalData.propTypes = {
 	isEditing: PropTypes.bool.isRequired,
-	onEditAvatar: PropTypes.func.isRequired,
+	// onEditAvatar: PropTypes.func.isRequired,
 	onEditProfile: PropTypes.func.isRequired,
 };
 
