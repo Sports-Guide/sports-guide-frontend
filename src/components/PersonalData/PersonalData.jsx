@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import './PersonalData.scss';
 import { Input } from '../Input/Input';
@@ -25,12 +26,13 @@ export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
 				</div>
 			</div>
 			{isEditing ? (
-				<>
+				<div className="profile__change-info-container">
 					<Input
 						className="profile__input profile__input_login"
 						type="text"
 						name="login"
-						value="login"
+						value="User1234"
+						// value={currentUser.login}
 						placeholder="Никнейм"
 						minLength="6"
 						maxLength="20"
@@ -43,7 +45,8 @@ export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
 						className="profile__input profile__input_email"
 						type="email"
 						name="email"
-						value="adress@pochta.com"
+						value="mail@example.ru"
+						// value={currentUser.email}
 						placeholder="E-mail"
 						minLength="6"
 						maxLength="50"
@@ -51,7 +54,7 @@ export function PersonalData({ isEditing, onEditAvatar, onEditProfile }) {
 					<span className="error error_place_profile">
 						Введите корректный email. Пример: user@mail.ru
 					</span>
-				</>
+				</div>
 			) : (
 				<div className="profile__info-container">
 					<p className="profile__field-title">Никнейм</p>

@@ -2,75 +2,77 @@
 	display: flex;
 	align-items: center;
 	margin-bottom: 24px;
-    column-gap: 8px;
+	column-gap: 8px;
 }
 
 .profile__avatar-button {
-    background: url(../../images/user-icon-avatar.jpg) center no-repeat;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    height: 52px;
-    width: 52px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    background-color: transparent;
+	background: url(../../images/user-icon-avatar.jpg) center no-repeat;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	height: 52px;
+	width: 52px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	background-color: transparent;
 }
 
 .profile__name-container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 2px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 2px;
 }
 
 .profile__name {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: left;
-    color: #030303;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
+	text-align: left;
+	color: #030303;
 }
 
 .profile__email {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 18px;
-    text-align: left;
-    color: #515151;
-    margin: 0;
-    padding: 0;   
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px;
+	text-align: left;
+	color: #515151;
+	margin: 0;
+	padding: 0;
 }
 
-.profile__input-title {
-	text-align: left;
-	margin: 0;
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 16px;
-	padding-bottom: 4px;
+.profile__change-info-container {
+    width: 425px;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile__input {
-	width: 100%;
-	height: 48px;
-	display: flex;
-	border-radius: 4px;
-    border: 1px solid #C9D1E5;
+    width: 100%;
+    height: 44px;
+    display: flex;
+    border-radius: 4px;
+    border: 1px solid #c9d1e5;
+    outline: none;
     background-color: transparent;
-	text-align: left;
-	font-weight: 400;
-	font-size: 16px;
-	line-height: 18px;
-	padding: 0;
-	margin: 0;
-	align-items: center;
-	color: #111;
-	padding: 15px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    color: #111;
+    padding: 16px 12px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
 }
-
 
 // .error {
 
@@ -88,48 +90,48 @@
 }
 
 .profile__info-container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .profile__field-title {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 18px;
-    text-align: left;
-    color: #515151;
-    margin: 0 0 4px;
-    padding: 0;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px;
+	text-align: left;
+	color: #515151;
+	margin: 0 0 4px;
+	padding: 0;
 }
 
 .profile__field-name {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: left;
-    color: #030303;
-    padding: 0;
-    margin: 0 0 16px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 20px;
+	text-align: left;
+	color: #030303;
+	padding: 0;
+	margin: 0 0 16px;
 }
 
 .profile__change-button {
-    font-family: 'Roboto', sans-serif, system-ui;
-    width: 161px;
-    height: 36px;
-    color: #FCFCFC;
-    background-color: #1478FF;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 20px;
-    text-align: center;
-    padding: 0;
-    margin-top: calc(24px - 16px);
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-    cursor: pointer;
+	font-family: 'Roboto', sans-serif, system-ui;
+	width: 161px;
+	height: 36px;
+	color: #fcfcfc;
+	background-color: #1478ff;
+	border: none;
+	outline: none;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	text-align: center;
+	padding: 0;
+	margin-top: calc(24px - 16px);
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	cursor: pointer;
 }

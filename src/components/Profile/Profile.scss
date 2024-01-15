@@ -140,10 +140,8 @@
 .form_place_profile {
 	color: #767676;
 	width: 480px;
-	// width: 220px; прошлый стиль
 	display: flex;
 	flex-direction: column;
-	// position: relative; прошлый стиль
 }
 
 .form__title_place_profile {
@@ -154,13 +152,6 @@
 	line-height: 28px;
 	margin: 0 0 16px;
 }
-
-// .form__personal-info-container {
-// 	display: flex;
-// 	justify-content: space-between;
-// 	align-items: center;
-// 	margin-bottom: 16px;
-// }
 
 .form__personal-data-title {
 	margin: 0;
@@ -184,16 +175,6 @@
 	-o-border-radius: 8px;
 }
 
-// .form__button_place_profile {
-// 	color: #1478ff;
-// 	border-bottom: solid 1px;
-// 	font-size: 16px;
-// 	font-weight: 400;
-// 	line-height: 20px;
-// 	text-align: left;
-// 	padding: 0;
-// }
-
 .form__button_password-edit {
 	width: 157px;
 	height: 44px;
@@ -206,32 +187,6 @@
 	font-weight: 700;
 	line-height: 20px;
 }
-
-// .profile__input-title {
-// 	text-align: left;
-// 	margin: 0;
-// 	font-weight: 600;
-// 	font-size: 14px;
-// 	line-height: 16px;
-// 	padding-bottom: 4px;
-// }
-
-// .profile__input {
-// 	width: 100%;
-// 	height: 48px;
-// 	display: flex;
-// 	border: 2px solid #aaa;
-// 	border-radius: 4px;
-// 	text-align: left;
-// 	font-weight: 400;
-// 	font-size: 16px;
-// 	line-height: 18px;
-// 	padding: 0;
-// 	margin: 0;
-// 	align-items: center;
-// 	color: #111;
-// 	padding: 15px;
-// }
 
 .form__button_submit_changes {
 	color: #fcfcfc;
