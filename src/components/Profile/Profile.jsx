@@ -109,17 +109,6 @@ export function Profile({
 					</div>
 				</nav>
 				<div className="profile__personal-info">
-					<article className="form_place_profile">
-						<FormTitle
-							label="Личные данные"
-							className="form__title_place_profile"
-						/>
-						<PersonalData
-							isEditing={isEditing}
-							// onEditAvatar={onEditAvatar}
-							onEditProfile={onEditProfile}
-						/>
-					</article>
 					{!isPasswordMenuOpened ? (
 						<>
 							<FormTitle
