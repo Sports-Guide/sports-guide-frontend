@@ -11,7 +11,12 @@ import { Button } from '../Button/Button';
 import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
 import { ButtonOnRegister } from '../Button/ButtonOnRegister';
 
-function Login({ isOnLogInPopUpOpen, onClose, toSignUpPopUp }) {
+function Login({
+	isOnLogInPopUpOpen,
+	onClose,
+	toSignUpPopUp,
+	onPasswordRecovery,
+}) {
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const navigate = useNavigate();
@@ -67,7 +72,8 @@ className="popup__login-form-title"
 							Запомнить меня
 						</label>
 						<ButtonOnPasswordRecovery
-							/* onClick={onPasswordRecovery} */ label="Забыли пароль?"
+							onClick={onPasswordRecovery}
+							label="Забыли пароль?"
 						/>
 					</div>
 					{/* тут будет валидация кнопки войти */}
@@ -93,8 +99,9 @@ Login.propTypes = {
 	isOnLogInPopUpOpen: PropTypes.bool.isRequired,
 	onClose: PropTypes.func.isRequired,
 	toSignUpPopUp: PropTypes.func.isRequired,
-	/* onLogin: PropTypes.func.isRequired,
 	onPasswordRecovery: PropTypes.func.isRequired,
+	/* onLogin: PropTypes.func.isRequired,
+	
 	 */
 };
 

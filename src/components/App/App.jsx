@@ -8,6 +8,7 @@ import Register from '../Register/Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { SportsGround } from '../SportsGround/SportsGround';
 import Layuot from '../Layout/Layout';
+import PasswordRecoveryPopUp from '../PasswordRecoveryPopUp/PasswordRecoveryPopUp';
 
 export function App() {
 	const [isEditing, setIsEditing] = useState(false);
@@ -18,6 +19,8 @@ export function App() {
 	const [isOnLogInPopUpOpen, setOnLogInPopUpOpen] = useState(false);
 	const [isOnRegisterPopUpOpen, setOnRegisterPopUpOpen] = useState(false);
 	const [isPasswordEditPopupOpen, setIsPasswordEditPopupOpen] = useState(false);
+	const [isPasswordRecoveryPopUpOpen, setPasswordRecoveryPopUpOpen] =
+		useState(false);
 
 	const handleEditButtonClick = () =>
 		isEditing ? setIsEditing(false) : setIsEditing(true);
@@ -52,6 +55,11 @@ export function App() {
 		setOnLogInPopUpOpen(false);
 	};
 
+	const handleOpenPasswordRecoveryPopUp = () => {
+		setPasswordRecoveryPopUpOpen(true);
+		setOnLogInPopUpOpen(false);
+	};
+
 	const handleChangePassword = () => {
 		if (isEditing) {
 			setIsEditing(false);
@@ -66,6 +74,7 @@ export function App() {
 		setIsPasswordEditPopupOpen(false);
 		setOnLogInPopUpOpen(false);
 		setOnRegisterPopUpOpen(false);
+		setPasswordRecoveryPopUpOpen(false);
 	};
 
 	// закрываем попапы по Esc
@@ -86,6 +95,7 @@ export function App() {
 		isPasswordEditPopupOpen,
 		isOnLogInPopUpOpen,
 		isOnRegisterPopUpOpen,
+		isPasswordRecoveryPopUpOpen,
 	]);
 
 	return (
@@ -126,14 +136,19 @@ export function App() {
 					isOnLogInPopUpOpen={isOnLogInPopUpOpen}
 					onClose={closeAllPopups}
 					toSignUpPopUp={handleOpenSignUpPopUp}
+					onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
 					/* onLogin={handleLogin}
-			onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
-			 */
+		
+		 */
 				/>
 				<Register
 					isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
 					onClose={closeAllPopups}
 					toSignInPopUp={handleOnLogInClick}
+				/>
+				<PasswordRecoveryPopUp
+					isPasswordRecoveryPopUpOpen={isPasswordRecoveryPopUpOpen}
+					onClose={closeAllPopups}
 				/>
 			</div>
 		</div>
