@@ -3,7 +3,7 @@ import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
 import MapComponent from '../Map/Map';
 import addPictures from '../../images/Camera.svg';
-import { ButtonAppSite } from '../Button/ButtonAppSite';
+import { Button } from '../Button/Button';
 
 export function AreaApp(onAreaApp) {
 	return (
@@ -68,7 +68,11 @@ export function AreaApp(onAreaApp) {
 							Перед публикацией площадка будет проверена модерацией нашего
 							сервиса. Это может занять некоторое время.
 						</p>
-						<ButtonAppSite onClick={onAreaApp} label="Добавить площадку" />
+						<Button
+							className="button-add"
+							onClick={onAreaApp}
+							label="Добавить площадку"
+						/>
 					</div>
 				</form>
 			</div>

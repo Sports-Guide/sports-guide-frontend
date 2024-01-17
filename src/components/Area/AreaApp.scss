@@ -8,6 +8,7 @@ $fontsRoboto: 'Roboto';
 	letter-spacing: 0em;
 	text-align: left;
 	margin: 0;
+
 }
 
 @mixin displayPosition {
@@ -19,10 +20,9 @@ $fontsRoboto: 'Roboto';
 @mixin blocks {
 	width: 772px;
 	border-radius: 12px;
+	margin-top: 24px;
 	background: rgba(252, 252, 252, 1);
 	padding: 24px;
-	margin-top: 22px;
-	margin-bottom: 24px;
 }
 
 @mixin label {
@@ -33,7 +33,7 @@ $fontsRoboto: 'Roboto';
 	letter-spacing: 0em;
 	text-align: left;
 	color: rgba(81, 81, 81, 1);
-	margin-top: 13px;
+	margin-top: 12px;
 }
 
 @mixin inputs {
@@ -45,8 +45,7 @@ $fontsRoboto: 'Roboto';
 }
 
 .area-app {
-	border: 1px solid green;
-	padding-left: 195px;
+	padding-left: 200px;
 	color: rgba(81, 81, 81, 1);
 }
 .area-app__link {
@@ -56,37 +55,31 @@ $fontsRoboto: 'Roboto';
 	font-size: 14px;
 	line-height: 20px;
 	color: #737a8e;
-	margin-top: 46px;
-	padding-left: 36px;
-	padding-top: 5px;
+	margin-top: 50px;
+	padding-left: 33px;
 	text-decoration: none;
 	text-align: left;
 	background-image: url('../../images/left-arrow.svg');
 	background-repeat: no-repeat;
-	background-position: 5px 3px;
 }
 
 .area-app__information {
 	display: flex;
 	flex-direction: column;
-	width: 778px;
 }
 
 .area-app__title {
-	margin-top: 32px;
-	margin-left: 3px;
-	margin-bottom: 0;
+	margin-top: 33px;
 	font-family: Garet;
 	font-size: 36px;
 	font-weight: 850;
 	line-height: 40px;
 	letter-spacing: 0em;
 	text-align: left;
+	margin-bottom: 0;
 }
 
-.addition-area {
-	margin-top: 0;
-}
+
 .kinds-of-sports {
 	@include blocks;
 }
@@ -130,6 +123,7 @@ $fontsRoboto: 'Roboto';
 	line-height: 18px;
 	letter-spacing: 0em;
 	text-align: left;
+	margin-top: 9px;
 }
 
 .foto__container {
@@ -160,12 +154,10 @@ $fontsRoboto: 'Roboto';
 }
 
 .app-area {
-	width: 772px;
-	height: 188px;
-	padding: 24px;
-	border-radius: 12px;
-	gap: 24px;
-	background: rgba(252, 252, 252, 1);
+  @include blocks;
+ display: flex;
+ flex-direction: column;
+ margin-bottom: 202px
 }
 .app-area__title {
 	@include fontsTitle;
@@ -178,5 +170,5 @@ $fontsRoboto: 'Roboto';
 	letter-spacing: 0em;
 	text-align: left;
 	width: 391px;
-	height: 36px;
+	margin-top: 8;
 }

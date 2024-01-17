@@ -69,12 +69,12 @@
 }
 
 .register-password-label {
-    color: var(--Primary-Black-light, #515151);
-    font-family: Roboto;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align: left;
+	color: var(--Primary-Black-light, #515151);
+	font-family: Roboto;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+	text-align: left;
 	display: flex;
 	margin-top: 16px;
 }
@@ -105,12 +105,13 @@
 }
 
 .show-hide-btn-login {
-	background: url(../../images/show-hide-password-button-log-reg.svg) no-repeat center;
+	background: url(../../images/show-hide-password-button-log-reg.svg) no-repeat
+		center;
 	width: 16px;
 	height: 16px;
 	position: absolute;
 	top: 16px;
-    right: 14px;
+	right: 14px;
 	outline: none;
 	border: none;
 }
