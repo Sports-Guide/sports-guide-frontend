@@ -63,8 +63,8 @@ export function AreaApp(onAreaApp) {
 						</div>
 					</div>
 					<div className="app-area">
-						<h3 className="area-app__title">Добавление площадки</h3>
-						<p className="area-app__subtitle">
+						<h3 className="app-area__title">Добавление площадки</h3>
+						<p className="app-area__subtitle">
 							Перед публикацией площадка будет проверена модерацией нашего
 							сервиса. Это может занять некоторое время.
 						</p>
