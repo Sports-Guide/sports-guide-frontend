@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Profile.scss';
-import { Form } from '../Form/Form';
 import FormTitle from '../FormTitle/FormTitle';
 import { PersonalData } from './PersonalData';
 import { PasswordData } from './PasswordData';
@@ -16,9 +15,9 @@ export function Profile({
 	onDelete,
 	onLogOut,
 	isLogoutPopupOpen,
+	onLogoutPopupOpen,
 	isDeleteAccountPopupOpen,
-	isPasswordEditPopupOpen,
-	onChangePasswordSubmit,
+	onDeleteAccountPopupOpen,
 	onClose,
 }) {
 	// добавить логику на сравнение полей Никнейм и Почта: если совпадают, поля неактивны
@@ -27,12 +26,6 @@ export function Profile({
 	const togglePasswordMenu = () => {
 		setPasswordMenuOpened(!isPasswordMenuOpened);
 	};
-
-	// const onSubmitPassword = (e) => {
-	// 	e.preventDefault();
-	// 	// onChangePasswordSubmit();
-	// 	// убрать evt, т.к. react-hook-form уже предусматрвает это
-	// };
 
 	return (
 		<main className="profile">
@@ -95,14 +88,14 @@ export function Profile({
 					<div className="profile__menu">
 						<button
 							className="profile__button-logout"
-							onClick={onLogOut}
+							onClick={onLogoutPopupOpen}
 							type="button"
 						>
 							Выйти
 						</button>
 						<button
 							className="profile__button-account-delete"
-							onClick={onDelete}
+							onClick={onDeleteAccountPopupOpen}
 						>
 							Удалить аккаунт
 						</button>
@@ -132,16 +125,6 @@ export function Profile({
 					)}
 				</div>
 			</section>
-			<Popup
-				isOpen={isPasswordEditPopupOpen}
-				onClose={onClose}
-				title="Изменение пароля"
-			>
-				<Form
-					className="popup__change-password-form"
-					onSubmit={onChangePasswordSubmit}
-				/>
-			</Popup>
 			<Popup isOpen={isLogoutPopupOpen} onClose={onClose} title="Выход">
 				<h3 className="popup__title">Вы хотите выйти из профиля?</h3>
 				<div className="popup__button-container">
@@ -190,9 +173,9 @@ Profile.propTypes = {
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,
 	isLogoutPopupOpen: PropTypes.bool.isRequired,
+	onLogoutPopupOpen: PropTypes.func.isRequired,
 	isDeleteAccountPopupOpen: PropTypes.bool.isRequired,
-	isPasswordEditPopupOpen: PropTypes.bool.isRequired,
-	onChangePasswordSubmit: PropTypes.func.isRequired,
+	onDeleteAccountPopupOpen: PropTypes.func.isRequired,
 	onClose: PropTypes.func.isRequired,
 };
 

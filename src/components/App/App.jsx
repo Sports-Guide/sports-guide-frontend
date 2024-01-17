@@ -18,7 +18,6 @@ export function App() {
 		useState(false);
 	const [isOnLogInPopUpOpen, setOnLogInPopUpOpen] = useState(false);
 	const [isOnRegisterPopUpOpen, setOnRegisterPopUpOpen] = useState(false);
-	const [isPasswordEditPopupOpen, setIsPasswordEditPopupOpen] = useState(false);
 	const [isPasswordRecoveryPopUpOpen, setPasswordRecoveryPopUpOpen] =
 		useState(false);
 
@@ -34,10 +33,6 @@ export function App() {
 	};
 
 	// создаём обработчики для открытия попапов
-	const handlePasswordEditBtnClick = () => {
-		setIsPasswordEditPopupOpen(true);
-	};
-
 	const handleDeleteAccountBtnClick = () => {
 		setDeleteAccountPopupOpen(true);
 	};
@@ -71,7 +66,6 @@ export function App() {
 	const closeAllPopups = () => {
 		setDeleteAccountPopupOpen(false);
 		setLogoutConfirmationPopupOpen(false);
-		setIsPasswordEditPopupOpen(false);
 		setOnLogInPopUpOpen(false);
 		setOnRegisterPopUpOpen(false);
 		setPasswordRecoveryPopUpOpen(false);
@@ -92,7 +86,6 @@ export function App() {
 	}, [
 		isDeleteAccountPopupOpen,
 		isLogoutConfirmationPopupOpen,
-		isPasswordEditPopupOpen,
 		isOnLogInPopUpOpen,
 		isOnRegisterPopUpOpen,
 		isPasswordRecoveryPopUpOpen,
@@ -114,15 +107,13 @@ export function App() {
 								<Profile
 									onEditProfile={handleEditButtonClick}
 									isEditing={isEditing}
-									onEditPassword={handlePasswordEditBtnClick}
+									onEditPassword={handleChangePassword}
 									onDelete={handleDeleteAccount}
 									onLogOut={handleLogOut}
 									onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
 									onLogoutPopupOpen={handleLogOutClick}
 									isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
 									isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
-									isPasswordEditPopupOpen={isPasswordEditPopupOpen}
-									onChangePasswordSubmit={handleChangePassword}
 									onClose={closeAllPopups}
 								/>
 							}

@@ -81,3 +81,61 @@
 	gap: 4px;
 	align-self: center;
 }
+
+.login-password-label {
+    color: var(--Primary-Black-light, #515151);
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: left;
+	display: flex;
+	margin-top: 16px;
+}
+
+.login-password-input-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.login-password-input {
+	margin: 0;
+	margin-top: 4px;
+	padding: 11px 0 11px 17px;
+	display: flex;
+	width: 425px;
+	border: 1px solid #c9d1e5;
+	align-items: flex-start;
+	border-radius: var(--xs, 8px);
+	-webkit-border-radius: var(--xs, 8px);
+	-moz-border-radius: var(--xs, 8px);
+	-ms-border-radius: var(--xs, 8px);
+	-o-border-radius: var(--xs, 8px);
+}
+
+.login-password-input:focus {
+	outline: 1px solid var(--Accent, #1478ff);
+}
+
+.show-hide-btn-login {
+	background: url(../../images/show-hide-password-button-log-reg.svg) no-repeat center;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 16px;
+    right: 14px;
+	outline: none;
+	border: none;
+}
+
+.login-password-error {
+	font-family: Roboto;
+	padding: 1px 0 12px;
+	max-height: 32px;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 16px;
+	text-align: left;
+	color: #f92e2e;
+}
