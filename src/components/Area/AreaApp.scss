@@ -1,16 +1,27 @@
 $fontsRoboto: 'Roboto';
 
 @mixin fontsTitle {
-//styleName: Bold/H4;
-font-family: Roboto Flex;
-font-size: 20px;
-font-weight: 900;
-line-height: 24px;
-letter-spacing: 0.01em;
-text-align: left;
-font-variation-settings: 'wdth' 128, 'GRAD' 42, 'slnt' 0, 'XTRA' 486, 'XOPQ' 96, 'YOPQ' 79, 'YTLC' 544, 'YTUC' 712, 'YTAS' 750, 'YTDE' -203, 'YTFI' 738;
-margin-top: 0;
-margin-bottom: 16px;
+	//styleName: Bold/H4;
+	font-family: Roboto Flex;
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+	margin-top: 0;
+	margin-bottom: 16px;
 }
 
 @mixin displayPosition {
@@ -23,22 +34,32 @@ margin-bottom: 16px;
 	width: 772px;
 	border-radius: 12px;
 	background: rgba(252, 252, 252, 1);
-	;
 	padding: 24px;
 	margin-bottom: 16px;
 }
 
 @mixin label {
-//styleName: Bold/H4;
-font-family: Roboto Flex;
-font-size: 20px;
-font-weight: 900;
-line-height: 24px;
-letter-spacing: 0.01em;
-text-align: left;
-font-variation-settings: 'wdth' 128, 'GRAD' 42, 'slnt' 0, 'XTRA' 486, 'XOPQ' 96, 'YOPQ' 79, 'YTLC' 544, 'YTUC' 712, 'YTAS' 750, 'YTDE' -203, 'YTFI' 738;
-margin-top: 7px;
-margin-left: -3px;
+	//styleName: Bold/H4;
+	font-family: Roboto Flex;
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+	margin-top: 7px;
+	margin-left: -3px;
 }
 
 @mixin inputs {
@@ -93,9 +114,9 @@ margin-left: -3px;
 		'YTAS' 750,
 		'YTDE' -203,
 		'YTFI' 738;
-		margin-top: 34px;
-		margin-left: -3px;
-		margin-bottom: 28px
+	margin-top: 34px;
+	margin-left: -3px;
+	margin-bottom: 28px;
 }
 
 .kinds-of-sports {
@@ -180,22 +201,22 @@ margin-left: -3px;
 	@include fontsTitle;
 }
 .app-area__subtitle {
-//styleName: Regular/Inputs_Placeholdertext;
-font-family: Roboto;
-font-size: 15px;
-font-weight: 400;
-line-height: 20px;
-letter-spacing: 0em;
-text-align: left;
-margin-top: -2px;
-margin-bottom: 0;
-margin-left: -4px;
-width: 555px;
-color: rgba(115, 122, 142, 1);
-margin-bottom: 28px;
+	//styleName: Regular/Inputs_Placeholdertext;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	margin-top: -2px;
+	margin-bottom: 0;
+	margin-left: -4px;
+	width: 555px;
+	color: rgba(115, 122, 142, 1);
+	margin-bottom: 28px;
 }
 
-.test{
+.test {
 	margin-left: -4px;
 	margin-top: -1px;
 }
