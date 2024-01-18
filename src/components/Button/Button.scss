@@ -1,15 +1,18 @@
 .button {
-	width: 80px;
-	height: 36px;
-	border-radius: 8px;
-	gap: 8px;
-	border: none;
-	background: rgba(229, 240, 255, 1);
-	font-family: 'Roboto';
-	font-style: normal;
-	font-weight: 700;
+	font-family: Roboto;
 	font-size: 14px;
+	font-weight: 700;
 	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	width: 131px;
+	height: 36px;
+	border:none;
+	text-align: right;
+	background: rgba(252, 252, 252, 1);
+	background-image: url('../../images/User_icon.svg');
+	background-repeat: no-repeat;
+	padding-right: 21px;
 	margin-right: 13px;
 }
 

@@ -4,6 +4,7 @@
 	background-color: rgba(252, 252, 252, 1);
 	height: 68px;
 	color: black;
+	padding: 16px, 200px, 16px, 200px;
 }
 
 .header__container {
@@ -15,27 +16,41 @@
 .header__logo {
 	display: flex;
 	text-decoration: none;
+	align-items: center;
 	color: black;
-	padding-top: 26px;
-	padding-left: 1px;
 
 	.logo {
-		margin-right: 15px;
 		width: 24px;
 		height: 24px;
+		margin-right: 10px;
 	}
-
 	.header__title {
-		font-family: Garet;
+		font-family: Roboto Flex;
 		font-size: 20px;
-		font-weight: 850;
+		font-style: italic;
+		font-weight: 600;
 		line-height: 28px;
 		letter-spacing: 0em;
-		margin: 0;
+		text-align: left;
+		font-variation-settings:
+			'wdth' 111,
+			'GRAD' 150,
+			'slnt' -4,
+			'XTRA' 468,
+			'XOPQ' 96,
+			'YOPQ' 79,
+			'YTLC' 514,
+			'YTUC' 657,
+			'YTAS' 750,
+			'YTDE' -203,
+			'YTFI' 738;
+			color: rgba(81, 81, 81, 1);
+
 	}
 }
 
 .header__buttons {
 	display: flex;
 	align-items: center;
+	margin-bottom: 3px;
 }

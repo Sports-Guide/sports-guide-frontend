@@ -1,13 +1,16 @@
 $fontsRoboto: 'Roboto';
 
 @mixin fontsTitle {
-	font-family: $fontsRoboto;
-	font-size: 24px;
-	font-weight: 900;
-	line-height: 28px;
-	letter-spacing: 0em;
-	text-align: left;
-	margin: 0;
+//styleName: Bold/H4;
+font-family: Roboto Flex;
+font-size: 20px;
+font-weight: 900;
+line-height: 24px;
+letter-spacing: 0.01em;
+text-align: left;
+font-variation-settings: 'wdth' 128, 'GRAD' 42, 'slnt' 0, 'XTRA' 486, 'XOPQ' 96, 'YOPQ' 79, 'YTLC' 544, 'YTUC' 712, 'YTAS' 750, 'YTDE' -203, 'YTFI' 738;
+margin-top: 0;
+margin-bottom: 16px;
 }
 
 @mixin displayPosition {
@@ -19,27 +22,30 @@ $fontsRoboto: 'Roboto';
 @mixin blocks {
 	width: 772px;
 	border-radius: 12px;
-	margin-top: 24px;
 	background: rgba(252, 252, 252, 1);
+	;
 	padding: 24px;
+	margin-bottom: 16px;
 }
 
 @mixin label {
-	font-family: $fontsRoboto;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 20px;
-	letter-spacing: 0em;
-	text-align: left;
-	color: rgba(81, 81, 81, 1);
-	margin-top: 12px;
+//styleName: Bold/H4;
+font-family: Roboto Flex;
+font-size: 20px;
+font-weight: 900;
+line-height: 24px;
+letter-spacing: 0.01em;
+text-align: left;
+font-variation-settings: 'wdth' 128, 'GRAD' 42, 'slnt' 0, 'XTRA' 486, 'XOPQ' 96, 'YOPQ' 79, 'YTLC' 544, 'YTUC' 712, 'YTAS' 750, 'YTDE' -203, 'YTFI' 738;
+margin-top: 7px;
+margin-left: -3px;
 }
 
 @mixin inputs {
 	width: 724px;
 	height: 42px;
 	border-radius: 8px;
-	margin-top: 4px;
+	margin-top: 18px;
 	border: 1px solid rgba(201, 209, 229, 1);
 }
 
@@ -54,8 +60,8 @@ $fontsRoboto: 'Roboto';
 	font-size: 14px;
 	line-height: 20px;
 	color: #737a8e;
-	margin-top: 50px;
-	padding-left: 33px;
+	margin-top: 51px;
+	padding-left: 31px;
 	text-decoration: none;
 	text-align: left;
 	background-image: url('../../images/left-arrow.svg');
@@ -68,14 +74,28 @@ $fontsRoboto: 'Roboto';
 }
 
 .area-app__title {
-	margin-top: 33px;
-	font-family: Garet;
-	font-size: 36px;
-	font-weight: 850;
-	line-height: 40px;
-	letter-spacing: 0em;
+	//styleName: Bold/H2;
+	font-family: Roboto Flex;
+	font-size: 28px;
+	font-weight: 900;
+	line-height: 32px;
+	letter-spacing: 0.01em;
 	text-align: left;
-	margin-bottom: 0;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+		margin-top: 34px;
+		margin-left: -3px;
+		margin-bottom: 28px
 }
 
 .kinds-of-sports {
@@ -97,7 +117,6 @@ $fontsRoboto: 'Roboto';
 }
 
 .locatin__title {
-	@include fontsTitle;
 }
 .location__label {
 	@include displayPosition;
@@ -161,13 +180,22 @@ $fontsRoboto: 'Roboto';
 	@include fontsTitle;
 }
 .app-area__subtitle {
-	font-family: $fontsRoboto;
-	font-size: 13px;
-	font-weight: 400;
-	line-height: 18px;
-	letter-spacing: 0em;
-	text-align: left;
-	width: 391px;
-	margin-top: 8px;
-	margin-bottom: 24px;
+//styleName: Regular/Inputs_Placeholdertext;
+font-family: Roboto;
+font-size: 15px;
+font-weight: 400;
+line-height: 20px;
+letter-spacing: 0em;
+text-align: left;
+margin-top: -2px;
+margin-bottom: 0;
+margin-left: -4px;
+width: 555px;
+color: rgba(115, 122, 142, 1);
+margin-bottom: 28px;
+}
+
+.test{
+	margin-left: -4px;
+	margin-top: -1px;
 }

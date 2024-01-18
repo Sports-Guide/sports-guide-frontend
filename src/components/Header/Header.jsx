@@ -19,9 +19,9 @@ export function Header({ onLogIn, onLogOut, loggedIn, onAreaApp }) {
 				<div className="header__buttons">
 					<ButtonMap label="Москва" />
 					{loggedIn ? (
-						<Button onClick={onLogOut} label="Выйти" />
-					) : (
 						<ButtonLoginSite onClick={onLogIn} type="button" label="Войти" />
+					) : (
+						<Button onClick={onLogOut} label="UserName" />
 					)}
 					<ButtonAppSite onClick={onAreaApp} label="Добавить площадку" />
 				</div>

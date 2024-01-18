@@ -4,7 +4,7 @@ import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
 import MapComponent from '../Map/Map';
 import addPictures from '../../images/Camera.svg';
-import { Button } from '../Button/Button';
+import { ButtonAppSite } from '../Button/ButtonAppSite';
 
 export function AreaApp(onAreaApp) {
 	const data = [
@@ -24,13 +24,14 @@ export function AreaApp(onAreaApp) {
 				<form className="addition-area">
 					<div className="kinds-of-sports">
 						<h3 className="kinds-of-sports__title">Виды спорта</h3>
-						<div className="kinds-of-sports__label">
-							Выберите категории спорта из списка
-						</div>
-						<Multiselect options={options} displayValue="Country" />
+						<Multiselect
+							showCheckbox
+							placeholder=" "
+							options={options}
+							displayValue="Country"
+						/>
 					</div>
 					<div className="location">
-						<h3 className="locatin__title">Расположение</h3>
 						<label htmlFor="text" className="location__label">
 							Адрес площадки
 							<input type="text" id="text" className="location__adress" />
@@ -39,9 +40,7 @@ export function AreaApp(onAreaApp) {
 					</div>
 					<div className="foto">
 						<h3 className="foto__title">Фотографии</h3>
-						<p className="foto__subtitle">
-							Добавьте актуальные изображения площадки
-						</p>
+
 						<div className="foto__container">
 							<label htmlFor="add-file" className="foto__file-label">
 								<input
@@ -61,16 +60,13 @@ export function AreaApp(onAreaApp) {
 						</div>
 					</div>
 					<div className="app-area">
-						<h3 className="app-area__title">Добавление площадки</h3>
 						<p className="app-area__subtitle">
 							Перед публикацией площадка будет проверена модерацией нашего
 							сервиса. Это может занять некоторое время.
 						</p>
-						<Button
-							className="button-add"
-							onClick={onAreaApp}
-							label="Добавить площадку"
-						/>
+						<div className="test">
+							<ButtonAppSite onClick={onAreaApp} label="Добавить площадку" />
+						</div>
 					</div>
 				</form>
 			</div>
