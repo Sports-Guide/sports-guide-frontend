@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Multiselect } from 'multiselect-react-dropdown';
 import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
 import MapComponent from '../Map/Map';
@@ -6,6 +7,13 @@ import addPictures from '../../images/Camera.svg';
 import { Button } from '../Button/Button';
 
 export function AreaApp(onAreaApp) {
+	const data = [
+		{ Country: 'Футбол', id: 1 },
+		{ Country: 'Баскетбол', id: 2 },
+		{ Country: 'Волейбол', id: 3 },
+		{ Country: 'Каток', id: 4 },
+	];
+	const [options] = useState(data);
 	return (
 		<div className="area-app">
 			<div className="area-app__information">
@@ -16,20 +24,10 @@ export function AreaApp(onAreaApp) {
 				<form className="addition-area">
 					<div className="kinds-of-sports">
 						<h3 className="kinds-of-sports__title">Виды спорта</h3>
-						<label htmlFor="category-select" className="kinds-of-sports__label">
+						<div className="kinds-of-sports__label">
 							Выберите категории спорта из списка
-							<select
-								name="category"
-								id="category-select"
-								className="kinds-of-sports__add"
-							>
-								<option value="">- </option>
-								<option value="workout">workout</option>
-								<option value="football">Футбол</option>
-								<option value="basketball">Баскетбал</option>
-								<option value="Cycling">Велоспорт</option>
-							</select>
-						</label>
+						</div>
+						<Multiselect options={options} displayValue="Country" />
 					</div>
 					<div className="location">
 						<h3 className="locatin__title">Расположение</h3>

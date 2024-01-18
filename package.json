@@ -9,6 +9,7 @@
 		"leaflet": "^1.9.4",
 		"leaflet-control-geocoder": "^2.4.0",
 		"leaflet-geosearch": "^3.11.0",
+		"multiselect-react-dropdown": "^2.0.25",
 		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",

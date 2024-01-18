@@ -8,7 +8,6 @@ $fontsRoboto: 'Roboto';
 	letter-spacing: 0em;
 	text-align: left;
 	margin: 0;
-
 }
 
 @mixin displayPosition {
@@ -78,7 +77,6 @@ $fontsRoboto: 'Roboto';
 	text-align: left;
 	margin-bottom: 0;
 }
-
 
 .kinds-of-sports {
 	@include blocks;
@@ -154,10 +152,10 @@ $fontsRoboto: 'Roboto';
 }
 
 .app-area {
-  @include blocks;
- display: flex;
- flex-direction: column;
- margin-bottom: 202px
+	@include blocks;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 184px;
 }
 .app-area__title {
 	@include fontsTitle;
@@ -170,5 +168,6 @@ $fontsRoboto: 'Roboto';
 	letter-spacing: 0em;
 	text-align: left;
 	width: 391px;
-	margin-top: 8;
+	margin-top: 8px;
+	margin-bottom: 24px;
 }
