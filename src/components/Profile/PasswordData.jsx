@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import './PasswordData.scss';
 import { PasswordInputWithValidation } from '../PasswordInputWithValidation/PasswordInputWithValidation';
 
-export function PasswordData({ onEditPassword, isEditing }) {
+export function PasswordData({ onEditPassword, isPasswordEditing }) {
 	const {
 		formState: { isValid },
 		handleSubmit,
@@ -23,7 +23,7 @@ export function PasswordData({ onEditPassword, isEditing }) {
 			className="form__password-container"
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			{isEditing && (
+			{isPasswordEditing && (
 				<>
 					<PasswordInputWithValidation
 						labelClassName="profile-password-label"
@@ -104,12 +104,14 @@ export function PasswordData({ onEditPassword, isEditing }) {
 				</>
 			)}
 			<button
-				className="form__change-password-button"
-				type={isEditing ? 'submit' : 'button'}
+				className={`form__change-password-button ${
+					isPasswordEditing ? 'has-margin' : 'no-margin'
+				}`}
+				type={isPasswordEditing ? 'submit' : 'button'}
 				onClick={onEditPassword}
-				disabled={isEditing && !isValid}
+				disabled={isPasswordEditing && !isValid}
 			>
-				{isEditing ? 'Сохранить' : 'Изменить пароль'}
+				{isPasswordEditing ? 'Сохранить' : 'Изменить пароль'}
 			</button>
 		</form>
 	);
@@ -117,7 +119,7 @@ export function PasswordData({ onEditPassword, isEditing }) {
 
 PasswordData.propTypes = {
 	onEditPassword: PropTypes.func.isRequired,
-	isEditing: PropTypes.bool.isRequired,
+	isPasswordEditing: PropTypes.bool.isRequired,
 };
 
 export default PasswordData;

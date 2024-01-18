@@ -11,7 +11,9 @@ import Layuot from '../Layout/Layout';
 import PasswordRecoveryPopUp from '../PasswordRecoveryPopUp/PasswordRecoveryPopUp';
 
 export function App() {
-	const [isEditing, setIsEditing] = useState(false);
+	// const [isEditing, setIsEditing] = useState(false);
+	const [isPasswordEditing, setIsPasswordEditing] = useState(false);
+	const [isPersonalDataEditing, setIsPersonalDataEditing] = useState(false);
 	// состояния попапов
 	const [isDeleteAccountPopupOpen, setDeleteAccountPopupOpen] = useState(false);
 	const [isLogoutConfirmationPopupOpen, setLogoutConfirmationPopupOpen] =
@@ -21,8 +23,12 @@ export function App() {
 	const [isPasswordRecoveryPopUpOpen, setPasswordRecoveryPopUpOpen] =
 		useState(false);
 
-	const handleEditButtonClick = () =>
-		isEditing ? setIsEditing(false) : setIsEditing(true);
+	// const handleEditButtonClick = () =>
+	// 	isEditing ? setIsEditing(false) : setIsEditing(true);
+	const handlePersonalDataEditBtnClick = () =>
+		isPersonalDataEditing
+			? setIsPersonalDataEditing(false)
+			: setIsPersonalDataEditing(true);
 
 	const handleDeleteAccount = () => {
 		console.log('Аккаунт удален');
@@ -56,9 +62,9 @@ export function App() {
 	};
 
 	const handleChangePassword = () => {
-		if (isEditing) {
-			setIsEditing(false);
-		} else setIsEditing(true);
+		if (isPasswordEditing) {
+			setIsPasswordEditing(false);
+		} else setIsPasswordEditing(true);
 		console.log('Пароль изменен');
 	};
 
@@ -105,9 +111,10 @@ export function App() {
 							path="/profile"
 							element={
 								<Profile
-									onEditProfile={handleEditButtonClick}
-									isEditing={isEditing}
+									onEditPersonalData={handlePersonalDataEditBtnClick}
 									onEditPassword={handleChangePassword}
+									isPersonalDataEditing={isPersonalDataEditing}
+									isPasswordEditing={isPasswordEditing}
 									onDelete={handleDeleteAccount}
 									onLogOut={handleLogOut}
 									onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}

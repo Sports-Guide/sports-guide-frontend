@@ -1,12 +1,10 @@
 import React from 'react';
-// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import './PersonalData.scss';
-import { Form } from '../Form/Form';
 
 export function PersonalData({
-	isEditing,
+	isPersonalDataEditing,
 	// onEditAvatar, // сделаю позже
 	onEditProfile,
 }) {
@@ -39,8 +37,8 @@ export function PersonalData({
 					<p className="profile__email">mail@example.ru</p>
 				</div>
 			</div>
-			{isEditing ? (
-				<Form
+			{isPersonalDataEditing ? (
+				<div
 					className="profile__change-info-container"
 					onSubmit={handleSubmit(onSubmit)}
 				>
@@ -104,29 +102,29 @@ export function PersonalData({
 							{errors?.email?.message}
 						</span>
 					)}
-				</Form>
+				</div>
 			) : (
 				<div className="profile__info-container">
 					<p className="profile__field-title">Никнейм</p>
-					<p className="profile__field-name">User1234</p>
+					<p className="profile__field-name">user-xd6xm1lh5y</p>
 					<p className="profile__field-title">Почта</p>
 					<p className="profile__field-name">mail@example.ru</p>
 				</div>
 			)}
 			<button
 				className="profile__change-button"
-				type={isEditing ? 'submit' : 'button'}
+				type={isPersonalDataEditing ? 'submit' : 'button'}
 				onClick={onEditProfile}
 				disabled={!isValid}
 			>
-				{isEditing ? 'Сохранить изменения' : 'Изменить данные'}
+				{isPersonalDataEditing ? 'Сохранить изменения' : 'Изменить данные'}
 			</button>
 		</form>
 	);
 }
 
 PersonalData.propTypes = {
-	isEditing: PropTypes.bool.isRequired,
+	isPersonalDataEditing: PropTypes.bool.isRequired,
 	// onEditAvatar: PropTypes.func.isRequired,
 	onEditProfile: PropTypes.func.isRequired,
 };

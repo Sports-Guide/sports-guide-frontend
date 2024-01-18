@@ -1,3 +1,10 @@
+.form_place_profile {
+	color: #767676;
+	width: 480px;
+	display: flex;
+	flex-direction: column;
+}
+
 .profile__personal-info-container {
 	display: flex;
 	align-items: center;
@@ -27,11 +34,13 @@
 }
 
 .profile__name {
+	font-family: 'Roboto';
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 400;
 	line-height: 20px;
 	text-align: left;
-	color: #030303;
+	margin: 0;
+	color: #0E0E0E;
 }
 
 .profile__email {
@@ -105,9 +114,10 @@
 }
 
 .profile__field-title {
-	font-size: 13px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
 	font-weight: 400;
-	line-height: 18px;
+	line-height: 16px;
 	text-align: left;
 	color: #515151;
 	margin: 0 0 4px;
@@ -115,11 +125,11 @@
 }
 
 .profile__field-name {
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: 500;
 	line-height: 20px;
 	text-align: left;
-	color: #030303;
+	color: #0E0E0E;
 	padding: 0;
 	margin: 0 0 16px;
 }
@@ -137,12 +147,11 @@
 	background-color: #1478ff;
 	border: none;
 	outline: none;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 700;
 	line-height: 20px;
 	text-align: center;
-	padding: 6px 20px;
-	// padding: 0;
+	padding: 8px 24px;
 	margin-top: 24px;
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
