@@ -120,7 +120,7 @@ className="popup__login-form-title"
 					>
 						<button
 							className="show-hide-btn-register"
-							type={showPassword ? 'button' : 'submit'}
+							type="button"
 							onClick={togglePasswordVisibility}
 							aria-label="show-hide-password"
 						/>

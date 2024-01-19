@@ -178,7 +178,7 @@ function Register({
 					>
 						<button
 							className="show-hide-btn-register"
-							type={showPassword ? 'text' : 'password'}
+							type="button"
 							onClick={togglePasswordVisibility}
 							aria-label="show-hide-password"
 						/>
@@ -201,7 +201,7 @@ function Register({
 					>
 						<button
 							className="show-hide-btn-register"
-							type={showConfirmPassword ? 'button' : 'submit'}
+							type="button"
 							onClick={toggleConfirmPasswordVisibility}
 							aria-label="show-hide-password"
 						/>
