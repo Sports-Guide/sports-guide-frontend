@@ -1,4 +1,5 @@
-const BASE_URL = 'https://sports-map.ru/api/auth';
+// const BASE_URL = 'https://sports-map.ru/api/auth';
+const BASE_URL = 'http://localhost:3000';
 
 export function validateResponse(res) {
 	if (res.ok) {
@@ -48,5 +49,16 @@ export const editPassword = (currentPassword, newPassword) => {
 			currentPassword,
 			newPassword,
 		}),
+	}).then(validateResponse);
+};
+
+// получаем площадки
+export const getAreas = () => {
+	fetch(`${BASE_URL}/areas/`, {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
 	}).then(validateResponse);
 };
