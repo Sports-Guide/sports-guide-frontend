@@ -33,12 +33,67 @@
 	line-height: 20px; /* 83.333% */
 }
 
+.button-app {
+	width: 204px;
+	height: 36px;
+	border-radius: 8px;
+	background: rgba(20, 120, 255, 1);
+	color: white;
+	font-family: Roboto;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	margin-right: 0;
+}
+
 .button-add {
-	width: 391px;
+	width: 204px;
 	height: 44px;
-	padding: 10px, 20px, 10px, 20px;
 	border-radius: 8px;
 	gap: 8px;
-	background: rgba(229, 240, 255, 1);
-	color: rgba(20, 120, 255, 0.3);
+	background: rgba(20, 120, 255, 1);
+	color: white;
+	font-family: Roboto;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0em;
+	padding-left: 18px;
+	cursor: pointer;
+	text-decoration: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button-login-site {
+	margin: 0;
+	color: var(--Accent, #1478ff);
+	//styleName: Bold/Button_text;
+	font-family: Roboto;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+
+	display: flex;
+	padding: 6px 20px;
+	justify-content: center;
+	align-items: center;
+	align-self: center;
+	width: 94px;
+	height: 36px;
+	border-radius: 8px;
+	background: #e5f0ff;
+	border: 0;
+	cursor: pointer;
+	margin-bottom: 2px;
+	margin-right: 12px;
+	margin-left: 30px;
 }

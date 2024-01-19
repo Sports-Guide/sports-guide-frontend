@@ -136,8 +136,8 @@ export function App() {
 					toSignUpPopUp={handleOpenSignUpPopUp}
 					onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
 					/* onLogin={handleLogin}
-		
-		 */
+	
+	 */
 				/>
 				<Register
 					isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
