@@ -4,9 +4,9 @@ import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
 import MapComponent from '../Map/Map';
 import addPictures from '../../images/Camera.svg';
-import { ButtonAppSite } from '../Button/ButtonAppSite';
+import { Button } from '../Button/Button';
 
-export function AreaApp(onAreaApp) {
+export function AreaApp() {
 	const data = [
 		{ Country: 'Футбол', id: 1 },
 		{ Country: 'Баскетбол', id: 2 },
@@ -14,6 +14,11 @@ export function AreaApp(onAreaApp) {
 		{ Country: 'Каток', id: 4 },
 	];
 	const [options] = useState(data);
+
+	const test = () => {
+		console.log('test');
+	};
+
 	return (
 		<div className="area-app">
 			<div className="area-app__information">
@@ -64,9 +69,12 @@ export function AreaApp(onAreaApp) {
 							Перед публикацией площадка будет проверена модерацией нашего
 							сервиса. Это может занять некоторое время.
 						</p>
-						<div className="test">
-							<ButtonAppSite onClick={onAreaApp} label="Добавить площадку" />
-						</div>
+
+						<Button
+							className="button-add"
+							onClick={test}
+							label="Добавить площадку"
+						/>
 					</div>
 				</form>
 			</div>
