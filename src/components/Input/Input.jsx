@@ -13,6 +13,7 @@ export function Input({
 	name,
 	minLength,
 	maxLength,
+	children,
 }) {
 	return (
 		<div className="input__container">
@@ -31,6 +32,7 @@ export function Input({
 				maxLength={maxLength}
 				autoComplete="off"
 			/>
+			{children}
 		</div>
 	);
 }
@@ -46,6 +48,11 @@ Input.propTypes = {
 	name: PropTypes.string.isRequired,
 	minLength: PropTypes.string.isRequired,
 	maxLength: PropTypes.string.isRequired,
+	children: PropTypes.node,
+};
+
+Input.defaultProps = {
+	children: null,
 };
 
 export default Input;

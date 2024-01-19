@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import Multiselect from 'multiselect-react-dropdown';
 import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
 import MapComponent from '../Map/Map';
@@ -6,6 +8,13 @@ import addPictures from '../../images/Camera.svg';
 import { ButtonAppSite } from '../Button/ButtonAppSite';
 
 export function AreaApp(onAreaApp) {
+	const data = [
+		{ Country: 'Футбол', id: 1 },
+		{ Country: 'Баскетбол', id: 2 },
+		{ Country: 'Волейбол', id: 3 },
+		{ Country: 'Каток', id: 4 },
+	];
+	const [options] = useState(data);
 	return (
 		<div className="area-app">
 			<div className="area-app__information">
@@ -16,23 +25,14 @@ export function AreaApp(onAreaApp) {
 				<form className="addition-area">
 					<div className="kinds-of-sports">
 						<h3 className="kinds-of-sports__title">Виды спорта</h3>
-						<label htmlFor="category-select" className="kinds-of-sports__label">
-							Выберите категории спорта из списка
-							<select
-								name="category"
-								id="category-select"
-								className="kinds-of-sports__add"
-							>
-								<option value="">- </option>
-								<option value="workout">workout</option>
-								<option value="football">Футбол</option>
-								<option value="basketball">Баскетбал</option>
-								<option value="Cycling">Велоспорт</option>
-							</select>
-						</label>
+						<Multiselect
+							showCheckbox
+							placeholder=" "
+							options={options}
+							displayValue="Country"
+						/>
 					</div>
 					<div className="location">
-						<h3 className="locatin__title">Расположение</h3>
 						<label htmlFor="text" className="location__label">
 							Адрес площадки
 							<input type="text" id="text" className="location__adress" />
@@ -41,9 +41,7 @@ export function AreaApp(onAreaApp) {
 					</div>
 					<div className="foto">
 						<h3 className="foto__title">Фотографии</h3>
-						<p className="foto__subtitle">
-							Добавьте актуальные изображения площадки
-						</p>
+
 						<div className="foto__container">
 							<label htmlFor="add-file" className="foto__file-label">
 								<input
@@ -63,12 +61,13 @@ export function AreaApp(onAreaApp) {
 						</div>
 					</div>
 					<div className="app-area">
-						<h3 className="area-app__title">Добавление площадки</h3>
-						<p className="area-app__subtitle">
+						<p className="app-area__subtitle">
 							Перед публикацией площадка будет проверена модерацией нашего
 							сервиса. Это может занять некоторое время.
 						</p>
-						<ButtonAppSite onClick={onAreaApp} label="Добавить площадку" />
+						<div className="test">
+							<ButtonAppSite onClick={onAreaApp} label="Добавить площадку" />
+						</div>
 					</div>
 				</form>
 			</div>

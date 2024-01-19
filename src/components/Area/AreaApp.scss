@@ -1,18 +1,88 @@
+$fontsRoboto: 'Roboto';
+
+@mixin fontsTitle {
+	//styleName: Bold/H4;
+	font-family: Roboto Flex;
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+@mixin displayPosition {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+@mixin blocks {
+	width: 772px;
+	border-radius: 12px;
+	background: rgba(252, 252, 252, 1);
+	padding: 24px;
+	margin-bottom: 16px;
+}
+
+@mixin label {
+	//styleName: Bold/H4;
+	font-family: Roboto Flex;
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+	margin-top: 7px;
+	margin-left: -3px;
+}
+
+@mixin inputs {
+	width: 724px;
+	height: 42px;
+	border-radius: 8px;
+	margin-top: 18px;
+	border: 1px solid rgba(201, 209, 229, 1);
+}
+
 .area-app {
-	border: 1px solid green;
-	padding-left: 195px;
+	padding-left: 200px;
 	color: rgba(81, 81, 81, 1);
 }
 .area-app__link {
-	font-family: 'Roboto';
+	font-family: $fontsRoboto;
 	font-style: normal;
 	font-weight: 700;
 	font-size: 14px;
 	line-height: 20px;
 	color: #737a8e;
-	margin-top: 46px;
-	padding-left: 33px;
-	padding-top: 3px;
+	margin-top: 51px;
+	padding-left: 31px;
 	text-decoration: none;
 	text-align: left;
 	background-image: url('../../images/left-arrow.svg');
@@ -22,120 +92,78 @@
 .area-app__information {
 	display: flex;
 	flex-direction: column;
-	width: 778px;
 }
 
 .area-app__title {
-	margin-top: 30px;
-	margin-bottom: 0;
-	font-family: Garet;
-	font-size: 36px;
-	font-weight: 850;
-	line-height: 40px;
-	letter-spacing: 0em;
+	//styleName: Bold/H2;
+	font-family: Roboto Flex;
+	font-size: 28px;
+	font-weight: 900;
+	line-height: 32px;
+	letter-spacing: 0.01em;
 	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+	margin-top: 34px;
+	margin-left: -3px;
+	margin-bottom: 28px;
 }
 
-.addition-area {
-}
 .kinds-of-sports {
-	width: 772px;
-	height: 154px;
-	padding: 24px;
-	border-radius: 12px;
-	background: rgba(252, 252, 252, 1);
-	margin-top: 21px;
-	padding-left: 25px;
+	@include blocks;
 }
 .kinds-of-sports__title {
-	text-align: left;
-	font-family: Roboto;
-	font-size: 24px;
-	font-weight: 900;
-	line-height: 28px;
-	letter-spacing: 0em;
-	text-align: left;
-	margin: 0;
+	@include fontsTitle;
 }
 .kinds-of-sports__label {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	font-family: Roboto;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 20px;
-	letter-spacing: 0em;
-	text-align: left;
-	color: rgba(81, 81, 81, 1);
-	margin-top: 13px;
+	@include displayPosition;
+	@include label;
 }
 .kinds-of-sports__add {
-	width: 724px;
-	height: 42px;
-	padding: 12px, 16px, 12px, 16px;
-	border-radius: 8px;
-	border: 1px solid rgba(201, 209, 229, 1);
-	gap: 8px;
+	@include inputs;
 }
 
 .location {
-	width: 772px;
-	height: 508px;
-	padding: 24px;
-	border-radius: 12px;
-	background: rgba(252, 252, 252, 1);
-	margin-top: 21px;
-	padding-left: 25px;
+	@include blocks;
 }
+
 .locatin__title {
-	text-align: left;
-	font-family: Roboto;
-	font-size: 24px;
-	font-weight: 900;
-	line-height: 28px;
-	letter-spacing: 0em;
-	text-align: left;
 }
 .location__label {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	font-family: Roboto;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 20px;
-	letter-spacing: 0em;
-	text-align: left;
-	color: rgba(81, 81, 81, 1);
-	margin-top: 13px;
+	@include displayPosition;
+	@include label;
 }
 .location__adress {
-	width: 724px;
-	height: 42px;
-	padding: 12px, 16px, 12px, 16px;
-	border-radius: 8px;
-	border: 1px solid rgba(201, 209, 229, 1);
-	gap: 8px;
+	@include inputs;
 }
 
 .foto {
-	width: 772px;
-	height: 289px;
-	padding: 24px;
-	border-radius: 12px;
-	gap: 12px;
-	background: rgba(252, 252, 252, 1);
+	@include blocks;
 }
 .foto__title {
+	@include fontsTitle;
+}
+
+.foto__subtitle {
 	font-family: Roboto;
-	font-size: 24px;
-	font-weight: 900;
-	line-height: 28px;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px;
 	letter-spacing: 0em;
 	text-align: left;
-	margin: 0;
+	margin-top: 9px;
 }
+
 .foto__container {
 	display: flex;
 	width: 724px;
@@ -164,28 +192,31 @@
 }
 
 .app-area {
-	width: 772px;
-	height: 188px;
-	padding: 24px;
-	border-radius: 12px;
-	gap: 24px;
-	background: rgba(252, 252, 252, 1);
+	@include blocks;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 184px;
 }
-.area-app__title {
-	font-family: Roboto;
-	font-size: 24px;
-	font-weight: 900;
-	line-height: 28px;
-	letter-spacing: 0em;
-	text-align: left;
+.app-area__title {
+	@include fontsTitle;
 }
-.area-app__subtitle {
+.app-area__subtitle {
+	//styleName: Regular/Inputs_Placeholdertext;
 	font-family: Roboto;
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 400;
-	line-height: 18px;
+	line-height: 20px;
 	letter-spacing: 0em;
 	text-align: left;
-	width: 391px;
-	height: 36px;
+	margin-top: -2px;
+	margin-bottom: 0;
+	margin-left: -4px;
+	width: 555px;
+	color: rgba(115, 122, 142, 1);
+	margin-bottom: 28px;
+}
+
+.test {
+	margin-left: -4px;
+	margin-top: -1px;
 }

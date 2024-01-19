@@ -1,14 +1,14 @@
 .button-app {
-	width: 176px;
+	width: 204px;
 	height: 36px;
-	padding: 6px, 20px, 6px, 20px;
+	padding: 8px, 24px, 8px, 24px;
 	border-radius: 8px;
 	gap: 8px;
-	background-color: rgba(20, 120, 255, 1);
+	background: rgba(20, 120, 255, 1);
+	//styleName: Bold/Button_text;
 	color: white;
-	border: none;
 	font-family: Roboto;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 700;
 	line-height: 20px;
 	letter-spacing: 0em;

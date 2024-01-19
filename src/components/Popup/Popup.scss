@@ -5,7 +5,6 @@
 	position: fixed;
 	align-items: center;
 	justify-content: center;
-
 	top: 0;
 	left: 0;
 	z-index: 350;
@@ -37,8 +36,6 @@
 .popup__container {
 	width: 33.6vw;
 	width: 529px;
-	// max-width: 730px;
-	// min-width: 282px; // уточнить
 	border-radius: var(--md, 16px);
 	background: var(--Background_secondary, #fcfcfc);
 	-webkit-border-radius: 10px;
@@ -61,8 +58,8 @@
 	position: absolute;
 	right: 20px;
 	top: 20px;
-	width: 24px;
-	height: 24px;
+	width: 20px;
+	height: 20px;
 	background-size: 100%;
 	transition: opacity 0.3s ease-in;
 	-webkit-transition: opacity 0.3s ease-in;

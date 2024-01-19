@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Profile.scss';
-import { Form } from '../Form/Form';
 import FormTitle from '../FormTitle/FormTitle';
 import { PersonalData } from './PersonalData';
 import { PasswordData } from './PasswordData';
@@ -9,16 +8,17 @@ import { Button } from '../Button/Button';
 import { Popup } from '../Popup/Popup';
 
 export function Profile({
-	isEditing,
-	onEditProfile,
+	isPersonalDataEditing,
+	isPasswordEditing,
+	onEditPersonalData,
 	// onEditAvatar, // сделаю позже
 	onEditPassword,
 	onDelete,
 	onLogOut,
 	isLogoutPopupOpen,
+	onLogoutPopupOpen,
 	isDeleteAccountPopupOpen,
-	isPasswordEditPopupOpen,
-	onChangePasswordSubmit,
+	onDeleteAccountPopupOpen,
 	onClose,
 }) {
 	// добавить логику на сравнение полей Никнейм и Почта: если совпадают, поля неактивны
@@ -27,12 +27,6 @@ export function Profile({
 	const togglePasswordMenu = () => {
 		setPasswordMenuOpened(!isPasswordMenuOpened);
 	};
-
-	// const onSubmitPassword = (e) => {
-	// 	e.preventDefault();
-	// 	// onChangePasswordSubmit();
-	// 	// убрать evt, т.к. react-hook-form уже предусматрвает это
-	// };
 
 	return (
 		<main className="profile">
@@ -94,15 +88,15 @@ export function Profile({
 					</div>
 					<div className="profile__menu">
 						<button
-							className="profile__button-logout"
-							onClick={onLogOut}
+							className="profile__nav-button profile__button-logout"
+							onClick={onLogoutPopupOpen}
 							type="button"
 						>
 							Выйти
 						</button>
 						<button
-							className="profile__button-account-delete"
-							onClick={onDelete}
+							className="profile__nav-button profile__button-account-delete"
+							onClick={onDeleteAccountPopupOpen}
 						>
 							Удалить аккаунт
 						</button>
@@ -116,9 +110,9 @@ export function Profile({
 								className="form__title_place_profile"
 							/>
 							<PersonalData
-								isEditing={isEditing}
 								// onEditAvatar={onEditAvatar}
-								onEditProfile={onEditProfile}
+								onEditProfile={onEditPersonalData}
+								isPersonalDataEditing={isPersonalDataEditing}
 							/>
 						</>
 					) : (
@@ -126,55 +120,53 @@ export function Profile({
 							<FormTitle label="Пароль" className="form__title_place_profile" />
 							<PasswordData
 								onEditPassword={onEditPassword}
-								isEditing={isEditing}
+								isPasswordEditing={isPasswordEditing}
 							/>
 						</>
 					)}
 				</div>
 			</section>
 			<Popup
-				isOpen={isPasswordEditPopupOpen}
+				isOpen={isLogoutPopupOpen}
 				onClose={onClose}
-				title="Изменение пароля"
+				headerClassName="popup__header_left-aligned"
+				title="Выход из профиля"
 			>
-				<Form
-					className="popup__change-password-form"
-					onSubmit={onChangePasswordSubmit}
-				/>
-			</Popup>
-			<Popup isOpen={isLogoutPopupOpen} onClose={onClose} title="Выход">
-				<h3 className="popup__title">Вы хотите выйти из профиля?</h3>
-				<div className="popup__button-container">
+				<h3 className="popup__title">
+					Вы уверены, что хотите выйти из профиля?
+				</h3>
+				<div className="popup__button-container align-left">
 					<Button
 						className="popup__button popup__button-y"
 						onClick={onLogOut}
-						label="Да"
+						label="Выйти"
 					/>
 					<Button
 						className="popup__button popup__button-n"
 						onClick={onClose}
-						label="Нет"
+						label="Отмена"
 					/>
 				</div>
 			</Popup>
 			<Popup
 				isOpen={isDeleteAccountPopupOpen}
 				onClose={onClose}
-				title="Удаление аккаунта"
+				headerClassName="popup__header_left-aligned"
+				title="Удаление профиля"
 			>
 				<h3 className="popup__title">
-					Вы действительно хотите удалить аккаунт?
+					Вы уверены, что хотите удалить профиль?
 				</h3>
 				<div className="popup__button-container">
 					<Button
 						className="popup__button popup__button-y"
 						onClick={onDelete}
-						label="Да"
+						label="Удалить"
 					/>
 					<Button
 						className="popup__button popup__button-n"
 						onClick={onClose}
-						label="Нет"
+						label="Отмена"
 					/>
 				</div>
 			</Popup>
@@ -183,16 +175,17 @@ export function Profile({
 }
 
 Profile.propTypes = {
-	isEditing: PropTypes.bool.isRequired,
-	onEditProfile: PropTypes.func.isRequired,
+	isPasswordEditing: PropTypes.bool.isRequired,
+	isPersonalDataEditing: PropTypes.bool.isRequired,
+	onEditPersonalData: PropTypes.func.isRequired,
 	// onEditAvatar: PropTypes.func.isRequired,
 	onEditPassword: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,
 	isLogoutPopupOpen: PropTypes.bool.isRequired,
+	onLogoutPopupOpen: PropTypes.func.isRequired,
 	isDeleteAccountPopupOpen: PropTypes.bool.isRequired,
-	isPasswordEditPopupOpen: PropTypes.bool.isRequired,
-	onChangePasswordSubmit: PropTypes.func.isRequired,
+	onDeleteAccountPopupOpen: PropTypes.func.isRequired,
 	onClose: PropTypes.func.isRequired,
 };
 
