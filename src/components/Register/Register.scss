@@ -77,12 +77,14 @@
 	text-align: left;
 	display: flex;
 	margin-top: 16px;
+	position: relative;
+
 }
 
 .register-password-input-container {
 	display: flex;
 	flex-direction: column;
-	position: relative;
+	// position: relative;
 }
 
 .register-password-input {
@@ -104,13 +106,13 @@
 	outline: 1px solid var(--Accent, #1478ff);
 }
 
-.show-hide-btn-login {
+.show-hide-btn-register {
 	background: url(../../images/show-hide-password-button-log-reg.svg) no-repeat
 		center;
 	width: 16px;
 	height: 16px;
 	position: absolute;
-	top: 16px;
+	top: 35px;
 	right: 14px;
 	outline: none;
 	border: none;

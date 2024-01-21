@@ -193,10 +193,17 @@
 	font-weight: 700;
 	line-height: 18px;
 	cursor: pointer;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
 }
 
-.popup__button-n {
-	border: 2px solid #898989;
+.popup__button.popup__button-n {
+	background-color: #E5F0FF;
+	color:#1478FF;
+	background-image: none;
 }
 
 .popup__button.popup__button-y {

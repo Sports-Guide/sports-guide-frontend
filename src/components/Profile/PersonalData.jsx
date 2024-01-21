@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import './PersonalData.scss';
+// import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 export function PersonalData({
 	isPersonalDataEditing,
@@ -17,6 +18,8 @@ export function PersonalData({
 	const onSubmit = (data) => {
 		onEditProfile(data);
 	};
+
+	// const currentUser = React.useContext(CurrentUserContext);
 
 	return (
 		<form className="form_place_profile">
@@ -54,11 +57,8 @@ export function PersonalData({
 							},
 							minLength: {
 								value: 2,
-								message: 'Никнейм должен быть не менее 2 символов',
-							},
-							maxLength: {
-								value: 20,
-								message: 'Никнейм должен быть не более 20 символов',
+								message:
+									'Никнейм должен быть не менее 2 символов, включать латинские буквы, может содержать цифры и другие символы',
 							},
 							required: 'Поле не может быть пустым',
 						})}
@@ -66,11 +66,11 @@ export function PersonalData({
 						// value="User1234"
 						// value={currentUser.login}
 						placeholder="Никнейм"
+						maxLength={20}
 					/>
 					{errors?.login && (
 						<span className="error error_place_profile">
-							{errors?.login?.message ||
-								'Никнейм должен быть не менее 2 символов, включать латинские буквы, может содержать цифры и другие символы'}
+							{errors?.login?.message}
 						</span>
 					)}
 					<input
@@ -86,16 +86,13 @@ export function PersonalData({
 								value: 6,
 								message: 'Почта должна содержать не менее 6 символов',
 							},
-							maxLength: {
-								value: 50,
-								message: 'Почта не должна превышать 50 символов',
-							},
 							required: 'Поле не может быть пустым',
 						})}
 						type="email"
 						// value="mail@example.ru"
 						// value={currentUser.email}
 						placeholder="E-mail"
+						maxLength={50}
 					/>
 					{errors?.email && (
 						<span className="error error_place_profile">

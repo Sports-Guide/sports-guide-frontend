@@ -16,7 +16,7 @@ export function PasswordData({ onEditPassword, isPasswordEditing }) {
 		onEditPassword(data);
 	};
 
-	const emailRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+	const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,25}$/;
 
 	return (
 		<form
@@ -43,13 +43,15 @@ export function PasswordData({ onEditPassword, isPasswordEditing }) {
 								message: 'Пароль должен быть не менее 6 символов',
 							},
 							pattern: {
-								value: emailRegEx,
+								value: passwordRegEx,
 								message:
 									'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
 							},
 							// validate: (value) =>
 							// value === currentUser.currentPassword || 'Неверный текущий пароль',
 						}}
+						maxLength={25}
+						required
 					/>
 					<PasswordInputWithValidation
 						labelClassName="profile-password-label"
@@ -69,11 +71,12 @@ export function PasswordData({ onEditPassword, isPasswordEditing }) {
 								message: 'Пароль должен быть не менее 6 символов',
 							},
 							pattern: {
-								value: emailRegEx,
+								value: passwordRegEx,
 								message:
 									'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
 							},
 						}}
+						maxLength={25}
 					/>
 					<PasswordInputWithValidation
 						labelClassName="profile-password-label"
@@ -93,13 +96,15 @@ export function PasswordData({ onEditPassword, isPasswordEditing }) {
 								message: 'Пароль должен быть не менее 6 символов',
 							},
 							pattern: {
-								value: emailRegEx,
+								value: passwordRegEx,
 								message:
 									'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
 							},
 							validate: (value) =>
 								value === getValues('newPassword') || 'Пароли не совпадают',
 						}}
+						maxLength={25}
+						required
 					/>
 				</>
 			)}

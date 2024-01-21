@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 export function Input({
 	label,
 	htmlFor,
-	className,
+	labelClassName,
+	inputClassName,
 	onChange,
 	value,
 	type,
@@ -16,12 +17,12 @@ export function Input({
 	children,
 }) {
 	return (
-		<div className="input__container">
+		<div className={`input__container ${labelClassName}`}>
 			<label className="input-label" htmlFor={htmlFor}>
 				{label}
 			</label>
 			<input
-				className={`input ${className}`}
+				className={inputClassName}
 				onChange={onChange}
 				value={value}
 				type={type}
@@ -39,7 +40,8 @@ export function Input({
 
 Input.propTypes = {
 	label: PropTypes.string.isRequired,
-	className: PropTypes.string.isRequired,
+	labelClassName: PropTypes.string.isRequired,
+	inputClassName: PropTypes.string.isRequired,
 	htmlFor: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	value: PropTypes.string.isRequired,
