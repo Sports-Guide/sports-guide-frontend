@@ -2,6 +2,7 @@
 	height: 100%;
 	width: 100%;
 	z-index: 1;
+	border-radius: 12px;
 }
 
 /* .leaflet-control-container {
@@ -20,9 +21,13 @@
 }
 
 .map-container_place_main {
-	width: 1120px;
+	width: 1040px;
+	height: 500px;
+	margin: 0px auto 90px;
+
+	/* 	width: 1120px;
 	height: 820px;
-	margin: 90px auto 90px;
+	margin: 90px auto 90px; */
 }
 
 .map-container_place_sport {

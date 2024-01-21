@@ -7,12 +7,14 @@ import MapComponent from '../Map/Map';
 import { SearchControl } from '../SearchControl/SearchControl';
 import customIcon from '../CustomIcon/CustomIcon';
 import MarkerLayer from '../MarkerLayer/MarkerLayer';
+import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
 
 export function Main() {
 	const [newMarkers, setNewMarkers] = React.useState([]);
 
 	return (
 		<main>
+			<WelcomeBanner />
 			<Form label="Найти" />
 			<MapComponent className="map-container_place_main">
 				<SearchControl />
