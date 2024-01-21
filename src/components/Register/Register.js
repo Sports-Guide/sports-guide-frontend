@@ -11,9 +11,15 @@ import { PasswordInputWithValidation } from '../PasswordInputWithValidation/Pass
 import { Button } from '../Button/Button';
 import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
 
-function Register({ isOnRegisterPopUpOpen, onClose, toSignInPopUp }) {
+function Register({
+	isOnRegisterPopUpOpen,
+	onClose,
+	toSignInPopUp,
+	onRegister,
+}) {
 	const [nickname, setNickname] = useState('');
 	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	const [nicknameError, setNicknameError] = useState('');
 	const [emailError, setEmailError] = useState('');
 
@@ -51,9 +57,13 @@ function Register({ isOnRegisterPopUpOpen, onClose, toSignInPopUp }) {
 		}
 	};
 
+	const handleChangePassword = (e) => {
+		setPassword(e.target.value);
+	};
+
 	const onSubmit = (event) => {
 		event.preventDefault();
-		/* onRegister(nickname, email, password); */
+		onRegister(nickname, email, password);
 		navigate('/');
 	};
 
@@ -109,6 +119,8 @@ function Register({ isOnRegisterPopUpOpen, onClose, toSignInPopUp }) {
 						errorClassName="register-password-error"
 						name="registerPasswordInput"
 						id="registerPasswordInput"
+						value={password.value || ''}
+						onChange={handleChangePassword}
 						control={control}
 						rules={{
 							required: 'Поле обязательно для заполнения',
@@ -134,6 +146,8 @@ function Register({ isOnRegisterPopUpOpen, onClose, toSignInPopUp }) {
 						name="registerConfirmationPasswordInput"
 						id="registerConfirmationPasswordInput"
 						control={control}
+						value={password.value || ''}
+						onChange={handleChangePassword}
 						rules={{
 							required: 'Поле обязательно для заполнения',
 							minLength: {
@@ -189,7 +203,7 @@ Register.propTypes = {
 	isOnRegisterPopUpOpen: PropTypes.bool.isRequired,
 	onClose: PropTypes.func.isRequired,
 	toSignInPopUp: PropTypes.func.isRequired,
-
+	onRegister: PropTypes.func.isRequired,
 	/* onLogin: PropTypes.func.isRequired,
 	onPasswordRecovery: PropTypes.func.isRequired,
 	 */
