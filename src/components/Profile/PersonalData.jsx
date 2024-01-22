@@ -69,9 +69,7 @@ export function PersonalData({
 						maxLength={20}
 					/>
 					{errors?.login && (
-						<span className="error error_place_profile">
-							{errors?.login?.message}
-						</span>
+						<span className="error error_active">{errors?.login?.message}</span>
 					)}
 					<input
 						className={`profile__input ${
@@ -95,9 +93,7 @@ export function PersonalData({
 						maxLength={50}
 					/>
 					{errors?.email && (
-						<span className="error error_place_profile">
-							{errors?.email?.message}
-						</span>
+						<span className="error error_active">{errors?.email?.message}</span>
 					)}
 				</div>
 			) : (

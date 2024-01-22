@@ -18,6 +18,9 @@ export function App() {
 	// const [isEditing, setIsEditing] = useState(false);
 	const [isPasswordEditing, setIsPasswordEditing] = useState(false);
 	const [isPersonalDataEditing, setIsPersonalDataEditing] = useState(false);
+	// стейт для отображения e-mail пользователя
+	// eslint-disable-next-line no-unused-vars
+	const [userEmail, setUserEmail] = useState('');
 	// состояния попапов
 	const [isDeleteAccountPopupOpen, setDeleteAccountPopupOpen] = useState(false);
 	const [isLogoutConfirmationPopupOpen, setLogoutConfirmationPopupOpen] =
@@ -42,28 +45,11 @@ export function App() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const handleTokenCheck = (token) => {
-			auth.checkToken(token).then((res) => {
-				if (res) {
-					setLoggedIn(true);
-					navigate('/', { replace: true });
-				}
-				console.log(`Токен: ${token}`);
-			});
-		};
-		const token = localStorage.getItem('userId');
-		if (token) {
-			handleTokenCheck(token);
-		}
-	}, [navigate]);
-
-	useEffect(() => {
 		if (loggedIn) {
 			Promise.all([api.getUserInfo(), api.getAreas()])
 				.then(([userData, areasData]) => {
 					setCurrentUser(userData);
 					setAreas(areasData);
-					console.log(`Пользователь ${userData.email} авторизован`);
 				})
 				.catch((err) => {
 					console.log(`Ошибка при получении данных: ${err}`);
@@ -71,6 +57,29 @@ export function App() {
 				});
 		}
 	}, [loggedIn]);
+
+	useEffect(() => {
+		const handleTokenCheck = (token) => {
+			auth.checkToken(token).then((res) => {
+				if (res) {
+					setLoggedIn(true);
+					navigate('/', { replace: true });
+				}
+			});
+		};
+		const token = localStorage.getItem('token');
+		if (token) {
+			handleTokenCheck(token);
+		}
+	}, [navigate]);
+
+	// сохраняем email
+	useEffect(() => {
+		const currentEmail = localStorage.getItem('userName');
+		if (currentEmail) {
+			setUserEmail(currentEmail);
+		} else setUserEmail('');
+	}, []);
 
 	const handleRegistration = (nickname, email, password) => {
 		setRegErrorMessage('');
@@ -82,6 +91,7 @@ export function App() {
 				} else {
 					// navigate('/', {replace: true});
 					console.log(`Пользователь ${email} зарегистрирован`);
+					localStorage.setItem('userName', email);
 				}
 			})
 			.catch((err) => {
@@ -99,7 +109,8 @@ export function App() {
 				if (res) {
 					setLoggedIn(true);
 					// localStorage.setItem('userId',res._id);
-					// setUserEmail(email);
+					setUserEmail(email);
+					console.log(`Пользователь ${email} авторизован`);
 					navigate('/', { replace: true });
 				}
 			})

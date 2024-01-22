@@ -1,5 +1,4 @@
-// const BASE_URL = 'https://sports-map.ru/api/auth';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://sports-map.ru/api/auth';
 
 /* const BASE_URL = "http://localhost:3000";
 https://sports-map.ru/api/auth/jwt/create/
@@ -17,7 +16,7 @@ const checkResponse = (res) => {
 
 // Регистрация пользователя
 function register(nickname, email, password) {
-	return fetch(`${BASE_URL}/users`, {
+	return fetch(`${BASE_URL}/users/`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -29,19 +28,19 @@ function register(nickname, email, password) {
 
 // Авторизация пользователя
 function login(email, password) {
-	return fetch(`${BASE_URL}/users`, {
+	return fetch(`${BASE_URL}/jwt/create/`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 		},
-		body: JSON.stringify(email, password),
+		body: JSON.stringify({ email, password }),
 	}).then(checkResponse);
 }
 
 // Аутинфикация пользователя
 function checkToken(token) {
-	return fetch(`${BASE_URL}/users/me`, {
+	return fetch(`${BASE_URL}/jwt/verify`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',

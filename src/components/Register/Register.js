@@ -132,11 +132,13 @@ function Register({
 					<Input
 						labelClassName="register-password-label"
 						inputClassName="register-password-input"
+						htmlFor="resgisterNicknameInput"
 						label="Никнейм"
 						className="popup__login-form-input popup__register-form-input-name"
 						onChange={validateNickname}
 						type="name"
-						name="nickname"
+						name="register-nickname"
+						id="resgisterNicknameInput"
 						value={nickname}
 						minLength="2"
 						maxLength="20"
@@ -149,11 +151,13 @@ function Register({
 					<Input
 						labelClassName="register-password-label"
 						inputClassName="register-password-input"
+						htmlFor="resgisterEmailInput"
 						label="E-mail"
 						className="popup__login-form-input popup__register-form-input-email"
 						onChange={validateEmail}
 						type="email"
-						name="email"
+						name="register-email"
+						id="resgisterEmailInput"
 						value={email}
 						minLength="6"
 						maxLength="50"

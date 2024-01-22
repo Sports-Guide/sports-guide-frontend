@@ -95,7 +95,8 @@ className="popup__login-form-title"
 						onChange={validateEmail}
 						value={email}
 						type="email"
-						name="email"
+						name="login-email"
+						id="loginEmailInput"
 						maxLength="50"
 						minLength="6"
 						required
