@@ -4,6 +4,7 @@
 	font-weight: 700;
 	line-height: 20px;
 	letter-spacing: 0em;
+	text-align: left;
 	width: 131px;
 	height: 36px;
 	border: none;
@@ -11,7 +12,6 @@
 	background: rgba(252, 252, 252, 1);
 	background-image: url('../../images/User_icon.svg');
 	background-repeat: no-repeat;
-	padding-right: 21px;
 }
 
 .comment-submit-button {
@@ -95,5 +95,4 @@
 	cursor: pointer;
 	margin-bottom: 2px;
 	margin-right: 12px;
-	margin-left: 30px;
 }
