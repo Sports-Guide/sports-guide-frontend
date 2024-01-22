@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://sports-map.ru/api/auth';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://sports-map.ru/api/auth';
+// const BASE_URL = 'http://localhost:3000';
 
 export function validateResponse(res) {
 	if (res.ok) {

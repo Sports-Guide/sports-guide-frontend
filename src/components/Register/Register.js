@@ -235,7 +235,7 @@ function Register({
 					<Button
 						className="popup__register-form-button-signup"
 						type="submit"
-						label="Регистрация"
+						label="Зарегистрироваться"
 						// disabled={!isValid}
 						onRegister={onRegister}
 					/>

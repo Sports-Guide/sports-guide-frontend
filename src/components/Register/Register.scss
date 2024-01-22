@@ -1,6 +1,9 @@
 .popup__register-form {
 	margin: 0;
-	margin-top: 20px;
+	// margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	
 }
 
 .popup__register-form-input-name {
@@ -44,7 +47,9 @@
 	margin: 0;
 	border-radius: 8px;
 	background: var(--Accent-Blue, #1478ff);
+	padding: 0;
 	width: 326px;
+	height: 44px;
 	color: var(--Primary-White, #fcfcfc);
 	font-family: Roboto;
 	font-size: 14px;
@@ -52,14 +57,15 @@
 	font-weight: 700;
 	line-height: 20px;
 	text-align: center;
+	align-self: center;
 }
 
 .popup__register-form-paragraph {
 	margin: 0;
-	padding: 10px 0px;
+	padding: 16px 0px;
 	color: var(--Primary-Gray-blue-dark, #737a8e);
 	font-family: Roboto;
-	font-size: 18px;
+	font-size: 16px;
 	font-style: normal;
 	font-weight: 700;
 	line-height: 20px;
@@ -78,7 +84,6 @@
 	display: flex;
 	margin-top: 16px;
 	position: relative;
-
 }
 
 .register-password-input-container {
