@@ -109,9 +109,16 @@ function Register({
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		onRegister({ nickname, email, password, passwordConfirmation });
-		navigate('/');
-		console.log('all good');
+		if (
+			!nicknameError &&
+			!emailError &&
+			!passwordError &&
+			!passwordConfirmationError
+		) {
+			onRegister({ nickname, email, password, passwordConfirmation });
+			navigate('/');
+			console.log('all good');
+		}
 	};
 
 	return (
