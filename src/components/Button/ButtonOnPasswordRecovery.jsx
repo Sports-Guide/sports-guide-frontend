@@ -16,7 +16,7 @@ export function ButtonOnPasswordRecovery({ onClick, type, disabled, label }) {
 }
 
 ButtonOnPasswordRecovery.propTypes = {
-	disabled: PropTypes.string.isRequired,
+	disabled: PropTypes.bool.isRequired,
 	onClick: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,

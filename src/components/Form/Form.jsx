@@ -8,7 +8,11 @@ export function Form({ children, className }) {
 
 Form.propTypes = {
 	children: PropTypes.node.isRequired,
-	className: PropTypes.string.isRequired,
+	className: PropTypes.string,
+};
+
+Form.defaultProps = {
+	className: '',
 };
 
 export default Form;

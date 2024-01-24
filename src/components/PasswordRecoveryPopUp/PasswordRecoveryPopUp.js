@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import '../Form/Form.scss';
 import './PasswordRecoveryPopUp.scss';
 import { Popup } from '../Popup/Popup';
@@ -20,9 +21,11 @@ function PasswordRecoveryPopUp({
 		/* onRecovery(email); */
 	};
 
+	const navigate = useNavigate();
+
 	return (
 		<main>
-			<Popup isOpen={isPasswordRecoveryPopUpOpen} onClose={onClose}>
+			<Popup isOpen={isPasswordRecoveryPopUpOpen} onClose={onClose} title="">
 				<FormTitle
 					label="Восстановление пароля"
 					className="popup__recovery-password-title"
@@ -32,11 +35,15 @@ function PasswordRecoveryPopUp({
 				</h3>
 				<Form className="popup__recovery-password-form" onSubmit={handleSubmit}>
 					<Input
+						labelClassName="popup__recovery-password-form-label"
+						inputClassName="popup__recovery-password-form-input"
+						htmlFor="recoveryEmail"
 						label="E-mail"
-						className="popup__recovery-password-form-input"
 						onChange={(e) => setEmail(e.target.value)}
 						type="email"
-						name="email"
+						name="recoveryEmail"
+						id="recoveryEmail"
+						placeholder=""
 						value={email}
 						minLength="6"
 						maxLength="50"
@@ -45,10 +52,15 @@ function PasswordRecoveryPopUp({
 						className="popup__recovery-password-button"
 						type="submit"
 						label="Восстановить"
+						onClick={onClose} // заменить на функцию восставновления пароля
 					/>
 				</Form>
 			</Popup>
-			<Popup isOpen={isSendPasswordRecoveryPopUpOpen} onClose={onClose}>
+			<Popup
+				isOpen={isSendPasswordRecoveryPopUpOpen}
+				onClose={onClose}
+				title=""
+			>
 				<h2 className="popup__recovery-password-title">
 					Восстановление пароля
 				</h2>
@@ -60,12 +72,14 @@ function PasswordRecoveryPopUp({
 					className="popup__recovery-password-back"
 					type="button"
 					label="На главную"
+					onClick={() => navigate('/')}
 				/>
 				<Button
 					onSubmit={handleSubmit}
 					className="popup__recovery-password-send-again"
 					type="button"
 					label="Отправить повторно"
+					onClick={onClose} // заменить на функцию повторной отправки
 				/>
 			</Popup>
 		</main>
@@ -73,9 +87,13 @@ function PasswordRecoveryPopUp({
 }
 
 PasswordRecoveryPopUp.propTypes = {
-	isPasswordRecoveryPopUpOpen: PropTypes.bool.isRequired,
+	isPasswordRecoveryPopUpOpen: PropTypes.bool,
 	isSendPasswordRecoveryPopUpOpen: PropTypes.bool.isRequired,
 	onClose: PropTypes.func.isRequired,
+};
+
+PasswordRecoveryPopUp.defaultProps = {
+	isPasswordRecoveryPopUpOpen: false,
 };
 
 export default PasswordRecoveryPopUp;

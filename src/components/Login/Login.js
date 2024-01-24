@@ -97,6 +97,7 @@ className="popup__login-form-title"
 						type="email"
 						name="login-email"
 						id="loginEmailInput"
+						placeholder=""
 						maxLength="50"
 						minLength="6"
 						required
@@ -115,6 +116,8 @@ className="popup__login-form-title"
 						value={password}
 						type={showPassword ? 'text' : 'password'}
 						name="password"
+						id="loginPasswordInput"
+						placeholder=""
 						maxLength="50"
 						minLength="6"
 						required
@@ -145,6 +148,8 @@ className="popup__login-form-title"
 						<ButtonOnPasswordRecovery
 							onClick={onPasswordRecovery}
 							label="Забыли пароль?"
+							type="button"
+							disabled={false}
 						/>
 					</div>
 					{/* тут будет валидация кнопки войти */}
@@ -156,7 +161,7 @@ className="popup__login-form-title"
 						type="submit"
 						label="Войти"
 						// disabled={!isValid}
-						onLogIn={onLogIn}
+						onClick={() => onLogIn(email, password)}
 					/>
 				</Form>
 				<p className="popup__login-form-paragraph">
@@ -164,6 +169,8 @@ className="popup__login-form-title"
 					<ButtonOnRegister
 						onClick={toSignUpPopUp}
 						label="Зарегистрироваться"
+						type="button"
+						disabled={false}
 					/>
 				</p>
 			</Popup>

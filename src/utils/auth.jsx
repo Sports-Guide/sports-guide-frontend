@@ -15,14 +15,14 @@ const checkResponse = (res) => {
 };
 
 // Регистрация пользователя
-function register(nickname, email, password) {
+function register(nickname, email, password, passwordConfirmation) {
 	return fetch(`${BASE_URL}/users/`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
 		},
-		body: JSON.stringify({ nickname, email, password }),
+		body: JSON.stringify(nickname, email, password, passwordConfirmation),
 	}).then(checkResponse);
 }
 
@@ -40,8 +40,9 @@ function login(email, password) {
 
 // Аутинфикация пользователя
 function checkToken(token) {
-	return fetch(`${BASE_URL}/jwt/verify`, {
-		method: 'GET',
+	// const token = localStorage.getItem('token');
+	return fetch(`${BASE_URL}/jwt/verify/`, {
+		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,

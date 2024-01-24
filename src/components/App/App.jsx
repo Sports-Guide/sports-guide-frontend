@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { Main } from '../Main/Main';
@@ -44,7 +44,51 @@ export function App() {
 
 	const navigate = useNavigate();
 
+	const tokenCheck = useCallback(
+		(token) => {
+			// если пользователь авторизован,
+			// const token = localStorage.getItem('token');
+			if (token) {
+				// проверим, есть ли данные в req.user._id
+				auth
+					.checkToken(token)
+					.then((res) => {
+						// res
+						if (res.token) {
+							setLoggedIn(true);
+							setUserEmail(res.email);
+							navigate('/', { replace: true });
+							console.log(`Токен ${token}`);
+						}
+					})
+					.catch((err) => {
+						console.log(err); // выведем ошибку в консоль
+					});
+			} else {
+				setLoggedIn(false);
+			}
+		},
+		[navigate]
+	);
+
+	// useEffect(() => {
+	// 	const handleTokenCheck = (token) => {
+	// 		auth.checkToken(token)
+	// 		.then((res) => {
+	// 			if (res) {
+	// 				setLoggedIn(true);
+	// 				navigate('/', { replace: true });
+	// 			}
+	// 		});
+	// 	};
+	// 	const token = localStorage.getItem('token');
+	// 	if (token) {
+	// 		handleTokenCheck(token);
+	// 	}
+	// }, [navigate]);
+
 	useEffect(() => {
+		tokenCheck();
 		if (loggedIn) {
 			Promise.all([api.getUserInfo(), api.getAreas()])
 				.then(([userData, areasData]) => {
@@ -56,68 +100,68 @@ export function App() {
 					setLoggedIn(false);
 				});
 		}
-	}, [loggedIn]);
-
-	useEffect(() => {
-		const handleTokenCheck = (token) => {
-			auth.checkToken(token).then((res) => {
-				if (res) {
-					setLoggedIn(true);
-					navigate('/', { replace: true });
-				}
-			});
-		};
-		const token = localStorage.getItem('token');
-		if (token) {
-			handleTokenCheck(token);
-		}
-	}, [navigate]);
+	}, [loggedIn, tokenCheck]);
 
 	// сохраняем email
 	useEffect(() => {
-		const currentEmail = localStorage.getItem('userName');
+		const currentEmail = localStorage.getItem('userEmail');
 		if (currentEmail) {
 			setUserEmail(currentEmail);
 		} else setUserEmail('');
 	}, []);
 
-	const handleRegistration = (nickname, email, password) => {
+	const handleRegistration = async (
+		nickname,
+		email,
+		password,
+		passwordConfirmation
+	) => {
 		setRegErrorMessage('');
-		auth
-			.register(nickname, email, password)
-			.then((res) => {
-				if (!res || res.statusCode === 400) {
-					setRegErrorMessage(res.message);
-				} else {
-					// navigate('/', {replace: true});
-					console.log(`Пользователь ${email} зарегистрирован`);
-					localStorage.setItem('userName', email);
-				}
-			})
-			.catch((err) => {
-				console.log(`Ошибка регистрации: ${err}`);
-				setRegErrorMessage(err.message);
-			});
+		try {
+			const response = await auth.register(
+				nickname,
+				email,
+				password,
+				passwordConfirmation
+			);
+			if (!response || response.statusCode === 400) {
+				setRegErrorMessage(response.message);
+			} else {
+				localStorage.setItem('userEmail', email);
+				setLoggedIn(true);
+				// setCurrentUser(response.user);
+				console.log(`Пользователь ${email} зарегистрирован`);
+				navigate('/', { replace: true });
+			}
+		} catch (err) {
+			console.log(`Ошибка регистрации: ${err}`);
+			setRegErrorMessage(err.message);
+		}
 	};
 
 	const handleLogIn = (email, password) => {
 		setLogErrorMessage('');
-		auth
-			.login(email, password)
-			.then((res) => {
-				if (res.statusCode === 401) throw new Error('Ошибка авторизации');
-				if (res) {
-					setLoggedIn(true);
-					// localStorage.setItem('userId',res._id);
-					setUserEmail(email);
-					console.log(`Пользователь ${email} авторизован`);
-					navigate('/', { replace: true });
-				}
-			})
-			.catch((err) => {
-				console.log(`Ошибка авторизации: ${err}`);
-				setLogErrorMessage(err.message);
-			});
+		if (!email || !password) {
+			setLogErrorMessage('Заполните все поля');
+			return;
+		}
+		try {
+			const response = auth.login(email, password);
+			if (!response || response.statusCode === 401) {
+				setLogErrorMessage(response.message);
+			} else {
+				localStorage.setItem('userEmail', email);
+				localStorage.setItem('token', response.token);
+				setUserEmail(email);
+				setLoggedIn(true);
+				setCurrentUser(response.user);
+				console.log(`Пользователь ${email} авторизован`);
+				navigate('/', { replace: true });
+			}
+		} catch (err) {
+			console.log(`Ошибка авторизации: ${err}`);
+			setLogErrorMessage(err.message);
+		}
 	};
 
 	// const handleEditButtonClick = () =>

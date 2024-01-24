@@ -22,28 +22,30 @@ export const getUserInfo = () => {
 };
 
 // запрос на изменение данных пользователя
-export const editEmailAndNickname = (formValues) => {
+export const editEmailAndNickname = (email, nickname) => {
+	const token = localStorage.getItem('token');
 	fetch(`${BASE_URL}/users/me/`, {
 		method: 'PATCH',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
-			// 'Authorization': `Bearer ${formValues.token}`
+			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({
-			email: formValues.email,
-			nickname: formValues.nickname,
+			email,
+			nickname,
 		}),
 	}).then(validateResponse);
 };
 
 export const editPassword = (currentPassword, newPassword) => {
+	const token = localStorage.getItem('token');
 	fetch(`${BASE_URL}/users/set_password/`, {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
-			// 'Autohorization': `Bearer ${}`
+			Autohorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({
 			currentPassword,
@@ -54,11 +56,13 @@ export const editPassword = (currentPassword, newPassword) => {
 
 // получаем площадки
 export const getAreas = () => {
+	const token = localStorage.getItem('token');
 	fetch(`${BASE_URL}/areas/`, {
 		method: 'GET',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
 		},
 	}).then(validateResponse);
 };

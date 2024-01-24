@@ -109,15 +109,8 @@ function Register({
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		if (
-			!nicknameError &&
-			!emailError &&
-			!passwordError &&
-			!passwordConfirmationError
-		) {
-			onRegister(nickname, email, password);
-			navigate('/');
-		}
+		onRegister({ nickname, email, password, passwordConfirmation });
+		navigate('/');
 		console.log('all good');
 	};
 
@@ -136,17 +129,21 @@ function Register({
 						label="Никнейм"
 						className="popup__login-form-input popup__register-form-input-name"
 						onChange={validateNickname}
+						// onChange={(e) => {
+						// 	setNickname(e.target.value);
+						// }}
 						type="name"
 						name="register-nickname"
 						id="resgisterNicknameInput"
 						value={nickname}
+						placeholder=""
 						minLength="2"
 						maxLength="20"
 						required
 					>
-						{nicknameError ? (
+						{nicknameError && (
 							<span className="register-password-error">{nicknameError}</span>
-						) : null}
+						)}
 					</Input>
 					<Input
 						labelClassName="register-password-label"
@@ -154,11 +151,15 @@ function Register({
 						htmlFor="resgisterEmailInput"
 						label="E-mail"
 						className="popup__login-form-input popup__register-form-input-email"
+						// onChange={(e) => {
+						// 	setEmail(e.target.value);
+						// }}
 						onChange={validateEmail}
 						type="email"
 						name="register-email"
 						id="resgisterEmailInput"
 						value={email}
+						placeholder=""
 						minLength="6"
 						maxLength="50"
 						required
@@ -170,12 +171,18 @@ function Register({
 					<Input
 						labelClassName="register-password-label"
 						inputClassName="register-password-input"
+						htmlFor="registerPasswordInput"
 						label="Пароль"
 						className="register-password-input"
+						// onChange={(e) => {
+						// 	setRegisterPasswordInput(e.target.value);
+						// }}
 						onChange={validatePassword}
 						type={showPassword ? 'text' : 'password'}
 						name="registerPasswordInput"
+						id="registerPasswordInput"
 						value={password}
+						placeholder=""
 						minLength="6"
 						maxLength="25"
 						required
@@ -193,12 +200,18 @@ function Register({
 					<Input
 						labelClassName="register-password-label"
 						inputClassName="register-password-input"
+						htmlFor="registerConfirmationPasswordInput"
 						label="Повторите пароль"
 						className="popup__login-form-input popup__register-form-input-password"
+						// onChange={(e) => {
+						// 	setPasswordConfirmation(e.target.value);
+						// }}
 						onChange={validatePasswordConfirmation}
 						type={showConfirmPassword ? 'text' : 'password'}
 						name="registerConfirmationPasswordInput"
+						id="registerConfirmationPasswordInput"
 						value={passwordConfirmation}
+						placeholder=""
 						minLength="6"
 						maxLength="25"
 						required
@@ -222,7 +235,6 @@ function Register({
 							id="politicks"
 							name="politicks"
 						/>
-						{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 						<label
 							className="popup__register-form-checkbox-text"
 							htmlFor="politicks"
@@ -240,13 +252,22 @@ function Register({
 						className="popup__register-form-button-signup"
 						type="submit"
 						label="Зарегистрироваться"
-						// disabled={!isValid}
-						onRegister={onRegister}
+						disabled={false}
+						// onClick={onRegister({nickname, email, password, passwordConfirmation})}
+						// onClick={({registrationData}) => onRegister({registrationData})}
+						onClick={() =>
+							onRegister({ nickname, email, password, passwordConfirmation })
+						}
 					/>
 				</Form>
 				<p className="popup__register-form-paragraph">
 					Уже есть аккаунт?
-					<ButtonOnLoginPopUp onClick={toSignInPopUp} label="Войти" />
+					<ButtonOnLoginPopUp
+						onClick={toSignInPopUp}
+						label="Войти"
+						type="button"
+						disabled={false}
+					/>
 				</p>
 			</Popup>
 		</main>

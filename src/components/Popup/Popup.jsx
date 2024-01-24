@@ -20,11 +20,16 @@ export function Popup({ isOpen, onClose, title, headerClassName, children }) {
 }
 
 Popup.propTypes = {
-	isOpen: PropTypes.bool.isRequired,
+	isOpen: PropTypes.bool,
 	onClose: PropTypes.func.isRequired,
 	title: PropTypes.string.isRequired,
-	headerClassName: PropTypes.string.isRequired,
+	headerClassName: PropTypes.string,
 	children: PropTypes.node.isRequired,
+};
+
+Popup.defaultProps = {
+	headerClassName: '',
+	isOpen: false,
 };
 
 export default Popup;
