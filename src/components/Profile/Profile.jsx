@@ -4,7 +4,6 @@ import './Profile.scss';
 import FormTitle from '../FormTitle/FormTitle';
 import { PersonalData } from './PersonalData';
 import { PasswordData } from './PasswordData';
-import { Button } from '../Button/Button';
 import { Popup } from '../Popup/Popup';
 
 export function Profile({
@@ -136,16 +135,22 @@ export function Profile({
 					Вы уверены, что хотите выйти из профиля?
 				</h3>
 				<div className="popup__button-container align-left">
-					<Button
+					<button
 						className="popup__button popup__button-y"
 						onClick={onLogOut}
-						label="Выйти"
-					/>
-					<Button
+						type="button"
+						aria-label="log-out-button"
+					>
+						Выйти
+					</button>
+					<button
 						className="popup__button popup__button-n"
 						onClick={onClose}
-						label="Отмена"
-					/>
+						type="button"
+						aria-label="cancel-log-out-button"
+					>
+						Отмена
+					</button>
 				</div>
 			</Popup>
 			<Popup
@@ -158,16 +163,22 @@ export function Profile({
 					Вы уверены, что хотите удалить профиль?
 				</h3>
 				<div className="popup__button-container">
-					<Button
+					<button
 						className="popup__button popup__button-y"
 						onClick={onDelete}
-						label="Удалить"
-					/>
-					<Button
+						type="button"
+						aria-label="delete-profile-button"
+					>
+						Удалить
+					</button>
+					<button
 						className="popup__button popup__button-n"
 						onClick={onClose}
-						label="Отмена"
-					/>
+						type="button"
+						aria-label="cancel-delete-profile-button"
+					>
+						Отмена
+					</button>
 				</div>
 			</Popup>
 		</main>

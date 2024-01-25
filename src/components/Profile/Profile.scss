@@ -3,6 +3,7 @@ $primary-bg-color: #f2f3f7;
 $secondary-bg-color: #fcfcfc;
 $text-color: #0e0e0e;
 $button-bg-color: #1478ff;
+$button-secondary-bg-color: #E5F0FF;
 $button-text-color: #fff;
 $button-border-radius: 8px;
 $form-border-color: #aaa;
@@ -184,7 +185,7 @@ $form-border-color: #aaa;
 	padding: 32px 0 0;
 }
 
-.button.popup__button {
+.popup__button {
 	font-family: inherit;
 	border: none;
 	outline: none;
@@ -200,7 +201,7 @@ $form-border-color: #aaa;
 }
 
 .popup__button.popup__button-n {
-	background-color: $secondary-bg-color;
+	background-color: $button-secondary-bg-color;
 	color: $button-bg-color;
 }
 

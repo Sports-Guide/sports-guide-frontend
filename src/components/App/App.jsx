@@ -29,6 +29,7 @@ export function App() {
 	const [isOnRegisterPopUpOpen, setOnRegisterPopUpOpen] = useState(false);
 	const [isPasswordRecoveryPopUpOpen, setPasswordRecoveryPopUpOpen] =
 		useState(false);
+	const [isSuccessPopupOpen, setSuccessPopupOpen] = useState(false);
 
 	// стейт для серверных ошибок
 	// const [errorMessage, setErrorMessage] = useState('');
@@ -215,6 +216,10 @@ export function App() {
 		console.log('Пароль изменен');
 	};
 
+	const handleSuccessPopupOpen = () => {
+		setSuccessPopupOpen(true);
+	};
+
 	// функция закрытия всех попапов
 	const closeAllPopups = () => {
 		setDeleteAccountPopupOpen(false);
@@ -222,6 +227,7 @@ export function App() {
 		setOnLogInPopUpOpen(false);
 		setOnRegisterPopUpOpen(false);
 		setPasswordRecoveryPopUpOpen(false);
+		setSuccessPopupOpen(false);
 	};
 
 	// закрываем попапы по Esc
@@ -242,6 +248,7 @@ export function App() {
 		isOnLogInPopUpOpen,
 		isOnRegisterPopUpOpen,
 		isPasswordRecoveryPopUpOpen,
+		isSuccessPopupOpen,
 	]);
 
 	return (
@@ -292,6 +299,8 @@ export function App() {
 						toSignInPopUp={handleOnLogInClick}
 						regErrorMessage={regErrorMessage}
 						onRegister={handleRegistration}
+						onSuccessPopupOpen={handleSuccessPopupOpen}
+						isSuccessPopupOpen={isSuccessPopupOpen}
 					/>
 					<PasswordRecoveryPopUp
 						isPasswordRecoveryPopUpOpen={isPasswordRecoveryPopUpOpen}

@@ -10,6 +10,7 @@ import { Input } from '../Input/Input';
 // import { PasswordInputWithValidation } from '../PasswordInputWithValidation/PasswordInputWithValidation';
 import { Button } from '../Button/Button';
 import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
+import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
 
 function Register({
 	isOnRegisterPopUpOpen,
@@ -17,6 +18,8 @@ function Register({
 	toSignInPopUp,
 	regErrorMessage,
 	onRegister,
+	isInfoTooltipOpen,
+	isSucceeded,
 }) {
 	const [nickname, setNickname] = useState('');
 	const [email, setEmail] = useState('');
@@ -128,20 +131,17 @@ function Register({
 				onClose={onClose}
 				title="Регистрация"
 			>
-				<Form className="popup__register-form" onSubmit={onSubmit}>
+				<Form className="popup__register-form" onSubmit={onSubmit} noValidate>
 					<Input
 						labelClassName="register-password-label"
 						inputClassName="register-password-input"
-						htmlFor="resgisterNicknameInput"
+						htmlFor="registerNicknameInput"
 						label="Никнейм"
 						className="popup__login-form-input popup__register-form-input-name"
 						onChange={validateNickname}
-						// onChange={(e) => {
-						// 	setNickname(e.target.value);
-						// }}
 						type="name"
 						name="register-nickname"
-						id="resgisterNicknameInput"
+						id="registerNicknameInput"
 						value={nickname}
 						placeholder=""
 						minLength="2"
@@ -155,16 +155,13 @@ function Register({
 					<Input
 						labelClassName="register-password-label"
 						inputClassName="register-password-input"
-						htmlFor="resgisterEmailInput"
+						htmlFor="registerEmailInput"
 						label="E-mail"
 						className="popup__login-form-input popup__register-form-input-email"
-						// onChange={(e) => {
-						// 	setEmail(e.target.value);
-						// }}
 						onChange={validateEmail}
 						type="email"
 						name="register-email"
-						id="resgisterEmailInput"
+						id="registerEmailInput"
 						value={email}
 						placeholder=""
 						minLength="6"
@@ -181,9 +178,6 @@ function Register({
 						htmlFor="registerPasswordInput"
 						label="Пароль"
 						className="register-password-input"
-						// onChange={(e) => {
-						// 	setRegisterPasswordInput(e.target.value);
-						// }}
 						onChange={validatePassword}
 						type={showPassword ? 'text' : 'password'}
 						name="registerPasswordInput"
@@ -260,8 +254,6 @@ function Register({
 						type="submit"
 						label="Зарегистрироваться"
 						disabled={false}
-						// onClick={onRegister({nickname, email, password, passwordConfirmation})}
-						// onClick={({registrationData}) => onRegister({registrationData})}
 						onClick={() =>
 							onRegister({ nickname, email, password, passwordConfirmation })
 						}
@@ -277,6 +269,21 @@ function Register({
 					/>
 				</p>
 			</Popup>
+			{isSucceeded ? (
+				<InfoTooltip
+					isInfoTooltipOpen={isInfoTooltipOpen}
+					onInfoTooltipClose={onClose}
+					successMessage="Вы зарегистрированы"
+				>
+					<p className="popup__title">Регистрация пройдена успешно.</p>
+					<Button
+						className="popup__button popup__button-y"
+						type="button"
+						onClick={onClose}
+						label="Регистрация"
+					/>
+				</InfoTooltip>
+			) : null}
 		</main>
 	);
 }
@@ -287,9 +294,9 @@ Register.propTypes = {
 	toSignInPopUp: PropTypes.func.isRequired,
 	regErrorMessage: PropTypes.string.isRequired,
 	onRegister: PropTypes.func.isRequired,
-	/* onLogin: PropTypes.func.isRequired,
-	onPasswordRecovery: PropTypes.func.isRequired,
-	 */
+	isInfoTooltipOpen: PropTypes.bool.isRequired,
+	isSucceeded: PropTypes.bool.isRequired,
+	// onPasswordRecovery: PropTypes.func.isRequired,
 };
 
 export default Register;
