@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { Main } from '../Main/Main';
@@ -29,7 +29,7 @@ export function App() {
 	const [isOnRegisterPopUpOpen, setOnRegisterPopUpOpen] = useState(false);
 	const [isPasswordRecoveryPopUpOpen, setPasswordRecoveryPopUpOpen] =
 		useState(false);
-	const [isSuccessPopupOpen, setSuccessPopupOpen] = useState(false);
+	const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
 
 	// стейт для серверных ошибок
 	// const [errorMessage, setErrorMessage] = useState('');
@@ -39,77 +39,98 @@ export function App() {
 	// создаём стейт для проверки пользователя на авторизацию
 	const [loggedIn, setLoggedIn] = useState(false);
 
+	const [isSucceeded, setIsSucceeded] = useState(false);
+
 	const [currentUser, setCurrentUser] = useState({});
 	// eslint-disable-next-line no-unused-vars
 	const [areas, setAreas] = useState([]);
 
 	const navigate = useNavigate();
 
-	const tokenCheck = useCallback(
-		(token) => {
-			// если пользователь авторизован,
-			// const token = localStorage.getItem('token');
-			if (token) {
-				// проверим, есть ли данные в req.user._id
-				auth
-					.checkToken(token)
-					.then((res) => {
-						// res
-						if (res.token) {
-							setLoggedIn(true);
-							setUserEmail(res.email);
-							navigate('/', { replace: true });
-							console.log(`Токен ${token}`);
-						}
-					})
-					.catch((err) => {
-						console.log(err); // выведем ошибку в консоль
-					});
-			} else {
-				setLoggedIn(false);
-			}
-		},
-		[navigate]
-	);
-
-	// useEffect(() => {
-	// 	const handleTokenCheck = (token) => {
-	// 		auth.checkToken(token)
-	// 		.then((res) => {
-	// 			if (res) {
-	// 				setLoggedIn(true);
-	// 				navigate('/', { replace: true });
-	// 			}
-	// 		});
-	// 	};
-	// 	const token = localStorage.getItem('token');
-	// 	if (token) {
-	// 		handleTokenCheck(token);
-	// 	}
-	// }, [navigate]);
-
 	useEffect(() => {
-		tokenCheck();
+		const handleTokenCheck = (token) => {
+			auth.checkToken(token).then((res) => {
+				if (res) {
+					setUserEmail(res.email);
+					setCurrentUser(res.user);
+					setLoggedIn(true);
+					navigate('/', { replace: true });
+				}
+			});
+		};
+		const token = localStorage.getItem('token');
+		if (token) {
+			handleTokenCheck(token);
+		}
+	}, [navigate]);
+
+	// получаем данные пользователя
+	useEffect(() => {
 		if (loggedIn) {
-			Promise.all([api.getUserInfo(), api.getAreas()])
-				.then(([userData, areasData]) => {
+			api
+				.getUserInfo()
+				.then((userData) => {
 					setCurrentUser(userData);
-					setAreas(areasData);
 				})
 				.catch((err) => {
-					console.log(`Ошибка при получении данных: ${err}`);
+					console.log(`Ошибка при получении данных пользователя: ${err}`);
 					setLoggedIn(false);
 				});
 		}
-	}, [loggedIn, tokenCheck]);
+	}, [loggedIn]);
+
+	// получаем данные площадок
+	// useEffect(() => {
+	//     if (loggedIn) {
+	//         api.getAreas()
+	//             .then(areasData => {
+	//                 setAreas(areasData);
+	//             })
+	//             .catch(err => {
+	//                 console.log(`Ошибка при получении данных о площадках: ${err}`);
+	//                 setLoggedIn(false);
+	//             });
+	//     }
+	// }, [loggedIn]);
 
 	// сохраняем email
 	useEffect(() => {
-		const currentEmail = localStorage.getItem('userEmail');
+		const currentEmail = localStorage.getItem('email');
 		if (currentEmail) {
 			setUserEmail(currentEmail);
 		} else setUserEmail('');
 	}, []);
+
+	const handleLogIn = async (email, password) => {
+		setLogErrorMessage('');
+		if (!email || !password) {
+			setLogErrorMessage('Заполните все поля');
+			return;
+		}
+		try {
+			const response = await auth.login(email, password);
+			console.log(`response.access = ${response.access}`);
+			console.log(`response.refresh = ${response.refresh}`);
+			console.log(`response.access = ${JSON.stringify(response)}`);
+			if (!response || response.statusCode === 401) {
+				setLogErrorMessage(response.message);
+			} else {
+				localStorage.setItem('userEmail', email);
+				localStorage.setItem('token', response.access);
+				setUserEmail(response.email);
+				setLoggedIn(true);
+				setCurrentUser(response.user);
+				console.log(`Пользователь ${email} авторизован`);
+				navigate('/', { replace: true });
+				setOnLogInPopUpOpen(false);
+			}
+		} catch (err) {
+			console.log(`Ошибка авторизации: ${err}`);
+			setLogErrorMessage(err.message);
+		} finally {
+			setLogErrorMessage('');
+		}
+	};
 
 	const handleRegistration = async (
 		nickname,
@@ -128,40 +149,22 @@ export function App() {
 			if (!response || response.statusCode === 400) {
 				setRegErrorMessage(response.message);
 			} else {
-				localStorage.setItem('userEmail', email);
-				setLoggedIn(true);
+				handleLogIn(response.email, response.password);
+				localStorage.setItem('userEmail', response.email);
+				// setUserEmail(response.email);
+				// setLoggedIn(true);
 				// setCurrentUser(response.user);
-				console.log(`Пользователь ${email} зарегистрирован`);
+				setIsSucceeded(true);
+				console.log(`email = ${response.email}`);
+				console.log(`Пользователь ${response.email} зарегистрирован`);
+				setOnRegisterPopUpOpen(false);
 				navigate('/', { replace: true });
 			}
 		} catch (err) {
 			console.log(`Ошибка регистрации: ${err}`);
 			setRegErrorMessage(err.message);
-		}
-	};
-
-	const handleLogIn = (email, password) => {
-		setLogErrorMessage('');
-		if (!email || !password) {
-			setLogErrorMessage('Заполните все поля');
-			return;
-		}
-		try {
-			const response = auth.login(email, password);
-			if (!response || response.statusCode === 401) {
-				setLogErrorMessage(response.message);
-			} else {
-				localStorage.setItem('userEmail', email);
-				localStorage.setItem('token', response.token);
-				setUserEmail(email);
-				setLoggedIn(true);
-				setCurrentUser(response.user);
-				console.log(`Пользователь ${email} авторизован`);
-				navigate('/', { replace: true });
-			}
-		} catch (err) {
-			console.log(`Ошибка авторизации: ${err}`);
-			setLogErrorMessage(err.message);
+		} finally {
+			setRegErrorMessage('');
 		}
 	};
 
@@ -216,10 +219,6 @@ export function App() {
 		console.log('Пароль изменен');
 	};
 
-	const handleSuccessPopupOpen = () => {
-		setSuccessPopupOpen(true);
-	};
-
 	// функция закрытия всех попапов
 	const closeAllPopups = () => {
 		setDeleteAccountPopupOpen(false);
@@ -227,7 +226,7 @@ export function App() {
 		setOnLogInPopUpOpen(false);
 		setOnRegisterPopUpOpen(false);
 		setPasswordRecoveryPopUpOpen(false);
-		setSuccessPopupOpen(false);
+		setInfoTooltipOpen(false);
 	};
 
 	// закрываем попапы по Esc
@@ -248,7 +247,7 @@ export function App() {
 		isOnLogInPopUpOpen,
 		isOnRegisterPopUpOpen,
 		isPasswordRecoveryPopUpOpen,
-		isSuccessPopupOpen,
+		isInfoTooltipOpen,
 	]);
 
 	return (
@@ -299,8 +298,8 @@ export function App() {
 						toSignInPopUp={handleOnLogInClick}
 						regErrorMessage={regErrorMessage}
 						onRegister={handleRegistration}
-						onSuccessPopupOpen={handleSuccessPopupOpen}
-						isSuccessPopupOpen={isSuccessPopupOpen}
+						isInfoTooltipOpen={isInfoTooltipOpen}
+						isSucceeded={isSucceeded}
 					/>
 					<PasswordRecoveryPopUp
 						isPasswordRecoveryPopUpOpen={isPasswordRecoveryPopUpOpen}
@@ -313,3 +312,18 @@ export function App() {
 }
 
 export default App;
+
+// одновременное полечение данных пользователя и площадок
+// useEffect(() => {
+// 	if (loggedIn) {
+// 		Promise.all([api.getUserInfo(), api.getAreas()])
+// 			.then(([userData, areasData]) => {
+// 				setCurrentUser(userData);
+// 				setAreas(areasData);
+// 			})
+// 			.catch((err) => {
+// 				console.log(`Ошибка при получении данных: ${err}`);
+// 				setLoggedIn(false);
+// 			});
+// 	}
+// }, [loggedIn]);

@@ -64,28 +64,15 @@ function Login({
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (!emailError && !passwordError) {
-			onLogIn(email, password);
+			onLogIn({ email, password });
 			navigate('/');
 		}
 	};
-	// const handleSubmit = (event) => {
-	// 	event.preventDefault();
-	// 	if (!emailError) {
-	// 		onLogIn(email, password);
-	// 		navigate('/');
-	// 	}
-	// };
 
 	return (
 		<main id="sign-in">
 			<Popup isOpen={isOnLogInPopUpOpen} onClose={onClose} title="Вход">
 				<Form className="popup__login-form" onSubmit={handleSubmit}>
-					{/* <Form className="popup__login-form" onSubmit={handleSubmit}> */}
-					{/* <FormTitle
-label="Вход"
-className="popup__login-form-title"
-/> */}
-
 					<Input
 						labelClassName="login-email-label"
 						inputClassName="login-password-input"
@@ -153,9 +140,7 @@ className="popup__login-form-title"
 						/>
 					</div>
 					{/* тут будет валидация кнопки войти */}
-					<span className="form__error form__error_login">
-						{logErrorMessage}
-					</span>
+					<span className="form__server-error">{logErrorMessage}</span>
 					<Button
 						className="popup__login-form-button-signin"
 						type="submit"

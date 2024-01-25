@@ -28,11 +28,13 @@ function register(nickname, email, password, passwordConfirmation) {
 
 // Авторизация пользователя
 function login(email, password) {
+	const token = localStorage.getItem('token');
 	return fetch(`${BASE_URL}/jwt/create/`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
+			Autohorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({ email, password }),
 	}).then(checkResponse);

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 // import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../Form/Form.scss';
 import './Register.scss';
@@ -41,8 +40,6 @@ function Register({
 	const toggleConfirmPasswordVisibility = () => {
 		setShowConfirmPassword(!showConfirmPassword);
 	};
-
-	const navigate = useNavigate();
 
 	// const {
 	// 	handleSubmit,
@@ -119,7 +116,6 @@ function Register({
 			!passwordConfirmationError
 		) {
 			onRegister({ nickname, email, password, passwordConfirmation });
-			navigate('/');
 			console.log('all good');
 		}
 	};
@@ -246,17 +242,15 @@ function Register({
 							</span>
 						</label>
 					</div>
-					<span className="form__error form__error_register">
-						{regErrorMessage}
-					</span>
+					<span className="form__server-error">{regErrorMessage}</span>
 					<Button
 						className="popup__register-form-button-signup"
 						type="submit"
 						label="Зарегистрироваться"
 						disabled={false}
-						onClick={() =>
-							onRegister({ nickname, email, password, passwordConfirmation })
-						}
+						// onClick={() =>
+						// 	onRegister({ nickname, email, password, passwordConfirmation })
+						// }
 					/>
 				</Form>
 				<p className="popup__register-form-paragraph">

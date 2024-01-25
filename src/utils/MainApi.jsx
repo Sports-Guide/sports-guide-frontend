@@ -12,11 +12,13 @@ export function validateResponse(res) {
 
 // запрос на данные текущего пользователя
 export const getUserInfo = () => {
-	fetch(`${BASE_URL}/users/me`, {
+	const token = localStorage.getItem('token');
+	fetch(`${BASE_URL}/users/me/`, {
 		method: 'GET',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
 		},
 	}).then(validateResponse);
 };
