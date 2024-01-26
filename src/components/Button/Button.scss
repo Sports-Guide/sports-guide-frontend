@@ -1,4 +1,4 @@
-@mixin buttonAdd{
+@mixin buttonAdd {
 	border-radius: 8px;
 	gap: 8px;
 	background: rgba(20, 120, 255, 1);
@@ -72,14 +72,14 @@
 .button-add {
 	width: 204px;
 	height: 44px;
-	@include buttonAdd
+	@include buttonAdd;
 }
 
 .button-add__check {
 	width: 184px;
 	height: 44px;
 	@include buttonAdd;
-	padding-right:20px;
+	padding-right: 20px;
 }
 
 .button-login-site {
