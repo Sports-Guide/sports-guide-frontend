@@ -34,7 +34,7 @@ function login(email, password) {
 		headers: {
 			'Content-Type': 'application/json',
 			Accept: 'application/json',
-			Autohorization: `Bearer ${token}`,
+			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({ email, password }),
 	}).then(checkResponse);
@@ -42,13 +42,14 @@ function login(email, password) {
 
 // Аутинфикация пользователя
 function checkToken(token) {
-	// const token = localStorage.getItem('token');
 	return fetch(`${BASE_URL}/jwt/verify/`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
+			Accept: 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
+		body: JSON.stringify({ token }),
 	}).then(checkResponse);
 }
 

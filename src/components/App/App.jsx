@@ -49,14 +49,16 @@ export function App() {
 
 	useEffect(() => {
 		const handleTokenCheck = (token) => {
-			auth.checkToken(token).then((res) => {
-				if (res) {
-					setUserEmail(res.email);
-					setCurrentUser(res.user);
-					setLoggedIn(true);
-					navigate('/', { replace: true });
-				}
-			});
+			auth
+				.checkToken(token)
+				.then((res) => {
+					if (res) {
+						setUserEmail(res.email);
+						setCurrentUser(res.user);
+						setLoggedIn(true);
+					}
+				})
+				.catch((err) => console.log(err));
 		};
 		const token = localStorage.getItem('token');
 		if (token) {
@@ -71,6 +73,8 @@ export function App() {
 				.getUserInfo()
 				.then((userData) => {
 					setCurrentUser(userData);
+					JSON.stringify(localStorage.getItem('userData', userData));
+					console.log(`userData ${JSON.stringify(userData)}`);
 				})
 				.catch((err) => {
 					console.log(`Ошибка при получении данных пользователя: ${err}`);
@@ -78,20 +82,6 @@ export function App() {
 				});
 		}
 	}, [loggedIn]);
-
-	// получаем данные площадок
-	// useEffect(() => {
-	//     if (loggedIn) {
-	//         api.getAreas()
-	//             .then(areasData => {
-	//                 setAreas(areasData);
-	//             })
-	//             .catch(err => {
-	//                 console.log(`Ошибка при получении данных о площадках: ${err}`);
-	//                 setLoggedIn(false);
-	//             });
-	//     }
-	// }, [loggedIn]);
 
 	// сохраняем email
 	useEffect(() => {
@@ -109,9 +99,6 @@ export function App() {
 		}
 		try {
 			const response = await auth.login(email, password);
-			console.log(`response.access = ${response.access}`);
-			console.log(`response.refresh = ${response.refresh}`);
-			console.log(`response.access = ${JSON.stringify(response)}`);
 			if (!response || response.statusCode === 401) {
 				setLogErrorMessage(response.message);
 			} else {
@@ -151,9 +138,6 @@ export function App() {
 			} else {
 				handleLogIn(response.email, response.password);
 				localStorage.setItem('userEmail', response.email);
-				// setUserEmail(response.email);
-				// setLoggedIn(true);
-				// setCurrentUser(response.user);
 				setIsSucceeded(true);
 				console.log(`email = ${response.email}`);
 				console.log(`Пользователь ${response.email} зарегистрирован`);

@@ -13,7 +13,7 @@ export function validateResponse(res) {
 // запрос на данные текущего пользователя
 export const getUserInfo = () => {
 	const token = localStorage.getItem('token');
-	fetch(`${BASE_URL}/users/me/`, {
+	return fetch(`${BASE_URL}/users/me/`, {
 		method: 'GET',
 		headers: {
 			Accept: 'application/json',
@@ -26,7 +26,7 @@ export const getUserInfo = () => {
 // запрос на изменение данных пользователя
 export const editEmailAndNickname = (email, nickname) => {
 	const token = localStorage.getItem('token');
-	fetch(`${BASE_URL}/users/me/`, {
+	return fetch(`${BASE_URL}/users/me/`, {
 		method: 'PATCH',
 		headers: {
 			Accept: 'application/json',
@@ -42,12 +42,12 @@ export const editEmailAndNickname = (email, nickname) => {
 
 export const editPassword = (currentPassword, newPassword) => {
 	const token = localStorage.getItem('token');
-	fetch(`${BASE_URL}/users/set_password/`, {
+	return fetch(`${BASE_URL}/users/set_password/`, {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
-			Autohorization: `Bearer ${token}`,
+			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({
 			currentPassword,
@@ -59,7 +59,7 @@ export const editPassword = (currentPassword, newPassword) => {
 // получаем площадки
 export const getAreas = () => {
 	const token = localStorage.getItem('token');
-	fetch(`${BASE_URL}/areas/`, {
+	return fetch(`${BASE_URL}/areas/`, {
 		method: 'GET',
 		headers: {
 			Accept: 'application/json',
