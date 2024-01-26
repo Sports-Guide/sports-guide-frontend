@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Multiselect from 'multiselect-react-dropdown';
+import PropTypes from 'prop-types';
 import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
 import MapComponent from '../Map/Map';
 import addPictures from '../../images/Camera.svg';
 import { Button } from '../Button/Button';
+import { Popup } from '../Popup/Popup';
 
-export function AreaApp() {
+function AreaApp({ isCheckPopup, onClose, handleAreaApp }) {
 	const data = [
 		{ Country: 'Футбол', id: 1 },
 		{ Country: 'Баскетбол', id: 2 },
@@ -16,8 +18,9 @@ export function AreaApp() {
 	];
 	const [options] = useState(data);
 
-	const test = () => {
-		console.log('test');
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		handleAreaApp(!isCheckPopup);
 	};
 
 	return (
@@ -73,12 +76,32 @@ export function AreaApp() {
 
 						<Button
 							className="button-add"
-							onClick={test}
+							onClick={handleSubmit}
 							label="Добавить площадку"
 						/>
 					</div>
+					<Popup
+						onClose={onClose}
+						isOpen={isCheckPopup}
+						title="Проверка началась"
+						checkPopup="popup-check"
+						headerClassName="popup-check__title"
+					>
+						<p className="popup-check__subtitle">
+							Как только площадка пройдет проверку, она будет доступна для всех
+							пользователей.
+						</p>
+						<Button className="button-add__check" label="На главную" />
+					</Popup>
 				</form>
 			</div>
 		</div>
 	);
 }
+
+AreaApp.propTypes = {
+	isCheckPopup: PropTypes.bool.isRequired,
+	onClose: PropTypes.bool.isRequired,
+	handleAreaApp: PropTypes.bool.isRequired,
+};
+export default AreaApp;

@@ -2,10 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Popup.scss';
 
-export function Popup({ isOpen, onClose, title, headerClassName, children }) {
+export function Popup({
+	isOpen,
+	onClose,
+	title,
+	headerClassName,
+	children,
+	checkPopup,
+}) {
 	return (
 		<div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
-			<div className="popup__container">
+			<div className={`popup__container ${checkPopup}`}>
 				<button
 					className="popup__close-button"
 					type="button"
@@ -25,6 +32,7 @@ Popup.propTypes = {
 	title: PropTypes.string.isRequired,
 	headerClassName: PropTypes.string,
 	children: PropTypes.node.isRequired,
+	checkPopup: PropTypes.string.isRequired,
 };
 
 Popup.defaultProps = {

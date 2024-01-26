@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { Main } from '../Main/Main';
 import { Profile } from '../Profile/Profile';
-import { AreaApp } from '../Area/AreaApp';
+import AreaApp from '../Area/AreaApp';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
@@ -30,6 +30,7 @@ export function App() {
 	const [isPasswordRecoveryPopUpOpen, setPasswordRecoveryPopUpOpen] =
 		useState(false);
 	const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+	const [isCheckPopup, setIsCheckPopup] = useState(false);
 
 	// стейт для серверных ошибок
 	// const [errorMessage, setErrorMessage] = useState('');
@@ -211,6 +212,7 @@ export function App() {
 		setOnRegisterPopUpOpen(false);
 		setPasswordRecoveryPopUpOpen(false);
 		setInfoTooltipOpen(false);
+		setIsCheckPopup(false);
 	};
 
 	// закрываем попапы по Esc
@@ -232,6 +234,7 @@ export function App() {
 		isOnRegisterPopUpOpen,
 		isPasswordRecoveryPopUpOpen,
 		isInfoTooltipOpen,
+		isCheckPopup,
 	]);
 
 	return (
@@ -244,7 +247,16 @@ export function App() {
 							element={<Layuot handleOnLogInClick={handleOnLogInClick} />}
 						>
 							<Route path="/" element={<Main />} />
-							<Route path="/app-area" element={<AreaApp />} />
+							<Route
+								path="/app-area"
+								element={
+									<AreaApp
+										onClose={closeAllPopups}
+										isCheckPopup={isCheckPopup}
+										handleAreaApp={setIsCheckPopup}
+									/>
+								}
+							/>
 							<Route
 								path="/profile"
 								element={
