@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -75,7 +76,7 @@ export function App() {
 				.then((userData) => {
 					setCurrentUser(userData);
 					JSON.stringify(localStorage.getItem('userData', userData));
-					console.log(`userData ${JSON.stringify(userData)}`);
+					// console.log(`userData ${JSON.stringify(userData)}`);
 				})
 				.catch((err) => {
 					console.log(`Ошибка при получении данных пользователя: ${err}`);
@@ -261,7 +262,7 @@ export function App() {
 							path="/"
 							element={<Layuot handleOnLogInClick={handleOnLogInClick} />}
 						>
-							<Route path="/" element={<Main />} />
+							<Route path="/" element={<Main areas={areas} />} />
 							<Route
 								path="/app-area"
 								element={
