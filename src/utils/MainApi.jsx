@@ -1,4 +1,5 @@
 const BASE_URL = 'https://sports-map.ru/api/auth';
+const SPORT_GROUNDS_URL = 'https://sports-map.ru/api';
 // const BASE_URL = 'http://localhost:3000';
 
 export function validateResponse(res) {
@@ -57,14 +58,12 @@ export const editPassword = (currentPassword, newPassword) => {
 };
 
 // получаем площадки
-export const getAreas = () => {
-	const token = localStorage.getItem('token');
-	return fetch(`${BASE_URL}/areas/`, {
+export function getAreas() {
+	return fetch(`${SPORT_GROUNDS_URL}/areas/`, {
 		method: 'GET',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`,
 		},
 	}).then(validateResponse);
-};
+}

@@ -84,6 +84,21 @@ export function App() {
 		}
 	}, [loggedIn]);
 
+	// получаем данные площадок
+	useEffect(() => {
+		if (loggedIn) {
+			api
+				.getAreas()
+				.then((areasData) => {
+					setAreas(areasData);
+				})
+				.catch((err) => {
+					console.log(`Ошибка при получении данных о площадках: ${err}`);
+					setLoggedIn(false);
+				});
+		}
+	}, [loggedIn]);
+
 	// сохраняем email
 	useEffect(() => {
 		const currentEmail = localStorage.getItem('email');
