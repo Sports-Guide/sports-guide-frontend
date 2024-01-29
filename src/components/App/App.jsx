@@ -257,7 +257,7 @@ export function App() {
 		<CurrentUserContext.Provider value={currentUser}>
 			<Routes>
 				<Route
-					path=""
+					path="/"
 					element={<Layuot handleOnLogInClick={handleOnLogInClick} />}
 				>
 					<Route index element={<Main areas={areas} />} />
