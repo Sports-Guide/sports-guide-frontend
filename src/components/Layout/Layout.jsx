@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 
-function Layuot({ handleOnLogInClick }) {
+function Layuot({ handleOnLogInClick, loggedIn }) {
 	return (
 		<div className="app">
 			<div className="page__container">
-				<Header onLogIn={handleOnLogInClick} />
+				<Header onLogIn={handleOnLogInClick} loggedIn={loggedIn} />
 				<Outlet />
 				<Footer />
 			</div>
@@ -19,6 +19,7 @@ function Layuot({ handleOnLogInClick }) {
 
 Layuot.propTypes = {
 	handleOnLogInClick: PropTypes.func.isRequired,
+	loggedIn: PropTypes.bool.isRequired,
 };
 
 export default Layuot;

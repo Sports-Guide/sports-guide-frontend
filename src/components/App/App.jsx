@@ -258,11 +258,16 @@ export function App() {
 			<Routes>
 				<Route
 					path="/"
-					element={<Layuot handleOnLogInClick={handleOnLogInClick} />}
+					element={
+						<Layuot
+							handleOnLogInClick={handleOnLogInClick}
+							loggedIn={loggedIn}
+						/>
+					}
 				>
 					<Route index element={<Main areas={areas} />} />
 					<Route
-						path="/app-area"
+						path="app-area"
 						element={
 							<AreaApp
 								onClose={closeAllPopups}
@@ -272,7 +277,7 @@ export function App() {
 						}
 					/>
 					<Route
-						path="/profile"
+						path="profile"
 						element={
 							<Profile
 								onEditPersonalData={handlePersonalDataEditBtnClick}
@@ -289,7 +294,7 @@ export function App() {
 							/>
 						}
 					/>
-					<Route path="/sports-ground" element={<SportsGround />} />
+					<Route path="sports-ground" element={<SportsGround />} />
 
 					<Route path="*" element={<NotFoundPage />} />
 				</Route>

@@ -4,10 +4,10 @@ import Multiselect from 'multiselect-react-dropdown';
 import PropTypes from 'prop-types';
 import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
-import MapComponent from '../Map/Map';
 import addPictures from '../../images/Camera.svg';
 import { Button } from '../Button/Button';
 import { Popup } from '../Popup/Popup';
+import YandexMap from '../YandexMap/YandexMap';
 
 function AreaApp({ isCheckPopup, onClose, handleAreaApp }) {
 	const data = [
@@ -51,7 +51,7 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp }) {
 								placeholder="Введите адрес"
 							/>
 						</label>
-						<MapComponent className="map-container_place_area-app" />
+						<YandexMap />
 					</div>
 					<div className="foto">
 						<h3 className="foto__title">Фотографии</h3>

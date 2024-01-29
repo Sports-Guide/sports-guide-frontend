@@ -6,11 +6,15 @@ import { ButtonMap } from '../Button/ButtonMap';
 import logo from '../../images/logo.svg';
 import './Header.scss';
 
-export function Header({ onLogIn, onLogOut, loggedIn }) {
+export function Header({ onLogIn, loggedIn }) {
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
 		navigate('/app-area');
+	};
+
+	const navigateToPersonalArea = () => {
+		navigate('/profile');
 	};
 
 	return (
@@ -28,7 +32,11 @@ export function Header({ onLogIn, onLogOut, loggedIn }) {
 						label="Добавить площадку"
 					/>
 					{loggedIn ? (
-						<Button onClick={onLogOut} label="UserName" />
+						<Button
+							onClick={navigateToPersonalArea}
+							label="Личный кабинет"
+							className="button-login-site"
+						/>
 					) : (
 						<Button
 							className="button-login-site"
@@ -45,6 +53,5 @@ export function Header({ onLogIn, onLogOut, loggedIn }) {
 
 Header.propTypes = {
 	onLogIn: PropTypes.func.isRequired,
-	onLogOut: PropTypes.func.isRequired,
 	loggedIn: PropTypes.bool.isRequired,
 };
