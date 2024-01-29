@@ -214,7 +214,22 @@ $fontsRoboto: 'Roboto';
 	margin-bottom: 28px;
 }
 
-.test {
-	margin-left: -2px;
-	margin-top: -1px;
+.search-wrapper {
+	border-radius: 8px;
+	border: 1px solid rgba(201, 209, 229, 1);
+	width: 724px;
+	height: 44px;
 }
+
+.chip {
+	background: rgba(229, 240, 255, 1);
+	border-radius: 0;
+	color: rgba(21, 62, 140, 1);
+}
+
+.custom-close{
+	width: 14px;
+	height: 14px;
+	background-image: url('../../images/icn_cross.svg');
+}
+

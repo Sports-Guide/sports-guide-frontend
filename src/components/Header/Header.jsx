@@ -19,9 +19,14 @@ export function Header({ onLogIn, onLogOut, loggedIn }) {
 				<Link to="/" className="header__logo">
 					<img className="logo" src={logo} alt="" />
 					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
+					<ButtonMap label="Москва" />
 				</Link>
 				<div className="header__buttons">
-					<ButtonMap label="Москва" />
+					<Button
+						className="button-app"
+						onClick={navigateHome}
+						label="Добавить площадку"
+					/>
 					{loggedIn ? (
 						<Button onClick={onLogOut} label="UserName" />
 					) : (
@@ -29,14 +34,9 @@ export function Header({ onLogIn, onLogOut, loggedIn }) {
 							className="button-login-site"
 							onClick={onLogIn}
 							type="button"
-							label="Войти"
+							label="Личный кабинет"
 						/>
 					)}
-					<Button
-						className="button-app"
-						onClick={navigateHome}
-						label="Добавить площадку"
-					/>
 				</div>
 			</div>
 		</header>

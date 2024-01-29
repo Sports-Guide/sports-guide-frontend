@@ -35,15 +35,21 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp }) {
 						<h3 className="kinds-of-sports__title">Виды спорта</h3>
 						<Multiselect
 							showCheckbox
-							placeholder=" "
+							placeholder=""
 							options={options}
 							displayValue="Country"
+							customCloseIcon={<> </>}
 						/>
 					</div>
 					<div className="location">
 						<label htmlFor="text" className="location__label">
 							Адрес площадки
-							<input type="text" id="text" className="location__adress" />
+							<input
+								type="text"
+								id="text"
+								className="location__adress"
+								placeholder="Введите адрес"
+							/>
 						</label>
 						<MapComponent className="map-container_place_area-app" />
 					</div>
