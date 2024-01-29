@@ -255,70 +255,66 @@ export function App() {
 
 	return (
 		<CurrentUserContext.Provider value={currentUser}>
-			<div className="app">
-				<div className="page__container">
-					<Routes>
-						<Route
-							path="/"
-							element={<Layuot handleOnLogInClick={handleOnLogInClick} />}
-						>
-							<Route path="/" element={<Main areas={areas} />} />
-							<Route
-								path="/app-area"
-								element={
-									<AreaApp
-										onClose={closeAllPopups}
-										isCheckPopup={isCheckPopup}
-										handleAreaApp={setIsCheckPopup}
-									/>
-								}
+			<Routes>
+				<Route
+					path=""
+					element={<Layuot handleOnLogInClick={handleOnLogInClick} />}
+				>
+					<Route index element={<Main areas={areas} />} />
+					<Route
+						path="/app-area"
+						element={
+							<AreaApp
+								onClose={closeAllPopups}
+								isCheckPopup={isCheckPopup}
+								handleAreaApp={setIsCheckPopup}
 							/>
-							<Route
-								path="/profile"
-								element={
-									<Profile
-										onEditPersonalData={handlePersonalDataEditBtnClick}
-										onEditPassword={handleChangePassword}
-										isPersonalDataEditing={isPersonalDataEditing}
-										isPasswordEditing={isPasswordEditing}
-										onDelete={handleDeleteAccount}
-										onLogOut={handleLogOut}
-										onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
-										onLogoutPopupOpen={handleLogOutClick}
-										isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
-										isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
-										onClose={closeAllPopups}
-									/>
-								}
+						}
+					/>
+					<Route
+						path="/profile"
+						element={
+							<Profile
+								onEditPersonalData={handlePersonalDataEditBtnClick}
+								onEditPassword={handleChangePassword}
+								isPersonalDataEditing={isPersonalDataEditing}
+								isPasswordEditing={isPasswordEditing}
+								onDelete={handleDeleteAccount}
+								onLogOut={handleLogOut}
+								onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
+								onLogoutPopupOpen={handleLogOutClick}
+								isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
+								isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
+								onClose={closeAllPopups}
 							/>
-							<Route path="/sports-ground" element={<SportsGround />} />
+						}
+					/>
+					<Route path="/sports-ground" element={<SportsGround />} />
 
-							<Route path="*" element={<NotFoundPage />} />
-						</Route>
-					</Routes>
-					<Login
-						isOnLogInPopUpOpen={isOnLogInPopUpOpen}
-						onClose={closeAllPopups}
-						toSignUpPopUp={handleOpenSignUpPopUp}
-						onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
-						logErrorMessage={logErrorMessage}
-						onLogIn={handleLogIn}
-					/>
-					<Register
-						isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
-						onClose={closeAllPopups}
-						toSignInPopUp={handleOnLogInClick}
-						regErrorMessage={regErrorMessage}
-						onRegister={handleRegistration}
-						isInfoTooltipOpen={isInfoTooltipOpen}
-						isSucceeded={isSucceeded}
-					/>
-					<PasswordRecoveryPopUp
-						isPasswordRecoveryPopUpOpen={isPasswordRecoveryPopUpOpen}
-						onClose={closeAllPopups}
-					/>
-				</div>
-			</div>
+					<Route path="*" element={<NotFoundPage />} />
+				</Route>
+			</Routes>
+			<Login
+				isOnLogInPopUpOpen={isOnLogInPopUpOpen}
+				onClose={closeAllPopups}
+				toSignUpPopUp={handleOpenSignUpPopUp}
+				onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
+				logErrorMessage={logErrorMessage}
+				onLogIn={handleLogIn}
+			/>
+			<Register
+				isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
+				onClose={closeAllPopups}
+				toSignInPopUp={handleOnLogInClick}
+				regErrorMessage={regErrorMessage}
+				onRegister={handleRegistration}
+				isInfoTooltipOpen={isInfoTooltipOpen}
+				isSucceeded={isSucceeded}
+			/>
+			<PasswordRecoveryPopUp
+				isPasswordRecoveryPopUpOpen={isPasswordRecoveryPopUpOpen}
+				onClose={closeAllPopups}
+			/>
 		</CurrentUserContext.Provider>
 	);
 }
