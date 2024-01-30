@@ -22,10 +22,13 @@ jobs:
       - name: Push to DockerHub
         uses: docker/build-push-action@v4
         with:
+          context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/sports-guide-frontend:latest
   deploy:
     name: Deploy project
+    needs:
+      - build_and_push_to_docker_hub
     environment: Docker
     runs-on: ubuntu-latest
     steps:
