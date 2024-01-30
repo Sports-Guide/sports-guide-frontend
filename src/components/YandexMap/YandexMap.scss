@@ -23,15 +23,57 @@
 	height: 52px;
 }
 
-.ymaps-2-1-79-balloon__layout{
-	border-radius:20px ;
-  }
-  
-  .ymaps-2-1-79-balloon {
-	border: 1px solid black;
-	border-radius:20px ;
-  
-  }
+.ymaps-2-1-79-balloon__layout {
+	border-radius: 8px;
+	width: 358px;
+	height: 112px;
+}
+
+.ymaps-2-1-79-balloon {
+	border-radius: 8px;
+	
+}
+/*
+.ymaps-2-1-79-balloon__content {
+	border: 1px solid red;
+}*/
+
+.yandex {
+	display: flex;
+	
+	width: 318px;
+	height: 88px;
+}
+
+.yandex__contetn{
+	margin-left: 10px;
+}
+
+.yandex__images{
+	width: 88px;
+	height: 88px;
+	border-radius: 8px;
+}
+
+.yandex__title {
+	//styleName: Desktop/Subhead_Black;
+	font-family: Roboto Flex;
+	font-size: 14px;
+	font-weight: 900;
+	line-height: 16px;
+	letter-spacing: 0.01em;
+	text-align: left;
+}
+
+.yandex__subtitle {
+	//styleName: Desktop/Caption 3_Regular;
+	font-family: Roboto;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 12px;
+	letter-spacing: 0em;
+	text-align: left;
+}
 
 // .ymaps-2-1-79-copyrights-pane {
 // 	display: none;

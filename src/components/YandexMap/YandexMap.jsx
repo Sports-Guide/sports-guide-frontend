@@ -76,13 +76,15 @@ function YandexMap({ areas, areaAppClass }) {
 									parseFloat(area.longitude),
 								]}
 								properties={{
-									balloonContentHeader: 'header',
 									balloonContentBody: `
-									<h1>Заголовок</h1>
-									<p>описание</p>
-									<img src="https://34travel.me/media/upload/images/2016/october/Paris_palasatka/02.jpg" height="153" width="200">`,
-									balloonContent: 'Text',
-									balloonContentFooter: 'Footer',
+									<div class = "yandex">
+									<img class = "yandex__images" src="https://r4p.org/image/cache/data/msport_new/1-silnyj-dvor-nojabrsk/3_sil_dv/2-max-900.jpg">
+									<div class = "yandex__contetn">
+									<h1 class = "yandex__title" >Спортивная площадка</h1>
+									<p class = "yandex__subtitle">Муниципальное автономное учреждение «Центр спортивных мероприятий и физкультурно-массовой работы» (МАУ "ЦСМ и ФМР")</p>
+									</div>
+									</div>
+									`,
 								}}
 								options={{
 									preset: 'islands#blueSportIcon',
