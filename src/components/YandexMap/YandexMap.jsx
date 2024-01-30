@@ -75,7 +75,21 @@ function YandexMap({ areas, areaAppClass }) {
 									parseFloat(area.latitude),
 									parseFloat(area.longitude),
 								]}
-								properties={{ balloonContent: `ID: ${area.id}` }}
+								properties={{
+									balloonContentHeader: 'header',
+									balloonContentBody: `
+									<h1>Заголовок</h1>
+									<p>описание</p>
+									<img src="https://34travel.me/media/upload/images/2016/october/Paris_palasatka/02.jpg" height="153" width="200">`,
+									balloonContent: 'Text',
+									balloonContentFooter: 'Footer',
+								}}
+								options={{
+									preset: 'islands#blueSportIcon',
+									controls: [],
+									visible: true,
+									cursor: 'pointer',
+								}}
 							/>
 						))}
 					</Clusterer>

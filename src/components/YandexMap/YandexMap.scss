@@ -23,6 +23,16 @@
 	height: 52px;
 }
 
+.ymaps-2-1-79-balloon__layout{
+	border-radius:20px ;
+  }
+  
+  .ymaps-2-1-79-balloon {
+	border: 1px solid black;
+	border-radius:20px ;
+  
+  }
+
 // .ymaps-2-1-79-copyrights-pane {
 // 	display: none;
 // }
@@ -40,17 +50,15 @@
 		width: 1040px;
 		height: 500px;
 		border: 1px solid red;
-	
 	}
-	
+
 	.map__baloon {
 		border: 1px solid red;
 		width: 150px;
 		height: 150px;
 		background-image: url(../../images/location.png);
-	
 	}
-	
+
 	.map__search-bar {
 		width: 540px;
 		height: 52px;
