@@ -1,14 +1,16 @@
-import React from 'react';
+/* eslint-disable */
+import React, { useState, useEffect } from 'react';
 import './YandexMap.scss';
 import {
 	YMaps,
 	Map,
+	Placemark,
 	SearchControl,
 	Clusterer,
-	Placemark,
 } from '@pbe/react-yandex-maps';
+import PropTypes from 'prop-types';
 
-function YandexMap() {
+function YandexMap({ areas }) {
 	const defaultState = {
 		center: [55.751426, 37.618879],
 		zoom: 10,
@@ -68,12 +70,31 @@ function YandexMap() {
 		[55.858585, 37.48498],
 	];
 
-	// const { areas.latitude } = areas;
-	// console.log(sportAreas);
-	// function
+	// function MapSuggestComponent(props) {
+	// 	const { ymaps } = props;
+
+	// 	React.useEffect(() => {
+	// 		const suggestView = new ymaps.SuggestView('suggest');
+	// 	}, [ymaps.SuggestView]);
+
+	// 	return <input type="text" id="suggest" />;
+	// }
+
+	// const SuggestComponent = React.useMemo(() => {
+	// 	return withYMaps(MapSuggestComponent, true, [
+	// 		'SuggestView',
+	// 		'geocode',
+	// 		'coordSystem.geo',
+	// 	]);
+	// }, []);
+	const loadSuggest = (ymaps) => {
+		const suggestView = new ymaps.SuggestView('suggest');
+	};
 
 	return (
 		<div className="map">
+			{/* <SearchBar /> */}
+			<input type="text" className="map__search-bar" id="suggest" />
 			<YMaps
 				query={{
 					ns: 'use-load-option',
@@ -81,12 +102,14 @@ function YandexMap() {
 					apikey: 'c062e9ac-db0c-4d73-b5b2-71830702f484',
 					suggest_apikey: '7841f93a-196d-47c1-9184-54f3c937df30',
 				}}
-				// className="map__container"
 			>
+				{/* <SuggestComponent /> */}
+
 				<Map
 					defaultState={defaultState}
 					className="map__container"
-					// modules={['control.ZoomControl', 'control.FullscreenControl']}
+					modules={['SuggestView']}
+					onLoad={(ymaps) => loadSuggest(ymaps)}
 				>
 					<SearchControl options={{ float: 'right' }} />
 					<Clusterer
@@ -95,8 +118,18 @@ function YandexMap() {
 							groupByCoordinates: false,
 						}}
 					>
-						{points.map((coordinates) => (
+						{/* {points.map((coordinates) => (
 							<Placemark geometry={coordinates} />
+						))} */}
+						{areas.map((area) => (
+							<Placemark
+								key={area.id}
+								geometry={[
+									parseFloat(area.latitude),
+									parseFloat(area.longitude),
+								]}
+								properties={{ balloonContent: `ID: ${area.id}` }}
+							/>
 						))}
 					</Clusterer>
 				</Map>
@@ -104,5 +137,9 @@ function YandexMap() {
 		</div>
 	);
 }
+
+YandexMap.propTypes = {
+	areas: PropTypes.arrayOf.isRequired,
+};
 
 export default YandexMap;

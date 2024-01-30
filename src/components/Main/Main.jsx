@@ -7,10 +7,11 @@ import './Main.scss';
 // import { SearchControl } from '../SearchControl/SearchControl';
 // import customIcon from '../CustomIcon/CustomIcon';
 // import MarkerLayer from '../MarkerLayer/MarkerLayer';
+import PropTypes from 'prop-types';
 import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
 import YandexMap from '../YandexMap/YandexMap';
 
-export function Main(areas) {
+export function Main({ areas }) {
 	// const [newMarkers, setNewMarkers] = React.useState([]);
 
 	return (
@@ -24,7 +25,12 @@ export function Main(areas) {
 					<Marker position={marker} icon={customIcon} draggable />
 				))}
 			</MapComponent> */}
-			<YandexMap sportAreas={areas} />
+
+			<YandexMap areas={areas} />
 		</main>
 	);
 }
+
+Main.propTypes = {
+	areas: PropTypes.arrayOf.isRequired,
+};

@@ -3,6 +3,8 @@
 	height: 100%;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 .map__container {
 	width: 1040px;
@@ -14,6 +16,11 @@
 	width: 150px;
 	height: 150px;
 	background-image: url(../../images/location.png);
+}
+
+.map__search-bar {
+	width: 540px;
+	height: 52px;
 }
 
 // .ymaps-2-1-79-copyrights-pane {

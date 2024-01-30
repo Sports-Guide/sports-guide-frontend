@@ -87,18 +87,16 @@ export function App() {
 
 	// получаем данные площадок
 	useEffect(() => {
-		if (loggedIn) {
-			api
-				.getAreas()
-				.then((areasData) => {
-					setAreas(areasData);
-				})
-				.catch((err) => {
-					console.log(`Ошибка при получении данных о площадках: ${err}`);
-					setLoggedIn(false);
-				});
-		}
-	}, [loggedIn]);
+		api
+			.getAreas()
+			.then((areasData) => {
+				setAreas(areasData);
+			})
+			.catch((err) => {
+				console.log(`Ошибка при получении данных о площадках: ${err}`);
+				setLoggedIn(false);
+			});
+	}, []);
 
 	// сохраняем email
 	useEffect(() => {
