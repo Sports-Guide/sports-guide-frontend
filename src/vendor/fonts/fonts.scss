@@ -1,0 +1,30 @@
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url('./Roboto-regular.woff2') format('woff2'),
+		url('./Roboto-regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		url('./Roboto-Bold.woff2') format('woff2'),
+		url('./Roboto-Bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Roboto Flex';
+	src: url('https://assets.codepen.io/2585/RobotoFlex') format('truetype');
+}
+
+/* @font-face {
+	font-family: 'Roboto Flex';
+	font-style: normal;
+	font-weight: 1000;
+	src: url('./RobotoFlex-Regular.ttf') format('ttf');
+}
+ */

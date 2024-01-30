@@ -1,0 +1,57 @@
+$fontsRoboto: 'Roboto';
+
+@mixin displayPosition {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	/* gap: 4px; */
+}
+
+@mixin blocks {
+	width: 1040px;
+	border-radius: 12px;
+	background: #fcfcfc;
+	padding: 24px 36px;
+	/* 	margin-bottom: 24px; */
+}
+
+.location__container {
+	@include blocks;
+	margin: 40px auto 24px;
+}
+
+.location__title {
+	//styleName: Bold/H2;
+	font-family: Roboto Flex;
+	font-size: 28px;
+	font-weight: 900;
+	line-height: 36px;
+	text-align: center;
+	margin: 0;
+}
+
+.location__subtitle {
+	margin: 0;
+	color: var(--Primary-Black-light, #515151);
+	text-align: center;
+
+	font-family: Roboto;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 22px; /* 122.222% */
+}
+
+/* @mixin inputs {
+	display: flex;
+	width: 206px;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 4px;
+	width: 206px;
+	height: 42px;
+	border-radius: 8px;
+	margin-top: 24px;
+	border: 1px solid #c9d1e5;
+}
+ */

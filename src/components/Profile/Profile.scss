@@ -1,0 +1,212 @@
+// Variables
+$primary-bg-color: #f2f3f7;
+$secondary-bg-color: #fcfcfc;
+$text-color: #0e0e0e;
+$button-bg-color: #1478ff;
+$button-secondary-bg-color: #e5f0ff;
+$button-text-color: #fff;
+$button-border-radius: 8px;
+$form-border-color: #aaa;
+
+// Mixins
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+}
+
+// Styles
+.profile {
+	width: 100%;
+	height: 100vh;
+	background-color: $primary-bg-color;
+}
+
+.profile__container {
+	display: flex;
+	width: calc(415px + 593px + 32px);
+	justify-content: center;
+	padding: 62px 0 0;
+	margin: 0 auto;
+	column-gap: 32px;
+}
+
+.profile__navigation {
+	width: 325px;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px 24px;
+}
+
+.profile__avatar {
+	position: relative;
+	width: 120px;
+	height: 120px;
+	@include border-radius(50%);
+	background-size: cover;
+	background-position: center;
+	margin-right: 20px;
+}
+
+.profile__info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 14px;
+}
+
+.profile__menu {
+	display: flex;
+	flex-direction: column;
+	background-color: $secondary-bg-color;
+	padding: 16px;
+	@include border-radius(12px);
+	gap: 4px;
+}
+
+.profile__menu-button {
+	font-family: 'Roboto', sans-serif;
+	display: flex;
+	width: 100%;
+	height: 48px;
+	padding: 0 0 0 24px;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	background-color: transparent;
+	color: #737a8e;
+	outline: none;
+	border: none;
+	@include border-radius(8px);
+	cursor: pointer;
+}
+
+.profile__menu-button_active {
+	background-color: $primary-bg-color;
+}
+
+.profile__menu-button_inactive {
+	background-color: transparent;
+}
+
+.profile__menu-button-icon {
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
+}
+
+.profile__personal-info {
+	display: flex;
+	height: fit-content;
+	width: 683px;
+	flex-direction: column;
+	background-color: $secondary-bg-color;
+	padding: 24px;
+	@include border-radius(12px);
+}
+
+.form__title_place_profile {
+	font-family: 'Roboto Flex', sans-serif;
+	color: $text-color;
+	text-align: left;
+	font-size: 26px;
+	font-weight: 900;
+	line-height: 28px;
+	letter-spacing: 0.01em;
+	margin: 0 0 16px;
+}
+
+.profile__nav-button {
+	width: 100%;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+	outline: none;
+	border: none;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+}
+
+.profile__button-logout {
+	height: 44px;
+	padding: 0;
+	color: $button-text-color;
+	background-color: $button-bg-color;
+	@include border-radius(8px);
+}
+
+.profile__button-account-delete {
+	background-color: transparent;
+	height: 36px;
+	color: #737a8e;
+	padding: 4px 0 0 0;
+}
+
+.button-y {
+	border: none;
+	@include border-radius(10px);
+	width: 200px;
+	height: 30px;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 20px;
+	color: $button-text-color;
+	background-color: #aaa;
+}
+
+.popup__title {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	text-align: left;
+	color: #515151;
+	margin: 0;
+	padding-top: 12px;
+}
+
+.popup__header.popup__header_left-aligned {
+	text-align: left;
+}
+
+.popup__button-container {
+	display: flex;
+	max-width: 312px;
+	gap: 12px;
+	justify-content: left;
+	padding: 32px 0 0;
+}
+
+.popup__button {
+	font-family: inherit;
+	border: none;
+	outline: none;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	width: calc(312px / 2 - 12px);
+	height: 44px;
+	font-weight: 700;
+	line-height: 18px;
+	cursor: pointer;
+	@include border-radius(8px);
+}
+
+.popup__button.popup__button-n {
+	background-color: $button-secondary-bg-color;
+	color: $button-bg-color;
+}
+
+.popup__button.popup__button-y {
+	background: $button-bg-color;
+	color: $button-text-color;
+	font-size: 16px;
+}
