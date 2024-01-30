@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../Form/Form.scss';
 import './Login.scss';
@@ -11,6 +12,8 @@ import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
 import { ButtonOnRegister } from '../Button/ButtonOnRegister';
+import { fetchLogin } from '../../services/thunks/userThunk';
+import { getIsUserAuth } from '../../services/selectors/userSelector';
 
 function Login({
 	isOnLogInPopUpOpen,
@@ -18,7 +21,7 @@ function Login({
 	toSignUpPopUp,
 	onPasswordRecovery,
 	logErrorMessage,
-	onLogIn,
+	// onLogIn,
 }) {
 	const [email, setEmail] = useState('');
 	const [emailError, setEmailError] = useState('');
@@ -61,10 +64,22 @@ function Login({
 		}
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	// const handleSubmit = (event) => {
+	// 	event.preventDefault();
+	// 	if (!emailError && !passwordError) {
+	// 		onLogIn({ email, password });
+	// 		navigate('/');
+	// 	}
+	// };
+	const dispatch = useDispatch();
+	const isUserAuth = useSelector(getIsUserAuth);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		if (!emailError && !passwordError) {
-			onLogIn({ email, password });
+			dispatch(fetchLogin({ email, password }));
+		}
+		if (isUserAuth) {
 			navigate('/');
 		}
 	};
@@ -146,7 +161,7 @@ function Login({
 						type="submit"
 						label="Войти"
 						// disabled={!isValid}
-						onClick={() => onLogIn(email, password)}
+						// onClick={() => onLogIn(email, password)}
 					/>
 				</Form>
 				<p className="popup__login-form-paragraph">
@@ -169,7 +184,7 @@ Login.propTypes = {
 	toSignUpPopUp: PropTypes.func.isRequired,
 	onPasswordRecovery: PropTypes.func.isRequired,
 	logErrorMessage: PropTypes.string.isRequired,
-	onLogIn: PropTypes.func.isRequired,
+	// onLogIn: PropTypes.func.isRequired,
 };
 
 export default Login;
