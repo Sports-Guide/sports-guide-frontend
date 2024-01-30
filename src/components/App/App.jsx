@@ -271,6 +271,7 @@ export function App() {
 								onClose={closeAllPopups}
 								isCheckPopup={isCheckPopup}
 								handleAreaApp={setIsCheckPopup}
+								areas={areas}
 							/>
 						}
 					/>

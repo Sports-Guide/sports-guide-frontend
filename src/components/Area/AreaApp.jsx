@@ -9,7 +9,7 @@ import { Button } from '../Button/Button';
 import { Popup } from '../Popup/Popup';
 import YandexMap from '../YandexMap/YandexMap';
 
-function AreaApp({ isCheckPopup, onClose, handleAreaApp }) {
+function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 	const data = [
 		{ Country: 'Футбол', id: 1 },
 		{ Country: 'Баскетбол', id: 2 },
@@ -51,7 +51,7 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp }) {
 								placeholder="Введите адрес"
 							/>
 						</label>
-						<YandexMap />
+						<YandexMap areas={areas} areaAppClass="map_area-app" />
 					</div>
 					<div className="foto">
 						<h3 className="foto__title">Фотографии</h3>
@@ -109,5 +109,6 @@ AreaApp.propTypes = {
 	isCheckPopup: PropTypes.bool.isRequired,
 	onClose: PropTypes.bool.isRequired,
 	handleAreaApp: PropTypes.bool.isRequired,
+	areas: PropTypes.arrayOf.isRequired,
 };
 export default AreaApp;
