@@ -38,13 +38,13 @@ export function App() {
 
 	// стейт для серверных ошибок
 	// const [errorMessage, setErrorMessage] = useState('');
-	const [regErrorMessage, setRegErrorMessage] = useState('');
+	// const [regErrorMessage, setRegErrorMessage] = useState('');
 	const [logErrorMessage, setLogErrorMessage] = useState('');
 
 	// создаём стейт для проверки пользователя на авторизацию
 	const [loggedIn, setLoggedIn] = useState(false);
 
-	const [isSucceeded, setIsSucceeded] = useState(false);
+	// const [isSucceeded, setIsSucceeded] = useState(false);
 
 	const [currentUser, setCurrentUser] = useState({});
 	// eslint-disable-next-line no-unused-vars
@@ -108,38 +108,38 @@ export function App() {
 		}
 	};
 
-	const handleRegistration = async (
-		nickname,
-		email,
-		password,
-		passwordConfirmation
-	) => {
-		setRegErrorMessage('');
-		try {
-			const response = await auth.register(
-				nickname,
-				email,
-				password,
-				passwordConfirmation
-			);
-			if (!response || response.statusCode === 400) {
-				setRegErrorMessage(response.message);
-			} else {
-				handleLogIn(response.email, response.password);
-				localStorage.setItem('userEmail', response.email);
-				setIsSucceeded(true);
-				console.log(`email = ${response.email}`);
-				console.log(`Пользователь ${response.email} зарегистрирован`);
-				setOnRegisterPopUpOpen(false);
-				navigate('/', { replace: true });
-			}
-		} catch (err) {
-			console.log(`Ошибка регистрации: ${err}`);
-			setRegErrorMessage(err.message);
-		} finally {
-			setRegErrorMessage('');
-		}
-	};
+	// const handleRegistration = async (
+	// 	nickname,
+	// 	email,
+	// 	password,
+	// 	passwordConfirmation
+	// ) => {
+	// 	setRegErrorMessage('');
+	// 	try {
+	// 		const response = await auth.register(
+	// 			nickname,
+	// 			email,
+	// 			password,
+	// 			passwordConfirmation
+	// 		);
+	// 		if (!response || response.statusCode === 400) {
+	// 			setRegErrorMessage(response.message);
+	// 		} else {
+	// 			handleLogIn(response.email, response.password);
+	// 			localStorage.setItem('userEmail', response.email);
+	// 			setIsSucceeded(true);
+	// 			console.log(`email = ${response.email}`);
+	// 			console.log(`Пользователь ${response.email} зарегистрирован`);
+	// 			setOnRegisterPopUpOpen(false);
+	// 			navigate('/', { replace: true });
+	// 		}
+	// 	} catch (err) {
+	// 		console.log(`Ошибка регистрации: ${err}`);
+	// 		setRegErrorMessage(err.message);
+	// 	} finally {
+	// 		setRegErrorMessage('');
+	// 	}
+	// };
 
 	const handleDeleteAccount = () => {
 		setDeleteAccountPopupOpen(false);
@@ -292,10 +292,10 @@ export function App() {
 				isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
 				onClose={closeAllPopups}
 				toSignInPopUp={handleOnLogInClick}
-				regErrorMessage={regErrorMessage}
-				onRegister={handleRegistration}
+				// regErrorMessage={regErrorMessage}
+				// onRegister={handleRegistration}
 				isInfoTooltipOpen={isInfoTooltipOpen}
-				isSucceeded={isSucceeded}
+				// isSucceeded={isSucceeded}
 			/>
 			<PasswordRecoveryPopUp
 				isPasswordRecoveryPopUpOpen={isPasswordRecoveryPopUpOpen}
