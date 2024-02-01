@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import './AreaApp.scss';
 import { NavLink } from 'react-router-dom';
 import addPictures from '../../images/Camera.svg';
+import foto from '../../images/1b5ff838-4a02-11ed-933f-3a23cf4bb419.1220x600.jpeg';
 import { Button } from '../Button/Button';
 import { Popup } from '../Popup/Popup';
 import YandexMap from '../YandexMap/YandexMap';
@@ -70,6 +71,30 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 									alt="Добавление картинки"
 								/>
 							</label>
+							<div className="foto-file__container">
+								<Button className="button-clouse-foto-file" />
+								<img
+									className="foto-file__add-server"
+									src={foto}
+									alt="Добавление картинки"
+								/>
+							</div>
+							<div className="foto-file__container">
+								<Button className="button-clouse-foto-file" />
+								<img
+									className="foto-file__add-server"
+									src={foto}
+									alt="Добавление картинки"
+								/>
+							</div>
+							<div className="foto-file__container">
+								<Button className="button-clouse-foto-file" />
+								<img
+									className="foto-file__add-server"
+									src={foto}
+									alt="Добавление картинки"
+								/>
+							</div>
 						</div>
 					</div>
 					<div className="app-area">

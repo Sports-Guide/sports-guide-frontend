@@ -163,11 +163,15 @@ $fontsRoboto: 'Roboto';
 }
 
 .foto__container {
-	display: flex;
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	width: 724px;
 	height: 175px;
 	border-radius: 8px;
 	gap: 8px;
+	
+
 }
 
 .foto__file-label {
@@ -187,6 +191,17 @@ $fontsRoboto: 'Roboto';
 }
 .foto-file-img {
 	cursor: pointer;
+}
+
+.foto-file__add-server {
+	position: relative;
+	width: 176px;
+	height: 176px;
+	border-radius: 8px;
+	object-fit: cover;
+	bottom: 19px;
+	
+   
 }
 
 .app-area {

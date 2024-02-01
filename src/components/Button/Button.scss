@@ -111,3 +111,16 @@
 	margin-bottom: 2px;
 	margin-right: 12px;
 }
+
+.button-clouse-foto-file{
+	position: relative;
+	z-index: 1;
+	background-image: url('../../images/button_close_foto.svg');
+	width: 16px;
+	height: 16px;
+	top: 10px;
+	left: 150px;
+	background-color: transparent;
+	padding: 0;
+	cursor: pointer;
+}
