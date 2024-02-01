@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Profile.scss';
-import FormTitle from '../FormTitle/FormTitle';
-import { PersonalData } from './PersonalData';
-import { PasswordData } from './PasswordData';
+import { NavLink, Outlet } from 'react-router-dom';
+// import FormTitle from '../FormTitle/FormTitle';
+// import { PersonalData } from './PersonalData';
+// import { PasswordData } from './PasswordData';
 import { Popup } from '../Popup/Popup';
 
 export function Profile({
-	isPasswordEditing,
+	// isPasswordEditing,
 	// onEditAvatar, // сделаю позже
-	onEditPassword,
+	// onEditPassword,
 	onDelete,
 	onLogOut,
 	isLogoutPopupOpen,
@@ -20,28 +20,19 @@ export function Profile({
 }) {
 	// добавить логику на сравнение полей Никнейм и Почта: если совпадают, поля неактивны
 
-	const [isPasswordMenuOpened, setPasswordMenuOpened] = useState(false);
-	const togglePasswordMenu = () => {
-		setPasswordMenuOpened(!isPasswordMenuOpened);
-	};
+	const linkClass = ({ isActive }) =>
+		isActive
+			? 'profile__menu-link profile__menu-link_active'
+			: 'profile__menu-link profile__menu-link_inactive';
 
 	return (
 		<main className="profile">
 			<section className="profile__container">
 				<nav className="profile__navigation">
 					<div className="profile__menu">
-						<button
-							className={`profile__menu-button ${
-								isPasswordMenuOpened
-									? 'profile__menu-button_inactive'
-									: 'profile__menu-button_active'
-							}`}
-							onClick={togglePasswordMenu}
-							type="button"
-							aria-label="Личные данные"
-						>
+						<NavLink to="/profile" className={linkClass} end>
 							<svg
-								className="profile__menu-button-icon"
+								className="profile__menu-link-icon"
 								alt="a person in circle icon for a personal info field"
 								width="24"
 								height="24"
@@ -55,19 +46,10 @@ export function Profile({
 								/>
 							</svg>
 							Личные данные
-						</button>
-						<button
-							className={`profile__menu-button ${
-								isPasswordMenuOpened
-									? 'profile__menu-button_active'
-									: 'profile__menu-button_inactive'
-							}`}
-							onClick={togglePasswordMenu}
-							type="button"
-							aria-label="Пароль"
-						>
+						</NavLink>
+						<NavLink to="password" className={linkClass}>
 							<svg
-								className="profile__menu-button-icon"
+								className="profile__menu-link-icon"
 								alt="lock icon for a password field"
 								width="24"
 								height="24"
@@ -81,7 +63,7 @@ export function Profile({
 								/>
 							</svg>
 							Пароль
-						</button>
+						</NavLink>
 					</div>
 					<div className="profile__menu">
 						<button
@@ -100,25 +82,7 @@ export function Profile({
 					</div>
 				</nav>
 				<div className="profile__personal-info">
-					{!isPasswordMenuOpened ? (
-						<>
-							<FormTitle
-								label="Личные данные"
-								className="form__title_place_profile"
-							/>
-							<PersonalData
-							// onEditAvatar={onEditAvatar}
-							/>
-						</>
-					) : (
-						<>
-							<FormTitle label="Пароль" className="form__title_place_profile" />
-							<PasswordData
-								onEditPassword={onEditPassword}
-								isPasswordEditing={isPasswordEditing}
-							/>
-						</>
-					)}
+					<Outlet />
 				</div>
 			</section>
 			<Popup
@@ -182,8 +146,8 @@ export function Profile({
 }
 
 Profile.propTypes = {
-	isPasswordEditing: PropTypes.bool.isRequired,
-	onEditPassword: PropTypes.func.isRequired,
+	// isPasswordEditing: PropTypes.bool.isRequired,
+	// onEditPassword: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,
 	isLogoutPopupOpen: PropTypes.bool.isRequired,

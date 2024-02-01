@@ -13,6 +13,8 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { SportsGround } from '../SportsGround/SportsGround';
 import Layuot from '../Layout/Layout';
 import PasswordRecoveryPopUp from '../PasswordRecoveryPopUp/PasswordRecoveryPopUp';
+import { PersonalData } from '../Profile/PersonalData';
+import { PasswordData } from '../Profile/PasswordData';
 
 import * as auth from '../../utils/auth';
 import * as api from '../../utils/MainApi';
@@ -285,8 +287,8 @@ export function App() {
 						path="profile"
 						element={
 							<Profile
-								onEditPassword={handleChangePassword}
-								isPasswordEditing={isPasswordEditing}
+								// onEditPassword={handleChangePassword}
+								// isPasswordEditing={isPasswordEditing}
 								onDelete={handleDeleteAccount}
 								onLogOut={handleLogOut}
 								onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
@@ -296,7 +298,27 @@ export function App() {
 								onClose={closeAllPopups}
 							/>
 						}
-					/>
+					>
+						<Route
+							index
+							element={
+								<PersonalData
+								// onEditAvatar={onEditAvatar}
+
+								// isPersonalDataEditing={isPersonalDataEditing}
+								/>
+							}
+						/>
+						<Route
+							path="password"
+							element={
+								<PasswordData
+									onEditPassword={handleChangePassword}
+									//          isPasswordEditing={isPasswordEditing}
+								/>
+							}
+						/>
+					</Route>
 					<Route path="sports-ground" element={<SportsGround />} />
 
 					<Route path="*" element={<NotFoundPage />} />
