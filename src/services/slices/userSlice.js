@@ -18,7 +18,8 @@ export const initialState = {
 	errorUser: false,
 	errorMessageUser: '',
 	// Сheck User Auth
-	isUserAuth: false,
+	isUserAuth: false, // проверяет авторизован ли юзер
+	isAuthInitialized: false, // отслеживает состояние проверки: авторизован ли юзео
 	// Edit User Data
 	isUserDataEditing: false, // состояние редактирования
 	isLoadingUserData: false, // загрузка/обновление данных
@@ -26,17 +27,22 @@ export const initialState = {
 	errorMessageEditUserData: '',
 };
 
-const authUserSlise = createSlice({
-	name: 'authUser',
+const userSlise = createSlice({
+	name: 'user',
 	initialState,
 	// reducers используется для изменения состояния (напоминает второй аргумент в хуке useState)
 	reducers: {
 		setAuthTrue: (state) => {
 			state.isUserAuth = true;
+			state.isAuthInitialized = true;
 		},
 		setAuthFalse: (state) => {
 			state.isUserAuth = false;
 			state.userData = null;
+			state.isAuthInitialized = true;
+		},
+		setAuthInitializing: (state) => {
+			state.isAuthInitialized = false; // Начинается процесс проверки: авторизован ли юзер
 		},
 		setIsUserDataEditingTrue: (state) => {
 			state.isUserDataEditing = true;
@@ -110,7 +116,8 @@ const authUserSlise = createSlice({
 export const {
 	setAuthTrue,
 	setAuthFalse,
+	setAuthInitializing,
 	setIsUserDataEditingTrue,
 	setIsUserDataEditingFalse,
-} = authUserSlise.actions;
-export default authUserSlise.reducer;
+} = userSlise.actions;
+export default userSlise.reducer;
