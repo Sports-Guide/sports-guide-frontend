@@ -1,6 +1,6 @@
 /* eslint no-console: "off" */
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { checkUserAuth } from '../../services/thunks/checkUserAuthThunk';
@@ -18,6 +18,7 @@ import { PasswordData } from '../Profile/PasswordData';
 
 import * as auth from '../../utils/auth';
 import * as api from '../../utils/MainApi';
+import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
 
 export function App() {
 	const [isPasswordEditing, setIsPasswordEditing] = useState(false);
@@ -53,45 +54,10 @@ export function App() {
 
 	const dispatch = useDispatch();
 
+	const location = useLocation(); // Получение текущего местоположения
 	useEffect(() => {
 		dispatch(checkUserAuth());
-	}, [dispatch]);
-
-	// useEffect(() => {
-	// 	const handleTokenCheck = (token) => {
-	// 		auth
-	// 			.checkToken(token)
-	// 			.then((res) => {
-	// 				if (res) {
-	// 					setUserEmail(res.email);
-	// 					setCurrentUser(res.user);
-	// 					setLoggedIn(true);
-	// 				}
-	// 			})
-	// 			.catch((err) => console.log(err));
-	// 	};
-	// 	const token = localStorage.getItem('token');
-	// 	if (token) {
-	// 		handleTokenCheck(token);
-	// 	}
-	// }, [navigate]);
-
-	// // получаем данные пользователя
-	// useEffect(() => {
-	// 	if (loggedIn) {
-	// 		api
-	// 			.getUserInfo()
-	// 			.then((userData) => {
-	// 				setCurrentUser(userData);
-	// 				JSON.stringify(localStorage.getItem('userData', userData));
-	// 				// console.log(`userData ${JSON.stringify(userData)}`);
-	// 			})
-	// 			.catch((err) => {
-	// 				console.log(`Ошибка при получении данных пользователя: ${err}`);
-	// 				setLoggedIn(false);
-	// 			});
-	// 	}
-	// }, [loggedIn]);
+	}, [dispatch, location]);
 
 	// получаем данные площадок
 	useEffect(() => {
@@ -174,13 +140,6 @@ export function App() {
 			setRegErrorMessage('');
 		}
 	};
-
-	// const handleEditButtonClick = () =>
-	// 	isEditing ? setIsEditing(false) : setIsEditing(true);
-	// const handlePersonalDataEditBtnClick = () =>
-	// 	isPersonalDataEditing
-	// 		? setIsPersonalDataEditing(false)
-	// 		: setIsPersonalDataEditing(true);
 
 	const handleDeleteAccount = () => {
 		setDeleteAccountPopupOpen(false);
@@ -275,40 +234,37 @@ export function App() {
 					<Route
 						path="app-area"
 						element={
-							<AreaApp
-								onClose={closeAllPopups}
-								isCheckPopup={isCheckPopup}
-								handleAreaApp={setIsCheckPopup}
-								areas={areas}
+							<ProtectedOnlyAuth
+								component={
+									<AreaApp
+										onClose={closeAllPopups}
+										isCheckPopup={isCheckPopup}
+										handleAreaApp={setIsCheckPopup}
+										areas={areas}
+									/>
+								}
 							/>
 						}
 					/>
 					<Route
 						path="profile"
 						element={
-							<Profile
-								// onEditPassword={handleChangePassword}
-								// isPasswordEditing={isPasswordEditing}
-								onDelete={handleDeleteAccount}
-								onLogOut={handleLogOut}
-								onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
-								onLogoutPopupOpen={handleLogOutClick}
-								isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
-								isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
-								onClose={closeAllPopups}
+							<ProtectedOnlyAuth
+								component={
+									<Profile
+										onDelete={handleDeleteAccount}
+										onLogOut={handleLogOut}
+										onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
+										onLogoutPopupOpen={handleLogOutClick}
+										isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
+										isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
+										onClose={closeAllPopups}
+									/>
+								}
 							/>
 						}
 					>
-						<Route
-							index
-							element={
-								<PersonalData
-								// onEditAvatar={onEditAvatar}
-
-								// isPersonalDataEditing={isPersonalDataEditing}
-								/>
-							}
-						/>
+						<Route index element={<PersonalData />} />
 						<Route
 							path="password"
 							element={

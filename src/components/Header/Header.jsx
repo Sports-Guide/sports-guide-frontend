@@ -32,7 +32,7 @@ export function Header({ onLogIn }) {
 				<div className="header__buttons">
 					<Button
 						className="button-app"
-						onClick={navigateHome}
+						onClick={isUserAuth ? navigateHome : onLogIn}
 						label="Добавить площадку"
 					/>
 					{isUserAuth ? (
