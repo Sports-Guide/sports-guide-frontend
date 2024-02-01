@@ -7,9 +7,7 @@ import { PasswordData } from './PasswordData';
 import { Popup } from '../Popup/Popup';
 
 export function Profile({
-	isPersonalDataEditing,
 	isPasswordEditing,
-	onEditPersonalData,
 	// onEditAvatar, // сделаю позже
 	onEditPassword,
 	onDelete,
@@ -109,9 +107,7 @@ export function Profile({
 								className="form__title_place_profile"
 							/>
 							<PersonalData
-								// onEditAvatar={onEditAvatar}
-								onEditProfile={onEditPersonalData}
-								isPersonalDataEditing={isPersonalDataEditing}
+							// onEditAvatar={onEditAvatar}
 							/>
 						</>
 					) : (
@@ -187,9 +183,6 @@ export function Profile({
 
 Profile.propTypes = {
 	isPasswordEditing: PropTypes.bool.isRequired,
-	isPersonalDataEditing: PropTypes.bool.isRequired,
-	onEditPersonalData: PropTypes.func.isRequired,
-	// onEditAvatar: PropTypes.func.isRequired,
 	onEditPassword: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,

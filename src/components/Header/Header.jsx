@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Button } from '../Button/Button';
 import { ButtonMap } from '../Button/ButtonMap';
 import logo from '../../images/logo.svg';
+
+import { getIsUserAuth } from '../../services/selectors/userSelector';
 import './Header.scss';
 
-export function Header({ onLogIn, loggedIn }) {
+export function Header({ onLogIn }) {
+	const isUserAuth = useSelector(getIsUserAuth);
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
@@ -31,7 +35,7 @@ export function Header({ onLogIn, loggedIn }) {
 						onClick={navigateHome}
 						label="Добавить площадку"
 					/>
-					{loggedIn ? (
+					{isUserAuth ? (
 						<Button
 							onClick={navigateToPersonalArea}
 							label="Личный кабинет"
@@ -42,7 +46,7 @@ export function Header({ onLogIn, loggedIn }) {
 							className="button-login-site"
 							onClick={onLogIn}
 							type="button"
-							label="Личный кабинет"
+							label="Войти"
 						/>
 					)}
 				</div>
@@ -53,5 +57,5 @@ export function Header({ onLogIn, loggedIn }) {
 
 Header.propTypes = {
 	onLogIn: PropTypes.func.isRequired,
-	loggedIn: PropTypes.bool.isRequired,
+	// loggedIn: PropTypes.bool.isRequired,
 };

@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchLogin, fetchUserInfo } from '../thunks/userThunk';
+import {
+	fetchLogin,
+	fetchUserInfo,
+	fetchEditUserInfo,
+} from '../thunks/userThunk';
 
 // initialState хранит начальное состояние(напоминает первый аргумент в хуке useState)
 export const initialState = {
@@ -15,6 +19,11 @@ export const initialState = {
 	errorMessageUser: '',
 	// Сheck User Auth
 	isUserAuth: false,
+	// Edit User Data
+	isUserDataEditing: false, // состояние редактирования
+	isLoadingUserData: false, // загрузка/обновление данных
+	errorEditUserData: false,
+	errorMessageEditUserData: '',
 };
 
 const authUserSlise = createSlice({
@@ -28,6 +37,12 @@ const authUserSlise = createSlice({
 		setAuthFalse: (state) => {
 			state.isUserAuth = false;
 			state.userData = null;
+		},
+		setIsUserDataEditingTrue: (state) => {
+			state.isUserDataEditing = true;
+		},
+		setIsUserDataEditingFalse: (state) => {
+			state.isUserDataEditing = false;
 		},
 	},
 	// extraReducers используется для изменения состояния при выполнении АПИ запросов(напоминает второй аргумент в хука useState)
@@ -51,6 +66,7 @@ const authUserSlise = createSlice({
 				state.errorLogin = true;
 				state.errorMessageLogin =
 					action.error.message || 'Произошла неизвестная ошибка';
+				console.log(action.error); // вывести описание ошибки
 			})
 			// получение данных пользователя
 			.addCase(fetchUserInfo.fulfilled, (state, action) => {
@@ -67,9 +83,34 @@ const authUserSlise = createSlice({
 				state.errorUser = true;
 				state.errorMessageUser =
 					action.error.message || 'Произошла неизвестная ошибка';
+			})
+			// изменение данных пользователя
+			.addCase(fetchEditUserInfo.fulfilled, (state, action) => {
+				state.userData = action.payload;
+				state.isUserDataEditing = false;
+				state.isLoadingUserData = false;
+				state.errorEditUserData = false;
+				state.errorMessageEditUserData = '';
+			})
+			.addCase(fetchEditUserInfo.pending, (state) => {
+				state.isLoadingUserData = true;
+				state.errorEditUserData = false;
+			})
+			.addCase(fetchEditUserInfo.rejected, (state, action) => {
+				state.isUserDataEditing = false;
+				state.isLoadingUserData = false;
+				state.errorEditUserData = true;
+				state.errorMessageEditUserData =
+					action.error.message ||
+					'Произошла неизвестная ошибка при изменении данных пользователя';
 			});
 	},
 });
 
-export const { setAuthTrue, setAuthFalse } = authUserSlise.actions;
+export const {
+	setAuthTrue,
+	setAuthFalse,
+	setIsUserDataEditingTrue,
+	setIsUserDataEditingFalse,
+} = authUserSlise.actions;
 export default authUserSlise.reducer;

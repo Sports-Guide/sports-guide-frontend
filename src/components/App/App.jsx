@@ -1,7 +1,9 @@
 /* eslint no-console: "off" */
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { checkUserAuth } from '../../services/thunks/checkUserAuthThunk';
 import { Main } from '../Main/Main';
 import { Profile } from '../Profile/Profile';
 import AreaApp from '../Area/AreaApp';
@@ -16,9 +18,7 @@ import * as auth from '../../utils/auth';
 import * as api from '../../utils/MainApi';
 
 export function App() {
-	// const [isEditing, setIsEditing] = useState(false);
 	const [isPasswordEditing, setIsPasswordEditing] = useState(false);
-	const [isPersonalDataEditing, setIsPersonalDataEditing] = useState(false);
 	// стейт для отображения e-mail пользователя
 	// eslint-disable-next-line no-unused-vars
 	const [userEmail, setUserEmail] = useState('');
@@ -49,41 +49,47 @@ export function App() {
 
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		const handleTokenCheck = (token) => {
-			auth
-				.checkToken(token)
-				.then((res) => {
-					if (res) {
-						setUserEmail(res.email);
-						setCurrentUser(res.user);
-						setLoggedIn(true);
-					}
-				})
-				.catch((err) => console.log(err));
-		};
-		const token = localStorage.getItem('token');
-		if (token) {
-			handleTokenCheck(token);
-		}
-	}, [navigate]);
+	const dispatch = useDispatch();
 
-	// получаем данные пользователя
 	useEffect(() => {
-		if (loggedIn) {
-			api
-				.getUserInfo()
-				.then((userData) => {
-					setCurrentUser(userData);
-					JSON.stringify(localStorage.getItem('userData', userData));
-					// console.log(`userData ${JSON.stringify(userData)}`);
-				})
-				.catch((err) => {
-					console.log(`Ошибка при получении данных пользователя: ${err}`);
-					setLoggedIn(false);
-				});
-		}
-	}, [loggedIn]);
+		dispatch(checkUserAuth());
+	}, [dispatch]);
+
+	// useEffect(() => {
+	// 	const handleTokenCheck = (token) => {
+	// 		auth
+	// 			.checkToken(token)
+	// 			.then((res) => {
+	// 				if (res) {
+	// 					setUserEmail(res.email);
+	// 					setCurrentUser(res.user);
+	// 					setLoggedIn(true);
+	// 				}
+	// 			})
+	// 			.catch((err) => console.log(err));
+	// 	};
+	// 	const token = localStorage.getItem('token');
+	// 	if (token) {
+	// 		handleTokenCheck(token);
+	// 	}
+	// }, [navigate]);
+
+	// // получаем данные пользователя
+	// useEffect(() => {
+	// 	if (loggedIn) {
+	// 		api
+	// 			.getUserInfo()
+	// 			.then((userData) => {
+	// 				setCurrentUser(userData);
+	// 				JSON.stringify(localStorage.getItem('userData', userData));
+	// 				// console.log(`userData ${JSON.stringify(userData)}`);
+	// 			})
+	// 			.catch((err) => {
+	// 				console.log(`Ошибка при получении данных пользователя: ${err}`);
+	// 				setLoggedIn(false);
+	// 			});
+	// 	}
+	// }, [loggedIn]);
 
 	// получаем данные площадок
 	useEffect(() => {
@@ -169,10 +175,10 @@ export function App() {
 
 	// const handleEditButtonClick = () =>
 	// 	isEditing ? setIsEditing(false) : setIsEditing(true);
-	const handlePersonalDataEditBtnClick = () =>
-		isPersonalDataEditing
-			? setIsPersonalDataEditing(false)
-			: setIsPersonalDataEditing(true);
+	// const handlePersonalDataEditBtnClick = () =>
+	// 	isPersonalDataEditing
+	// 		? setIsPersonalDataEditing(false)
+	// 		: setIsPersonalDataEditing(true);
 
 	const handleDeleteAccount = () => {
 		setDeleteAccountPopupOpen(false);
@@ -279,9 +285,7 @@ export function App() {
 						path="profile"
 						element={
 							<Profile
-								onEditPersonalData={handlePersonalDataEditBtnClick}
 								onEditPassword={handleChangePassword}
-								isPersonalDataEditing={isPersonalDataEditing}
 								isPasswordEditing={isPasswordEditing}
 								onDelete={handleDeleteAccount}
 								onLogOut={handleLogOut}
