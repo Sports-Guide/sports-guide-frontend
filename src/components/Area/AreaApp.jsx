@@ -42,16 +42,14 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 						/>
 					</div>
 					<div className="location">
-						<label htmlFor="text" className="location__label">
+						<p htmlFor="text" className="location__label">
 							Адрес площадки
-							<input
-								type="text"
-								id="text"
-								className="location__adress"
-								placeholder="Введите адрес"
-							/>
-						</label>
-						<YandexMap areas={areas} areaAppClass="map_area-app" />
+						</p>
+						<YandexMap
+							areas={areas}
+							areaAppClass="map_area-app"
+							placeHolder="Введите адресс"
+						/>
 					</div>
 					<div className="foto">
 						<h3 className="foto__title">Фотографии</h3>

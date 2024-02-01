@@ -119,24 +119,36 @@
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid green;
 
+
+
+	
 	.map__container {
-		width: 1040px;
-		height: 500px;
-		border: 1px solid red;
+		width: 724px;
+		height: 340px;
 	}
 
+
+
 	.map__baloon {
-		border: 1px solid red;
 		width: 150px;
 		height: 150px;
 		background-image: url(../../images/location.png);
 	}
 
 	.map__search-bar {
-		width: 540px;
-		height: 52px;
-		border: 1px solid hotpink;
+		width: 724px;
+		height: 42px;
+		border-radius: 8px;
+		margin-bottom: 10px;
+		border: 1px solid rgba(201, 209, 229, 1);
+	}
+
+	.ymaps-2-1-79-inner-panes{
+		border-radius: 12px;
+	}
+
+	.ymaps-2-1-79-controls__control_toolbar{
+		display: none;
 	}
 }

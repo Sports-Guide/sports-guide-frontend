@@ -10,7 +10,7 @@ import {
 } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 
-function YandexMap({ areas, areaAppClass }) {
+function YandexMap({ areas, areaAppClass, placeHolder }) {
 	const defaultState = {
 		center: [55.751426, 37.618879],
 		zoom: 10,
@@ -41,7 +41,12 @@ function YandexMap({ areas, areaAppClass }) {
 	return (
 		<div className={`map ${areaAppClass}`}>
 			{/* <SearchBar /> */}
-			<input type="text" className="map__search-bar" id="suggest" />
+			<input
+				type="text"
+				className="map__search-bar"
+				id="suggest"
+				placeholder={placeHolder}
+			/>
 			<YMaps
 				query={{
 					ns: 'use-load-option',
