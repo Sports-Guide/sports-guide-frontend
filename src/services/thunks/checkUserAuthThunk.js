@@ -1,4 +1,8 @@
-import { setAuthFalse, setAuthTrue } from '../slices/userSlice';
+import {
+	setAuthFalse,
+	setAuthInitializing,
+	setAuthTrue,
+} from '../slices/userSlice';
 import { fetchRefreshToken, fetchVerifyToken } from './userThunk';
 
 // Тестовый юзер
@@ -6,6 +10,7 @@ import { fetchRefreshToken, fetchVerifyToken } from './userThunk';
 // Iuio77Jk
 
 export const checkUserAuth = () => async (dispatch) => {
+	dispatch(setAuthInitializing()); // устанавливем состояние что начался процесс проверки: авторизован ли пользователь
 	const accessToken = localStorage.getItem('accessToken');
 	if (!accessToken) {
 		dispatch(setAuthFalse());

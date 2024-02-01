@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 // import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import '../Form/Form.scss';
@@ -10,13 +11,13 @@ import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
 import { InfoTooltip } from '../InfoTooltip/InfoTooltip';
+import { fetchRegister } from '../../services/thunks/registerUserThunk';
 
 function Register({
 	isOnRegisterPopUpOpen,
 	onClose,
 	toSignInPopUp,
 	regErrorMessage,
-	onRegister,
 	isInfoTooltipOpen,
 	isSucceeded,
 }) {
@@ -107,6 +108,8 @@ function Register({
 		}
 	};
 
+	const dispatch = useDispatch();
+
 	const onSubmit = (event) => {
 		event.preventDefault();
 		if (
@@ -115,7 +118,9 @@ function Register({
 			!passwordError &&
 			!passwordConfirmationError
 		) {
-			onRegister({ nickname, email, password, passwordConfirmation });
+			dispatch(
+				fetchRegister({ nickname, email, password, passwordConfirmation })
+			);
 			console.log('all good');
 		}
 	};
@@ -287,7 +292,7 @@ Register.propTypes = {
 	onClose: PropTypes.func.isRequired,
 	toSignInPopUp: PropTypes.func.isRequired,
 	regErrorMessage: PropTypes.string.isRequired,
-	onRegister: PropTypes.func.isRequired,
+	// onRegister: PropTypes.func.isRequired,
 	isInfoTooltipOpen: PropTypes.bool.isRequired,
 	isSucceeded: PropTypes.bool.isRequired,
 	// onPasswordRecovery: PropTypes.func.isRequired,
