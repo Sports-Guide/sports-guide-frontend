@@ -81,7 +81,33 @@ function YandexMap({ areas, areaAppClass }) {
 									<img class = "yandex__images" src="https://r4p.org/image/cache/data/msport_new/1-silnyj-dvor-nojabrsk/3_sil_dv/2-max-900.jpg">
 									<div class = "yandex__contetn">
 									<h1 class = "yandex__title" >Спортивная площадка</h1>
-									<p class = "yandex__subtitle">Муниципальное автономное учреждение «Центр спортивных мероприятий и физкультурно-массовой работы» (МАУ "ЦСМ и ФМР")</p>
+									<p class = "yandex__subtitle">Муниципальное автономное учреждение «Центр спортивных мероприятий Муниципальное автономное учреждение «Центр спортивных мероприятийМуниципальное автономное учреждение «Центр спортивных мероприятий </p>
+									<div class = "yandex__categories">
+									<div class = "yandex__category">
+									<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+									<p class = "yandex__small-text">баскетболл</p>
+									</div>
+									<div class = "yandex__category">
+									<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+									<p class = "yandex__small-text">баскетболл</p>
+									</div>
+									<div class = "yandex__category">
+									<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+									<p class = "yandex__small-text">баскетболл</p>
+									</div>
+									<div class = "yandex__category">
+									<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+									<p class = "yandex__small-text">баскетболл</p>
+									</div>
+									<div class = "yandex__category">
+									<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+									<p class = "yandex__small-text">баскетболл</p>
+									</div>
+									<div class = "yandex__category">
+									<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+									<p class = "yandex__small-text">баскетболл</p>
+									</div>
+									</div>
 									</div>
 									</div>
 									`,

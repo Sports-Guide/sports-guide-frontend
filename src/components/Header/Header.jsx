@@ -10,11 +10,11 @@ export function Header({ onLogIn, loggedIn }) {
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
-		navigate('/app-area');
+		navigate('app-area');
 	};
 
 	const navigateToPersonalArea = () => {
-		navigate('/profile');
+		navigate('profile');
 	};
 
 	return (
