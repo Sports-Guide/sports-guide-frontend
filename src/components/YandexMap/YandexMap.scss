@@ -120,15 +120,10 @@
 	flex-direction: column;
 	align-items: center;
 
-
-
-	
 	.map__container {
 		width: 724px;
 		height: 340px;
 	}
-
-
 
 	.map__baloon {
 		width: 150px;
@@ -144,11 +139,11 @@
 		border: 1px solid rgba(201, 209, 229, 1);
 	}
 
-	.ymaps-2-1-79-inner-panes{
+	.ymaps-2-1-79-inner-panes {
 		border-radius: 12px;
 	}
 
-	.ymaps-2-1-79-controls__control_toolbar{
+	.ymaps-2-1-79-controls__control_toolbar {
 		display: none;
 	}
 }
