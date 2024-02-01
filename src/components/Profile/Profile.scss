@@ -3,8 +3,8 @@ $primary-bg-color: #f2f3f7;
 $secondary-bg-color: #fcfcfc;
 $text-color: #0e0e0e;
 $button-bg-color: #1478ff;
-$button-final-color: #F36565;
-$button-secondary-text-color: #737A8E;
+$button-final-color: #f36565;
+$button-secondary-text-color: #737a8e;
 $button-text-color: #fff;
 $button-border-radius: 8px;
 $form-border-color: #aaa;
@@ -68,7 +68,7 @@ $form-border-color: #aaa;
 	gap: 4px;
 }
 
-.profile__menu-button {
+.profile__menu-link {
 	font-family: 'Roboto', sans-serif;
 	display: flex;
 	width: 100%;
@@ -84,17 +84,18 @@ $form-border-color: #aaa;
 	border: none;
 	@include border-radius(8px);
 	cursor: pointer;
+	text-decoration: none;
 }
 
-.profile__menu-button_active {
+.profile__menu-link_active {
 	background-color: $primary-bg-color;
 }
 
-.profile__menu-button_inactive {
+.profile__menu-link_inactive {
 	background-color: transparent;
 }
 
-.profile__menu-button-icon {
+.profile__menu-link-icon {
 	width: 24px;
 	height: 24px;
 	display: flex;

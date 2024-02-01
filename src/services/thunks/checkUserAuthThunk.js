@@ -2,8 +2,8 @@ import { setAuthFalse, setAuthTrue } from '../slices/userSlice';
 import { fetchRefreshToken, fetchVerifyToken } from './userThunk';
 
 // Тестовый юзер
-// testuse769627r@mail.com
-// hgk67Ghs
+// jkcjzkjczlk@gmail.com
+// Iuio77Jk
 
 export const checkUserAuth = () => async (dispatch) => {
 	const accessToken = localStorage.getItem('accessToken');
