@@ -52,25 +52,25 @@
 }
 
 .button-app {
-	width: 204px;
+	width: 188px;
 	height: 36px;
 	border-radius: 8px;
 	background: rgba(20, 120, 255, 1);
 	color: white;
 	font-family: Roboto;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 700;
 	line-height: 20px;
-	letter-spacing: 0em;
-	text-align: left;
 	cursor: pointer;
 	text-decoration: none;
-	text-align: center;
+	outline: none;
+	text-align: end;
 	margin-right: 0;
+	padding: 8px 16px;
 	background-image: url('../../images/btn_plus.svg');
 	background-repeat: no-repeat;
-	background-size: 16px 16px;
-	background-position: 4% 50%;
+	background-size: 11px 11px;
+	background-position: 7% 50%;
 }
 
 .button-add {
@@ -84,32 +84,6 @@
 	height: 44px;
 	@include buttonAdd;
 	padding-right: 20px;
-}
-
-.button-login-site {
-	margin: 0;
-	color: var(--Accent, #1478ff);
-	//styleName: Bold/Button_text;
-	//styleName: Desktop/Subhead_Bold;
-	font-family: Roboto;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 20px;
-	letter-spacing: 0em;
-	text-align: left;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	align-self: center;
-	width: 143px;
-	height: 36px;
-	border-radius: 8px;
-	background: #e5f0ff;
-	border: 0;
-	cursor: pointer;
-	margin-bottom: 2px;
-	margin-right: 12px;
 }
 
 .button-clouse-foto-file {

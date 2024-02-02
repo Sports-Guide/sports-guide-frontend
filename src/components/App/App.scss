@@ -1,14 +1,18 @@
-.app {
-	max-width: 1440px;
-	margin: 0 auto;
-	// border: 1px solid green;
-	background: rgba(242, 243, 247, 1);
-}
-
 * {
 	box-sizing: border-box;
 }
 
-.page-container {
-	max-width: 1440px;
+.app {
+	width: 100vw;
+	min-height: 100vh;
+	margin: 0 auto;
+	background: rgba(242, 243, 247, 1);
+	display: flex;
+	flex-direction: column;
+}
+
+.page__container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 }

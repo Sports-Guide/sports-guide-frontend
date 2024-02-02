@@ -1,36 +1,41 @@
+// Variables
+$primary-text-color: #737A8E;
+$text-centering: center;
+
+@mixin fontStyle {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+}
+
 .footer {
 	background-color: rgba(252, 252, 252, 1);
-	color: #030303;
+	color: $primary-text-color;
 	display: flex;
 	width: 100%;
-	padding: 16px 200px;
-	align-items: center;
+	align-items: $text-centering;
 	gap: 64px;
+	margin-top: auto;
 }
 
 .footer__container {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
-	width: 100%;
+	align-items: $text-centering;
+	width: 1040px;
+    margin: 0 auto;
 }
 
 .footer__copyright {
-	font-family: Roboto;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
+	@include fontStyle;
 	text-align: left;
 }
 
 .footer__nav-link {
-	font-family: Roboto;
-	color: #030303;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
+	@include fontStyle;
+	color: $primary-text-color;
 	text-decoration: none;
 	transition: opacity 0.3s ease;
 }

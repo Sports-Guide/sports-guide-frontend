@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Button } from '../Button/Button';
+import { ButtonLoginSite } from '../Button/ButtonLoginSite';
 import { ButtonMap } from '../Button/ButtonMap';
 import logo from '../../images/logo.svg';
 
@@ -36,18 +37,12 @@ export function Header({ onLogIn }) {
 						label="Добавить площадку"
 					/>
 					{isUserAuth ? (
-						<Button
+						<ButtonLoginSite
 							onClick={navigateToPersonalArea}
-							label="Личный кабинет"
-							className="button-login-site"
+							label="Личный&nbsp;кабинет"
 						/>
 					) : (
-						<Button
-							className="button-login-site"
-							onClick={onLogIn}
-							type="button"
-							label="Войти"
-						/>
+						<ButtonLoginSite onClick={onLogIn} type="button" label="Войти" />
 					)}
 				</div>
 			</div>
