@@ -15,7 +15,7 @@ export const initialState = {
 	errorMessageLogin: '',
 	// User
 	userData: null,
-	userPassword: '',
+	// userPassword: '',
 	isLoadingUser: false,
 	errorUser: false,
 	errorMessageUser: '',
@@ -125,6 +125,7 @@ const userSlise = createSlice({
 			})
 			.addCase(fetchNewPassword.fulfilled, (state, action) => {
 				state.userData = action.payload;
+				// state.userPassword = action.payload;
 				state.isPasswordEditing = false;
 				state.isLoadingPassword = false;
 				state.errorEditPassword = false;

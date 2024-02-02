@@ -2,11 +2,11 @@ import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import {
-	fetchUserInfo,
+	// fetchUserInfo,
 	fetchNewPassword,
 } from '../../services/thunks/userThunk';
 import {
-	getUserInfo,
+	// getUserInfo,
 	getIsPasswordEditing,
 } from '../../services/selectors/userSelector';
 import {
@@ -19,54 +19,56 @@ import FormTitle from '../FormTitle/FormTitle';
 
 export function PasswordData() {
 	const dispatch = useDispatch();
-	const user = useSelector(getUserInfo);
+	// const user = useSelector(getUserInfo);
 	const IsPasswordEditing = useSelector(getIsPasswordEditing);
 
 	const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,25}$/;
 
-	useEffect(() => {
-		dispatch(fetchUserInfo());
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	dispatch(fetchUserInfo());
+	// }, [dispatch]);
 
 	const {
 		formState: { isValid },
 		handleSubmit,
 		control,
 		getValues,
+		reset,
 	} = useForm({ mode: 'onChange' });
 
-	const resetUserDataEditing = useCallback(() => {
+	const resetPasswordDataEditing = useCallback(() => {
 		dispatch(setIsPasswordEditingFalse()); // отключаем режим редактирования при размонтировании компонента (при свиче)
 	}, [dispatch]);
 
 	useEffect(() => {
 		// при каждом рендере вызываем ресет состояния редактирования
 		const cleanup = () => {
-			resetUserDataEditing();
+			resetPasswordDataEditing();
 		};
 
 		return cleanup;
-	}, [resetUserDataEditing]);
+	}, [resetPasswordDataEditing]);
 
 	const onSubmit = () => {
 		const currentPassword = getValues('currentPassword');
 		const newPassword = getValues('newPassword');
-		if (
-			user.currentPassword === currentPassword &&
-			passwordRegEx.test(newPassword)
-		) {
+		if (currentPassword && newPassword) {
 			dispatch(
 				fetchNewPassword({
-					currentPassword,
-					newPassword,
+					current_password: currentPassword,
+					new_password: newPassword,
 				})
 			)
 				.then(() => {
 					dispatch(setIsPasswordEditingFalse());
+					reset();
 				})
 				.catch((err) => {
 					console.log(err);
 				});
+		} else {
+			console.log('Что-то пошло не так при изменении пароля');
+			dispatch(setIsPasswordEditingFalse());
 		}
 	};
 
@@ -101,8 +103,6 @@ export function PasswordData() {
 									message:
 										'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
 								},
-								validate: (value) =>
-									value === getValues('currentPassword') || 'Неверный пароль',
 							}}
 							maxLength={25}
 							required

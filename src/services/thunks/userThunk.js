@@ -104,7 +104,7 @@ const urlChangePassword = `${baseUserURL}/users/set_password/`;
 
 export const fetchNewPassword = createAsyncThunk(
 	'newPassword/post',
-	async ({ currentPassword, newPassword }) => {
+	async ({ current_password: currentPassword, new_password: newPassword }) => {
 		const token = localStorage.getItem('accessToken');
 		await request(urlChangePassword, {
 			method: 'POST',
@@ -114,8 +114,8 @@ export const fetchNewPassword = createAsyncThunk(
 				Authorization: `Bearer ${token}`,
 			},
 			body: JSON.stringify({
-				currentPassword,
-				newPassword,
+				current_password: currentPassword,
+				new_password: newPassword,
 			}),
 		});
 	}

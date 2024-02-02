@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-// import { useLocation } from 'react-router-dom';
 import {
 	fetchUserInfo,
 	fetchEditUserInfo,
@@ -22,22 +21,16 @@ export function PersonalData() {
 	const user = useSelector(getUserInfo);
 	const isUserDataEditing = useSelector(getIsUserDataEditing);
 
-	// const location = useLocation();
-
 	const {
 		register,
 		formState: { errors, isValid },
 		handleSubmit,
-		reset,
+		// reset,
 	} = useForm({ mode: 'onChange' });
 
 	useEffect(() => {
 		dispatch(fetchUserInfo());
 	}, [dispatch]);
-
-	useEffect(() => {
-		reset(user);
-	}, [user, reset]);
 
 	// ресетим состояние редактирования при свиче на другое меню
 	// useCallback запоминает функцию и предотвращает ререндеринг компонентов
