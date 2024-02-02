@@ -57,8 +57,8 @@ export function PasswordData() {
 		) {
 			dispatch(
 				fetchNewPassword({
-					current_passowrd: currentPassword,
-					new_password: newPassword,
+					currentPassword,
+					newPassword,
 				})
 			)
 				.then(() => {
@@ -94,7 +94,7 @@ export function PasswordData() {
 								required: 'Поле не может быть пустым',
 								minLength: {
 									value: 6,
-									message: 'Пароль до лжен быть не менее 6 символов',
+									message: 'Пароль должен быть не менее 6 символов',
 								},
 								pattern: {
 									value: passwordRegEx,
