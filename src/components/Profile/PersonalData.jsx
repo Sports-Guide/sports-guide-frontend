@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
+// import { useLocation } from 'react-router-dom';
 import {
 	fetchUserInfo,
 	fetchEditUserInfo,
@@ -21,6 +22,8 @@ export function PersonalData() {
 	const user = useSelector(getUserInfo);
 	const isUserDataEditing = useSelector(getIsUserDataEditing);
 
+	// const location = useLocation();
+
 	const {
 		register,
 		formState: { errors, isValid },
@@ -35,6 +38,21 @@ export function PersonalData() {
 	useEffect(() => {
 		reset(user);
 	}, [user, reset]);
+
+	// ресетим состояние редактирования при свиче на другое меню
+	// useCallback запоминает функцию и предотвращает ререндеринг компонентов
+	const resetUserDataEditing = useCallback(() => {
+		dispatch(setIsUserDataEditingFalse()); // отключаем режим редактирования при размонтировании компонента (при свиче)
+	}, [dispatch]);
+
+	useEffect(() => {
+		// при каждом рендере вызываем ресет состояния редактирования
+		const cleanup = () => {
+			resetUserDataEditing();
+		};
+
+		return cleanup;
+	}, [resetUserDataEditing]);
 
 	const onSubmit = ({ nickname, email }) => {
 		if (user.nickname !== nickname || user.email !== email) {
@@ -133,7 +151,7 @@ export function PersonalData() {
 						<button
 							className="profile__change-button"
 							type="submit"
-							onClick={() => dispatch(setIsUserDataEditingTrue(false))}
+							// onClick={() => dispatch(setIsUserDataEditingTrue(false))}
 							disabled={!isValid}
 						>
 							{isUserDataEditing ? 'Сохранить изменения' : 'Изменить данные'}

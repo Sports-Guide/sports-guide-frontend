@@ -19,7 +19,7 @@ export function PasswordInputWithValidation({
 }) {
 	const location = useLocation();
 
-	const locationsForButton = ['/profile', '/registration', '/login'];
+	const locationsForButton = ['/profile/password', '/registration', '/login'];
 
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -58,7 +58,7 @@ export function PasswordInputWithValidation({
 				{locationsForButton.includes(location.pathname) ? (
 					<button
 						className={
-							location.pathname === '/profile'
+							location.pathname === '/profile/password'
 								? passwordBtnClassName
 								: loginBtnClassName
 						}

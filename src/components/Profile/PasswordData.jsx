@@ -1,11 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import {
+	fetchUserInfo,
+	fetchNewPassword,
+} from '../../services/thunks/userThunk';
+import {
+	getUserInfo,
+	getIsPasswordEditing,
+} from '../../services/selectors/userSelector';
+import {
+	setIsPasswordEditingTrue,
+	setIsPasswordEditingFalse,
+} from '../../services/slices/userSlice';
 import './PasswordData.scss';
 import { PasswordInputWithValidation } from '../PasswordInputWithValidation/PasswordInputWithValidation';
 import FormTitle from '../FormTitle/FormTitle';
 
-export function PasswordData({ onEditPassword, isPasswordEditing }) {
+export function PasswordData() {
+	const dispatch = useDispatch();
+	const user = useSelector(getUserInfo);
+	const IsPasswordEditing = useSelector(getIsPasswordEditing);
+
+	const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,25}$/;
+
+	useEffect(() => {
+		dispatch(fetchUserInfo());
+	}, [dispatch]);
+
 	const {
 		formState: { isValid },
 		handleSubmit,
@@ -13,11 +35,40 @@ export function PasswordData({ onEditPassword, isPasswordEditing }) {
 		getValues,
 	} = useForm({ mode: 'onChange' });
 
-	const onSubmit = (data) => {
-		onEditPassword(data);
-	};
+	const resetUserDataEditing = useCallback(() => {
+		dispatch(setIsPasswordEditingFalse()); // отключаем режим редактирования при размонтировании компонента (при свиче)
+	}, [dispatch]);
 
-	const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,25}$/;
+	useEffect(() => {
+		// при каждом рендере вызываем ресет состояния редактирования
+		const cleanup = () => {
+			resetUserDataEditing();
+		};
+
+		return cleanup;
+	}, [resetUserDataEditing]);
+
+	const onSubmit = () => {
+		const currentPassword = getValues('currentPassword');
+		const newPassword = getValues('newPassword');
+		if (
+			user.currentPassword === currentPassword &&
+			passwordRegEx.test(newPassword)
+		) {
+			dispatch(
+				fetchNewPassword({
+					current_passowrd: currentPassword,
+					new_password: newPassword,
+				})
+			)
+				.then(() => {
+					dispatch(setIsPasswordEditingFalse());
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	};
 
 	return (
 		<>
@@ -26,7 +77,7 @@ export function PasswordData({ onEditPassword, isPasswordEditing }) {
 				className="form__password-container"
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				{isPasswordEditing && (
+				{IsPasswordEditing && (
 					<>
 						<PasswordInputWithValidation
 							labelClassName="profile-password-label"
@@ -43,15 +94,15 @@ export function PasswordData({ onEditPassword, isPasswordEditing }) {
 								required: 'Поле не может быть пустым',
 								minLength: {
 									value: 6,
-									message: 'Пароль должен быть не менее 6 символов',
+									message: 'Пароль до лжен быть не менее 6 символов',
 								},
 								pattern: {
 									value: passwordRegEx,
 									message:
 										'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
 								},
-								// validate: (value) =>
-								// value === currentUser.currentPassword || 'Неверный текущий пароль',
+								validate: (value) =>
+									value === getValues('currentPassword') || 'Неверный пароль',
 							}}
 							maxLength={25}
 							required
@@ -78,57 +129,28 @@ export function PasswordData({ onEditPassword, isPasswordEditing }) {
 									message:
 										'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
 								},
-							}}
-							maxLength={25}
-						/>
-						<PasswordInputWithValidation
-							labelClassName="profile-password-label"
-							passwordBtnClassName="password-show-hide-btn-profile"
-							label="Подтвердите пароль"
-							htmlFor="confirmPassword"
-							inputClassName="profile-password-input"
-							inputContainerClassName="profile-password-input-container"
-							errorClassName="profile-password-error"
-							name="confirmPassword"
-							id="confirmPassword"
-							control={control}
-							rules={{
-								required: 'Поле не может быть пустым',
-								minLength: {
-									value: 6,
-									message: 'Пароль должен быть не менее 6 символов',
-								},
-								pattern: {
-									value: passwordRegEx,
-									message:
-										'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
-								},
 								validate: (value) =>
-									value === getValues('newPassword') || 'Пароли не совпадают',
+									value !== getValues('currentPassword') || 'Пароли совпадают',
 							}}
 							maxLength={25}
-							required
 						/>
 					</>
 				)}
 				<button
 					className={`form__change-password-button ${
-						isPasswordEditing ? 'has-margin' : 'no-margin'
+						IsPasswordEditing ? 'has-margin' : 'no-margin'
 					}`}
-					type={isPasswordEditing ? 'submit' : 'button'}
-					onClick={onEditPassword}
-					disabled={isPasswordEditing && !isValid}
+					type={IsPasswordEditing ? 'submit' : 'button'}
+					onClick={() => {
+						dispatch(setIsPasswordEditingTrue());
+					}}
+					disabled={IsPasswordEditing && !isValid}
 				>
-					{isPasswordEditing ? 'Сохранить' : 'Изменить пароль'}
+					{IsPasswordEditing ? 'Сохранить' : 'Изменить пароль'}
 				</button>
 			</form>
 		</>
 	);
 }
-
-PasswordData.propTypes = {
-	onEditPassword: PropTypes.func.isRequired,
-	isPasswordEditing: PropTypes.bool.isRequired,
-};
 
 export default PasswordData;

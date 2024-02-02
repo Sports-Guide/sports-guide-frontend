@@ -3,6 +3,7 @@ import {
 	fetchLogin,
 	fetchUserInfo,
 	fetchEditUserInfo,
+	fetchNewPassword,
 } from '../thunks/userThunk';
 
 // initialState хранит начальное состояние(напоминает первый аргумент в хуке useState)
@@ -14,6 +15,7 @@ export const initialState = {
 	errorMessageLogin: '',
 	// User
 	userData: null,
+	userPassword: '',
 	isLoadingUser: false,
 	errorUser: false,
 	errorMessageUser: '',
@@ -25,6 +27,11 @@ export const initialState = {
 	isLoadingUserData: false, // загрузка/обновление данных
 	errorEditUserData: false,
 	errorMessageEditUserData: '',
+	// Edit Password
+	isPasswordEditing: false,
+	isLoadingPassword: false,
+	errorEditPassword: false,
+	errorMessageEditPassword: '',
 };
 
 const userSlise = createSlice({
@@ -49,6 +56,12 @@ const userSlise = createSlice({
 		},
 		setIsUserDataEditingFalse: (state) => {
 			state.isUserDataEditing = false;
+		},
+		setIsPasswordEditingTrue: (state) => {
+			state.isPasswordEditing = true;
+		},
+		setIsPasswordEditingFalse: (state) => {
+			state.isPasswordEditing = false;
 		},
 	},
 	// extraReducers используется для изменения состояния при выполнении АПИ запросов(напоминает второй аргумент в хука useState)
@@ -109,6 +122,25 @@ const userSlise = createSlice({
 				state.errorMessageEditUserData =
 					action.error.message ||
 					'Произошла неизвестная ошибка при изменении данных пользователя';
+			})
+			.addCase(fetchNewPassword.fulfilled, (state, action) => {
+				state.userData = action.payload;
+				state.isPasswordEditing = false;
+				state.isLoadingPassword = false;
+				state.errorEditPassword = false;
+				state.errorMessageEditPassword = '';
+			})
+			.addCase(fetchNewPassword.pending, (state) => {
+				state.isLoadingPassword = true;
+				state.errorEditPassword = false;
+			})
+			.addCase(fetchNewPassword.rejected, (state, action) => {
+				state.isPasswordEditing = false;
+				state.isLoadingPassword = false;
+				state.errorEditPassword = true;
+				state.errorMessageEditPassword =
+					action.error.message ||
+					'Произошла неизвестная ошибка при изменении пароля';
 			});
 	},
 });
@@ -119,5 +151,7 @@ export const {
 	setAuthInitializing,
 	setIsUserDataEditingTrue,
 	setIsUserDataEditingFalse,
+	setIsPasswordEditingTrue,
+	setIsPasswordEditingFalse,
 } = userSlise.actions;
 export default userSlise.reducer;

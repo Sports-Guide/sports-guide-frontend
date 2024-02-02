@@ -21,7 +21,7 @@ import * as api from '../../utils/MainApi';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
 
 export function App() {
-	const [isPasswordEditing, setIsPasswordEditing] = useState(false);
+	// const [isPasswordEditing, setIsPasswordEditing] = useState(false);
 	// стейт для отображения e-mail пользователя
 	// eslint-disable-next-line no-unused-vars
 	const [userEmail, setUserEmail] = useState('');
@@ -178,12 +178,12 @@ export function App() {
 		setOnLogInPopUpOpen(false);
 	};
 
-	const handleChangePassword = () => {
-		if (isPasswordEditing) {
-			setIsPasswordEditing(false);
-		} else setIsPasswordEditing(true);
-		console.log('Пароль изменен');
-	};
+	// const handleChangePassword = () => {
+	// 	if (isPasswordEditing) {
+	// 		setIsPasswordEditing(false);
+	// 	} else setIsPasswordEditing(true);
+	// 	console.log('Пароль изменен');
+	// };
 
 	// функция закрытия всех попапов
 	const closeAllPopups = () => {
@@ -269,8 +269,8 @@ export function App() {
 							path="password"
 							element={
 								<PasswordData
-									onEditPassword={handleChangePassword}
-									//          isPasswordEditing={isPasswordEditing}
+								// onEditPassword={handleChangePassword}
+								//          isPasswordEditing={isPasswordEditing}
 								/>
 							}
 						/>

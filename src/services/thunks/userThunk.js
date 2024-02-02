@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { baseURL, request } from '../../utils/api';
+import { baseUserURL, baseAuthURL, request } from '../../utils/api';
 
 // Авторизация
-const urlLogin = `${baseURL}/jwt/create/`;
+const urlLogin = `${baseAuthURL}/jwt/create/`;
 
 export const fetchLogin = createAsyncThunk(
 	'login/post',
@@ -24,7 +24,7 @@ export const fetchLogin = createAsyncThunk(
 );
 
 // Провера accessToken
-const urlVerifyToken = `${baseURL}/jwt/verify/`;
+const urlVerifyToken = `${baseAuthURL}/jwt/verify/`;
 
 export const fetchVerifyToken = createAsyncThunk(
 	'verifyToken/post',
@@ -43,7 +43,7 @@ export const fetchVerifyToken = createAsyncThunk(
 );
 
 // Обновление accessToken
-const urlRefreshToken = `${baseURL}/jwt/refresh/`;
+const urlRefreshToken = `${baseAuthURL}/jwt/refresh/`;
 
 export const fetchRefreshToken = createAsyncThunk(
 	'refreshToken/post',
@@ -63,7 +63,7 @@ export const fetchRefreshToken = createAsyncThunk(
 );
 
 // Получение данных о пользователе
-const urlUserInfo = `${baseURL}/users/me/`;
+const urlUserInfo = `${baseUserURL}/users/me/`;
 
 export const fetchUserInfo = createAsyncThunk('userInfo/get', async () => {
 	const token = localStorage.getItem('accessToken');
@@ -100,7 +100,7 @@ export const fetchEditUserInfo = createAsyncThunk(
 );
 
 // Изменение пароля
-const urlChangePassword = `${baseURL}/users/set_password/`;
+const urlChangePassword = `${baseUserURL}/users/set_password/`;
 
 export const fetchNewPassword = createAsyncThunk(
 	'newPassword/post',

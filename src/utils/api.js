@@ -1,4 +1,5 @@
-export const baseURL = 'https://sports-map.ru/api/auth';
+export const baseUserURL = 'https://sports-map.ru/api';
+export const baseAuthURL = 'https://sports-map.ru/api/auth';
 
 function checkResponse(res) {
 	const contentType = res.headers.get('content-type');
