@@ -1,5 +1,5 @@
 // Variables
-$primary-text-color: #737A8E;
+$primary-text-color: #737a8e;
 $text-centering: center;
 
 @mixin fontStyle {
@@ -25,7 +25,7 @@ $text-centering: center;
 	justify-content: space-between;
 	align-items: $text-centering;
 	width: 1040px;
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 .footer__copyright {

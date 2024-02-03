@@ -2,7 +2,8 @@
 $primary-bg-color: #f2f3f7;
 $secondary-bg-color: #fcfcfc;
 $text-color: #0e0e0e;
-$button-bg-color: #1478ff;
+$logout-button-text-color: #1478ff;
+$logout-button-bg-color: #E5F0FF;
 $button-final-color: #f36565;
 $button-secondary-text-color: #737a8e;
 $button-text-color: #fff;
@@ -140,8 +141,8 @@ $form-border-color: #aaa;
 .profile__button-logout {
 	height: 44px;
 	padding: 0;
-	color: $button-text-color;
-	background-color: $button-bg-color;
+	color: $logout-button-text-color;
+	background-color: $logout-button-bg-color;
 	@include border-radius(8px);
 }
 
@@ -150,6 +151,7 @@ $form-border-color: #aaa;
 	height: 36px;
 	color: #737a8e;
 	padding: 4px 0 0 0;
+	font-size: 14px;
 }
 
 .button-y {

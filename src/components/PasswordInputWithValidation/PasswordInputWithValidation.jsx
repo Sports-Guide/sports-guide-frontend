@@ -46,11 +46,16 @@ export function PasswordInputWithValidation({
 								type={showPassword ? 'text' : 'password'}
 								autoComplete="off"
 							/>
-							{fieldState?.error && (
+
+							<span className={errorClassName}>
+								{fieldState?.error?.message}
+							</span>
+
+							{/* {fieldState?.error && (
 								<span className={errorClassName}>
 									{fieldState?.error?.message}
 								</span>
-							)}
+							)} */}
 						</>
 					)}
 					rules={rules}

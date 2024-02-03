@@ -1,14 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import {
-	// fetchUserInfo,
-	fetchNewPassword,
-} from '../../services/thunks/userThunk';
-import {
-	// getUserInfo,
-	getIsPasswordEditing,
-} from '../../services/selectors/userSelector';
+import { fetchNewPassword } from '../../services/thunks/userThunk';
+import { getIsPasswordEditing } from '../../services/selectors/userSelector';
 import {
 	setIsPasswordEditingTrue,
 	setIsPasswordEditingFalse,
@@ -19,14 +13,9 @@ import FormTitle from '../FormTitle/FormTitle';
 
 export function PasswordData() {
 	const dispatch = useDispatch();
-	// const user = useSelector(getUserInfo);
 	const IsPasswordEditing = useSelector(getIsPasswordEditing);
 
 	const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,25}$/;
-
-	// useEffect(() => {
-	// 	dispatch(fetchUserInfo());
-	// }, [dispatch]);
 
 	const {
 		formState: { isValid },
@@ -79,7 +68,7 @@ export function PasswordData() {
 				className="form__password-container"
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				{IsPasswordEditing && (
+				{IsPasswordEditing ? (
 					<>
 						<PasswordInputWithValidation
 							labelClassName="profile-password-label"
@@ -101,7 +90,8 @@ export function PasswordData() {
 								pattern: {
 									value: passwordRegEx,
 									message:
-										'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
+										// 'Пароль должен содержать латинские буквы в верхнем и нижнем регистре, может содержать цифры и другие символы',
+										'Пароль должен: латинские буквы (верхний и нижний регистр), цифры, другие символы.',
 								},
 							}}
 							maxLength={25}
@@ -134,20 +124,38 @@ export function PasswordData() {
 							}}
 							maxLength={25}
 						/>
+						<div className="profile__pass-button-container">
+							<button
+								className="form__change-password-button"
+								type="submit"
+								onClick={() => {
+									dispatch(setIsPasswordEditingTrue());
+								}}
+								disabled={!isValid}
+							>
+								Сохранить
+							</button>
+							<button
+								className="profile__cancel-button"
+								type="button"
+								onClick={() => dispatch(setIsPasswordEditingFalse())}
+							>
+								Отмена
+							</button>
+						</div>
 					</>
+				) : (
+					<button
+						className="form__change-password-button no-margin"
+						type="button"
+						onClick={() => {
+							dispatch(setIsPasswordEditingTrue());
+						}}
+						disabled={!isValid}
+					>
+						Изменить
+					</button>
 				)}
-				<button
-					className={`form__change-password-button ${
-						IsPasswordEditing ? 'has-margin' : 'no-margin'
-					}`}
-					type={IsPasswordEditing ? 'submit' : 'button'}
-					onClick={() => {
-						dispatch(setIsPasswordEditingTrue());
-					}}
-					disabled={IsPasswordEditing && !isValid}
-				>
-					{IsPasswordEditing ? 'Сохранить' : 'Изменить пароль'}
-				</button>
 			</form>
 		</>
 	);

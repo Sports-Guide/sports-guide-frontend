@@ -32,14 +32,16 @@
 .header__title {
 	margin: 0;
 	color: var(--Primary-Black-light, #515151);
-	/*Bold/Logo_text*/font-family: Roboto Flex;
+	/*Bold/Logo_text*/
+	font-family: Roboto Flex;
 	font-size: 20px;
 	font-style: normal;
 	transform: skewX(-5deg);
 	font-weight: 750;
 	// font-weight: 600; было, подгонка под макет
 	line-height: 28px;
-	/*140%*/text-transform: uppercase;
+	/*140%*/
+	text-transform: uppercase;
 	-webkit-transform: skewX(-5deg);
 	-moz-transform: skewX(-5deg);
 	-ms-transform: skewX(-5deg);
