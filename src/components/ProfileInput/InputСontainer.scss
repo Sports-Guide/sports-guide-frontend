@@ -1,0 +1,41 @@
+.input__container {
+	display: flex;
+	flex-direction: column;
+}
+
+.input__label {
+	color: var(--Primary-Black-light, #515151);
+	font-variant-numeric: slashed-zero;
+	font-family: Roboto;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 20px;
+	text-align: left;
+}
+
+.input__error {
+	font-family: Roboto;
+	padding: 1px 0 12px;
+	max-height: 32px;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	text-align: left;
+	color: #f92e2e;
+}
+
+.email-input {
+	margin: 0;
+	margin-top: 4px;
+	padding: 11px 0 11px 17px;
+	display: flex;
+	width: 425px;
+	border: 1px solid #c9d1e5;
+	align-items: flex-start;
+	border-radius: var(--xs, 8px);
+}
+
+.input:focus {
+	outline: 1px solid var(--Accent, #1478ff);
+}

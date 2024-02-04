@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
-import { Field, ErrorMessage } from 'formik'; // https://formik.org/ - документация библиотеки formik
+import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import './InputEmail.scss';
+import { InputСontainer } from './InputСontainer';
 
 export function InputEmail() {
 	const validateEmail = useCallback((value) => {
@@ -17,23 +18,15 @@ export function InputEmail() {
 	}, []);
 
 	return (
-		<div className="email-input__container">
-			<label htmlFor="Email" className="email-input__label">
-				E-mail
-				<Field
-					id="Email"
-					type="email"
-					name="email"
-					className="email-input"
-					validate={validateEmail}
-				/>
-			</label>
-			<ErrorMessage
-				className="email-input__error"
-				component="span"
+		<InputСontainer labelText="E-mail" id="Email" name="email">
+			<Field
+				id="Email"
+				type="email"
 				name="email"
+				className="email-input"
+				validate={validateEmail}
 			/>
-		</div>
+		</InputСontainer>
 	);
 }
 
