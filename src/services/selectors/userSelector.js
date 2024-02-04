@@ -6,3 +6,6 @@ export const getIsPasswordEditing = (state) => state.user.isPasswordEditing;
 export const getAuthInitializationStatus = (state) =>
 	state.user.isAuthInitialized;
 // прописать ошибки для инпутов
+
+export const getIsErrorLogin = (state) => state.user.errorLogin;
+export const getErrorMessageLogin = (state) => state.user.errorMessageLogin;

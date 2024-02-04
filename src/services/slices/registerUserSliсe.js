@@ -8,7 +8,7 @@ export const initialState = {
 	errorMessageRegister: '',
 };
 
-const registerUserSlise = createSlice({
+const registerUserSlice = createSlice({
 	name: 'registerUser',
 	initialState,
 	extraReducers: (builder) => {
@@ -33,4 +33,4 @@ const registerUserSlise = createSlice({
 	},
 });
 
-export default registerUserSlise.reducer;
+export default registerUserSlice.reducer;
