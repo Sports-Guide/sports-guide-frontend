@@ -12,14 +12,14 @@ import {
 	// 	getIsLogin,
 } from '../../services/selectors/userSelector';
 import { ButtonOnRegister } from '../Button/ButtonOnRegister';
-import { InputEmail } from '../ProfileInputs/InputEmail';
-import { InputPassword } from '../ProfileInputs/InputPassword';
-import { InputCheckbox } from '../ProfileInputs/InputCheckbox';
+import InputEmail from '../ProfileInputs/InputEmail';
+import InputPassword from '../ProfileInputs/InputPassword';
+import InputCheckbox from '../ProfileInputs/InputCheckbox';
 // import { closeModal, openModal } from '../../services/slices/modalSlice';
 import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
 // import { clearLoginError } from '../../services/slices/userSlice';
 
-function FormLogin() {
+export default function FormLogin() {
 	const dispatch = useDispatch();
 	const errorFetchLogin = useSelector(getErrorMessageLogin);
 	// const isLogin = useSelector(getIsLogin);
@@ -63,7 +63,7 @@ function FormLogin() {
 						<InputEmail />
 						<InputPassword labelText="Пароль" inputId="Password" />
 						<div className="login-form__down_group">
-							<InputCheckbox labelText="Запомнить меня" />
+							<InputCheckbox inputId="RememberMe">Запомнить меня</InputCheckbox>
 							<ButtonOnPasswordRecovery
 								// onClick={() => dispatch(openModal('passwordRecovery'))}
 								label="Забыли пароль?"
@@ -94,5 +94,3 @@ function FormLogin() {
 		</div>
 	);
 }
-
-export default FormLogin;

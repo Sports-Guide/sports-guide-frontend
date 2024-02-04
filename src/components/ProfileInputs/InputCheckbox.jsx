@@ -2,24 +2,23 @@ import PropTypes from 'prop-types';
 import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import './InputCheckbox.scss';
 
-export function InputCheckbox({ labelText }) {
+export default function InputCheckbox({ inputId, children }) {
 	return (
 		<div className="checkbox__container">
-			<label htmlFor="rememberMe" className="checkbox__label">
+			<label htmlFor={inputId} className="checkbox__label">
 				<Field
-					id="rememberMe"
+					id={inputId}
 					type="checkbox"
-					name="rememberMe"
+					name={inputId}
 					className="checkbox__input"
 				/>
-				{labelText}
+				{children}
 			</label>
 		</div>
 	);
 }
 
-export default InputCheckbox;
-
 InputCheckbox.propTypes = {
-	labelText: PropTypes.string.isRequired,
+	inputId: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
 };

@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import './InputContainer.scss';
-import { InputContainer } from './InputContainer';
+import InputContainer from './InputContainer';
 
-export function InputNickname() {
+export default function InputNickname() {
 	const validateNickname = useCallback((value) => {
 		if (!value) {
 			return 'Поле не может быть пустым';
@@ -31,5 +31,3 @@ export function InputNickname() {
 		</InputContainer>
 	);
 }
-
-export default InputNickname;

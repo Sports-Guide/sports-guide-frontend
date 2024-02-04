@@ -19,7 +19,6 @@ import { PasswordData } from '../Profile/PasswordData';
 // import * as auth from '../../utils/auth';
 import * as api from '../../utils/MainApi';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
-import FormLogin from '../Forms/FormLogin';
 
 export function App() {
 	// стейт для отображения e-mail пользователя
@@ -201,7 +200,6 @@ export function App() {
 					<Route path="sports-ground" element={<SportsGround />} />
 
 					<Route path="*" element={<NotFoundPage />} />
-					<Route path="/login" element={<FormLogin />} />
 				</Route>
 			</Routes>
 			<Login

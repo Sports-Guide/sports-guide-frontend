@@ -1,4 +1,5 @@
 .checkbox__container {
+	height: 44px;
 	margin: 0;
 	display: flex;
 	justify-content: space-between;
@@ -15,6 +16,7 @@
 	line-height: 16px;
 	display: flex;
 	align-items: start;
+	text-align: justify;
 }
 
 .checkbox__input {

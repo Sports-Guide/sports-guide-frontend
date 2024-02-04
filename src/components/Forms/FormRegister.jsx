@@ -1,53 +1,41 @@
 import { Formik, Form } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import { useDispatch, useSelector } from 'react-redux';
-import './FormLogin.scss';
-import React, {
-	useCallback,
-	//  useEffect
-} from 'react';
-import { fetchLogin } from '../../services/thunks/userThunk';
+import './FormRegister.scss';
+import React, { useCallback } from 'react';
 import { Button } from '../Button/Button';
-import {
-	getErrorMessageLogin,
-	// 	getIsLogin,
-} from '../../services/selectors/userSelector';
-import { ButtonOnRegister } from '../Button/ButtonOnRegister';
-import { InputEmail } from '../ProfileInputs/InputEmail';
-import { InputPassword } from '../ProfileInputs/InputPassword';
-// import { closeModal, openModal } from '../../services/slices/modalSlice';
-// import { CheckboxRememberMe } from '../NewInput/CheckboxRememberMe';
-// import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
-// import { clearLoginError } from '../../services/slices/userSlice';
+import InputEmail from '../ProfileInputs/InputEmail';
+import InputPassword from '../ProfileInputs/InputPassword';
+import InputNickname from '../ProfileInputs/InputNickname';
+import InputCheckbox from '../ProfileInputs/InputCheckbox';
+import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
+import { fetchRegister } from '../../services/thunks/registerUserThunk';
 
 export default function FormRegister() {
 	const dispatch = useDispatch();
-	const errorFetchLogin = useSelector(getErrorMessageLogin);
-	// const isLogin = useSelector(getIsLogin);
-	// const isOpenModal = useSelector((state) => state.modal.isOpen);
-	// console.log(`isOpenModal ${isOpenModal}`);
+	const errorMessageRegister = useSelector(
+		(state) => state.registerUser.errorMessageRegister
+	);
 
 	const handleSubmit = useCallback(
-		(values, { resetForm }) => {
-			dispatch(fetchLogin({ email: values.Email, password: values.Password }));
-			resetForm();
+		(values) => {
+			dispatch(
+				fetchRegister({
+					nickname: values.Nickname,
+					email: values.Email,
+					password: values.Password,
+					passwordConfirmation: values.PasswordRepeat,
+				})
+			);
 			// .then(() => {
-			// 	if (isLogin) {
-			// 		resetForm();
-			// 		dispatch(closeModal());
+			// 	if (isRegister) {
 			// 	}
 			// });
 		},
-		[
-			dispatch,
-			// isLogin
-		]
+		[dispatch]
 	);
 
 	const validate = (values) => {
 		const errors = {};
-		if (!values.PasswordRepeat) {
-			errors.passwordRepeat = 'Подтвердите пароль';
-		}
 		if (values.Password !== values.PasswordRepeat) {
 			errors.PasswordRepeat = 'Пароли не совпадают';
 		}
@@ -55,64 +43,57 @@ export default function FormRegister() {
 		return errors;
 	};
 
-	// useEffect(() => {
-	// 	if (!isOpenModal) {
-	// 		dispatch(clearLoginError());
-	// 	}
-	// }, [isOpenModal, dispatch]);
-
 	return (
-		<>
+		<div className="register-form__container">
 			<Formik
 				initialValues={{
+					Nickname: '',
 					Email: '',
 					Password: '',
 					PasswordRepeat: '',
-					RememberMe: false,
+					AgreeWithPolitiks: false,
 				}}
 				onSubmit={handleSubmit}
 				validate={validate}
 			>
-				{(errors, touched) => (
-					<Form noValidate className="popup__login-form">
+				{() => (
+					<Form noValidate className="register-form">
+						<InputNickname />
 						<InputEmail />
 						<InputPassword labelText="Пароль" inputId="Password" />
 						<InputPassword
 							labelText="Повторите пароль"
 							inputId="PasswordRepeat"
 						/>
-						{errors.passwordRepeat && touched.passwordRepeat && (
-							<div className="input__error">{errors.passwordRepeat}</div>
-						)}
-						{/* <div className="popup__login-form-down_group">
-							<CheckboxRememberMe />
-							<ButtonOnPasswordRecovery
-								onClick={() => dispatch(openModal('passwordRecovery'))}
-								label="Забыли пароль?"
-								type="button"
-								disabled={false}
-							/>
-						</div> */}
-						<span className="popup__form-server-error">
-							{errorFetchLogin || ''}
+						<InputCheckbox inputId="AgreeWithPolitiks">
+							<span>
+								Я соглашаюсь с{' '}
+								<a href="/politika" className="register-form__link-politiks">
+									Политикой обработки персональных данных
+								</a>
+							</span>
+						</InputCheckbox>
+
+						<span className="register-form__server-error">
+							{errorMessageRegister || ''}
 						</span>
 						<Button
-							className="popup__login-form-button-signin"
+							className="register-form__button-register"
 							type="submit"
-							label="Войти"
+							label="Зарегистрироваться"
 						/>
 					</Form>
 				)}
 			</Formik>
-			<p className="popup__login-form-paragraph">
-				Нет аккаунта?
-				<ButtonOnRegister
-					// onClick={() => dispatch(openModal('register'))}
-					label="Зарегистрироваться"
+			<p className="register-form__paragraph">
+				Уже есть аккаунт?
+				<ButtonOnLoginPopUp
+					// onClick={() => dispatch(openModal('login'))}
+					label="Войти"
 					type="button"
 					disabled={false}
 				/>
 			</p>
-		</>
+		</div>
 	);
 }

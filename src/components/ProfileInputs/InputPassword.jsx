@@ -2,11 +2,10 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import './InputContainer.scss';
 import './InputPassword.scss';
-import { Field } from 'formik';
-import { InputContainer } from './InputContainer';
-// https://formik.org/ - документация библиотеки formik
+import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
+import InputContainer from './InputContainer';
 
-export function InputPassword({ labelText, inputId }) {
+export default function InputPassword({ labelText, inputId }) {
 	const [showPassword, setShowPassword] = useState(false);
 
 	// Функция для переключения отображения пароля
@@ -51,8 +50,6 @@ export function InputPassword({ labelText, inputId }) {
 		</InputContainer>
 	);
 }
-
-export default InputPassword;
 
 InputPassword.propTypes = {
 	labelText: PropTypes.string.isRequired,

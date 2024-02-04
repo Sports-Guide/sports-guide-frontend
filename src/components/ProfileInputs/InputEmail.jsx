@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import './InputContainer.scss';
-import { InputContainer } from './InputContainer';
+import InputContainer from './InputContainer';
 
-export function InputEmail() {
+export default function InputEmail() {
 	const validateEmail = useCallback((value) => {
 		if (!value) {
 			return 'Поле не может быть пустым';
@@ -29,5 +29,3 @@ export function InputEmail() {
 		</InputContainer>
 	);
 }
-
-export default InputEmail;
