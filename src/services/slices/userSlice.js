@@ -34,7 +34,7 @@ export const initialState = {
 	errorMessageEditPassword: '',
 };
 
-const userSlise = createSlice({
+const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	// reducers используется для изменения состояния (напоминает второй аргумент в хуке useState)
@@ -154,5 +154,5 @@ export const {
 	setIsUserDataEditingFalse,
 	setIsPasswordEditingTrue,
 	setIsPasswordEditingFalse,
-} = userSlise.actions;
-export default userSlise.reducer;
+} = userSlice.actions;
+export default userSlice.reducer;

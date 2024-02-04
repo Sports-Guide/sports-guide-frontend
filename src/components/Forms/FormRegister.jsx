@@ -19,7 +19,7 @@ import { InputPassword } from '../ProfileInputs/InputPassword';
 // import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
 // import { clearLoginError } from '../../services/slices/userSlice';
 
-function FormLogin() {
+export default function FormRegister() {
 	const dispatch = useDispatch();
 	const errorFetchLogin = useSelector(getErrorMessageLogin);
 	// const isLogin = useSelector(getIsLogin);
@@ -116,5 +116,3 @@ function FormLogin() {
 		</>
 	);
 }
-
-export default FormLogin;

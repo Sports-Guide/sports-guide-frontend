@@ -14,12 +14,12 @@ import {
 import { ButtonOnRegister } from '../Button/ButtonOnRegister';
 import { InputEmail } from '../ProfileInputs/InputEmail';
 import { InputPassword } from '../ProfileInputs/InputPassword';
-import { InputCheckbox } from '../ProfileInputs/InputCheckbox';
 // import { closeModal, openModal } from '../../services/slices/modalSlice';
-import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
+// import { CheckboxRememberMe } from '../NewInput/CheckboxRememberMe';
+// import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
 // import { clearLoginError } from '../../services/slices/userSlice';
 
-function FormLogin() {
+export default function FormPasswordRecovery() {
 	const dispatch = useDispatch();
 	const errorFetchLogin = useSelector(getErrorMessageLogin);
 	// const isLogin = useSelector(getIsLogin);
@@ -27,8 +27,9 @@ function FormLogin() {
 	// console.log(`isOpenModal ${isOpenModal}`);
 
 	const handleSubmit = useCallback(
-		(values) => {
+		(values, { resetForm }) => {
 			dispatch(fetchLogin({ email: values.Email, password: values.Password }));
+			resetForm();
 			// .then(() => {
 			// 	if (isLogin) {
 			// 		resetForm();
@@ -42,6 +43,18 @@ function FormLogin() {
 		]
 	);
 
+	const validate = (values) => {
+		const errors = {};
+		if (!values.PasswordRepeat) {
+			errors.passwordRepeat = 'Подтвердите пароль';
+		}
+		if (values.Password !== values.PasswordRepeat) {
+			errors.PasswordRepeat = 'Пароли не совпадают';
+		}
+
+		return errors;
+	};
+
 	// useEffect(() => {
 	// 	if (!isOpenModal) {
 	// 		dispatch(clearLoginError());
@@ -49,40 +62,49 @@ function FormLogin() {
 	// }, [isOpenModal, dispatch]);
 
 	return (
-		<div className="login-form__container">
+		<>
 			<Formik
 				initialValues={{
 					Email: '',
 					Password: '',
+					PasswordRepeat: '',
 					RememberMe: false,
 				}}
 				onSubmit={handleSubmit}
+				validate={validate}
 			>
-				{() => (
-					<Form noValidate className="login-form">
+				{(errors, touched) => (
+					<Form noValidate className="popup__login-form">
 						<InputEmail />
 						<InputPassword labelText="Пароль" inputId="Password" />
-						<div className="login-form__down_group">
-							<InputCheckbox labelText="Запомнить меня" />
+						<InputPassword
+							labelText="Повторите пароль"
+							inputId="PasswordRepeat"
+						/>
+						{errors.passwordRepeat && touched.passwordRepeat && (
+							<div className="input__error">{errors.passwordRepeat}</div>
+						)}
+						{/* <div className="popup__login-form-down_group">
+							<CheckboxRememberMe />
 							<ButtonOnPasswordRecovery
-								// onClick={() => dispatch(openModal('passwordRecovery'))}
+								onClick={() => dispatch(openModal('passwordRecovery'))}
 								label="Забыли пароль?"
 								type="button"
 								disabled={false}
 							/>
-						</div>
-						<span className="login-form__server-error">
+						</div> */}
+						<span className="popup__form-server-error">
 							{errorFetchLogin || ''}
 						</span>
 						<Button
-							className="login-form__button-signin"
+							className="popup__login-form-button-signin"
 							type="submit"
 							label="Войти"
 						/>
 					</Form>
 				)}
 			</Formik>
-			<p className="login-form__paragraph">
+			<p className="popup__login-form-paragraph">
 				Нет аккаунта?
 				<ButtonOnRegister
 					// onClick={() => dispatch(openModal('register'))}
@@ -91,8 +113,6 @@ function FormLogin() {
 					disabled={false}
 				/>
 			</p>
-		</div>
+		</>
 	);
 }
-
-export default FormLogin;
