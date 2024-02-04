@@ -8,6 +8,7 @@
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
+		"formik": "^2.4.5",
 		"leaflet": "^1.9.4",
 		"leaflet-control-geocoder": "^2.4.0",
 		"leaflet-geosearch": "^3.11.0",
@@ -66,6 +67,28 @@
 				"error",
 				{
 					"props": false
+				}
+			],
+			"jsx-a11y/label-has-associated-control": [
+				"error",
+				{
+					"required": {
+						"some": [
+							"nesting",
+							"id"
+						]
+					}
+				}
+			],
+			"jsx-a11y/label-has-for": [
+				"error",
+				{
+					"required": {
+						"some": [
+							"nesting",
+							"id"
+						]
+					}
 				}
 			]
 		},
