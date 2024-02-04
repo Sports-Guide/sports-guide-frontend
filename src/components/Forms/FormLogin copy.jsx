@@ -73,10 +73,17 @@ function FormLogin() {
 				onSubmit={handleSubmit}
 				validate={validate}
 			>
-				{() => (
+				{(errors, touched) => (
 					<Form noValidate className="popup__login-form">
 						<InputEmail />
 						<InputPassword labelText="Пароль" inputId="Password" />
+						<InputPassword
+							labelText="Повторите пароль"
+							inputId="PasswordRepeat"
+						/>
+						{errors.passwordRepeat && touched.passwordRepeat && (
+							<div className="input__error">{errors.passwordRepeat}</div>
+						)}
 						{/* <div className="popup__login-form-down_group">
 							<CheckboxRememberMe />
 							<ButtonOnPasswordRecovery

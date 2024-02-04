@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
-import { Field, ErrorMessage } from 'formik'; // https://formik.org/ - документация библиотеки formik
-import './InputNickname.scss';
+import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
+import './InputContainer.scss';
+import { InputContainer } from './InputContainer';
 
 export function InputNickname() {
 	const validateNickname = useCallback((value) => {
@@ -18,24 +19,16 @@ export function InputNickname() {
 	}, []);
 
 	return (
-		<div className="nickname-input__container">
-			<label htmlFor="Nickname" className="nickname-input__label">
-				Никнейм
-				<Field
-					id="Nickname"
-					type="text"
-					name="nickname"
-					className="nickname-input"
-					validate={validateNickname}
-					maxLength={20}
-				/>
-			</label>
-			<ErrorMessage
-				className="nickname-input__error"
-				component="span"
-				name="nickname"
+		<InputContainer labelText="Никнейм" inputId="Nickname">
+			<Field
+				id="Nickname"
+				type="text"
+				name="Nickname"
+				className="input"
+				validate={validateNickname}
+				maxLength={20}
 			/>
-		</div>
+		</InputContainer>
 	);
 }
 

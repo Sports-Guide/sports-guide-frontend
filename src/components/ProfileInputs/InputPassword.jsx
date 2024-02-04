@@ -1,10 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
+import './InputContainer.scss';
 import './InputPassword.scss';
-import { Field, ErrorMessage } from 'formik';
+import { Field } from 'formik';
+import { InputContainer } from './InputContainer';
 // https://formik.org/ - документация библиотеки formik
 
-export function InputPassword({ passwordRepeat }) {
+export function InputPassword({ labelText, inputId }) {
 	const [showPassword, setShowPassword] = useState(false);
 
 	// Функция для переключения отображения пароля
@@ -29,46 +31,32 @@ export function InputPassword({ passwordRepeat }) {
 	}, []);
 
 	return (
-		<div className="password-input__container">
-			<label
-				htmlFor={passwordRepeat ? 'RepeatPassword' : 'Password'}
-				className="password-input__label"
-			>
-				{passwordRepeat ? 'Повторите пароль' : 'Пароль'}
-				<div>
-					<Field
-						id={passwordRepeat ? 'RepeatPassword' : 'Password'}
-						type={showPassword ? 'text' : 'password'}
-						name={passwordRepeat ? 'repeatPassword' : 'password'}
-						className="password-input"
-						validate={validatePassword}
-						maxLength={50}
-					/>
-					<button
-						className="password-input__show-hide-btn"
-						type="button"
-						onClick={togglePasswordVisibility}
-						aria-label="show-hide-password"
-					/>
-				</div>
-			</label>
-			<ErrorMessage
-				className="password-input__error"
-				component="span"
-				name={passwordRepeat ? 'repeatPassword' : 'password'}
-			/>
-		</div>
+		<InputContainer labelText={labelText} inputId={inputId}>
+			<div className="password__container">
+				<Field
+					id={inputId}
+					type={showPassword ? 'text' : 'password'}
+					name={inputId}
+					className="input"
+					validate={validatePassword}
+					maxLength={50}
+				/>
+				<button
+					className="password__show-hide-btn"
+					type="button"
+					onClick={togglePasswordVisibility}
+					aria-label="show-hide-password"
+				/>
+			</div>
+		</InputContainer>
 	);
 }
 
 export default InputPassword;
 
 InputPassword.propTypes = {
-	passwordRepeat: PropTypes.bool,
-};
-
-InputPassword.defaultProps = {
-	passwordRepeat: false,
+	labelText: PropTypes.string.isRequired,
+	inputId: PropTypes.string.isRequired,
 };
 
 // Альтернативная функция проверки
