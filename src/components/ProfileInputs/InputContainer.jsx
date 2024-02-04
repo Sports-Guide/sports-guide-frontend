@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { ErrorMessage } from 'formik'; // https://formik.org/ - документация библиотеки formik
-import './InputСontainer.scss';
+import './InputContainer.scss';
 
-export function InputСontainer({ labelText, id, name, children }) {
+export function InputContainer({ labelText, id, name, children }) {
 	return (
 		<div className="input__container">
 			<label htmlFor={id} className="input__label">
@@ -14,9 +14,9 @@ export function InputСontainer({ labelText, id, name, children }) {
 	);
 }
 
-export default InputСontainer;
+export default InputContainer;
 
-InputСontainer.propTypes = {
+InputContainer.propTypes = {
 	labelText: PropTypes.string.isRequired,
 	id: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
