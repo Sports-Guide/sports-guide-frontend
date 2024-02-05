@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Multiselect from 'multiselect-react-dropdown';
 import PropTypes from 'prop-types';
 import './AreaApp.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import addPictures from '../../images/Camera.svg';
-import foto from '../../images/1b5ff838-4a02-11ed-933f-3a23cf4bb419.1220x600.jpeg';
+
 import { Button } from '../Button/Button';
 import { Popup } from '../Popup/Popup';
 import YandexMap from '../YandexMap/YandexMap';
@@ -17,12 +17,41 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 		{ Country: 'Волейбол', id: 3 },
 		{ Country: 'Каток', id: 4 },
 	];
+
 	const [options] = useState(data);
+
+	const navigate = useNavigate();
+
+	// добавление фотографий
+	const [addFoto, setAddFoto] = useState([]);
+	// const [addFotoArray,setAddFotoArray]= useState([]);
+
+	const navigateToMain = () => {
+		navigate('/');
+	};
+
+	const handleFoto = (e) => {
+		const file = Array.from(e.target.files);
+		if (file.length > 3) {
+			console.log('Большое количество');
+		} else {
+			setAddFoto(file);
+			console.log(file);
+		}
+	};
+
+	const deletePhoto = (index) => {
+		console.log(index);
+		console.log(addFoto);
+	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		handleAreaApp(!isCheckPopup);
+		console.log(addFoto);
 	};
+
+	useEffect(() => {}, [addFoto]);
 
 	return (
 		<div className="area-app">
@@ -61,40 +90,34 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 									type="file"
 									className="foto__file-add"
 									name="add-file"
-									multiple
 									accept="image/png, image/jpeg"
 									id="add-file"
+									onChange={handleFoto}
+									multiple
 								/>
 								<img
 									className="foto-file-img"
 									src={addPictures}
 									alt="Добавление картинки"
 								/>
+								<p className="foto__file-text">
+									Макс. размер: 5 Мб. Формат: JPEG или PNG.
+								</p>
 							</label>
-							<div className="foto-file__container">
-								<Button className="button-clouse-foto-file" />
-								<img
-									className="foto-file__add-server"
-									src={foto}
-									alt="Добавление картинки"
-								/>
-							</div>
-							<div className="foto-file__container">
-								<Button className="button-clouse-foto-file" />
-								<img
-									className="foto-file__add-server"
-									src={foto}
-									alt="Добавление картинки"
-								/>
-							</div>
-							<div className="foto-file__container">
-								<Button className="button-clouse-foto-file" />
-								<img
-									className="foto-file__add-server"
-									src={foto}
-									alt="Добавление картинки"
-								/>
-							</div>
+
+							{addFoto.map((file, index) => (
+								<div className="foto-file__container" key={file}>
+									<Button
+										className="button-clouse-foto-file"
+										onClick={() => deletePhoto(index)}
+									/>
+									<img
+										className="foto-file__add-server"
+										src={URL.createObjectURL(file)}
+										alt="Добавление картинки"
+									/>
+								</div>
+							))}
 						</div>
 					</div>
 					<div className="app-area">
@@ -120,7 +143,11 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 							Как только площадка пройдет проверку, она будет доступна для всех
 							пользователей.
 						</p>
-						<Button className="button-add__check" label="На главную" />
+						<Button
+							className="button-add__check"
+							label="На главную"
+							onClick={navigateToMain}
+						/>
 					</Popup>
 				</form>
 			</div>

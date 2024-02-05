@@ -176,12 +176,13 @@ $fontsRoboto: 'Roboto';
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
 	width: 175px;
 	height: 175px;
 	padding: 24px;
 	border-radius: 8px;
 	border: 2px;
-	gap: 8px;
+
 	border: 2px dashed rgba(20, 120, 255, 0.3);
 }
 .foto__file-add {
@@ -189,6 +190,17 @@ $fontsRoboto: 'Roboto';
 }
 .foto-file-img {
 	cursor: pointer;
+}
+
+.foto__file-text {
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	letter-spacing: 0em;
+	text-align: center;
+	width: 145px;
+	color: rgba(115, 122, 142, 1);
 }
 
 .foto-file__add-server {
