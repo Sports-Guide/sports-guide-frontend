@@ -10,9 +10,9 @@ import {
 	getIsLogin,
 } from '../../services/selectors/userSelector';
 import { ButtonOnRegister } from '../Button/ButtonOnRegister';
-import InputEmail from '../ProfileInputs/InputEmail';
-import InputPassword from '../ProfileInputs/InputPassword';
-import InputCheckbox from '../ProfileInputs/InputCheckbox';
+import InputEmail from '../Inputs/InputEmail';
+import InputPassword from '../Inputs/InputPassword';
+import InputCheckbox from '../Inputs/InputCheckbox';
 import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
 import { openModal } from '../../services/slices/modalSlice';
 import { clearLoginError } from '../../services/slices/userSlice';
