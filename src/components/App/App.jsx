@@ -25,16 +25,20 @@ export function App() {
 
 	const location = useLocation(); // Получение текущего местоположения
 
+	// проверка авторизован ли пользователь
 	useEffect(() => {
 		dispatch(checkUserAuth());
 	}, [dispatch, location]);
 
+	// параметры для установки состояний popup
 	const { isOpen, type } = useSelector((state) => state.modal);
 
+	// Закрытие модального окна
 	const handleCloseModal = useCallback(() => {
 		dispatch(closeModal());
 	}, [dispatch]);
 
+	// Закрытие модального окна по Escape
 	useEffect(() => {
 		const handleEsc = (event) => {
 			if (event.key === 'Escape') {

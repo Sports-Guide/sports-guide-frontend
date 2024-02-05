@@ -7,7 +7,7 @@ import { fetchRefreshToken, fetchVerifyToken } from './userThunk';
 
 // Тестовый юзер
 // jkcjzkjczlk@gmail.com
-// Iuio77Jk
+// leraprok1L
 
 export const checkUserAuth = () => async (dispatch) => {
 	dispatch(setAuthInitializing()); // устанавливем состояние что начался процесс проверки: авторизован ли пользователь

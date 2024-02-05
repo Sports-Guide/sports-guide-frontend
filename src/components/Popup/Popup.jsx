@@ -12,26 +12,13 @@ export function Popup({
 	// Остановливает закрытие попапа при нажатии на основной контент
 	const stopPropagation = (e) => e.stopPropagation();
 
-	// Функция для обработки нажатий клавиш
-	const handleKeyPress = (e) => {
-		if (e.key === 'Enter' || e.key === ' ') {
-			handleClose();
-		}
-	};
-
 	return (
+		/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
 		<div
 			className={`popup ${isOpen ? 'popup_opened' : ''}`}
 			onClick={handleClose}
-			role="button" // Добавление роли
-			tabIndex="0" // Делаем элемент фокусируемым
-			onKeyDown={handleKeyPress}
 		>
-			<div
-				className="popup__container"
-				onClick={stopPropagation}
-				role="presentation" // Добавление роли
-			>
+			<div className="popup__container" onClick={stopPropagation}>
 				<button
 					className="popup__close-button"
 					type="button"

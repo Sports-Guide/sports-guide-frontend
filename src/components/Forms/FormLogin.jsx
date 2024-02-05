@@ -24,18 +24,18 @@ export default function FormLogin({ handleClose }) {
 	const isOpenModal = useSelector((state) => state.modal.isOpen);
 
 	const handleSubmit = useCallback(
-		(values, { resetForm }) => {
-			dispatch(
-				fetchLogin({ email: values.Email, password: values.Password })
-			).then(() => {
-				if (isLogin) {
-					resetForm();
-					handleClose();
-				}
-			});
+		(values) => {
+			dispatch(fetchLogin({ email: values.Email, password: values.Password }));
 		},
-		[dispatch, isLogin, handleClose]
+		[dispatch]
 	);
+
+	useEffect(() => {
+		if (isLogin) {
+			handleClose();
+			console.log(isLogin);
+		}
+	}, [isLogin, handleClose]);
 
 	useEffect(() => {
 		dispatch(clearLoginError());

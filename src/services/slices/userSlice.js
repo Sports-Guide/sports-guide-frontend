@@ -47,6 +47,7 @@ const userSlice = createSlice({
 			state.isUserAuth = false;
 			state.userData = null;
 			state.isAuthInitialized = true;
+			state.isLogin = false;
 		},
 		setAuthInitializing: (state) => {
 			state.isAuthInitialized = false; // Начинается процесс проверки: авторизован ли юзер
