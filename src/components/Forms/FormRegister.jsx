@@ -9,6 +9,7 @@ import InputNickname from '../ProfileInputs/InputNickname';
 import InputCheckbox from '../ProfileInputs/InputCheckbox';
 import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
 import { fetchRegister } from '../../services/thunks/registerUserThunk';
+import { openModal } from '../../services/slices/modalSlice';
 
 export default function FormRegister() {
 	const dispatch = useDispatch();
@@ -88,7 +89,7 @@ export default function FormRegister() {
 			<p className="register-form__paragraph">
 				Уже есть аккаунт?
 				<ButtonOnLoginPopUp
-					// onClick={() => dispatch(openModal('login'))}
+					onClick={() => dispatch(openModal('login'))}
 					label="Войти"
 					type="button"
 					disabled={false}

@@ -10,6 +10,10 @@ export const getTitleByType = (type) => {
 			return 'Регистрация';
 		case 'passwordRecovery':
 			return 'Восстановление пароля';
+		case 'logout':
+			return 'Выход из профиля';
+		case 'deleteProfile':
+			return 'Удаление профиля';
 		default:
 			return '';
 	}
@@ -18,7 +22,7 @@ export const getTitleByType = (type) => {
 export const getContentByType = (type, handleClose) => {
 	switch (type) {
 		case 'login':
-			return <FormLogin onClose={handleClose} />;
+			return <FormLogin handleClose={handleClose} />;
 		case 'register':
 			return <FormRegister />;
 		case 'passwordRecovery':
