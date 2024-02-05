@@ -24,9 +24,9 @@ export const getContentByType = (type, handleClose) => {
 		case 'login':
 			return <FormLogin handleClose={handleClose} />;
 		case 'register':
-			return <FormRegister />;
+			return <FormRegister handleClose={handleClose} />;
 		case 'passwordRecovery':
-			return <FormPasswordRecovery />;
+			return <FormPasswordRecovery handleClose={handleClose} />;
 		default:
 			return null;
 	}

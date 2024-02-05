@@ -33,7 +33,6 @@ export default function FormLogin({ handleClose }) {
 	useEffect(() => {
 		if (isLogin) {
 			handleClose();
-			console.log(isLogin);
 		}
 	}, [isLogin, handleClose]);
 
