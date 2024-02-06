@@ -9,3 +9,9 @@ export const getAuthInitializationStatus = (state) =>
 
 export const getIsErrorLogin = (state) => state.user.errorLogin;
 export const getErrorMessageLogin = (state) => state.user.errorMessageLogin;
+export const getIsErrorEditUserData = (state) => state.user.errorEditUserData;
+export const getErrorMessageEditUserData = (state) =>
+	state.user.errorMessageEditUserData;
+export const getIsErrorEditPassword = (state) => state.user.errorEditPassword;
+export const getErrorMessageEditPassword = (state) =>
+	state.user.errorMessageEditPassword;

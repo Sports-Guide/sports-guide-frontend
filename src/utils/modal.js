@@ -1,6 +1,7 @@
 import FormLogin from '../components/Forms/FormLogin';
 import FormRegister from '../components/Forms/FormRegister';
 import FormPasswordRecovery from '../components/Forms/FormPasswordRecovery';
+import FormPasswordReset from '../components/Forms/FormPasswordReset';
 
 export const getTitleByType = (type) => {
 	switch (type) {
@@ -10,6 +11,8 @@ export const getTitleByType = (type) => {
 			return 'Регистрация';
 		case 'passwordRecovery':
 			return 'Восстановление пароля';
+		case 'passwordReset':
+			return 'Сброс пароля';
 		case 'logout':
 			return 'Выход из профиля';
 		case 'deleteProfile':
@@ -27,6 +30,8 @@ export const getContentByType = (type, handleClose) => {
 			return <FormRegister handleClose={handleClose} />;
 		case 'passwordRecovery':
 			return <FormPasswordRecovery handleClose={handleClose} />;
+		case 'passwordReset':
+			return <FormPasswordReset handleClose={handleClose} />;
 		default:
 			return null;
 	}
