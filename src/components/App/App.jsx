@@ -87,11 +87,7 @@ export function App() {
 				</Route>
 			</Routes>
 			{isOpen && (
-				<Popup
-					handleClose={handleCloseModal}
-					title={getTitleByType(type)}
-					isOpen
-				>
+				<Popup handleClose={handleCloseModal} title={getTitleByType(type)}>
 					{getContentByType(type, handleCloseModal)}
 				</Popup>
 			)}
