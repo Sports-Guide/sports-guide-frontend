@@ -4,19 +4,25 @@ import './Popup.scss';
 
 export function Popup({
 	isOpen,
-	onClose,
+	handleClose,
 	title,
 	headerClassName,
 	children,
-	checkPopup,
 }) {
+	// Остановливает закрытие попапа при нажатии на основной контент
+	const stopPropagation = (e) => e.stopPropagation();
+
 	return (
-		<div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
-			<div className={`popup__container ${checkPopup}`}>
+		/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+		<div
+			className={`popup ${isOpen ? 'popup_opened' : ''}`}
+			onClick={handleClose}
+		>
+			<div className="popup__container" onClick={stopPropagation}>
 				<button
 					className="popup__close-button"
 					type="button"
-					onClick={onClose}
+					onClick={handleClose}
 					aria-label="close-popup-button"
 				/>
 				<h2 className={`popup__header ${headerClassName}`}>{title}</h2>
@@ -28,11 +34,10 @@ export function Popup({
 
 Popup.propTypes = {
 	isOpen: PropTypes.bool,
-	onClose: PropTypes.func.isRequired,
+	handleClose: PropTypes.func.isRequired,
 	title: PropTypes.string.isRequired,
 	headerClassName: PropTypes.string,
 	children: PropTypes.node.isRequired,
-	checkPopup: PropTypes.string.isRequired,
 };
 
 Popup.defaultProps = {

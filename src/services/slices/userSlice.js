@@ -47,9 +47,14 @@ const userSlice = createSlice({
 			state.isUserAuth = false;
 			state.userData = null;
 			state.isAuthInitialized = true;
+			state.isLogin = false;
 		},
 		setAuthInitializing: (state) => {
 			state.isAuthInitialized = false; // Начинается процесс проверки: авторизован ли юзер
+		},
+		clearLoginError: (state) => {
+			state.errorLogin = false;
+			state.errorMessageLogin = '';
 		},
 		setIsUserDataEditingTrue: (state) => {
 			state.isUserDataEditing = true;
@@ -154,5 +159,6 @@ export const {
 	setIsUserDataEditingFalse,
 	setIsPasswordEditingTrue,
 	setIsPasswordEditingFalse,
+	clearLoginError,
 } = userSlice.actions;
 export default userSlice.reducer;

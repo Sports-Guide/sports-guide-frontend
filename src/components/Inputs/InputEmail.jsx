@@ -25,6 +25,7 @@ export default function InputEmail() {
 				name="Email"
 				className="input"
 				validate={validateEmail}
+				maxLength={50}
 			/>
 		</InputContainer>
 	);

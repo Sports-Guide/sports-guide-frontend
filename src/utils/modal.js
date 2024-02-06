@@ -4,12 +4,16 @@ import FormPasswordRecovery from '../components/Forms/FormPasswordRecovery';
 
 export const getTitleByType = (type) => {
 	switch (type) {
-		case 'login':
-			return 'Вход';
+		case 'login': // type popup
+			return 'Вход'; // главный заголовок
 		case 'register':
 			return 'Регистрация';
 		case 'passwordRecovery':
 			return 'Восстановление пароля';
+		case 'logout':
+			return 'Выход из профиля';
+		case 'deleteProfile':
+			return 'Удаление профиля';
 		default:
 			return '';
 	}
@@ -18,11 +22,11 @@ export const getTitleByType = (type) => {
 export const getContentByType = (type, handleClose) => {
 	switch (type) {
 		case 'login':
-			return <FormLogin onClose={handleClose} />;
+			return <FormLogin handleClose={handleClose} />; // то что передается во внутрь попапа
 		case 'register':
-			return <FormRegister />;
+			return <FormRegister handleClose={handleClose} />;
 		case 'passwordRecovery':
-			return <FormPasswordRecovery />;
+			return <FormPasswordRecovery handleClose={handleClose} />;
 		default:
 			return null;
 	}

@@ -1,60 +1,55 @@
 /* eslint no-console: "off" */
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-// import CurrentUserContext from '../../contexts/CurrentUserContext';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { checkUserAuth } from '../../services/thunks/checkUserAuthThunk';
 import { Main } from '../Main/Main';
 import { Profile } from '../Profile/Profile';
 import AreaApp from '../Area/AreaApp';
-import Login from '../Login/Login';
-import Register from '../Register/Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { SportsGround } from '../SportsGround/SportsGround';
 import Layuot from '../Layout/Layout';
-import PasswordRecoveryPopUp from '../PasswordRecoveryPopUp/PasswordRecoveryPopUp';
 import { PersonalData } from '../Profile/PersonalData';
 import { PasswordData } from '../Profile/PasswordData';
-
-// import * as auth from '../../utils/auth';
 import * as api from '../../utils/MainApi';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
+import { getContentByType, getTitleByType } from '../../utils/modal';
+import { Popup } from '../Popup/Popup';
+import { closeModal } from '../../services/slices/modalSlice';
 
 export function App() {
-	// стейт для отображения e-mail пользователя
-	// eslint-disable-next-line no-unused-vars
-	const [userEmail, setUserEmail] = useState('');
-	// состояния попапов
-	const [isDeleteAccountPopupOpen, setDeleteAccountPopupOpen] = useState(false);
-	const [isLogoutConfirmationPopupOpen, setLogoutConfirmationPopupOpen] =
-		useState(false);
-	const [isOnLogInPopUpOpen, setOnLogInPopUpOpen] = useState(false);
-	const [isOnRegisterPopUpOpen, setOnRegisterPopUpOpen] = useState(false);
-	const [isPasswordRecoveryPopUpOpen, setPasswordRecoveryPopUpOpen] =
-		useState(false);
-	const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
-	const [isCheckPopup, setIsCheckPopup] = useState(false);
-
-	// стейт для серверных ошибок
-	// const [errorMessage, setErrorMessage] = useState('');
-	// const [regErrorMessage, setRegErrorMessage] = useState('');
-	// const [logErrorMessage, setLogErrorMessage] = useState('');
-
-	// создаём стейт для проверки пользователя на авторизацию
-	const [loggedIn, setLoggedIn] = useState(false);
-
 	// eslint-disable-next-line no-unused-vars
 	const [areas, setAreas] = useState([]);
-
-	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
 
 	const location = useLocation(); // Получение текущего местоположения
 
+	// проверка авторизован ли пользователь
 	useEffect(() => {
 		dispatch(checkUserAuth());
 	}, [dispatch, location]);
+
+	// параметры для установки состояний popup
+	const { isOpen, type } = useSelector((state) => state.modal);
+
+	// Закрытие модального окна
+	const handleCloseModal = useCallback(() => {
+		dispatch(closeModal());
+	}, [dispatch]);
+
+	// Закрытие модального окна по Escape
+	useEffect(() => {
+		const handleEsc = (event) => {
+			if (event.key === 'Escape') {
+				handleCloseModal();
+			}
+		};
+		document.addEventListener('keydown', handleEsc);
+		return () => {
+			document.removeEventListener('keydown', handleEsc);
+		};
+	}, [handleCloseModal]);
 
 	// получаем данные площадок
 	useEffect(() => {
@@ -65,134 +60,23 @@ export function App() {
 			})
 			.catch((err) => {
 				console.log(`Ошибка при получении данных о площадках: ${err}`);
-				setLoggedIn(false);
 			});
 	}, []);
 
-	// сохраняем email
-	useEffect(() => {
-		const currentEmail = localStorage.getItem('email');
-		if (currentEmail) {
-			setUserEmail(currentEmail);
-		} else setUserEmail('');
-	}, []);
-
-	const handleDeleteAccount = () => {
-		setDeleteAccountPopupOpen(false);
-		navigate('/', { replace: true });
-		console.log('Аккаунт удален');
-	};
-
-	const handleLogOut = () => {
-		setLogoutConfirmationPopupOpen(false);
-		navigate('/', { replace: true });
-		// setCurrentUser({});
-		localStorage.removeItem('userId');
-		console.log('Вы вышли из аккаунта');
-	};
-
-	// создаём обработчики для открытия попапов
-	const handleDeleteAccountBtnClick = () => {
-		setDeleteAccountPopupOpen(true);
-	};
-	const handleLogOutClick = () => {
-		setLogoutConfirmationPopupOpen(true);
-	};
-
-	const handleOnLogInClick = () => {
-		setOnLogInPopUpOpen(true);
-		setOnRegisterPopUpOpen(false);
-	};
-
-	const handleOpenSignUpPopUp = () => {
-		setOnRegisterPopUpOpen(true);
-		setOnLogInPopUpOpen(false);
-	};
-
-	const handleOpenPasswordRecoveryPopUp = () => {
-		setPasswordRecoveryPopUpOpen(true);
-		setOnLogInPopUpOpen(false);
-	};
-
-	// функция закрытия всех попапов
-	const closeAllPopups = () => {
-		setDeleteAccountPopupOpen(false);
-		setLogoutConfirmationPopupOpen(false);
-		setOnLogInPopUpOpen(false);
-		setOnRegisterPopUpOpen(false);
-		setPasswordRecoveryPopUpOpen(false);
-		setInfoTooltipOpen(false);
-		setIsCheckPopup(false);
-	};
-
-	// закрываем попапы по Esc
-	useEffect(() => {
-		const closeWithEsc = (e) => {
-			if (e.key === 'Escape') {
-				closeAllPopups();
-			}
-		};
-		document.addEventListener('keydown', closeWithEsc);
-		// удаляем событие при размонтировании компонента
-		return () => {
-			document.removeEventListener('keydown', closeWithEsc);
-		};
-	}, [
-		isDeleteAccountPopupOpen,
-		isLogoutConfirmationPopupOpen,
-		isOnLogInPopUpOpen,
-		isOnRegisterPopUpOpen,
-		isPasswordRecoveryPopUpOpen,
-		isInfoTooltipOpen,
-		isCheckPopup,
-	]);
-
 	return (
-		// <CurrentUserContext.Provider value={currentUser}>
 		<>
 			<Routes>
-				<Route
-					path="/"
-					element={
-						<Layuot
-							handleOnLogInClick={handleOnLogInClick}
-							loggedIn={loggedIn}
-						/>
-					}
-				>
+				<Route path="/" element={<Layuot />}>
 					<Route index element={<Main areas={areas} />} />
 					<Route
 						path="app-area"
 						element={
-							<ProtectedOnlyAuth
-								component={
-									<AreaApp
-										onClose={closeAllPopups}
-										isCheckPopup={isCheckPopup}
-										handleAreaApp={setIsCheckPopup}
-										areas={areas}
-									/>
-								}
-							/>
+							<ProtectedOnlyAuth component={<AreaApp areas={areas} />} />
 						}
 					/>
 					<Route
 						path="profile"
-						element={
-							<ProtectedOnlyAuth
-								component={
-									<Profile
-										onDelete={handleDeleteAccount}
-										onLogOut={handleLogOut}
-										onDeleteAccountPopupOpen={handleDeleteAccountBtnClick}
-										onLogoutPopupOpen={handleLogOutClick}
-										isDeleteAccountPopupOpen={isDeleteAccountPopupOpen}
-										isLogoutPopupOpen={isLogoutConfirmationPopupOpen}
-										onClose={closeAllPopups}
-									/>
-								}
-							/>
-						}
+						element={<ProtectedOnlyAuth component={<Profile />} />}
 					>
 						<Route index element={<PersonalData />} />
 						<Route path="password" element={<PasswordData />} />
@@ -202,91 +86,22 @@ export function App() {
 					<Route path="*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>
-			<Login
-				isOnLogInPopUpOpen={isOnLogInPopUpOpen}
-				onClose={closeAllPopups}
-				toSignUpPopUp={handleOpenSignUpPopUp}
-				onPasswordRecovery={handleOpenPasswordRecoveryPopUp}
-				// logErrorMessage={logErrorMessage}
-				// onLogIn={handleLogIn}
-			/>
-			<Register
-				isOnRegisterPopUpOpen={isOnRegisterPopUpOpen}
-				onClose={closeAllPopups}
-				toSignInPopUp={handleOnLogInClick}
-				// regErrorMessage={regErrorMessage}
-				// onRegister={handleRegistration}
-				isInfoTooltipOpen={isInfoTooltipOpen}
-				// isSucceeded={isSucceeded}
-			/>
-			<PasswordRecoveryPopUp
-				isPasswordRecoveryPopUpOpen={isPasswordRecoveryPopUpOpen}
-				onClose={closeAllPopups}
-			/>
+			{isOpen && (
+				<Popup
+					handleClose={handleCloseModal}
+					title={getTitleByType(type)}
+					isOpen
+				>
+					{getContentByType(type, handleCloseModal)}
+				</Popup>
+			)}
 		</>
-		// </CurrentUserContext.Provider>
 	);
 }
 
 export default App;
 
-// const handleLogIn = async (email, password) => {
-// 	setLogErrorMessage('');
-// 	if (!email || !password) {
-// 		setLogErrorMessage('Заполните все поля');
-// 		return;
-// 	}
-// 	try {
-// 		const response = await auth.login(email, password);
-// 		if (!response || response.statusCode === 401) {
-// 			setLogErrorMessage(response.message);
-// 		} else {
-// 			localStorage.setItem('userEmail', email);
-// 			localStorage.setItem('token', response.access);
-// 			setUserEmail(response.email);
-// 			setLoggedIn(true);
-// 			setCurrentUser(response.user);
-// 			console.log(`Пользователь ${email} авторизован`);
-// 			navigate('/', { replace: true });
-// 			setOnLogInPopUpOpen(false);
-// 		}
-// 	} catch (err) {
-// 		console.log(`Ошибка авторизации: ${err}`);
-// 		setLogErrorMessage(err.message);
-// 	} finally {
-// 		setLogErrorMessage('');
-// 	}
-// };
-
-// const handleRegistration = async (
-// 	nickname,
-// 	email,
-// 	password,
-// 	passwordConfirmation
-// ) => {
-// 	setRegErrorMessage('');
-// 	try {
-// 		const response = await auth.register(
-// 			nickname,
-// 			email,
-// 			password,
-// 			passwordConfirmation
-// 		);
-// 		if (!response || response.statusCode === 400) {
-// 			setRegErrorMessage(response.message);
-// 		} else {
-// 			handleLogIn(response.email, response.password);
-// 			localStorage.setItem('userEmail', response.email);
-// 			setIsSucceeded(true);
-// 			console.log(`email = ${response.email}`);
-// 			console.log(`Пользователь ${response.email} зарегистрирован`);
-// 			setOnRegisterPopUpOpen(false);
-// 			navigate('/', { replace: true });
-// 		}
-// 	} catch (err) {
-// 		console.log(`Ошибка регистрации: ${err}`);
-// 		setRegErrorMessage(err.message);
-// 	} finally {
-// 		setRegErrorMessage('');
-// 	}
-// };
+//      isDeleteAccountPopupOpen,
+// 		isLogoutConfirmationPopupOpen,
+// 		isInfoTooltipOpen,
+// 		isCheckPopup,

@@ -2,14 +2,9 @@ import PropTypes from 'prop-types';
 import './Profile.scss';
 import { NavLink, Outlet } from 'react-router-dom';
 // import FormTitle from '../FormTitle/FormTitle';
-// import { PersonalData } from './PersonalData';
-// import { PasswordData } from './PasswordData';
 import { Popup } from '../Popup/Popup';
 
 export function Profile({
-	// isPasswordEditing,
-	// onEditAvatar, // сделаю позже
-	// onEditPassword,
 	onDelete,
 	onLogOut,
 	isLogoutPopupOpen,
@@ -146,8 +141,6 @@ export function Profile({
 }
 
 Profile.propTypes = {
-	// isPasswordEditing: PropTypes.bool.isRequired,
-	// onEditPassword: PropTypes.func.isRequired,
 	onDelete: PropTypes.func.isRequired,
 	onLogOut: PropTypes.func.isRequired,
 	isLogoutPopupOpen: PropTypes.bool.isRequired,

@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 import { ButtonLoginSite } from '../Button/ButtonLoginSite';
 import { ButtonMap } from '../Button/ButtonMap';
@@ -9,8 +8,9 @@ import logo from '../../images/logo.svg';
 
 import { getIsUserAuth } from '../../services/selectors/userSelector';
 import './Header.scss';
+import { openModal } from '../../services/slices/modalSlice';
 
-export function Header({ onLogIn }) {
+export function Header() {
 	const isUserAuth = useSelector(getIsUserAuth);
 	const navigate = useNavigate();
 
@@ -20,6 +20,12 @@ export function Header({ onLogIn }) {
 
 	const navigateToPersonalArea = () => {
 		navigate('profile');
+	};
+
+	const dispatch = useDispatch();
+
+	const handleOpenModal = (type) => {
+		dispatch(openModal(type));
 	};
 
 	return (
@@ -33,7 +39,7 @@ export function Header({ onLogIn }) {
 				<div className="header__buttons">
 					<Button
 						className="button-app"
-						onClick={isUserAuth ? navigateHome : onLogIn}
+						onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
 						label="Добавить площадку"
 					/>
 					{isUserAuth ? (
@@ -42,15 +48,14 @@ export function Header({ onLogIn }) {
 							label="Личный&nbsp;кабинет"
 						/>
 					) : (
-						<ButtonLoginSite onClick={onLogIn} type="button" label="Войти" />
+						<ButtonLoginSite
+							onClick={() => dispatch(openModal('login'))}
+							type="button"
+							label="Войти"
+						/>
 					)}
 				</div>
 			</div>
 		</header>
 	);
 }
-
-Header.propTypes = {
-	onLogIn: PropTypes.func.isRequired,
-	// loggedIn: PropTypes.bool.isRequired,
-};

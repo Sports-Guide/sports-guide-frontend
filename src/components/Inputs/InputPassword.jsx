@@ -17,14 +17,11 @@ export default function InputPassword({ labelText, inputId }) {
 		if (!value) {
 			return 'Поле не может быть пустым';
 		}
-		if (value.length < 6 || value.length > 50) {
-			return 'Пароль должен содержать от 6 до 50 символов';
+		if (value.length < 6 || value.length > 25) {
+			return 'Пароль должен содержать от 6 до 25 символов';
 		}
 		if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/.test(value)) {
 			return 'Пароль должен содержать хотя бы одну заглавную букву и одну цифру';
-		}
-		if (value.passwordRepeat && value.passwordRepeat !== value.password) {
-			return 'Полея не совпадают';
 		}
 		return null; // Возвращаем null, если ошибок нет
 	}, []);
@@ -38,7 +35,7 @@ export default function InputPassword({ labelText, inputId }) {
 					name={inputId}
 					className="input"
 					validate={validatePassword}
-					maxLength={50}
+					maxLength={25}
 				/>
 				<button
 					className="password__show-hide-btn"

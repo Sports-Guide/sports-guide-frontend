@@ -3,7 +3,7 @@ import './FormPasswordRecovery.scss';
 import React, { useCallback } from 'react';
 import { Button } from '../Button/Button';
 
-import InputEmail from '../ProfileInputs/InputEmail';
+import InputEmail from '../Inputs/InputEmail';
 
 export default function FormPasswordRecovery() {
 	// const dispatch = useDispatch();
