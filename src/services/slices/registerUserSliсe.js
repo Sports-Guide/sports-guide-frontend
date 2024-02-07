@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchRegister } from '../thunks/registerUserThunk';
 
 export const initialState = {
+	email: '',
 	isRegister: false,
 	isLoadingRegister: false,
 	errorRegister: false,
@@ -11,9 +12,19 @@ export const initialState = {
 const registerUserSlice = createSlice({
 	name: 'registerUser',
 	initialState,
+	reducers: {
+		setIsRegister: (state) => {
+			state.isRegister = false;
+		},
+		clearRegisterError: (state) => {
+			state.errorRegister = false;
+			state.errorMessageRegister = '';
+		},
+	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchRegister.fulfilled, (state) => {
+			.addCase(fetchRegister.fulfilled, (state, action) => {
+				state.email = action.payload;
 				state.isRegister = true;
 				state.isLoadingRegister = false;
 				state.errorRegister = false;
@@ -33,4 +44,5 @@ const registerUserSlice = createSlice({
 	},
 });
 
+export const { setIsRegister, clearRegisterError } = registerUserSlice.actions;
 export default registerUserSlice.reducer;

@@ -1,6 +1,5 @@
 import { Formik, Form } from 'formik'; // https://formik.org/ - документация библиотеки formik
-import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './FormRegister.scss';
 import { Button } from '../Button/Button';
@@ -11,17 +10,18 @@ import InputCheckbox from '../Inputs/InputCheckbox';
 import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
 import { fetchRegister } from '../../services/thunks/registerUserThunk';
 import { openModal } from '../../services/slices/modalSlice';
-import SuccessEmailed from '../Popup/SuccessEmailed';
+import { clearRegisterError } from '../../services/slices/registerUserSliсe';
 
-export default function FormRegister({ handleClose }) {
+export default function FormRegister() {
 	const dispatch = useDispatch();
-
+	const isOpenModal = useSelector((state) => state.modal.isOpen);
 	const isRegister = useSelector((state) => state.registerUser.isRegister);
+	const isLoadingRegister = useSelector(
+		(state) => state.registerUser.isLoadingRegister
+	);
 	const errorMessageRegister = useSelector(
 		(state) => state.registerUser.errorMessageRegister
 	);
-
-	const [userEmail, setUserEmail] = useState('');
 
 	const handleSubmit = useCallback(
 		(values) => {
@@ -33,8 +33,6 @@ export default function FormRegister({ handleClose }) {
 					passwordConfirmation: values.PasswordRepeat,
 				})
 			);
-
-			setUserEmail(values.Email);
 		},
 		[dispatch]
 	);
@@ -47,74 +45,69 @@ export default function FormRegister({ handleClose }) {
 		return errors;
 	};
 
+	useEffect(() => {
+		if (isRegister) {
+			dispatch(openModal('successSentActivation'));
+		}
+	}, [isRegister, dispatch]);
+
+	useEffect(() => {
+		dispatch(clearRegisterError());
+	}, [isOpenModal, dispatch]);
+
 	return (
 		<div className="register-form__container">
-			{isRegister ? (
-				<SuccessEmailed
-					message="Письмо со ссылкой для подтверждения регистрации отправлено на"
-					email={userEmail}
-					handleClose={handleClose}
-				/>
-			) : (
-				<>
-					<Formik
-						initialValues={{
-							Nickname: '',
-							Email: '',
-							Password: '',
-							PasswordRepeat: '',
-							AgreeWithPolitiks: false,
-						}}
-						onSubmit={handleSubmit}
-						validate={validate}
-					>
-						{() => (
-							<Form noValidate className="register-form">
-								<InputNickname />
-								<InputEmail />
-								<InputPassword labelText="Пароль" inputId="Password" />
-								<InputPassword
-									labelText="Повторите пароль"
-									inputId="PasswordRepeat"
-								/>
-								<InputCheckbox inputId="AgreeWithPolitiks">
-									<span>
-										Я соглашаюсь с{' '}
-										<a
-											href="/politika"
-											className="register-form__link-politiks"
-										>
-											Политикой обработки персональных данных
-										</a>
-									</span>
-								</InputCheckbox>
-
-								<span className="register-form__server-error">
-									{errorMessageRegister || ''}
-								</span>
-								<Button
-									className="register-form__button-register"
-									type="submit"
-									label="Зарегистрироваться"
-								/>
-							</Form>
-						)}
-					</Formik>
-					<p className="register-form__paragraph">
-						Уже есть аккаунт?
-						<ButtonOnLoginPopUp
-							onClick={() => dispatch(openModal('login'))}
-							label="Войти"
-							type="button"
-							disabled={false}
+			<Formik
+				initialValues={{
+					Nickname: '',
+					Email: '',
+					Password: '',
+					PasswordRepeat: '',
+					AgreeWithPolitiks: false,
+				}}
+				onSubmit={handleSubmit}
+				validate={validate}
+			>
+				{() => (
+					<Form noValidate className="register-form">
+						<InputNickname />
+						<InputEmail />
+						<InputPassword labelText="Пароль" inputId="Password" />
+						<InputPassword
+							labelText="Повторите пароль"
+							inputId="PasswordRepeat"
 						/>
-					</p>
-				</>
-			)}
+						<InputCheckbox inputId="AgreeWithPolitiks">
+							<span>
+								Я соглашаюсь с{' '}
+								<a href="/politika" className="register-form__link-politiks">
+									Политикой обработки персональных данных
+								</a>
+							</span>
+						</InputCheckbox>
+
+						<span className="register-form__server-error">
+							{errorMessageRegister || ''}
+						</span>
+						<Button
+							className="register-form__button-register"
+							type="submit"
+							label={
+								isLoadingRegister ? 'Регистрация...' : 'Зарегистрироваться'
+							}
+						/>
+					</Form>
+				)}
+			</Formik>
+			<p className="register-form__paragraph">
+				Уже есть аккаунт?
+				<ButtonOnLoginPopUp
+					onClick={() => dispatch(openModal('login'))}
+					label="Войти"
+					type="button"
+					disabled={false}
+				/>
+			</p>
 		</div>
 	);
 }
-
-FormRegister.propTypes = {
-	handleClose: PropTypes.func.isRequired,
-};

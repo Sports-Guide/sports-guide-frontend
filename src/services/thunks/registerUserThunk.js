@@ -6,7 +6,7 @@ const urRegister = `${baseUserURL}/users/`;
 export const fetchRegister = createAsyncThunk(
 	'register/post',
 	async ({ nickname, email, password, passwordConfirmation }) => {
-		await request(urRegister, {
+		const data = await request(urRegister, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -19,5 +19,6 @@ export const fetchRegister = createAsyncThunk(
 				passwordConfirmation,
 			}),
 		});
+		return data.email;
 	}
 );
