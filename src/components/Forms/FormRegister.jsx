@@ -1,4 +1,4 @@
-import { Formik, Form } from 'formik'; // https://formik.org/ - документация библиотеки formik
+import { Formik, Form, useFormikContext } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './FormRegister.scss';
@@ -14,14 +14,7 @@ import { clearRegisterError } from '../../services/slices/registerUserSliсe';
 
 export default function FormRegister() {
 	const dispatch = useDispatch();
-	const isOpenModal = useSelector((state) => state.modal.isOpen);
 	const isRegister = useSelector((state) => state.registerUser.isRegister);
-	const isLoadingRegister = useSelector(
-		(state) => state.registerUser.isLoadingRegister
-	);
-	const errorMessageRegister = useSelector(
-		(state) => state.registerUser.errorMessageRegister
-	);
 
 	const handleSubmit = useCallback(
 		(values) => {
@@ -42,6 +35,9 @@ export default function FormRegister() {
 		if (values.Password !== values.PasswordRepeat) {
 			errors.PasswordRepeat = 'Пароли не совпадают';
 		}
+		if (!values.AgreeWithPolitiks) {
+			errors.AgreeWithPolitiks = 'Поле обязательно для заполнения';
+		}
 		return errors;
 	};
 
@@ -50,10 +46,6 @@ export default function FormRegister() {
 			dispatch(openModal('successSentActivation'));
 		}
 	}, [isRegister, dispatch]);
-
-	useEffect(() => {
-		dispatch(clearRegisterError());
-	}, [isOpenModal, dispatch]);
 
 	return (
 		<div className="register-form__container">
@@ -68,36 +60,7 @@ export default function FormRegister() {
 				onSubmit={handleSubmit}
 				validate={validate}
 			>
-				{() => (
-					<Form noValidate className="register-form">
-						<InputNickname />
-						<InputEmail />
-						<InputPassword labelText="Пароль" inputId="Password" />
-						<InputPassword
-							labelText="Повторите пароль"
-							inputId="PasswordRepeat"
-						/>
-						<InputCheckbox inputId="AgreeWithPolitiks">
-							<span>
-								Я соглашаюсь с{' '}
-								<a href="/politika" className="register-form__link-politiks">
-									Политикой обработки персональных данных
-								</a>
-							</span>
-						</InputCheckbox>
-
-						<span className="register-form__server-error">
-							{errorMessageRegister || ''}
-						</span>
-						<Button
-							className="register-form__button-register"
-							type="submit"
-							label={
-								isLoadingRegister ? 'Регистрация...' : 'Зарегистрироваться'
-							}
-						/>
-					</Form>
-				)}
+				{() => <FormComponent />}
 			</Formik>
 			<p className="register-form__paragraph">
 				Уже есть аккаунт?
@@ -109,5 +72,48 @@ export default function FormRegister() {
 				/>
 			</p>
 		</div>
+	);
+}
+
+function FormComponent() {
+	const isOpenModal = useSelector((state) => state.modal.isOpen);
+
+	const isLoadingRegister = useSelector(
+		(state) => state.registerUser.isLoadingRegister
+	);
+	const errorMessageRegister = useSelector(
+		(state) => state.registerUser.errorMessageRegister
+	);
+	const { values } = useFormikContext();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(clearRegisterError());
+	}, [values, isOpenModal, dispatch]);
+
+	return (
+		<Form noValidate className="register-form">
+			<InputNickname />
+			<InputEmail />
+			<InputPassword labelText="Пароль" inputId="Password" />
+			<InputPassword labelText="Повторите пароль" inputId="PasswordRepeat" />
+			<InputCheckbox inputId="AgreeWithPolitiks">
+				<span>
+					Я соглашаюсь с{' '}
+					<a href="/politika" className="register-form__link-politiks">
+						Политикой обработки персональных данных
+					</a>
+				</span>
+			</InputCheckbox>
+
+			<span className="register-form__server-error">
+				{errorMessageRegister || ''}
+			</span>
+			<Button
+				className="register-form__button-register"
+				type="submit"
+				label={isLoadingRegister ? 'Регистрация...' : 'Зарегистрироваться'}
+			/>
+		</Form>
 	);
 }
