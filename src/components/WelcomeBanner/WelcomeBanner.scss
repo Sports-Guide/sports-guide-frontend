@@ -9,7 +9,8 @@ $fontsRoboto: 'Roboto';
 
 @mixin blocks {
 	width: 1040px;
-	border-radius: 12px;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
 	background: #fcfcfc;
 	padding: 24px 36px;
 	/* 	margin-bottom: 24px; */
@@ -17,7 +18,7 @@ $fontsRoboto: 'Roboto';
 
 .location__container {
 	@include blocks;
-	margin: 40px auto 24px;
+	margin: 40px auto 0px;
 }
 
 .location__title {
