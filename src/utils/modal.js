@@ -28,6 +28,17 @@ export const getTitleByType = (type) => {
 	}
 };
 
+export const getTitleStyleByType = (type) => {
+	switch (type) {
+		case 'successSentActivation': // type popup
+			return 'popup__title-left'; // стиль для заголовка(если отличается от дефолтного)
+		case 'passwordRecoverySuccessSent':
+			return 'popup__title-left';
+		default:
+			return '';
+	}
+};
+
 export const getContentByType = (type, handleClose) => {
 	switch (type) {
 		case 'login':

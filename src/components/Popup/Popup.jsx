@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Popup.scss';
 
-export function Popup({ handleClose, title, children }) {
+export function Popup({ handleClose, title, titleStyle, children }) {
 	// Останавливает закрытие попапа при нажатии на основной контент
 	const stopPropagation = (e) => e.stopPropagation();
 
@@ -16,7 +16,7 @@ export function Popup({ handleClose, title, children }) {
 					onClick={handleClose}
 					aria-label="close-popup-button"
 				/>
-				<h2 className="popup__title">{title}</h2>
+				<h2 className={`${titleStyle} popup__title`}>{title}</h2>
 				{children}
 			</div>
 		</div>
@@ -26,6 +26,7 @@ export function Popup({ handleClose, title, children }) {
 Popup.propTypes = {
 	handleClose: PropTypes.func.isRequired,
 	title: PropTypes.string.isRequired,
+	titleStyle: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
 };
 
