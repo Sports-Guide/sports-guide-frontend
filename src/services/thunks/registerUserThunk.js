@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { baseUserURL, request } from '../../utils/api';
+import { baseURL, request } from '../../utils/api';
 
-const urRegister = `${baseUserURL}/users/`;
+const urRegister = `${baseURL}/users/`;
 
 export const fetchRegister = createAsyncThunk(
 	'register/post',
