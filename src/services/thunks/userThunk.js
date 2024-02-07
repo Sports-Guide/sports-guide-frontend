@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseURL, request } from '../../utils/api';
 
 // Авторизация
-const urlLogin = `${baseURL}/jwt/create/`;
+const urlLogin = `${baseURL}/auth/jwt/create/`;
 
 export const fetchLogin = createAsyncThunk(
 	'login/post',

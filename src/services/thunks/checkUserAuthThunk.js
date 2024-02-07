@@ -5,10 +5,6 @@ import {
 } from '../slices/userSlice';
 import { fetchRefreshToken, fetchVerifyToken } from './userThunk';
 
-// Тестовый юзер
-// jkcjzkjczlk@gmail.com
-// leraprok1L
-
 export const checkUserAuth = () => async (dispatch) => {
 	dispatch(setAuthInitializing()); // устанавливем состояние что начался процесс проверки: авторизован ли пользователь
 	const accessToken = localStorage.getItem('accessToken');
