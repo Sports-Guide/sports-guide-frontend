@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './FormRegister.scss';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button/Button';
 import InputEmail from '../Inputs/InputEmail';
 import InputPassword from '../Inputs/InputPassword';
@@ -12,20 +11,15 @@ import InputCheckbox from '../Inputs/InputCheckbox';
 import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
 import { fetchRegister } from '../../services/thunks/registerUserThunk';
 import { openModal } from '../../services/slices/modalSlice';
+import SuccessEmailed from '../Popup/SuccessEmailed';
 
 export default function FormRegister({ handleClose }) {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
+
 	const isRegister = useSelector((state) => state.registerUser.isRegister);
-	// const userEmail = useSelector((state) => state.registerUser.email);
 	const errorMessageRegister = useSelector(
 		(state) => state.registerUser.errorMessageRegister
 	);
-
-	const navigateHome = () => {
-		navigate('/');
-		handleClose();
-	};
 
 	const [userEmail, setUserEmail] = useState('');
 
@@ -56,15 +50,11 @@ export default function FormRegister({ handleClose }) {
 	return (
 		<div className="register-form__container">
 			{isRegister ? (
-				<>
-					<p className="popup__title">{userEmail}</p>
-					<Button
-						className="register-form__button-register popup__button-y"
-						type="button"
-						onClick={navigateHome}
-						label="На главную"
-					/>
-				</>
+				<SuccessEmailed
+					message="Письмо со ссылкой для подтверждения регистрации отправлено на"
+					email={userEmail}
+					handleClose={handleClose}
+				/>
 			) : (
 				<>
 					<Formik
