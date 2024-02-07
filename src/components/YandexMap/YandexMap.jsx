@@ -1,52 +1,55 @@
 /* eslint-disable */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './YandexMap.scss';
-import {
-	YMaps,
-	Map,
-	Placemark,
-	SearchControl,
-	Clusterer,
-} from '@pbe/react-yandex-maps';
+import { YMaps, Map, Placemark, Clusterer } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 
-function YandexMap({ areas, areaAppClass, placeHolder }) {
-	const defaultState = {
+function YandexMap({ areas, areaAppClass }) {
+	const ref = useRef();
+
+	const [mapState, setMapState] = useState({
 		center: [55.751426, 37.618879],
 		zoom: 10,
 		controls: ['zoomControl', 'fullscreenControl'],
-	};
+	});
 
-	// function MapSuggestComponent(props) {
-	// 	const { ymaps } = props;
-
-	// 	React.useEffect(() => {
-	// 		const suggestView = new ymaps.SuggestView('suggest');
-	// 	}, [ymaps.SuggestView]);
-
-	// 	return <input type="text" id="suggest" />;
-	// }
-
-	// const SuggestComponent = React.useMemo(() => {
-	// 	return withYMaps(MapSuggestComponent, true, [
-	// 		'SuggestView',
-	// 		'geocode',
-	// 		'coordSystem.geo',
-	// 	]);
-	// }, []);
 	const loadSuggest = (ymaps) => {
 		const suggestView = new ymaps.SuggestView('suggest');
+		let selectedItem = null;
+		suggestView.events.add('select', function (event) {
+			selectedItem = event.get('item');
+			ymaps
+				.geocode(selectedItem.value, {
+					results: 2,
+				})
+				.then(function (res) {
+					var firstGeoObject = res.geoObjects.get(0),
+						coords = firstGeoObject.geometry.getCoordinates();
+					let bounds = firstGeoObject.properties.get('boundedBy');
+					ref.current.setBounds(bounds, { checkZoomRange: true });
+					setMapState((prevState) => ({
+						...prevState,
+						center: coords,
+					}));
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		});
 	};
 
 	return (
 		<div className={`map ${areaAppClass}`}>
-			{/* <SearchBar /> */}
-			<input
-				type="text"
-				className="map__search-bar"
-				id="suggest"
-				placeholder={placeHolder}
-			/>
+			<div className="map__inputs">
+				<input type="text" className="map__search-bar " />
+				<input type="text" className="map__search-bar" />
+				<input
+					type="text"
+					className="map__search-bar map__search-bar_type_search"
+					id="suggest"
+					placeholder="Введите адрес"
+				/>
+			</div>
 			<YMaps
 				query={{
 					ns: 'use-load-option',
@@ -55,24 +58,19 @@ function YandexMap({ areas, areaAppClass, placeHolder }) {
 					suggest_apikey: '7841f93a-196d-47c1-9184-54f3c937df30',
 				}}
 			>
-				{/* <SuggestComponent /> */}
-
 				<Map
-					defaultState={defaultState}
+					instanceRef={ref}
+					state={mapState}
 					className="map__container"
-					modules={['SuggestView']}
+					modules={['SuggestView', 'geocode', 'coordSystem.geo']}
 					onLoad={(ymaps) => loadSuggest(ymaps)}
 				>
-					<SearchControl options={{ float: 'right' }} />
 					<Clusterer
 						options={{
 							preset: 'islands#invertedVioletClusterIcons',
 							groupByCoordinates: false,
 						}}
 					>
-						{/* {points.map((coordinates) => (
-							<Placemark geometry={coordinates} />
-						))} */}
 						{areas.map((area) => (
 							<Placemark
 								key={area.id}

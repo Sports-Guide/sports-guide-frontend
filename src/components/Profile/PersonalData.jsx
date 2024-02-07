@@ -1,5 +1,5 @@
+import { Formik, Form } from 'formik';
 import React, { useEffect, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import {
 	fetchUserInfo,
@@ -14,19 +14,16 @@ import {
 	setIsUserDataEditingFalse,
 } from '../../services/slices/userSlice';
 import './PersonalData.scss';
-import FormTitle from '../FormTitle/FormTitle';
+import InputNickname from '../Inputs/InputNickname';
+// import InputEmail from '../Inputs/InputEmail';
 
 export function PersonalData() {
 	const dispatch = useDispatch();
 	const user = useSelector(getUserInfo);
 	const isUserDataEditing = useSelector(getIsUserDataEditing);
-
-	const {
-		register,
-		formState: { errors, isValid },
-		handleSubmit,
-		// reset,
-	} = useForm({ mode: 'onChange' });
+	const errorMessageEditUserData = useSelector(
+		(state) => state.user.errorMessageEditUserData
+	);
 
 	useEffect(() => {
 		dispatch(fetchUserInfo());
@@ -47,10 +44,12 @@ export function PersonalData() {
 		return cleanup;
 	}, [resetUserDataEditing]);
 
-	const onSubmit = ({ nickname, email }) => {
-		if (user.nickname !== nickname || user.email !== email) {
+	const isDataChanged = (e) => user?.nickname !== e.target.value;
+
+	const handleSubmit = ({ Nickname }) => {
+		if (user?.nickname !== Nickname) {
 			// диспачим только если есть изменения
-			dispatch(fetchEditUserInfo({ nickname, email }))
+			dispatch(fetchEditUserInfo({ nickname: Nickname }))
 				.then(() => {
 					dispatch(setIsUserDataEditingFalse());
 				})
@@ -59,14 +58,12 @@ export function PersonalData() {
 				});
 		} else {
 			console.log('No changes made');
-			dispatch(setIsUserDataEditingFalse());
 		}
 	};
 
 	return (
 		<>
-			<FormTitle label="Личные данные" className="form__title_place_profile" />
-
+			<h2 className="form__title_place_profile">Личные данные</h2>
 			<div className="form_place_profile">
 				<div className="profile__personal-info-container">
 					<button
@@ -86,81 +83,40 @@ export function PersonalData() {
 					</div>
 				</div>
 				{isUserDataEditing ? (
-					<form
+					<Formik
+						initialValues={{
+							Nickname: user?.nickname,
+							// Email: user?.email,
+						}}
 						className="profile__change-info-container"
-						onSubmit={handleSubmit(onSubmit)}
+						onSubmit={handleSubmit}
 					>
-						<label className="profile__input-label" htmlFor="nickname">
-							Никнейм
-							<input
-								className={`profile__input ${
-									errors?.nickname && 'profile__input_error'
-								}`}
-								{...register('nickname', {
-									pattern: {
-										value: /^[a-zA-Zа-яА-Я0-9_]{2,20}$/,
-										message:
-											'Никнейм может содержать латинские буквы, цифры и другие символы',
-									},
-									minLength: {
-										value: 2,
-										message: 'Никнейм должен быть не менее 2 символов',
-									},
-									required: 'Поле не может быть пустым',
-								})}
-								type="text"
-								defaultValue={user?.nickname}
-								placeholder="Никнейм"
-								maxLength={20}
-							/>
-							<span className="error error_active">
-								{errors?.nickname?.message}
-							</span>
-						</label>
-						<label className="profile__input-label" htmlFor="email">
-							E-mail
-							<input
-								className={`profile__input ${
-									errors?.email && 'profile__input_error'
-								}`}
-								{...register('email', {
-									pattern: {
-										value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-										message: 'Введите корректный email. Пример: user@mail.ru',
-									},
-									minLength: {
-										value: 6,
-										message: 'Почта должна содержать не менее 6 символов',
-									},
-									required: 'Поле не может быть пустым',
-								})}
-								type="email"
-								defaultValue={user?.email}
-								placeholder="E-mail"
-								maxLength={50}
-							/>
-							<span className="error error error_active">
-								{errors?.email?.message}
-							</span>
-						</label>
-						<div className="profile__button-container">
-							<button
-								className="profile__change-button no-margin"
-								type="submit"
-								// onClick={() => dispatch(setIsUserDataEditingTrue(false))}
-								disabled={!isValid}
-							>
-								{isUserDataEditing ? 'Сохранить' : 'Изменить'}
-							</button>
-							<button
-								className="profile__cancel-button"
-								type="button"
-								onClick={() => dispatch(setIsUserDataEditingFalse())}
-							>
-								Отмена
-							</button>
-						</div>
-					</form>
+						{() => (
+							<Form noValidate className="profile__change-info-form">
+								<InputNickname />
+								{/* <InputEmail /> */}
+								<span className="profile_server-error">
+									{errorMessageEditUserData}
+								</span>
+								<div className="profile__button-container">
+									<button
+										className="profile__change-button no-margin"
+										type="submit"
+										disabled={!isDataChanged}
+									>
+										{isUserDataEditing ? 'Сохранить' : 'Изменить'}
+									</button>
+									<button
+										className="profile__cancel-button"
+										type="button"
+										onClick={() => dispatch(setIsUserDataEditingFalse())}
+									>
+										Отмена
+									</button>
+								</div>
+							</Form>
+						)}
+					</Formik>
 				) : (
 					<>
 						<div className="profile__info-container">
@@ -173,7 +129,7 @@ export function PersonalData() {
 							className="profile__change-button"
 							type="button"
 							onClick={() => dispatch(setIsUserDataEditingTrue())}
-							disabled={!isValid}
+							disabled={false}
 						>
 							{isUserDataEditing ? 'Сохранить' : 'Изменить'}
 						</button>

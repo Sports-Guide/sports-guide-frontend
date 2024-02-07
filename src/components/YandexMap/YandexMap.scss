@@ -9,6 +9,7 @@
 .map__container {
 	width: 1040px;
 	height: 500px;
+	padding-top: 32px;
 }
 
 .map__baloon {
@@ -18,9 +19,40 @@
 	background-image: url(../../images/location.png);
 }
 
+.map__inputs {
+	display: flex;
+	justify-content: center;
+	width: 1040px;
+	gap: 8px;
+	background: #fcfcfc;
+	padding: 0 36px 24px 36px;
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+}
+
 .map__search-bar {
-	width: 540px;
+	border: none;
+	width: 203.5px;
 	height: 52px;
+	border: 1px solid #c9d1e5;
+	border-radius: 8px;
+	padding-left: 10px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 20px;
+}
+
+.map__search-bar::placeholder {
+	color: #898787;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 20px;
+}
+
+.map__search-bar_type_search {
+	width: 425px;
 }
 
 .ymaps-2-1-79-balloon__layout {

@@ -13,10 +13,6 @@ $form-border-color: #aaa;
 // Mixins
 @mixin border-radius($radius) {
 	border-radius: $radius;
-	-webkit-border-radius: $radius;
-	-moz-border-radius: $radius;
-	-ms-border-radius: $radius;
-	-o-border-radius: $radius;
 }
 
 // Styles
@@ -97,8 +93,8 @@ $form-border-color: #aaa;
 }
 
 .profile__menu-link-icon {
-	width: 24px;
-	height: 24px;
+	width: 20px;
+	height: 20px;
 	display: flex;
 	align-items: center;
 	margin-right: 8px;
