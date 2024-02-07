@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUserAuth } from '../../services/thunks/checkUserAuthThunk';
@@ -11,15 +11,18 @@ import { SportsGround } from '../SportsGround/SportsGround';
 import Layuot from '../Layout/Layout';
 import { PersonalData } from '../Profile/PersonalData';
 import { PasswordData } from '../Profile/PasswordData';
-import * as api from '../../utils/MainApi';
+// import * as api from '../../utils/MainApi';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
 import { getContentByType, getTitleByType } from '../../utils/modal';
 import { Popup } from '../Popup/Popup';
 import { closeModal } from '../../services/slices/modalSlice';
+import { fetchGetAreas } from '../../services/thunks/getAreasThunk';
 
 export function App() {
 	// eslint-disable-next-line no-unused-vars
-	const [areas, setAreas] = useState([]);
+	// const [areas, setAreas] = useState([]);
+
+	const areas = useSelector((state) => state.getAreas.areasList);
 
 	const dispatch = useDispatch();
 
@@ -52,16 +55,21 @@ export function App() {
 	}, [handleCloseModal]);
 
 	// получаем данные площадок
+	// useEffect(() => {
+	// 	api
+	// 		.getAreas()
+	// 		.then((areasData) => {
+	// 			setAreas(areasData);
+	// 		})
+	// 		.catch((err) => {
+	// 			console.log(`Ошибка при получении данных о площадках: ${err}`);
+	// 		});
+	// }, []);
+
 	useEffect(() => {
-		api
-			.getAreas()
-			.then((areasData) => {
-				setAreas(areasData);
-			})
-			.catch((err) => {
-				console.log(`Ошибка при получении данных о площадках: ${err}`);
-			});
-	}, []);
+		dispatch(fetchGetAreas());
+		// console.log(areas);
+	}, [dispatch]);
 
 	return (
 		<>
