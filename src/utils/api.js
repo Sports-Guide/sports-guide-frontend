@@ -8,7 +8,7 @@ function checkResponse(res) {
 			if (res.ok) {
 				return data;
 			}
-			return Promise.reject(new Error(data.message || `Ошибка: ${res.status}`));
+			return Promise.reject(new Error(data.detail || `Ошибка: ${res.status}`));
 		});
 	}
 	return Promise.reject(new Error(`Ошибка: ${res.status}`));
