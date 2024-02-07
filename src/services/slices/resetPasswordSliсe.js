@@ -25,6 +25,9 @@ const resetPasswordSliсe = createSlice({
 		setIsSentEmail: (state) => {
 			state.isSentEmail = false;
 		},
+		setEmail: (state, action) => {
+			state.email = action.payload;
+		},
 		clearSentEmailError: (state) => {
 			state.errorSentEmail = false;
 			state.errorMessageSentEmail = '';
@@ -33,8 +36,7 @@ const resetPasswordSliсe = createSlice({
 	extraReducers: (builder) => {
 		builder
 			// initiating password reset
-			.addCase(fetchInitiatingPasswordReset.fulfilled, (state, action) => {
-				state.email = action.payload;
+			.addCase(fetchInitiatingPasswordReset.fulfilled, (state) => {
 				state.isSentEmail = true;
 				state.isLoadingSentEmail = false;
 				state.errorSentEmail = false;
@@ -72,6 +74,6 @@ const resetPasswordSliсe = createSlice({
 	},
 });
 
-export const { setIsSentEmail, clearSentEmailError } =
+export const { setIsSentEmail, clearSentEmailError, setEmail } =
 	resetPasswordSliсe.actions;
 export default resetPasswordSliсe.reducer;

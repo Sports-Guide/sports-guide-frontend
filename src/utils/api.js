@@ -1,6 +1,10 @@
 export const baseURL = 'https://sports-map.ru/api';
 
 function checkResponse(res) {
+	if (res.status === 204) {
+		return Promise.resolve({});
+	}
+
 	const contentType = res.headers.get('content-type');
 	if (contentType && contentType.includes('application/json')) {
 		return res.json().then((data) => {

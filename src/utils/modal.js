@@ -3,6 +3,7 @@ import FormRegister from '../components/Forms/FormRegister';
 import FormPasswordRecovery from '../components/Forms/FormPasswordRecovery';
 import FormPasswordReset from '../components/Forms/FormPasswordReset';
 import ViewSuccessSentActivation from '../components/Popup/ViewSuccessSentActivation';
+import ViewSuccessSentPasswordRecovery from '../components/Popup/ViewSuccessSentPasswordRecovery';
 
 export const getTitleByType = (type) => {
 	switch (type) {
@@ -13,6 +14,8 @@ export const getTitleByType = (type) => {
 		case 'successSentActivation':
 			return 'Регистрация';
 		case 'passwordRecovery':
+			return 'Восстановление пароля';
+		case 'passwordRecoverySuccessSent':
 			return 'Восстановление пароля';
 		case 'passwordReset':
 			return 'Сброс пароля';
@@ -37,6 +40,8 @@ export const getContentByType = (type, handleClose) => {
 			return <FormPasswordReset handleClose={handleClose} />;
 		case 'successSentActivation':
 			return <ViewSuccessSentActivation handleClose={handleClose} />;
+		case 'passwordRecoverySuccessSent':
+			return <ViewSuccessSentPasswordRecovery handleClose={handleClose} />;
 		default:
 			return null;
 	}
