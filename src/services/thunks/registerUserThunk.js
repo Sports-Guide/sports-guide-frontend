@@ -22,3 +22,23 @@ export const fetchRegister = createAsyncThunk(
 		return data.email;
 	}
 );
+
+const urlUserActivation = `${baseURL}/users/activation/`;
+
+export const fetchUserActivation = createAsyncThunk(
+	'userActivation/post',
+	async ({ uid, token }) => {
+		const data = await request(urlUserActivation, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body: JSON.stringify({
+				uid,
+				token,
+			}),
+		});
+		return data.email;
+	}
+);
