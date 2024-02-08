@@ -1,21 +1,12 @@
-import PropTypes from 'prop-types';
-import './Profile.scss';
 import { NavLink, Outlet } from 'react-router-dom';
-// import FormTitle from '../FormTitle/FormTitle';
-import { Popup } from '../Popup/Popup';
+import { useDispatch } from 'react-redux';
+import './Profile.scss';
 import PersonalDataIcon from '../../images/personal-info-icon.svg';
 import PassBtnIcon from '../../images/password-lock-icon.svg';
+import { openModal } from '../../services/slices/modalSlice';
 
-export function Profile({
-	onDelete,
-	onLogOut,
-	isLogoutPopupOpen,
-	onLogoutPopupOpen,
-	isDeleteAccountPopupOpen,
-	onDeleteAccountPopupOpen,
-	onClose,
-}) {
-	// добавить логику на сравнение полей Никнейм и Почта: если совпадают, поля неактивны
+export function Profile() {
+	const dispatch = useDispatch();
 
 	const linkClass = ({ isActive }) =>
 		isActive
@@ -47,14 +38,14 @@ export function Profile({
 					<div className="profile__menu">
 						<button
 							className="profile__nav-button profile__button-logout"
-							onClick={onLogoutPopupOpen}
+							onClick={() => dispatch(openModal('logout'))}
 							type="button"
 						>
 							Выйти
 						</button>
 						<button
 							className="profile__nav-button profile__button-account-delete"
-							onClick={onDeleteAccountPopupOpen}
+							onClick={() => dispatch(openModal('deleteProfile'))}
 						>
 							Удалить аккаунт
 						</button>
@@ -64,74 +55,8 @@ export function Profile({
 					<Outlet />
 				</div>
 			</section>
-			<Popup
-				isOpen={isLogoutPopupOpen}
-				onClose={onClose}
-				headerClassName="popup__header_left-aligned"
-				title="Выход из профиля"
-			>
-				<h3 className="popup__title">
-					Вы уверены, что хотите выйти из профиля?
-				</h3>
-				<div className="popup__button-container align-left">
-					<button
-						className="popup__button popup__button-y"
-						onClick={onLogOut}
-						type="button"
-						aria-label="log-out-button"
-					>
-						Выйти
-					</button>
-					<button
-						className="popup__button popup__button-n"
-						onClick={onClose}
-						type="button"
-						aria-label="cancel-log-out-button"
-					>
-						Отмена
-					</button>
-				</div>
-			</Popup>
-			<Popup
-				isOpen={isDeleteAccountPopupOpen}
-				onClose={onClose}
-				headerClassName="popup__header_left-aligned"
-				title="Удаление профиля"
-			>
-				<h3 className="popup__title">
-					Вы уверены, что хотите удалить профиль?
-				</h3>
-				<div className="popup__button-container">
-					<button
-						className="popup__button popup__button-y"
-						onClick={onDelete}
-						type="button"
-						aria-label="delete-profile-button"
-					>
-						Удалить
-					</button>
-					<button
-						className="popup__button popup__button-n"
-						onClick={onClose}
-						type="button"
-						aria-label="cancel-delete-profile-button"
-					>
-						Отмена
-					</button>
-				</div>
-			</Popup>
 		</main>
 	);
 }
-
-Profile.propTypes = {
-	onDelete: PropTypes.func.isRequired,
-	onLogOut: PropTypes.func.isRequired,
-	isLogoutPopupOpen: PropTypes.bool.isRequired,
-	onLogoutPopupOpen: PropTypes.func.isRequired,
-	isDeleteAccountPopupOpen: PropTypes.bool.isRequired,
-	onDeleteAccountPopupOpen: PropTypes.func.isRequired,
-	onClose: PropTypes.func.isRequired,
-};
 
 export default Profile;

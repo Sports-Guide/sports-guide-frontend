@@ -124,9 +124,6 @@ $form-border-color: #aaa;
 .profile__nav-button {
 	width: 100%;
 	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 20px;
 	outline: none;
 	border: none;
 	text-decoration: none;
@@ -140,6 +137,9 @@ $form-border-color: #aaa;
 	color: $logout-button-text-color;
 	background-color: $logout-button-bg-color;
 	@include border-radius(8px);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
 }
 
 .profile__button-account-delete {
@@ -148,6 +148,9 @@ $form-border-color: #aaa;
 	color: #737a8e;
 	padding: 4px 0 0 0;
 	font-size: 14px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
 }
 
 .button-y {
@@ -180,10 +183,9 @@ $form-border-color: #aaa;
 .popup__button-container {
 	display: flex;
 	max-width: 312px;
-	gap: 36px;
-	// gap: 12px;
+	gap: 12px;
 	justify-content: left;
-	padding: 32px 0 0;
+	padding: 28px 0 0;
 }
 
 .popup__button {
@@ -195,20 +197,24 @@ $form-border-color: #aaa;
 	text-align: center;
 	width: calc(312px / 2 - 12px);
 	height: 44px;
-	font-weight: 700;
-	line-height: 18px;
 	cursor: pointer;
 	@include border-radius(8px);
 }
 
 .popup__button.popup__button-n {
-	background-color: transparent;
+	background: none;
 	color: $button-secondary-text-color;
 	width: fit-content;
+	font-weight: 700;
+	line-height: 18px;
+	font-size: 16px;
 }
 
 .popup__button.popup__button-y {
 	background: $button-final-color;
 	color: $button-text-color;
+	text-align: center;
+	font-weight: 700;
+	line-height: 18px;
 	font-size: 16px;
 }

@@ -20,6 +20,7 @@ import {
 } from '../../utils/modal';
 import { Popup } from '../Popup/Popup';
 import { closeModal } from '../../services/slices/modalSlice';
+import { FormPasswordResetPage } from '../Forms/FormPasswordResetPage';
 
 export function App() {
 	// eslint-disable-next-line no-unused-vars
@@ -86,7 +87,10 @@ export function App() {
 						<Route path="password" element={<PasswordData />} />
 					</Route>
 					<Route path="sports-ground" element={<SportsGround />} />
-
+					<Route
+						path="password/reset/confirm/:uid/:token"
+						element={<FormPasswordResetPage />}
+					/>
 					<Route path="*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>

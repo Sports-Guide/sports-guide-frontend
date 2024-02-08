@@ -32,6 +32,10 @@ const resetPasswordSliсe = createSlice({
 			state.errorSentEmail = false;
 			state.errorMessageSentEmail = '';
 		},
+		clearConfirmPasswordError: (state) => {
+			state.errorConfirmPassword = false;
+			state.errorMessageConfirmPassword = '';
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -74,6 +78,10 @@ const resetPasswordSliсe = createSlice({
 	},
 });
 
-export const { setIsSentEmail, clearSentEmailError, setEmail } =
-	resetPasswordSliсe.actions;
+export const {
+	setIsSentEmail,
+	clearSentEmailError,
+	setEmail,
+	clearConfirmPasswordError,
+} = resetPasswordSliсe.actions;
 export default resetPasswordSliсe.reducer;

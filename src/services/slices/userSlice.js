@@ -4,6 +4,7 @@ import {
 	fetchUserInfo,
 	fetchEditUserInfo,
 	fetchNewPassword,
+	fetchDeleteProfile,
 } from '../thunks/userThunk';
 
 // initialState хранит начальное состояние(напоминает первый аргумент в хуке useState)
@@ -32,6 +33,10 @@ export const initialState = {
 	isLoadingPassword: false,
 	errorEditPassword: false,
 	errorMessageEditPassword: '',
+	// Delete Profile
+	isLoadingDeleteProfile: false,
+	errorDeleteProfile: false,
+	errorMessageDeleteProfile: '',
 };
 
 const userSlice = createSlice({
@@ -147,6 +152,23 @@ const userSlice = createSlice({
 				state.errorMessageEditPassword =
 					action.error.message ||
 					'Произошла неизвестная ошибка при изменении пароля';
+			})
+			.addCase(fetchDeleteProfile.fulfilled, (state) => {
+				state.userData = null;
+				state.isLogin = false;
+				state.isLoadingDeleteProfile = false;
+				state.errorDeleteProfile = false;
+			})
+			.addCase(fetchDeleteProfile.pending, (state) => {
+				state.isLoadingDeleteProfile = true;
+				state.errorDeleteProfile = false;
+			})
+			.addCase(fetchDeleteProfile.rejected, (state, action) => {
+				state.isLoadingDeleteProfile = false;
+				state.errorDeleteProfile = true;
+				state.errorMessageDeleteProfile =
+					action.error.message ||
+					'Произошла неизвестная ошибка при удалении профиля';
 			});
 	},
 });

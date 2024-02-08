@@ -1,7 +1,9 @@
 import FormLogin from '../components/Forms/FormLogin';
 import FormRegister from '../components/Forms/FormRegister';
 import FormPasswordRecovery from '../components/Forms/FormPasswordRecovery';
-import FormPasswordReset from '../components/Forms/FormPasswordReset';
+import FormPasswordResetModal from '../components/Forms/FormPasswordResetModal';
+import FormLogOut from '../components/Forms/FormLogOut';
+import FormDeleteProfile from '../components/Forms/FormDeleteProfile';
 import ViewSuccessSentActivation from '../components/Popup/ViewSuccessSentActivation';
 import ViewSuccessSentPasswordRecovery from '../components/Popup/ViewSuccessSentPasswordRecovery';
 import ViewSuccessCreateArea from '../components/Popup/ViewSuccessCreateArea';
@@ -37,6 +39,12 @@ export const getTitleStyleByType = (type) => {
 			return 'popup__title-left'; // стиль для заголовка(если отличается от дефолтного)
 		case 'passwordRecoverySuccessSent':
 			return 'popup__title-left';
+		case 'passwordReset':
+			return 'popup__title-left';
+		case 'logout':
+			return 'popup__title-left';
+		case 'deleteProfile':
+			return 'popup__title-left';
 		default:
 			return '';
 	}
@@ -51,7 +59,11 @@ export const getContentByType = (type, handleClose) => {
 		case 'passwordRecovery':
 			return <FormPasswordRecovery handleClose={handleClose} />;
 		case 'passwordReset':
-			return <FormPasswordReset handleClose={handleClose} />;
+			return <FormPasswordResetModal handleClose={handleClose} />;
+		case 'logout':
+			return <FormLogOut handleClose={handleClose} />;
+		case 'deleteProfile':
+			return <FormDeleteProfile handleClose={handleClose} />;
 		case 'successSentActivation':
 			return <ViewSuccessSentActivation handleClose={handleClose} />;
 		case 'passwordRecoverySuccessSent':

@@ -27,7 +27,7 @@ export const fetchInitiatingPasswordReset = createAsyncThunk(
 const urlConfirmPasswordReset = `${baseURL}/users/reset_password_confirm/`;
 
 export const fetchConfirmPasswordReset = createAsyncThunk(
-	'confirmPasswordReset /post',
+	'confirmPasswordReset/post',
 	async ({ uid, token, new_password }) => {
 		const data = await request(urlConfirmPasswordReset, {
 			method: 'POST',

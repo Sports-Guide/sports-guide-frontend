@@ -120,3 +120,19 @@ export const fetchNewPassword = createAsyncThunk(
 		});
 	}
 );
+
+// Удаление профиля
+export const fetchDeleteProfile = createAsyncThunk(
+	'deleteProfile/delete',
+	async () => {
+		const token = localStorage.getItem('accessToken');
+		await request(`${baseURL}/users/me/`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+		});
+	}
+);
