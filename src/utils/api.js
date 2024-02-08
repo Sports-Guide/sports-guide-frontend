@@ -1,14 +1,19 @@
-export const baseUserURL = 'https://sports-map.ru/api';
-export const baseAuthURL = 'https://sports-map.ru/api/auth';
+export const baseURL = 'https://sports-map.ru/api';
 
 function checkResponse(res) {
+	if (res.status === 204) {
+		return Promise.resolve({});
+	}
+
 	const contentType = res.headers.get('content-type');
 	if (contentType && contentType.includes('application/json')) {
 		return res.json().then((data) => {
 			if (res.ok) {
 				return data;
 			}
-			return Promise.reject(new Error(data.message || `Ошибка: ${res.status}`));
+			return Promise.reject(
+				new Error(Object.values(data) || `Ошибка: ${res.status}`)
+			);
 		});
 	}
 	return Promise.reject(new Error(`Ошибка: ${res.status}`));

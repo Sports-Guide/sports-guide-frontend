@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
+import { Field, ErrorMessage } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import './InputCheckbox.scss';
 
 export default function InputCheckbox({ inputId, children }) {
@@ -14,6 +14,7 @@ export default function InputCheckbox({ inputId, children }) {
 				/>
 				{children}
 			</label>
+			<ErrorMessage className="input__error" component="span" name={inputId} />
 		</div>
 	);
 }

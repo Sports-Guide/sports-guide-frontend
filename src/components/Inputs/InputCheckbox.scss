@@ -2,8 +2,9 @@
 	height: 44px;
 	margin: 0;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
 }
 
 .checkbox__label {
@@ -31,4 +32,21 @@
 
 .checkbox__input:checked {
 	background-color: #1478ff;
+}
+
+.input__error-container {
+	margin-top: 5px;
+	min-height: 19px;
+	max-height: 32px;
+	display: block;
+}
+
+.input__error {
+	margin: 0;
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	text-align: left;
+	color: #f92e2e;
 }

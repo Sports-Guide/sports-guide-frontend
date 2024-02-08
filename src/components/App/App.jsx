@@ -13,7 +13,11 @@ import { PersonalData } from '../Profile/PersonalData';
 import { PasswordData } from '../Profile/PasswordData';
 import * as api from '../../utils/MainApi';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
-import { getContentByType, getTitleByType } from '../../utils/modal';
+import {
+	getContentByType,
+	getTitleByType,
+	getTitleStyleByType,
+} from '../../utils/modal';
 import { Popup } from '../Popup/Popup';
 import { closeModal } from '../../services/slices/modalSlice';
 
@@ -90,7 +94,7 @@ export function App() {
 				<Popup
 					handleClose={handleCloseModal}
 					title={getTitleByType(type)}
-					isOpen
+					titleStyle={getTitleStyleByType(type)}
 				>
 					{getContentByType(type, handleCloseModal)}
 				</Popup>
@@ -100,8 +104,3 @@ export function App() {
 }
 
 export default App;
-
-//      isDeleteAccountPopupOpen,
-// 		isLogoutConfirmationPopupOpen,
-// 		isInfoTooltipOpen,
-// 		isCheckPopup,
