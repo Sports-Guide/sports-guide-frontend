@@ -145,6 +145,30 @@ $fontsRoboto: 'Roboto';
 	@include inputs;
 }
 
+.description-of-the-site {
+	width: 772px;
+	height: 168px;
+	padding: 24px;
+	border-radius: 12px;
+	gap: 16px;
+	background: rgba(252, 252, 252, 1);
+	margin-bottom: 10px;
+}
+.description-of-the-site__title {
+	@include fontsTitle;
+}
+.description-of-the-site__textarea {
+	width: 724px;
+	height: 80px;
+	padding: 12px, 16px, 12px, 16px;
+	border-radius: 8px;
+	gap: 4px;
+	border: none;
+	background: rgba(242, 243, 247, 1);
+    padding: 10px;
+	resize:none;
+}
+
 .foto {
 	@include blocks;
 }
@@ -253,5 +277,6 @@ $fontsRoboto: 'Roboto';
 .custom-close {
 	width: 14px;
 	height: 14px;
+	margin-left: 5px;
 	background-image: url('../../images/icn_cross.svg');
 }

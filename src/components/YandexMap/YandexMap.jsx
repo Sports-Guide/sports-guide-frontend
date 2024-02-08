@@ -40,9 +40,12 @@ function YandexMap({ areas, areaAppClass }) {
 
 	return (
 		<div className={`map ${areaAppClass}`}>
-			<div className="map__inputs">
-				<input type="text" className="map__search-bar " />
-				<input type="text" className="map__search-bar" />
+			<div className="map__inputs map__inputs_aprea">
+				<input
+					type="text"
+					className="map__search-bar map__search-bar_kinds-of-sports"
+				/>
+				<input type="text" className="map__search-bar map__search-bar_area" />
 				<input
 					type="text"
 					className="map__search-bar map__search-bar_type_search"

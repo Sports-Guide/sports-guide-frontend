@@ -10,7 +10,7 @@ import { Button } from '../Button/Button';
 import { Popup } from '../Popup/Popup';
 import YandexMap from '../YandexMap/YandexMap';
 
-function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
+function AreaApp({ isOpen, isCheckPopup, handleClose, handleAreaApp, areas }) {
 	const data = [
 		{ Country: 'Футбол', id: 1 },
 		{ Country: 'Баскетбол', id: 2 },
@@ -36,13 +36,12 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 			console.log('Большое количество');
 		} else {
 			setAddFoto(file);
-			console.log(file);
 		}
 	};
 
-	const deletePhoto = (index) => {
-		console.log(index);
-		console.log(addFoto);
+	const handleDeletePhoto = (index) => {
+		const filteredFoto = addFoto.filter((_, i) => i !== index);
+		setAddFoto(filteredFoto);
 	};
 
 	const handleSubmit = (event) => {
@@ -81,6 +80,17 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 							placeHolder="Введите адресс"
 						/>
 					</div>
+					<div className="description-of-the-site">
+						<h3 className="description-of-the-site__title">
+							Описание площадки
+						</h3>
+						<textarea
+							className="description-of-the-site__textarea"
+							id="add-text"
+							name="add-text"
+							placeholder=" "
+						/>
+					</div>
 					<div className="foto">
 						<h3 className="foto__title">Фотографии</h3>
 
@@ -109,7 +119,7 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 								<div className="foto-file__container" key={file}>
 									<Button
 										className="button-clouse-foto-file"
-										onClick={() => deletePhoto(index)}
+										onClick={() => handleDeletePhoto(index)}
 									/>
 									<img
 										className="foto-file__add-server"
@@ -132,23 +142,24 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 							label="Добавить площадку"
 						/>
 					</div>
-					<Popup
-						onClose={onClose}
-						isOpen={isCheckPopup}
-						title="Проверка началась"
-						checkPopup="popup-check"
-						headerClassName="popup-check__title"
-					>
-						<p className="popup-check__subtitle">
-							Как только площадка пройдет проверку, она будет доступна для всех
-							пользователей.
-						</p>
-						<Button
-							className="button-add__check"
-							label="На главную"
-							onClick={navigateToMain}
-						/>
-					</Popup>
+					{isOpen && (
+						<Popup
+							handleClose={handleClose}
+							title="Проверка началась"
+							checkPopup="popup-check"
+							headerClassName="popup-check__title"
+						>
+							<p className="popup-check__subtitle">
+								Как только площадка пройдет проверку, она будет доступна для
+								всех пользователей.
+							</p>
+							<Button
+								className="button-add__check"
+								label="На главную"
+								onClick={navigateToMain}
+							/>
+						</Popup>
+					)}
 				</form>
 			</div>
 		</div>
@@ -156,8 +167,9 @@ function AreaApp({ isCheckPopup, onClose, handleAreaApp, areas }) {
 }
 
 AreaApp.propTypes = {
+	isOpen: PropTypes.bool.isRequired,
 	isCheckPopup: PropTypes.bool.isRequired,
-	onClose: PropTypes.bool.isRequired,
+	handleClose: PropTypes.bool.isRequired,
 	handleAreaApp: PropTypes.bool.isRequired,
 	areas: PropTypes.arrayOf.isRequired,
 };

@@ -75,7 +75,15 @@ export function App() {
 					<Route
 						path="app-area"
 						element={
-							<ProtectedOnlyAuth component={<AreaApp areas={areas} />} />
+							<ProtectedOnlyAuth
+								component={
+									<AreaApp
+										areas={areas}
+										isOpen={isOpen}
+										handleClose={handleCloseModal}
+									/>
+								}
+							/>
 						}
 					/>
 					<Route
