@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import Multiselect from 'multiselect-react-dropdown';
 import PropTypes from 'prop-types';
 import './AreaApp.scss';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import addPictures from '../../images/Camera.svg';
-
 import { Button } from '../Button/Button';
-import { Popup } from '../Popup/Popup';
 import YandexMap from '../YandexMap/YandexMap';
+import { openModal } from '../../services/slices/modalSlice';
 
-function AreaApp({ isOpen, isCheckPopup, handleClose, handleAreaApp, areas }) {
+function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 	const data = [
 		{ Country: 'Футбол', id: 1 },
 		{ Country: 'Баскетбол', id: 2 },
@@ -18,17 +18,13 @@ function AreaApp({ isOpen, isCheckPopup, handleClose, handleAreaApp, areas }) {
 		{ Country: 'Каток', id: 4 },
 	];
 
-	const [options] = useState(data);
+	const dispatch = useDispatch();
 
-	const navigate = useNavigate();
+	const [options] = useState(data);
 
 	// добавление фотографий
 	const [addFoto, setAddFoto] = useState([]);
 	// const [addFotoArray,setAddFotoArray]= useState([]);
-
-	const navigateToMain = () => {
-		navigate('/');
-	};
 
 	const handleFoto = (e) => {
 		const file = Array.from(e.target.files);
@@ -45,8 +41,10 @@ function AreaApp({ isOpen, isCheckPopup, handleClose, handleAreaApp, areas }) {
 	};
 
 	const handleSubmit = (event) => {
+		dispatch(openModal('createAreasSuccess'));
 		event.preventDefault();
 		handleAreaApp(!isCheckPopup);
+
 		console.log(addFoto);
 	};
 
@@ -142,24 +140,6 @@ function AreaApp({ isOpen, isCheckPopup, handleClose, handleAreaApp, areas }) {
 							label="Добавить площадку"
 						/>
 					</div>
-					{isOpen && (
-						<Popup
-							handleClose={handleClose}
-							title="Проверка началась"
-							checkPopup="popup-check"
-							headerClassName="popup-check__title"
-						>
-							<p className="popup-check__subtitle">
-								Как только площадка пройдет проверку, она будет доступна для
-								всех пользователей.
-							</p>
-							<Button
-								className="button-add__check"
-								label="На главную"
-								onClick={navigateToMain}
-							/>
-						</Popup>
-					)}
 				</form>
 			</div>
 		</div>
@@ -167,9 +147,7 @@ function AreaApp({ isOpen, isCheckPopup, handleClose, handleAreaApp, areas }) {
 }
 
 AreaApp.propTypes = {
-	isOpen: PropTypes.bool.isRequired,
 	isCheckPopup: PropTypes.bool.isRequired,
-	handleClose: PropTypes.bool.isRequired,
 	handleAreaApp: PropTypes.bool.isRequired,
 	areas: PropTypes.arrayOf.isRequired,
 };

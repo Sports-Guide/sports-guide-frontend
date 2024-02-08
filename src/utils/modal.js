@@ -4,6 +4,7 @@ import FormPasswordRecovery from '../components/Forms/FormPasswordRecovery';
 import FormPasswordReset from '../components/Forms/FormPasswordReset';
 import ViewSuccessSentActivation from '../components/Popup/ViewSuccessSentActivation';
 import ViewSuccessSentPasswordRecovery from '../components/Popup/ViewSuccessSentPasswordRecovery';
+import ViewSuccessCreateArea from '../components/Popup/ViewSuccessCreateArea';
 
 export const getTitleByType = (type) => {
 	switch (type) {
@@ -23,6 +24,8 @@ export const getTitleByType = (type) => {
 			return 'Выход из профиля';
 		case 'deleteProfile':
 			return 'Удаление профиля';
+		case 'createAreasSuccess':
+			return 'Отправлено на проверку';
 		default:
 			return '';
 	}
@@ -53,6 +56,9 @@ export const getContentByType = (type, handleClose) => {
 			return <ViewSuccessSentActivation handleClose={handleClose} />;
 		case 'passwordRecoverySuccessSent':
 			return <ViewSuccessSentPasswordRecovery handleClose={handleClose} />;
+		case 'createAreasSuccess':
+			return <ViewSuccessCreateArea handleClose={handleClose} />;
+
 		default:
 			return null;
 	}
