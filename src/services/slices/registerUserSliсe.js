@@ -55,17 +55,17 @@ const registerUserSlice = createSlice({
 			.addCase(fetchUserActivation.fulfilled, (state) => {
 				state.isUserActivation = true;
 				state.isLoadingUserActivation = false;
-				state.errorMessageUserActivation = false;
+				state.errorUserActivation = false;
 			})
 			.addCase(fetchUserActivation.pending, (state) => {
 				state.isUserActivation = false;
 				state.isLoadingUserActivation = true;
-				state.errorMessageUserActivation = false;
+				state.errorUserActivation = false;
 			})
 			.addCase(fetchUserActivation.rejected, (state, action) => {
 				state.isUserActivation = false;
 				state.isLoadingUserActivation = false;
-				state.errorRegister = true;
+				state.errorUserActivation = true;
 				state.errorMessageUserActivation =
 					action.error.message || 'Произошла неизвестная ошибка';
 			});

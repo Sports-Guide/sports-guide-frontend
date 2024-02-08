@@ -10,7 +10,7 @@ export default function ViewSuccessSentPasswordRecovery({ handleClose }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const email = useSelector((state) => state.resetPassword.email);
-	const text = `Письмо успешно отправлено на ${email}.`;
+	const text = `Письмо со ссылкой для восстановления пароля отправлено на ${email}.`;
 
 	const navigateHome = () => {
 		navigate('/');
@@ -22,15 +22,15 @@ export default function ViewSuccessSentPasswordRecovery({ handleClose }) {
 	}, [dispatch, handleClose]);
 
 	return (
-		<>
-			<p className="popup__text">{text}</p>
+		<div className="view__container">
+			<p className="view__text">{text}</p>
 			<Button
-				className="register-form__button-register popup__button-y"
+				className="view__button-navigate-home"
 				type="button"
 				onClick={navigateHome}
 				label="На главную"
 			/>
-		</>
+		</div>
 	);
 }
 

@@ -7,6 +7,7 @@ import FormDeleteProfile from '../components/Forms/FormDeleteProfile';
 import ViewSuccessSentActivation from '../components/Popup/ViewSuccessSentActivation';
 import ViewSuccessSentPasswordRecovery from '../components/Popup/ViewSuccessSentPasswordRecovery';
 import ViewSuccessCreateArea from '../components/Popup/ViewSuccessCreateArea';
+import ViewInformActivation from '../components/Popup/ViewInformActivation';
 
 export const getTitleByType = (type) => {
 	switch (type) {
@@ -70,6 +71,8 @@ export const getContentByType = (type, handleClose) => {
 			return <ViewSuccessSentPasswordRecovery handleClose={handleClose} />;
 		case 'createAreasSuccess':
 			return <ViewSuccessCreateArea handleClose={handleClose} />;
+		case 'informActivation':
+			return <ViewInformActivation handleClose={handleClose} />;
 
 		default:
 			return null;
