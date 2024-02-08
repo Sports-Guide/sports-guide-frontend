@@ -74,6 +74,10 @@ export function App() {
 				<Route path="/" element={<Layuot />}>
 					<Route index element={<Main areas={areas} />} />
 					<Route
+						path="/activate/:uid/:token"
+						element={<Main areas={areas} />}
+					/>
+					<Route
 						path="app-area"
 						element={
 							<ProtectedOnlyAuth component={<AreaApp areas={areas} />} />

@@ -22,15 +22,15 @@ export default function ViewSuccessSentActivation({ handleClose }) {
 	}, [dispatch, handleClose]);
 
 	return (
-		<>
-			<p className="popup__text">{text}</p>
+		<div className="view__container">
+			<p className="view__text">{text}</p>
 			<Button
-				className="register-form__button-register popup__button-y"
+				className="view__button-navigate-home"
 				type="button"
 				onClick={navigateHome}
 				label="На главную"
 			/>
-		</>
+		</div>
 	);
 }
 
