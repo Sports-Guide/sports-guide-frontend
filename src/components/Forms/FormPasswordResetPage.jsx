@@ -22,6 +22,7 @@ export const FormPasswordResetPage = () => {
 		if (values.newPassword !== values.confirmPassword) {
 			errors.confirmPassword = 'Пароли не совпадают';
 		}
+		return errors;
 	};
 
 	const handleSubmit = (values) => {
@@ -92,9 +93,6 @@ function FormComponent() {
 	const isLoadingConfirmPassword = useSelector(
 		(state) => state.resetPassword.isLoadingConfirmPassword
 	);
-	const errorMessageConfirmPassword = useSelector(
-		(state) => state.resetPassword.errorMessageConfirmPassword
-	);
 
 	const { values } = useFormikContext();
 	const dispatch = useDispatch();
@@ -111,9 +109,6 @@ function FormComponent() {
 			</p>
 			<InputPassword labelText="Новый пароль" inputId="newPassword" />
 			<InputPassword labelText="Повторите пароль" inputId="confirmPassword" />
-			<span className="reset-password-form__server-error">
-				{errorMessageConfirmPassword || ''}
-			</span>
 			<button className="reset-password-form__button" type="submit">
 				{isLoadingConfirmPassword ? 'Отправка...' : 'Отправить'}
 			</button>
