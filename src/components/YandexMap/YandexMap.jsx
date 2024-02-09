@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useRef } from 'react';
 import './YandexMap.scss';
-import { YMaps, Map, Placemark, Clusterer } from '@pbe/react-yandex-maps';
+import { Map, Placemark, Clusterer } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 
 function YandexMap({ areas, areaAppClass }) {
@@ -14,18 +14,34 @@ function YandexMap({ areas, areaAppClass }) {
 	});
 
 	const loadSuggest = (ymaps) => {
-		const suggestView = new ymaps.SuggestView('suggest');
+		//Подключение поисковой подсказки
+		const suggestView = new ymaps.SuggestView('suggest', {
+			//ограничение зоны поисковой подсказки
+			boundedBy: [
+				[55.503749, 37.286549],
+				[56.009657, 37.967616],
+			], // Границы Москвы
+			strictBounds: [
+				[55.503749, 37.286549], // Юго-Западный округ
+				[56.009657, 37.967616], // Северо-Восточный округ
+			],
+		});
 		let selectedItem = null;
-		suggestView.events.add('select', function (event) {
+		//Получение коодинат по поисковому запросу
+		suggestView.events.add('select', (event) => {
 			selectedItem = event.get('item');
 			ymaps
 				.geocode(selectedItem.value, {
 					results: 2,
 				})
-				.then(function (res) {
-					var firstGeoObject = res.geoObjects.get(0),
-						coords = firstGeoObject.geometry.getCoordinates();
-					let bounds = firstGeoObject.properties.get('boundedBy');
+				.then((res) => {
+					const firstGeoObject = res.geoObjects.get(0);
+					//координаты запрашиваемого обьекта
+					const coords = firstGeoObject.geometry.getCoordinates();
+					//координаты для корректного зума карты
+					const bounds = firstGeoObject.properties.get('boundedBy');
+					console.log(bounds);
+					//обновление стейтов
 					ref.current.setBounds(bounds, { checkZoomRange: true });
 					setMapState((prevState) => ({
 						...prevState,
@@ -53,36 +69,33 @@ function YandexMap({ areas, areaAppClass }) {
 					placeholder="Введите адрес"
 				/>
 			</div>
-			<YMaps
-				query={{
-					ns: 'use-load-option',
-					load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon',
-					apikey: 'c062e9ac-db0c-4d73-b5b2-71830702f484',
-					suggest_apikey: '7841f93a-196d-47c1-9184-54f3c937df30',
+
+			<Map
+				instanceRef={ref}
+				state={mapState}
+				className="map__container"
+				modules={['SuggestView', 'geocode', 'coordSystem.geo']}
+				onLoad={(ymaps) => loadSuggest(ymaps)}
+				options={{
+					//ограничение максимальной зоны отображения - граница России
+					restrictMapArea: [
+						[41.185996, 19.484764],
+						[81.886117, 191.128012],
+					],
 				}}
 			>
-				<Map
-					instanceRef={ref}
-					state={mapState}
-					className="map__container"
-					modules={['SuggestView', 'geocode', 'coordSystem.geo']}
-					onLoad={(ymaps) => loadSuggest(ymaps)}
+				<Clusterer
+					options={{
+						preset: 'islands#invertedVioletClusterIcons',
+						groupByCoordinates: false,
+					}}
 				>
-					<Clusterer
-						options={{
-							preset: 'islands#invertedVioletClusterIcons',
-							groupByCoordinates: false,
-						}}
-					>
-						{areas.map((area) => (
-							<Placemark
-								key={area.id}
-								geometry={[
-									parseFloat(area.latitude),
-									parseFloat(area.longitude),
-								]}
-								properties={{
-									balloonContentBody: `
+					{areas.map((area) => (
+						<Placemark
+							key={area.id}
+							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}
+							properties={{
+								balloonContentBody: `
 									<div class = "yandex">
 									<img class = "yandex__images" src="https://r4p.org/image/cache/data/msport_new/1-silnyj-dvor-nojabrsk/3_sil_dv/2-max-900.jpg">
 									<div class = "yandex__contetn">
@@ -117,18 +130,17 @@ function YandexMap({ areas, areaAppClass }) {
 									</div>
 									</div>
 									`,
-								}}
-								options={{
-									preset: 'islands#blueSportIcon',
-									controls: [],
-									visible: true,
-									cursor: 'pointer',
-								}}
-							/>
-						))}
-					</Clusterer>
-				</Map>
-			</YMaps>
+							}}
+							options={{
+								preset: 'islands#blueSportIcon',
+								controls: [],
+								visible: true,
+								cursor: 'pointer',
+							}}
+						/>
+					))}
+				</Clusterer>
+			</Map>
 		</div>
 	);
 }
