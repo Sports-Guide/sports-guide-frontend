@@ -67,6 +67,10 @@ const userSlice = createSlice({
 		setIsUserDataEditingFalse: (state) => {
 			state.isUserDataEditing = false;
 		},
+		clearEditUserDataError: (state) => {
+			state.errorEditUserData = false;
+			state.errorMessageEditUserData = '';
+		},
 		setIsPasswordEditingTrue: (state) => {
 			state.isPasswordEditing = true;
 		},
@@ -182,5 +186,6 @@ export const {
 	setIsPasswordEditingTrue,
 	setIsPasswordEditingFalse,
 	clearLoginError,
+	clearEditUserDataError,
 } = userSlice.actions;
 export default userSlice.reducer;

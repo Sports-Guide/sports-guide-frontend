@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { fetchDeleteProfile } from '../../services/thunks/userThunk';
 import { Button } from '../Button/Button';
 import { closeModal } from '../../services/slices/modalSlice';
+import { setAuthFalse } from '../../services/slices/userSlice';
 import './FormDeleteProfile.scss';
 
 export default function FormDeleteProfile({ handleClose }) {
@@ -20,6 +21,8 @@ export default function FormDeleteProfile({ handleClose }) {
 		)
 			.then((res) => {
 				if (res.statusCode === 204 || 200) {
+					setAuthFalse();
+					localStorage.clear();
 					dispatch(closeModal());
 					navigate('/', { replace: true });
 				}

@@ -21,6 +21,7 @@ import {
 import { Popup } from '../Popup/Popup';
 import { closeModal } from '../../services/slices/modalSlice';
 import { FormPasswordResetPage } from '../Forms/FormPasswordResetPage';
+import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 
 export function App() {
 	// eslint-disable-next-line no-unused-vars
@@ -95,6 +96,7 @@ export function App() {
 						path="password/reset/confirm/:uid/:token"
 						element={<FormPasswordResetPage />}
 					/>
+					<Route path="privacy-policy" element={<PrivacyPolicy />} />
 					<Route path="*" element={<NotFoundPage />} />
 				</Route>
 			</Routes>

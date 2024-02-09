@@ -100,7 +100,11 @@ function FormComponent() {
 			<InputCheckbox inputId="AgreeWithPolitiks">
 				<span>
 					Я соглашаюсь с{' '}
-					<a href="/politika" className="register-form__link-politiks">
+					<a
+						href="/privacy-policy"
+						className="register-form__link-politiks"
+						target="_blank"
+					>
 						Политикой обработки персональных данных
 					</a>
 				</span>
