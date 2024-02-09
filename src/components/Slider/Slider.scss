@@ -1,0 +1,27 @@
+.slider-container {
+	width: 861px;
+	height: 400px;
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.slider-window {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	border-radius: 10px;
+}
+
+.images-container {
+	height: 100%;
+	display: flex;
+	transition: translate;
+	transition-property: transform;
+	transition-duration: 300ms;
+	transition-timing-function: ease-in-out;
+}
+
+.arrow {
+	cursor: pointer;
+}

@@ -1,0 +1,234 @@
+$fontsRoboto: 'Roboto';
+
+@mixin fontsTitle {
+	//styleName: Bold/H4;
+	font-family: Roboto Flex;
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+@mixin displayPosition {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+@mixin blocks {
+	width: 772px;
+	border-radius: 12px;
+	background: rgba(252, 252, 252, 1);
+	padding: 24px;
+	margin-bottom: 16px;
+}
+
+@mixin label {
+	//styleName: Bold/H4;
+	font-family: Roboto Flex;
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+	margin-top: 7px;
+	margin-left: -3px;
+}
+
+@mixin inputs {
+	width: 724px;
+	height: 42px;
+	border-radius: 8px;
+	margin-top: 18px;
+	border: 1px solid rgba(201, 209, 229, 1);
+}
+
+.area-app {
+	padding-left: 200px;
+	color: rgba(81, 81, 81, 1);
+}
+.area-app__link {
+	font-family: $fontsRoboto;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 20px;
+	color: #737a8e;
+	margin-top: 51px;
+	padding-left: 31px;
+	text-decoration: none;
+	text-align: left;
+	background-image: url('../../images/left-arrow.svg');
+	background-repeat: no-repeat;
+}
+
+.area-app__information {
+	display: flex;
+	flex-direction: column;
+}
+
+.area-app__title {
+	//styleName: Bold/H2;
+	font-family: Roboto Flex;
+	font-size: 28px;
+	font-weight: 900;
+	line-height: 32px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
+	margin-top: 34px;
+	margin-left: -3px;
+	margin-bottom: 28px;
+}
+
+.kinds-of-sports {
+	@include blocks;
+}
+.kinds-of-sports__title {
+	@include fontsTitle;
+}
+.kinds-of-sports__label {
+	@include displayPosition;
+	@include label;
+}
+.kinds-of-sports__add {
+	@include inputs;
+}
+
+.location {
+	@include blocks;
+}
+
+.location__label {
+	@include displayPosition;
+	@include label;
+}
+.location__adress {
+	@include inputs;
+}
+
+.foto {
+	@include blocks;
+}
+.foto__title {
+	@include fontsTitle;
+}
+
+.foto__subtitle {
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px;
+	letter-spacing: 0em;
+	text-align: left;
+	margin-top: 9px;
+}
+
+.foto__container {
+	display: flex;
+	width: 724px;
+	height: 175px;
+	border-radius: 8px;
+	gap: 8px;
+}
+
+.foto__file-label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 175px;
+	height: 175px;
+	padding: 24px;
+	border-radius: 8px;
+	border: 2px;
+	gap: 8px;
+	border: 2px dashed rgba(20, 120, 255, 0.3);
+}
+.foto__file-add {
+	display: none;
+}
+.foto-file-img {
+	cursor: pointer;
+}
+
+.app-area {
+	@include blocks;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 184px;
+}
+.app-area__title {
+	@include fontsTitle;
+}
+.app-area__subtitle {
+	//styleName: Regular/Inputs_Placeholdertext;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	margin-top: -2px;
+	margin-bottom: 0;
+	margin-left: -1px;
+	width: 555px;
+	color: rgba(115, 122, 142, 1);
+	margin-bottom: 28px;
+}
+
+.search-wrapper {
+	border-radius: 8px;
+	border: 1px solid rgba(201, 209, 229, 1);
+	width: 724px;
+	height: 44px;
+}
+
+.chip {
+	background: rgba(229, 240, 255, 1);
+	border-radius: 0;
+	color: rgba(21, 62, 140, 1);
+}
+
+.custom-close {
+	width: 14px;
+	height: 14px;
+	background-image: url('../../images/icn_cross.svg');
+}
