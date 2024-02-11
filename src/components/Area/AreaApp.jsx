@@ -10,7 +10,7 @@ import { Button } from '../Button/Button';
 import YandexMap from '../YandexMap/YandexMap';
 import { openModal } from '../../services/slices/modalSlice';
 
-function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
+function AreaApp({ areas }) {
 	const data = [
 		{ Country: 'Футбол', id: 1 },
 		{ Country: 'Баскетбол', id: 2 },
@@ -21,10 +21,18 @@ function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 	const dispatch = useDispatch();
 
 	const [options] = useState(data);
-
+	// отправка формы на сервер
+	const [areaDescription, setAreaDiscriptin] = useState([]);
+	const [category, setCategory] = useState([]);
 	// добавление фотографий
 	const [addFoto, setAddFoto] = useState([]);
-	// const [addFotoArray,setAddFotoArray]= useState([]);
+	// координаты карт
+
+	const [coordinate, setCoordinate] = useState([]);
+
+	const handlDescription = (e) => {
+		setAreaDiscriptin(e.target.value);
+	};
 
 	const handleFoto = (e) => {
 		const file = Array.from(e.target.files);
@@ -40,12 +48,17 @@ function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 		setAddFoto(filteredFoto);
 	};
 
+	const handleCategories = (e) => {
+		setCategory(e.target.value);
+	};
+
 	const handleSubmit = (event) => {
 		dispatch(openModal('createAreasSuccess'));
-		event.preventDefault();
-		handleAreaApp(!isCheckPopup);
-
+		console.log(areaDescription);
 		console.log(addFoto);
+		console.log(category);
+		console.log(coordinate);
+		event.preventDefault();
 	};
 
 	useEffect(() => {}, [addFoto]);
@@ -57,7 +70,7 @@ function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 					К выбору площадки
 				</NavLink>
 				<h2 className="area-app__title">Добавление площадки</h2>
-				<form className="addition-area">
+				<form className="addition-area" onSubmit={handleSubmit}>
 					<div className="kinds-of-sports">
 						<h3 className="kinds-of-sports__title">Виды спорта</h3>
 						<Multiselect
@@ -66,6 +79,7 @@ function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 							options={options}
 							displayValue="Country"
 							customCloseIcon={<> </>}
+							onChange={handleCategories}
 						/>
 					</div>
 					<div className="location">
@@ -76,6 +90,7 @@ function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 							areas={areas}
 							areaAppClass="map_area-app"
 							placeHolder="Введите адресс"
+							setCoordinate={setCoordinate}
 						/>
 					</div>
 					<div className="description-of-the-site">
@@ -87,6 +102,7 @@ function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 							id="add-text"
 							name="add-text"
 							placeholder=" "
+							onChange={handlDescription}
 						/>
 					</div>
 					<div className="foto">
@@ -136,8 +152,8 @@ function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 
 						<Button
 							className="button-add"
-							onClick={handleSubmit}
 							label="Добавить площадку"
+							onClick={handleSubmit}
 						/>
 					</div>
 				</form>
@@ -147,8 +163,6 @@ function AreaApp({ isCheckPopup, handleAreaApp, areas }) {
 }
 
 AreaApp.propTypes = {
-	isCheckPopup: PropTypes.bool.isRequired,
-	handleAreaApp: PropTypes.bool.isRequired,
 	areas: PropTypes.arrayOf.isRequired,
 };
 export default AreaApp;

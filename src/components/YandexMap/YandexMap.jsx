@@ -4,8 +4,18 @@ import './YandexMap.scss';
 import { Map, Placemark, Clusterer } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 
-function YandexMap({ areas, areaAppClass }) {
+function YandexMap({ areas, areaAppClass, setCoordinate }) {
 	const ref = useRef();
+
+	const [points, setPoints] = React.useState([]);
+	const handleMapClick = React.useCallback(
+		(e) => {
+			const point = e.get('coords');
+			setPoints([point]);
+			setCoordinate([point]);
+		},
+		[points]
+	);
 
 	const [mapState, setMapState] = useState({
 		center: [55.751426, 37.618879],
@@ -83,6 +93,7 @@ function YandexMap({ areas, areaAppClass }) {
 						[81.886117, 191.128012],
 					],
 				}}
+				onClick={handleMapClick}
 			>
 				<Clusterer
 					options={{
@@ -90,6 +101,13 @@ function YandexMap({ areas, areaAppClass }) {
 						groupByCoordinates: false,
 					}}
 				>
+					{areaAppClass === undefined ? (
+						<></>
+					) : (
+						points.map((point, index) => (
+							<Placemark key={index} geometry={point} />
+						))
+					)}
 					{areas.map((area) => (
 						<Placemark
 							key={area.id}
