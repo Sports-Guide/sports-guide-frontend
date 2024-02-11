@@ -4,7 +4,7 @@ import './YandexMap.scss';
 import { Map, Placemark, Clusterer } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 
-function YandexMap({ areas, areaAppClass, setCoordinate }) {
+function YandexMap({ areas, areaAppClass }) {
 	const ref = useRef();
 
 	const [points, setPoints] = React.useState([]);
@@ -12,7 +12,6 @@ function YandexMap({ areas, areaAppClass, setCoordinate }) {
 		(e) => {
 			const point = e.get('coords');
 			setPoints([point]);
-			setCoordinate([point]);
 		},
 		[points]
 	);

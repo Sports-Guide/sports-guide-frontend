@@ -28,8 +28,6 @@ function AreaApp({ areas }) {
 	const [addFoto, setAddFoto] = useState([]);
 	// координаты карт
 
-	const [coordinate, setCoordinate] = useState([]);
-
 	const handlDescription = (e) => {
 		setAreaDiscriptin(e.target.value);
 	};
@@ -57,7 +55,6 @@ function AreaApp({ areas }) {
 		console.log(areaDescription);
 		console.log(addFoto);
 		console.log(category);
-		console.log(coordinate);
 		event.preventDefault();
 	};
 
@@ -90,7 +87,6 @@ function AreaApp({ areas }) {
 							areas={areas}
 							areaAppClass="map_area-app"
 							placeHolder="Введите адресс"
-							setCoordinate={setCoordinate}
 						/>
 					</div>
 					<div className="description-of-the-site">
