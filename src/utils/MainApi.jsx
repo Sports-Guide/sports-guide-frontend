@@ -1,5 +1,6 @@
 const BASE_URL = 'https://sports-map.ru/api/auth';
 const SPORT_GROUNDS_URL = 'https://sports-map.ru/api';
+// const COORDS_URL = 'https://nominatim.openstreetmap.org/search';
 // const BASE_URL = 'http://localhost:3000';
 
 export function validateResponse(res) {
@@ -65,5 +66,17 @@ export function getAreas() {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
 		},
+	}).then(validateResponse);
+}
+
+export function getCoords() {
+	const params = new URLSearchParams({
+		q: 'Центральный округ, Москва',
+		format: 'json',
+		polygon_geojson: 1,
+	});
+
+	return fetch(`https://nominatim.openstreetmap.org/search?${params}`, {
+		method: 'GET',
 	}).then(validateResponse);
 }
