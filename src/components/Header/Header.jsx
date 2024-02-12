@@ -34,9 +34,9 @@ export function Header() {
 				<Link to="/" className="header__logo">
 					<img className="logo" src={logo} alt="" />
 					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
-					<ButtonMap label="Москва" />
 				</Link>
 				<div className="header__buttons">
+					<ButtonMap label="Москва" />
 					<Button
 						className="button-app"
 						onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
