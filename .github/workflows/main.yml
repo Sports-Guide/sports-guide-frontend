@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd sports-guide
+            cd sports-map
             docker compose pull
             docker compose down
             docker compose up -d
