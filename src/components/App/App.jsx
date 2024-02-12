@@ -27,6 +27,8 @@ export function App() {
 	// eslint-disable-next-line no-unused-vars
 	const [areas, setAreas] = useState([]);
 
+	const [categories, setCategories] = useState([]);
+
 	const dispatch = useDispatch();
 
 	const location = useLocation(); // Получение текущего местоположения
@@ -67,6 +69,16 @@ export function App() {
 			.catch((err) => {
 				console.log(`Ошибка при получении данных о площадках: ${err}`);
 			});
+
+		api
+			.getCategory()
+			.then((category) => {
+				console.log(category);
+				setCategories(category);
+			})
+			.catch((err) => {
+				console.log(`Ошибка при получении данных о категориях: ${err}`);
+			});
 	}, []);
 
 	// useEffect(() => {
@@ -92,7 +104,9 @@ export function App() {
 					<Route
 						path="app-area"
 						element={
-							<ProtectedOnlyAuth component={<AreaApp areas={areas} />} />
+							<ProtectedOnlyAuth
+								component={<AreaApp areas={areas} categories={categories} />}
+							/>
 						}
 					/>
 					<Route

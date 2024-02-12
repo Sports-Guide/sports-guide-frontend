@@ -10,17 +10,11 @@ import { Button } from '../Button/Button';
 import YandexMap from '../YandexMap/YandexMap';
 import { openModal } from '../../services/slices/modalSlice';
 
-function AreaApp({ areas }) {
-	const data = [
-		{ Country: 'Футбол', id: 1 },
-		{ Country: 'Баскетбол', id: 2 },
-		{ Country: 'Волейбол', id: 3 },
-		{ Country: 'Каток', id: 4 },
-	];
-
+function AreaApp({ areas, categories }) {
+	console.log(categories);
 	const dispatch = useDispatch();
 
-	const [options] = useState(data);
+	const [options] = useState(categories);
 	// отправка формы на сервер
 	const [areaDescription, setAreaDiscriptin] = useState([]);
 	const [category, setCategory] = useState([]);
@@ -74,7 +68,7 @@ function AreaApp({ areas }) {
 							showCheckbox
 							placeholder=""
 							options={options}
-							displayValue="Country"
+							displayValue="name"
 							customCloseIcon={<> </>}
 							onChange={handleCategories}
 						/>
@@ -160,5 +154,6 @@ function AreaApp({ areas }) {
 
 AreaApp.propTypes = {
 	areas: PropTypes.arrayOf.isRequired,
+	categories: PropTypes.arrayOf.isRequired,
 };
 export default AreaApp;

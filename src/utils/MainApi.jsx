@@ -69,6 +69,16 @@ export function getAreas() {
 	}).then(validateResponse);
 }
 
+export function getCategory() {
+	return fetch(`${SPORT_GROUNDS_URL}/categories/`, {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then(validateResponse);
+}
+
 export function getCoords() {
 	const params = new URLSearchParams({
 		q: 'Центральный округ, Москва',
