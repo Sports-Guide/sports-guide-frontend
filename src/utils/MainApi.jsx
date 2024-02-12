@@ -87,18 +87,22 @@ export const addNewArea = (
 	categories,
 	images
 ) => {
+	const token = localStorage.getItem('accessToken');
+
 	const data = new FormData();
 	data.append('address', address);
 	data.append('description', description);
 	data.append('latitude', latitude);
 	data.append('longitude', longitude);
 	data.append('categories', categories);
-	data.append('images', images);
+	images.forEach((foto) => {
+		data.append('images', foto);
+	});
 
-	return fetch(`${SPORT_GROUNDS_URL}/areas`, {
+	return fetch(`${SPORT_GROUNDS_URL}/areas/`, {
 		method: 'POST',
 		headers: {
-			authorization: `Bearer ${localStorage.getItem('token')}`,
+			Authorization: `Bearer ${token}`,
 		},
 		body: data,
 	}).then(validateResponse);
