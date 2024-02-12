@@ -73,7 +73,6 @@ export function App() {
 		api
 			.getCategory()
 			.then((category) => {
-				console.log(category);
 				setCategories(category);
 			})
 			.catch((err) => {
@@ -81,6 +80,24 @@ export function App() {
 			});
 	}, []);
 
+	// Функция добавления площадки
+	const handleAddArea = (
+		address,
+		description,
+		latitude,
+		longitude,
+		categorie,
+		images
+	) => {
+		api
+			.addNewArea(address, description, latitude, longitude, categorie, images)
+			.then((result) => {
+				console.log(result);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 	// useEffect(() => {
 	// 	api
 	// 		.getCoords()
@@ -105,7 +122,13 @@ export function App() {
 						path="app-area"
 						element={
 							<ProtectedOnlyAuth
-								component={<AreaApp areas={areas} categories={categories} />}
+								component={
+									<AreaApp
+										areas={areas}
+										categories={categories}
+										handleAddArea={handleAddArea}
+									/>
+								}
 							/>
 						}
 					/>

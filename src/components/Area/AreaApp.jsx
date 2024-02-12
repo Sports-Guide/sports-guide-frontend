@@ -10,17 +10,20 @@ import { Button } from '../Button/Button';
 import YandexMap from '../YandexMap/YandexMap';
 import { openModal } from '../../services/slices/modalSlice';
 
-function AreaApp({ areas, categories }) {
-	console.log(categories);
+function AreaApp({ areas, categories, handleAddArea }) {
 	const dispatch = useDispatch();
 
 	const [options] = useState(categories);
 	// отправка формы на сервер
 	const [areaDescription, setAreaDiscriptin] = useState([]);
+	// добавление категорий
 	const [category, setCategory] = useState([]);
 	// добавление фотографий
 	const [addFoto, setAddFoto] = useState([]);
 	// координаты карт
+	const [coordinate, setCoordinate] = useState([]);
+	const [adressText, setAdressText] = useState([]);
+	// широта
 
 	const handlDescription = (e) => {
 		setAreaDiscriptin(e.target.value);
@@ -46,10 +49,15 @@ function AreaApp({ areas, categories }) {
 
 	const handleSubmit = (event) => {
 		dispatch(openModal('createAreasSuccess'));
-		console.log(areaDescription);
-		console.log(addFoto);
-		console.log(category);
 		event.preventDefault();
+		handleAddArea(
+			adressText,
+			areaDescription,
+			coordinate.map((cord) => cord[0]),
+			coordinate.map((cord) => cord[1]),
+			category.map((categor) => categor.id),
+			addFoto
+		);
 	};
 
 	useEffect(() => {}, [addFoto]);
@@ -70,6 +78,12 @@ function AreaApp({ areas, categories }) {
 							options={options}
 							displayValue="name"
 							customCloseIcon={<> </>}
+							onSelect={(event) => {
+								setCategory(event);
+							}}
+							onRemove={(event) => {
+								setCategory(event);
+							}}
 							onChange={handleCategories}
 						/>
 					</div>
@@ -80,7 +94,8 @@ function AreaApp({ areas, categories }) {
 						<YandexMap
 							areas={areas}
 							areaAppClass="map_area-app"
-							placeHolder="Введите адресс"
+							setCoordinate={setCoordinate}
+							setAdressText={setAdressText}
 						/>
 					</div>
 					<div className="description-of-the-site">
@@ -155,5 +170,6 @@ function AreaApp({ areas, categories }) {
 AreaApp.propTypes = {
 	areas: PropTypes.arrayOf.isRequired,
 	categories: PropTypes.arrayOf.isRequired,
+	handleAddArea: PropTypes.arrayOf.isRequired,
 };
 export default AreaApp;

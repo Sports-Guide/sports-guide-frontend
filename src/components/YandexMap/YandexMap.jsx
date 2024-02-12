@@ -10,7 +10,7 @@ import {
 	areasCoord,
 } from '../../constants/MapConstants';
 
-function YandexMap({ areas, areaAppClass }) {
+function YandexMap({ areas, areaAppClass, setCoordinate, setAdressText }) {
 	const ref = useRef();
 	const location = useLocation();
 	const areaPath = location.pathname === '/app-area';
@@ -26,9 +26,11 @@ function YandexMap({ areas, areaAppClass }) {
 	const handleMapClick = React.useCallback((e, ymaps) => {
 		const point = e.get('coords');
 		setPoints([point]);
+		setCoordinate([point]);
 		ymaps.geocode(point).then((res) => {
 			const firstGeoObject = res.geoObjects.get(0);
 			const addressLine = firstGeoObject.getAddressLine();
+			setAdressText(addressLine);
 			setAddress(addressLine);
 		});
 	}, []);

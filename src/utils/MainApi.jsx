@@ -79,6 +79,31 @@ export function getCategory() {
 	}).then(validateResponse);
 }
 
+export const addNewArea = (
+	address,
+	description,
+	latitude,
+	longitude,
+	categories,
+	images
+) => {
+	const data = new FormData();
+	data.append('address', address);
+	data.append('description', description);
+	data.append('latitude', latitude);
+	data.append('longitude', longitude);
+	data.append('categories', categories);
+	data.append('images', images);
+
+	return fetch(`${SPORT_GROUNDS_URL}/areas`, {
+		method: 'POST',
+		headers: {
+			authorization: `Bearer ${localStorage.getItem('token')}`,
+		},
+		body: data,
+	}).then(validateResponse);
+};
+
 export function getCoords() {
 	const params = new URLSearchParams({
 		q: 'Центральный округ, Москва',
