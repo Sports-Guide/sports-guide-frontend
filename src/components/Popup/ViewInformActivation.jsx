@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import './ViewInformActivation.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../Button/Button';
+import { openModal } from '../../services/slices/modalSlice';
 
 export default function ViewInformActivation({ handleClose }) {
 	const navigate = useNavigate();
@@ -22,6 +24,8 @@ export default function ViewInformActivation({ handleClose }) {
 		(state) => state.registerUser.errorMessageUserActivation
 	);
 
+	const isLoadingLogin = useSelector((state) => state.user.isLoadingLogin);
+
 	useEffect(() => {
 		navigate('/');
 	}, [dispatch, handleClose, navigate]);
@@ -30,7 +34,15 @@ export default function ViewInformActivation({ handleClose }) {
 		<>
 			{isLoadingUserActivation && <p className="message__text">Активация...</p>}
 			{isUserActivation && (
-				<p className="message__text">Активация прошла успешно!</p>
+				<>
+					<p className="message__text">Регистрация прошла успешно</p>
+					<Button
+						className="view-form__button-signin"
+						type="button"
+						label={isLoadingLogin ? 'Вход...' : 'Войти'}
+						onClick={() => dispatch(openModal('login'))}
+					/>
+				</>
 			)}
 			{errorUserActivation && (
 				<p className="message__text message__text-error">

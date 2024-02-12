@@ -130,7 +130,6 @@ const userSlice = createSlice({
 				state.errorEditUserData = false;
 			})
 			.addCase(fetchEditUserInfo.rejected, (state, action) => {
-				state.isUserDataEditing = false;
 				state.isLoadingUserData = false;
 				state.errorEditUserData = true;
 				state.errorMessageEditUserData =

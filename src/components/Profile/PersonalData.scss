@@ -213,3 +213,17 @@ $input-border-radius: 8px;
 	padding: 8px 16px;
 	cursor: pointer;
 }
+
+.profile__server-error {
+	display: block;
+	justify-content: center;
+	align-items: center;
+	min-height: 18px;
+	max-height: 32px;
+	color: #f92e2e;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	margin: 0;
+	// margin: 20px 0 8px;
+}

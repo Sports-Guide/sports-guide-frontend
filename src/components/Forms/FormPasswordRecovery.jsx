@@ -3,7 +3,7 @@ import './FormPasswordRecovery.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useEffect } from 'react';
 import { Button } from '../Button/Button';
-
+// import Timer from '../Timer/Timer';
 import InputEmail from '../Inputs/InputEmail';
 import { fetchInitiatingPasswordReset } from '../../services/thunks/resetPasswordThunk';
 import { openModal } from '../../services/slices/modalSlice';
@@ -75,8 +75,9 @@ function FormComponent() {
 			<Button
 				className="password-recovery-form__button-send"
 				type="submit"
-				label={isLoadingSentEmail ? 'Отправка...' : 'Отправить'}
+				label={isLoadingSentEmail ? 'Отправка...' : 'Восстановить'}
 			/>
+			{/* <Timer /> */}
 		</Form>
 	);
 }

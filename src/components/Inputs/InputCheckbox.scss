@@ -18,6 +18,7 @@
 	display: flex;
 	align-items: start;
 	text-align: justify;
+	cursor: pointer;
 }
 
 .checkbox__input {
@@ -28,16 +29,16 @@
 	fill: var(--Primary-White, #fcfcfc);
 	stroke-width: 2px;
 	stroke: var(--Primary-Gray-blue-light, #c9d1e5);
+	cursor: pointer;
 }
 
 .checkbox__input:checked {
 	background-color: #1478ff;
 }
 
-.input__error-container {
-	margin-top: 5px;
+
+.checkbox__error-container {
 	min-height: 19px;
-	max-height: 32px;
 	display: block;
 }
 

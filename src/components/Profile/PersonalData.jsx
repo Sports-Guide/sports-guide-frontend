@@ -52,20 +52,12 @@ export function PersonalData() {
 		return errors;
 	};
 
-	const handleSubmit = ({ Nickname }) => {
-		if (user?.nickname !== Nickname) {
-			// диспачим только если есть изменения
-			dispatch(fetchEditUserInfo({ nickname: Nickname }))
-				.then(() => {
-					dispatch(setIsUserDataEditingFalse());
-				})
-				.catch((error) => {
-					console.error('Ошибка обновления профиля:', error);
-				});
-		} else {
-			console.log('No changes made');
-		}
-	};
+	const handleSubmit = useCallback(
+		(values) => {
+			dispatch(fetchEditUserInfo({ nickname: values.Nickname }));
+		},
+		[dispatch]
+	);
 
 	return (
 		<>
@@ -114,7 +106,7 @@ export function PersonalData() {
 							onClick={() => dispatch(setIsUserDataEditingTrue())}
 							disabled={false}
 						>
-							{isUserDataEditing ? 'Сохранить' : 'Изменить'}
+							Изменить
 						</button>
 					</>
 				)}
@@ -146,7 +138,9 @@ function FormComponent() {
 		<Form noValidate className="profile__change-info-form">
 			<InputNickname />
 			{/* <InputEmail /> */}
-			<span className="profile_server-error">{errorMessageEditUserData}</span>
+			<span className="profile__server-error">
+				{errorMessageEditUserData || ''}
+			</span>
 			<div className="profile__button-container">
 				<button
 					className="profile__change-button no-margin"

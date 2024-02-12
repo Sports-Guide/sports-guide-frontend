@@ -14,7 +14,13 @@ export default function InputCheckbox({ inputId, children }) {
 				/>
 				{children}
 			</label>
-			<ErrorMessage className="input__error" component="span" name={inputId} />
+			<div className="checkbox__error-container">
+				<ErrorMessage
+					className="input__error"
+					component="span"
+					name={inputId}
+				/>
+			</div>
 		</div>
 	);
 }

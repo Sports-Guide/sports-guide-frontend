@@ -40,6 +40,8 @@ export const getTitleStyleByType = (type) => {
 			return 'popup__title-left'; // стиль для заголовка(если отличается от дефолтного)
 		case 'passwordRecoverySuccessSent':
 			return 'popup__title-left';
+		case 'passwordRecovery':
+			return 'popup__title-left';
 		case 'passwordReset':
 			return 'popup__title-left';
 		case 'logout':

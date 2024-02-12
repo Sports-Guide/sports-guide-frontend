@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
 	fetchConfirmPasswordReset,
 	fetchInitiatingPasswordReset,
+	fetchResendActivationEmail,
 } from '../thunks/resetPasswordThunk';
 
 export const initialState = {
-	// initiating password reset
+	// initiating password reset & resend activation
 	email: '',
 	isSentEmail: false,
 	isLoadingSentEmail: false,
@@ -73,6 +74,23 @@ const resetPasswordSliсe = createSlice({
 				state.isLoadingConfirmPassword = false;
 				state.errorConfirmPassword = true;
 				state.errorMessageConfirmPassword =
+					action.error.message || 'Произошла неизвестная ошибка';
+			})
+			.addCase(fetchResendActivationEmail.fulfilled, (state) => {
+				state.isSentEmail = true;
+				state.isLoadingSentEmail = false;
+				state.errorSentEmail = false;
+			})
+			.addCase(fetchResendActivationEmail.pending, (state) => {
+				state.isSentEmail = false;
+				state.isLoadingSentEmail = true;
+				state.errorSentEmail = false;
+			})
+			.addCase(fetchResendActivationEmail.rejected, (state, action) => {
+				state.isSentEmail = false;
+				state.isLoadingSentEmail = false;
+				state.errorSentEmail = true;
+				state.errorMessageSentEmail =
 					action.error.message || 'Произошла неизвестная ошибка';
 			});
 	},

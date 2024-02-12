@@ -22,8 +22,7 @@ export const fetchInitiatingPasswordReset = createAsyncThunk(
 	}
 );
 
-// Сброса пароля
-
+// Сброс пароля
 const urlConfirmPasswordReset = `${baseURL}/users/reset_password_confirm/`;
 
 export const fetchConfirmPasswordReset = createAsyncThunk(
@@ -39,6 +38,26 @@ export const fetchConfirmPasswordReset = createAsyncThunk(
 				uid,
 				token,
 				new_password,
+			}),
+		});
+		return data.email;
+	}
+);
+
+// Повторная отправка письма
+const urlResendActivationEmail = `${baseURL}/users/resend_activation/`;
+
+export const fetchResendActivationEmail = createAsyncThunk(
+	'resendActivationEmail/post',
+	async ({ email }) => {
+		const data = await request(urlResendActivationEmail, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body: JSON.stringify({
+				email,
 			}),
 		});
 		return data.email;
