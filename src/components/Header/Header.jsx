@@ -12,6 +12,7 @@ import { openModal } from '../../services/slices/modalSlice';
 
 export function Header() {
 	const isUserAuth = useSelector(getIsUserAuth);
+
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
@@ -35,6 +36,7 @@ export function Header() {
 					<img className="logo" src={logo} alt="" />
 					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
 				</Link>
+				<Button className="button__menu-burger" />
 				<div className="header__buttons">
 					<ButtonMap label="Москва" />
 					<Button

@@ -96,6 +96,7 @@ function AreaApp({ areas, categories, handleAddArea }) {
 							areaAppClass="map_area-app"
 							setCoordinate={setCoordinate}
 							setAdressText={setAdressText}
+							placeholder="Двигайте ползунок на карте, чтобы указать адрес"
 						/>
 					</div>
 					<div className="description-of-the-site">

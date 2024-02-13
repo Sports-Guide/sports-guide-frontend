@@ -40,7 +40,7 @@ export function Main({ areas }) {
 				))}
 			</MapComponent> */}
 
-			<YandexMap areas={areas} />
+			<YandexMap areas={areas} placeholder="Название площадки или адрес" />
 		</main>
 	);
 }
