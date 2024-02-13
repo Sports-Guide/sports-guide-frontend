@@ -14,8 +14,8 @@ $text-centering: center;
 	background-color: rgba(252, 252, 252, 1);
 	color: $primary-text-color;
 	display: flex;
-	width: 100%;
-	align-items: $text-centering;
+	/* width: 100%;
+	align-items: $text-centering; */
 	gap: 64px;
 	margin-top: auto;
 }
@@ -24,7 +24,8 @@ $text-centering: center;
 	display: flex;
 	justify-content: space-between;
 	align-items: $text-centering;
-	width: 90%;
+	/* width: 90%; */
+	width: 1040px;
 	margin: 0 auto;
 }
 

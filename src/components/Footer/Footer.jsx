@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Footer.scss';
 /* import PropTypes from 'prop-types'; */
 
@@ -8,14 +9,9 @@ export function Footer() {
 				<p className="footer__copyright">
 					&copy; {new Date().getFullYear()} Спортивный гид
 				</p>
-				<a
-					className="footer__nav-link"
-					href="###"
-					target="_blank"
-					rel="noreferrer"
-				>
+				<Link to="/privacy-policy" className="footer__nav-link">
 					Политика в отношении обработки персональных данных
-				</a>
+				</Link>
 			</div>
 		</footer>
 	);
