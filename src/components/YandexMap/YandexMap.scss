@@ -86,13 +86,14 @@
 }
 
 .yandex__category {
-	width: min-content;
+	min-height: 100%;
 	height: 20px;
 	background: rgba(229, 240, 255, 1);
 	display: flex;
 	align-items: center;
 	border-radius: 6px;
 	justify-content: start;
+	
 }
 
 .yandex__small-img {
@@ -195,4 +196,62 @@
 	.ymaps-2-1-79-controls__control_toolbar {
 		display: none;
 	}
+}
+
+
+@media screen and (max-width: 800px) {
+	.map_area-app {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+		display: none;
+	
+		.map__container {
+			width: 100%;
+			height: 400px;
+			padding: 0;
+			padding-bottom: 100px;
+		}
+	
+		.map__baloon {
+			width: 150px;
+			height: 150px;
+			background-image: url(../../images/location.png);
+		}
+	
+		.map__inputs_aprea {
+			display: flex;
+			width: 100%;
+			padding: 0;
+		}
+	
+		.map__search-bar {
+			width: 724px;
+			height: 42px;
+			border-radius: 8px;
+			border: 1px solid rgba(201, 209, 229, 1);
+		}
+	
+		.map__search-bar_kinds-of-sports {
+			display: none;
+		}
+	
+		.map__search-bar_area {
+			display: none;
+		}
+	
+		.ymaps-2-1-79-inner-panes {
+			border-radius: 12px;
+		}
+	
+		.ymaps-2-1-79-controls__control_toolbar {
+			display: none;
+		}
+
+		
+	}
+	
 }

@@ -89,6 +89,7 @@ export function App() {
 		categorie,
 		images
 	) => {
+		console.log(address, description, latitude, longitude, categorie, images);
 		api
 			.addNewArea(address, description, latitude, longitude, categorie, images)
 			.then((result) => {
