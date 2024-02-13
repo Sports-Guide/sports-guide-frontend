@@ -41,9 +41,8 @@ $width90: 90%;
 	border: 1px solid red;
 }
 
-@mixin blocks800{
+@mixin blocks800 {
 	width: $width90;
-
 }
 
 @mixin label {
@@ -79,11 +78,7 @@ $width90: 90%;
 }
 @mixin inputs800 {
 	width: 90%;
-	
 }
-
-
-
 
 .area-app {
 	padding-left: 200px;
@@ -296,18 +291,16 @@ $width90: 90%;
 	background-image: url('../../images/icn_cross.svg');
 }
 
-
-@media screen and (max-width:1088px) {
+@media screen and (max-width: 1088px) {
 	.area-app {
 		padding: 0;
-		display:flex;
+		display: flex;
 		justify-content: center;
 	}
 }
 
-
-@media screen and (max-width:800px) {
-	.addition-area{
+@media screen and (max-width: 800px) {
+	.addition-area {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -321,13 +314,11 @@ $width90: 90%;
 		@include blocks800;
 	}
 
-
-	.multiSelectContainer{
+	.multiSelectContainer {
 		width: 100%;
 	}
 
 	.search-wrapper {
 		width: 100%;
 	}
-	
 }

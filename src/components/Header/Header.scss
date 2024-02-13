@@ -54,8 +54,8 @@
 	gap: 16px;
 }
 
-.button__menu-burger{
-   display: none;
+.button__menu-burger {
+	display: none;
 }
 
 @media screen and (max-width: 1088px) {
@@ -88,11 +88,11 @@
 	}
 }
 
-@media screen and (max-width:800px) {
-	.header__buttons{
+@media screen and (max-width: 800px) {
+	.header__buttons {
 		visibility: hidden;
 	}
-	.button__menu-burger{
+	.button__menu-burger {
 		display: block;
 		position: absolute;
 		right: 10%;
@@ -100,5 +100,4 @@
 		width: 28px;
 		height: 28px;
 	}
-	
 }
