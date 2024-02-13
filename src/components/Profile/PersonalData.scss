@@ -227,3 +227,19 @@ $input-border-radius: 8px;
 	margin: 0;
 	// margin: 20px 0 8px;
 }
+
+@media screen and (max-width: 800px) {
+	.profile__personal-info-container {
+		margin-bottom: 16px;
+	}
+	.profile__field-name {
+		margin-bottom: 24px;
+	}
+	.profile__change-button {
+		margin-top: 36px;
+		height: 40px;
+	}
+	.form_place_profile {
+		width: 100%;
+	}
+}

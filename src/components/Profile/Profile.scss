@@ -24,7 +24,7 @@ $form-border-color: #aaa;
 
 .profile__container {
 	display: flex;
-	width: calc(415px + 593px + 32px);
+	max-width: calc(415px + 593px + 32px);
 	justify-content: center;
 	padding: 62px 0 0;
 	margin: 0 auto;
@@ -76,7 +76,7 @@ $form-border-color: #aaa;
 	font-weight: 400;
 	line-height: 20px;
 	background-color: transparent;
-	color: #737a8e;
+	color: $button-secondary-text-color;
 	outline: none;
 	border: none;
 	@include border-radius(8px);
@@ -145,7 +145,7 @@ $form-border-color: #aaa;
 .profile__button-account-delete {
 	background-color: transparent;
 	height: 36px;
-	color: #737a8e;
+	color: $button-secondary-text-color;
 	padding: 4px 0 0 0;
 	font-size: 14px;
 	font-size: 16px;
@@ -217,4 +217,92 @@ $form-border-color: #aaa;
 	font-weight: 700;
 	line-height: 18px;
 	font-size: 16px;
+}
+
+@media screen and (max-width: 1080px) {
+	.profile__container {
+		width: 90%;
+	}
+	.profile__personal-info {
+		width: 43.52em;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.profile {
+		background-color: $secondary-bg-color;
+	}
+	.profile__container {
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-areas: 
+		'menu'
+		'menu-content';
+		padding: 0;
+		// flex-direction: column;
+	}
+	.profile__navigation {
+		grid-area: menu;
+		flex-direction: row;
+		gap: 0;
+		width: 100%;
+		background-color: transparent;
+		padding: 10px;
+		border-bottom: 1px solid #E8EAF1;
+	}
+	.profile__menu {
+		flex-direction: row;
+		background-color: transparent;
+		padding: 0;
+		gap: 0;
+	}
+	.profile__button-account-delete {
+		display: none;
+	}
+	.profile__menu-link {
+		height: 32px;
+		padding: 6px 12px;
+	}
+	.profile__menu-link_active {
+		height: 32px;
+		background-color: transparent;
+		border: 1px solid #C9D1E5;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+		color: $logout-button-text-color;
+		text-align: center;
+	}
+	.profile__menu-link_inactive {
+		background-color: transparent;
+		color: $button-secondary-text-color;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+	}
+	.profile__menu-link-icon {
+		display: none;
+	}
+	.profile__nav-button {
+		background-color: transparent;
+	}
+	.profile__button-logout {
+		background: url(../../images/logout-icon.png) no-repeat left;
+		padding: 0 14px;
+		background-size: 10px 13px;
+		height: 32px;
+		color: $button-secondary-text-color;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+		margin-left: 15px;
+	}
+	.form__title_place_profile {
+		display: none;
+	}
+	.profile__personal-info {
+		padding: 20px 0;
+		width: 100%;
+	}
+	
 }

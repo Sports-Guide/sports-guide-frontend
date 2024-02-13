@@ -24,7 +24,7 @@ export function Profile() {
 								src={PersonalDataIcon}
 								alt="lock icon for a password field"
 							/>
-							Личные данные
+							Личные&nbsp;данные
 						</NavLink>
 						<NavLink to="password" className={linkClass}>
 							<img

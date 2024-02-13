@@ -14,7 +14,7 @@ export const FormPasswordResetPage = () => {
 	const parts = pathname.split('/');
 	const uid = parts[4];
 	const token = parts[5];
-	console.log(uid, token);
+	// console.log(uid, token);
 
 	const [step, setStep] = useState(1);
 
