@@ -11,9 +11,10 @@ import './FormPasswordResetPage.scss';
 export const FormPasswordResetPage = () => {
 	const dispatch = useDispatch();
 	const { pathname } = useLocation();
-	const uid = pathname.slice(24, 27);
-	const token = pathname.slice(28);
-	// console.log(uid, token);
+	const parts = pathname.split('/');
+	const uid = parts[4];
+	const token = parts[5];
+	console.log(uid, token);
 
 	const [step, setStep] = useState(1);
 
