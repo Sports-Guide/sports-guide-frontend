@@ -15,6 +15,7 @@ function Layuot() {
 						load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon',
 						apikey: 'c062e9ac-db0c-4d73-b5b2-71830702f484',
 						suggest_apikey: '7841f93a-196d-47c1-9184-54f3c937df30',
+						coordorder: 'longlat',
 					}}
 				>
 					<Header />

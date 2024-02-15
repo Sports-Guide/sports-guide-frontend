@@ -108,9 +108,10 @@ export const addNewArea = (
 	}).then(validateResponse);
 };
 
-export function getCoords() {
+export function getCoords(area) {
 	const params = new URLSearchParams({
-		q: 'Центральный округ, Москва',
+		q:
+			area === 'город Москва' ? area : `${area} административный округ, Москва`,
 		format: 'json',
 		polygon_geojson: 1,
 	});

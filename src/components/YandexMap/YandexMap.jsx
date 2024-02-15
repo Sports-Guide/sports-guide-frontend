@@ -1,9 +1,11 @@
 /* eslint-disable */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './YandexMap.scss';
-import { Map, Placemark, Clusterer } from '@pbe/react-yandex-maps';
+import { Map, Placemark, Clusterer, Polygon } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import * as api from '../../utils/MainApi';
+
 import {
 	displayBorder,
 	bordersOfRussia,
@@ -11,20 +13,55 @@ import {
 } from '../../constants/MapConstants';
 
 function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
-	console.log(areas);
 	const ref = useRef();
 	const location = useLocation();
 	const areaPath = location.pathname === '/app-area';
 
 	const [points, setPoints] = useState([]);
+	const [coordsForArea, setCoordsForArea] = useState([]);
 	const [address, setAddress] = useState('');
+	const [selectedArea, setSelectedArea] = useState('');
+	const [isPolygonShow, setIsPolygonShow] = useState(false);
 	const [mapState, setMapState] = useState({
-		center: [55.751426, 37.618879],
+		center: [37.618879, 55.751426],
 		zoom: 10,
 		controls: ['zoomControl', 'fullscreenControl'],
 	});
 
-	const handleMapClick = React.useCallback((e, ymaps) => {
+	//рендер округов
+	useEffect(() => {
+		if (selectedArea) {
+			api
+				.getCoords(selectedArea)
+				.then((data) => {
+					if (data && data.length > 0) {
+						const firstResult = data[0];
+						if (firstResult.geojson && firstResult.geojson.coordinates) {
+							const polygonCoordinates = firstResult.geojson.coordinates;
+							let modifiedCoordinates = [];
+							if (
+								polygonCoordinates.every((subArray) => subArray.length === 1)
+							) {
+								modifiedCoordinates = polygonCoordinates.flat();
+							} else {
+								modifiedCoordinates = polygonCoordinates;
+							}
+							setCoordsForArea(modifiedCoordinates);
+						} else {
+							console.error('Полигон не найден в ответе API');
+						}
+					} else {
+						console.error('Данные не получены от API');
+					}
+				})
+				.catch((error) => {
+					console.error('Ошибка при выполнении запроса:', error);
+				});
+		}
+	}, [selectedArea]);
+
+	//Добавление клика на карту, запись адреса и координат в стейт
+	const handleMapClick = useCallback((e, ymaps) => {
 		const point = e.get('coords');
 		setPoints([point]);
 		setCoordinate([point]);
@@ -62,7 +99,6 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 					const coords = firstGeoObject.geometry.getCoordinates();
 					// координаты для корректного зума карты
 					const bounds = firstGeoObject.properties.get('boundedBy');
-					// console.log(bounds);
 					// обновление стейтов
 					ref.current.setBounds(bounds, { checkZoomRange: true });
 					setPoints([coords]);
@@ -77,17 +113,21 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 		});
 	};
 
+	//Зум при выборе округа
 	const handleAreaChange = (event) => {
+		setIsPolygonShow(true);
 		const selectedArea = event.target.value;
-		// console.log(selectedArea);
 		areasCoord.find((area) => {
 			const { place, coords } = area;
-			// console.log(coords);
 			if (place === selectedArea) {
 				return ref.current.setBounds(coords, { checkZoomRange: true });
 			}
 			return null;
 		});
+		if (selectedArea === 'Все округа') {
+			return setSelectedArea('город Москва');
+		}
+		setSelectedArea(selectedArea);
 	};
 
 	return (
@@ -132,37 +172,34 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 				onLoad={(ymaps) => {
 					loadSuggest(ymaps);
 					if (areaPath) {
+						//добавление клика на карту
 						ref.current.events.add('click', (e) => handleMapClick(e, ymaps));
 					}
+					//отслеживание зума
+					ref.current.events.add('boundschange', (e) => {
+						const newZoom = e.get('newZoom');
+						if (newZoom >= 13) {
+							setIsPolygonShow(false);
+						}
+					});
 				}}
 				options={{
 					// ограничение максимальной зоны отображения - граница России
 					restrictMapArea: bordersOfRussia,
 				}}
 			>
-				{/* <Polygon
-					geometry={[
-						[
-							[55.75, 37.8],
-							[55.8, 37.9],
-							[55.75, 38.0],
-							[55.7, 38.0],
-							[55.7, 37.8],
-						],
-						[
-							[55.75, 37.82],
-							[55.75, 37.98],
-							[55.65, 37.9],
-						],
-					]}
-					options={{
-						fillColor: '#00FF00',
-						strokeColor: '#0000FF',
-						opacity: 0.5,
-						strokeWidth: 5,
-						strokeStyle: 'shortdash',
-					}}
-				/> */}
+				{isPolygonShow && coordsForArea ? (
+					<Polygon
+						geometry={coordsForArea}
+						options={{
+							fillColor: '#f54747',
+							strokeColor: '#f50505',
+							strokeWidth: 1,
+							fillOpacity: 0.05,
+							// strokeStyle: 'dash',
+						}}
+					/>
+				) : null}
 				{areaPath
 					? points.map((point, index) => (
 							<Placemark key={index} geometry={point} draggable />
