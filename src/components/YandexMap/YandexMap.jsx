@@ -5,6 +5,7 @@ import { Map, Placemark, Clusterer, Polygon } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import * as api from '../../utils/MainApi';
+import buttonMap from '../../images/buttonMap.png';
 
 import {
 	displayBorder,
@@ -22,13 +23,15 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 	const [address, setAddress] = useState('');
 	const [selectedArea, setSelectedArea] = useState('');
 	const [isPolygonShow, setIsPolygonShow] = useState(false);
+	const [areasToShow, setAreasToShow] = useState([]);
 	const [mapState, setMapState] = useState({
 		center: [37.618879, 55.751426],
 		zoom: 10,
 		controls: ['zoomControl', 'fullscreenControl'],
 	});
+	const areasToDisplay = areasToShow.length > 0 ? areasToShow : areas;
 
-	//рендер округов
+	//рендер границ округов
 	useEffect(() => {
 		if (selectedArea) {
 			api
@@ -130,13 +133,35 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 		setSelectedArea(selectedArea);
 	};
 
+	const handleCategoryChange = (event) => {
+		const selectedCategory = event.target.value;
+		// console.log(selectedCategory);
+		if (selectedCategory === 'Вид спорта') {
+			return setAreasToShow(areas);
+		}
+		const filteredAreas = areas.filter((area) =>
+			area.categories.some((category) => category.name === selectedCategory)
+		);
+		console.log(filteredAreas);
+		setAreasToShow(filteredAreas);
+	};
+
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
 			<div className="map__inputs map__inputs_aprea">
-				<input
+				<button className="map__button"></button>
+				<select
 					type="text"
 					className="map__search-bar map__search-bar_kinds-of-sports"
-				/>
+					onChange={handleCategoryChange}
+				>
+					<option selected>Вид спорта</option>
+					<option>Футбол</option>
+					<option>Баскетбол</option>
+					<option>Волейбол</option>
+					<option>Теннис</option>
+					<option>Воркаут</option>
+				</select>
 				<select
 					type="text"
 					className="map__search-bar map__search-bar_area"
@@ -211,7 +236,7 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 						groupByCoordinates: false,
 					}}
 				>
-					{areas.map((area) => (
+					{areasToDisplay.map((area) => (
 						<Placemark
 							key={area.id}
 							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}

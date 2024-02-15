@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './SportsGround.css';
 import { Button } from '../Button/Button';
-import MapComponent from '../Map/Map';
 import { Comment } from '../Comment/Comment';
 import { Form } from '../Form/Form';
 import { Input } from '../Input/Input';
 import { Slider } from '../Slider/Slider';
 import { photos } from '../../constants/SliderConstants';
+// import YandexMap from '../YandexMap/YandexMap';
 
 export function SportsGround({ onCommentSubmit }) {
 	const comments = [
@@ -92,7 +92,7 @@ export function SportsGround({ onCommentSubmit }) {
 						/>
 					</div>
 				</Form>
-				<MapComponent className="map-container_place_sport" />
+				{/* <YandexMap /> */}
 			</div>
 		</main>
 	);

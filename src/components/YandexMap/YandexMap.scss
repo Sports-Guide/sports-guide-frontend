@@ -30,6 +30,15 @@
 	border-bottom-right-radius: 12px;
 }
 
+.map__button {
+	padding: 0;
+	border: 0;
+	width: 104px;
+	height: 52px;
+	background-image: url(../../images/buttonMap.png);
+	border-radius: 8px;
+}
+
 .map__search-bar {
 	border: none;
 	width: 203.5px;

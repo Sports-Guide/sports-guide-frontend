@@ -235,9 +235,9 @@ $form-border-color: #aaa;
 	.profile__container {
 		display: grid;
 		grid-template-columns: 100%;
-		grid-template-areas: 
-		'menu'
-		'menu-content';
+		grid-template-areas:
+			'menu'
+			'menu-content';
 		padding: 0;
 		// flex-direction: column;
 	}
@@ -248,7 +248,7 @@ $form-border-color: #aaa;
 		width: 100%;
 		background-color: transparent;
 		padding: 10px;
-		border-bottom: 1px solid #E8EAF1;
+		border-bottom: 1px solid #e8eaf1;
 	}
 	.profile__menu {
 		flex-direction: row;
@@ -266,7 +266,7 @@ $form-border-color: #aaa;
 	.profile__menu-link_active {
 		height: 32px;
 		background-color: transparent;
-		border: 1px solid #C9D1E5;
+		border: 1px solid #c9d1e5;
 		font-size: 14px;
 		font-weight: 700;
 		line-height: 20px;
@@ -304,5 +304,4 @@ $form-border-color: #aaa;
 		padding: 20px 0;
 		width: 100%;
 	}
-	
 }
