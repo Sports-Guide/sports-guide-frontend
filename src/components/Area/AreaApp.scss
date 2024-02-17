@@ -228,8 +228,12 @@ $width90: 90%;
 	cursor: pointer;
 }
 
-.test {
-	border: 1px solid red;
+.test{
+	margin-bottom: 10px;
+}
+
+.test__none{
+	display: none;
 }
 
 .test__two {
@@ -258,7 +262,7 @@ $width90: 90%;
 }
 
 .foto__file-text-small {
-	width: 300px;
+	width: 254px;
 	margin-top: 0;
 	font-family: Roboto;
 	font-size: 12px;
@@ -267,7 +271,7 @@ $width90: 90%;
 	letter-spacing: 0em;
 	text-align: left;
 	color: black;
-	border: 1px solid green;
+	
 }
 
 .foto-file__add-server {
@@ -374,7 +378,6 @@ $width90: 90%;
 	.foto__container {
 		width: 100%;
 		grid-template-columns: 1fr 1fr;
-		border: 1px solid green;
 	}
 
 	foto__file-label {
@@ -409,5 +412,20 @@ $width90: 90%;
 	}
 
 	@media screen and (max-width: 495px) {
+		.foto__container {
+			width: 100%;
+		}
+
+		.button-clouse-foto-file{
+			left: 140px;
+		}
+
+		.foto-file__container{
+			width: 162px;
+		}
+		.foto-file__add-server{
+			width: 162px;
+		}
+	
 	}
 }

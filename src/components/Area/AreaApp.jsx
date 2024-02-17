@@ -41,10 +41,10 @@ function AreaApp({ areas, categories, handleAddArea }) {
 			setLargeFoto('');
 		} else if (file.length > 4) {
 			setLargeFoto('Можно добавлять не больше 4 фотографий за раз');
+			setWindowSize(true);
 		} else {
 			setAddFoto(file);
 			setLargeFoto('');
-			setWindowSize(true);
 		}
 	};
 
@@ -76,7 +76,7 @@ function AreaApp({ areas, categories, handleAddArea }) {
 		} else {
 			setFotoFour(true);
 		}
-	}, [addFoto]);
+	}, [addFoto, windowSize]);
 
 	return (
 		<div className="area-app">
@@ -129,7 +129,31 @@ function AreaApp({ areas, categories, handleAddArea }) {
 					</div>
 					<div className="foto">
 						<h3 className="foto__title">Фотографии</h3>
-
+						{windowSize ? (
+							''
+						) : (
+							<div className={fotoFour ? 'test' : 'test__none'}>
+								<p className="foto__file-text-small">
+									Макс. размер: 5 Мб. Формат: JPEG или PNG.
+								</p>
+								<div className="test__two">
+									<label htmlFor="add-file-small" className="button-add-foto">
+										Загрузить фото
+										<input
+											type="file"
+											className="foto__file-add"
+											name="add-file-small"
+											accept="image/png, image/jpeg"
+											id="add-file-small"
+											onChange={handleFoto}
+											multiple
+										/>
+									</label>
+									<p className="foto__large-foto-small">Не более 4 фото.</p>
+								</div>
+								<p className="foto__large-foto">{largeFoto}</p>
+							</div>
+						)}
 						<div className="foto__container">
 							{windowSize ? (
 								<label
@@ -157,32 +181,9 @@ function AreaApp({ areas, categories, handleAddArea }) {
 									</p>
 								</label>
 							) : (
-								<div className="test">
-									<p className="foto__file-text-small">
-										Макс. размер: 5 Мб. Формат: JPEG или PNG.
-									</p>
-									<div className="test__two">
-										<label
-											htmlFor="add-file-small"
-											className={
-												fotoFour ? 'button-add-foto' : 'foto__file-label_none'
-											}
-										>
-											Загрузить фото
-											<input
-												type="file"
-												className="foto__file-add"
-												name="add-file-small"
-												accept="image/png, image/jpeg"
-												id="add-file-small"
-												onChange={handleFoto}
-												multiple
-											/>
-										</label>
-										<p className="foto__large-foto-small">Не более 4 фото.</p>
-									</div>
-								</div>
+								''
 							)}
+
 							{addFoto.map((file, index) => (
 								<div className="foto-file__container" key={file}>
 									<Button
