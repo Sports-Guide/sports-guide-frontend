@@ -38,7 +38,6 @@ $width90: 90%;
 	background: rgba(252, 252, 252, 1);
 	padding: 24px;
 	margin-bottom: 16px;
-	border: 1px solid red;
 }
 
 @mixin blocks800 {
@@ -300,13 +299,12 @@ $width90: 90%;
 	}
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 878px) {
 	.addition-area {
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		border: 1px solid green;
 		width: 100%;
 	}
 	.kinds-of-sports {
@@ -336,7 +334,22 @@ $width90: 90%;
 		@include blocks800;
 	}
 
+	.foto__container {
+		width: 100%;
+		height: 175px;
+	}
+
 	.app-area {
 		@include blocks800;
+	}
+
+	.app-area__subtitle {
+		font-family: Roboto;
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 14px;
+		letter-spacing: 0em;
+		text-align: left;
+		width: 100%;
 	}
 }

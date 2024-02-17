@@ -12,7 +12,7 @@ import { openModal } from '../../services/slices/modalSlice';
 
 function AreaApp({ areas, categories, handleAddArea }) {
 	const dispatch = useDispatch();
-	console.log(areas);
+
 	const [options] = useState(categories);
 	// отправка формы на сервер
 	const [areaDescription, setAreaDiscriptin] = useState([]);

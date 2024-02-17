@@ -44,3 +44,11 @@ $text-centering: center;
 .footer__nav-link:hover {
 	opacity: 0.7;
 }
+
+
+@media screen and (max-width: 1040px) {
+	.footer__container {
+		width: 100%;
+		padding: 0 20px 0 20px;
+	}
+}

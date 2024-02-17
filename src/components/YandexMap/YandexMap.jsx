@@ -149,7 +149,9 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
 			<div className="map__inputs map__inputs_aprea">
-				<button className="map__button"></button>
+				<button
+					className={areaPath ? 'map__button_none' : 'map__button'}
+				></button>
 				<select
 					type="text"
 					className="map__search-bar map__search-bar_kinds-of-sports"
