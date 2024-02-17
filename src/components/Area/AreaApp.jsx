@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import addPictures from '../../images/Camera.svg';
 import { Button } from '../Button/Button';
+import '../Button/Button.scss';
 import YandexMap from '../YandexMap/YandexMap';
 import { openModal } from '../../services/slices/modalSlice';
 
@@ -26,7 +27,7 @@ function AreaApp({ areas, categories, handleAddArea }) {
 	const [coordinate, setCoordinate] = useState([]);
 	const [adressText, setAdressText] = useState([]);
 
-	// широта
+	const [windowSize, setWindowSize] = useState(false);
 
 	const handlDescription = (e) => {
 		setAreaDiscriptin(e.target.value);
@@ -43,6 +44,7 @@ function AreaApp({ areas, categories, handleAddArea }) {
 		} else {
 			setAddFoto(file);
 			setLargeFoto('');
+			setWindowSize(true);
 		}
 	};
 
@@ -129,31 +131,58 @@ function AreaApp({ areas, categories, handleAddArea }) {
 						<h3 className="foto__title">Фотографии</h3>
 
 						<div className="foto__container">
-							<label
-								htmlFor="add-file"
-								className={
-									fotoFour ? 'foto__file-label' : 'foto__file-label_none'
-								}
-							>
-								<input
-									type="file"
-									className="foto__file-add"
-									name="add-file"
-									accept="image/png, image/jpeg"
-									id="add-file"
-									onChange={handleFoto}
-									multiple
-								/>
-								<img
-									className="foto-file-img"
-									src={addPictures}
-									alt="Добавление картинки"
-								/>
-								<p className="foto__file-text">
-									Макс. размер: 5 Мб. Формат: JPEG или PNG.
-								</p>
-							</label>
-
+							{windowSize ? (
+								<label
+									htmlFor="add-file"
+									className={
+										fotoFour ? 'foto__file-label' : 'foto__file-label_none'
+									}
+								>
+									<input
+										type="file"
+										className="foto__file-add"
+										name="add-file"
+										accept="image/png, image/jpeg"
+										id="add-file"
+										onChange={handleFoto}
+										multiple
+									/>
+									<img
+										className="foto-file-img"
+										src={addPictures}
+										alt="Добавление картинки"
+									/>
+									<p className="foto__file-text">
+										Макс. размер: 5 Мб. Формат: JPEG или PNG.
+									</p>
+								</label>
+							) : (
+								<div className="test">
+									<p className="foto__file-text-small">
+										Макс. размер: 5 Мб. Формат: JPEG или PNG.
+									</p>
+									<div className="test__two">
+										<label
+											htmlFor="add-file-small"
+											className={
+												fotoFour ? 'button-add-foto' : 'foto__file-label_none'
+											}
+										>
+											Загрузить фото
+											<input
+												type="file"
+												className="foto__file-add"
+												name="add-file-small"
+												accept="image/png, image/jpeg"
+												id="add-file-small"
+												onChange={handleFoto}
+												multiple
+											/>
+										</label>
+										<p className="foto__large-foto-small">Не более 4 фото.</p>
+									</div>
+								</div>
+							)}
 							{addFoto.map((file, index) => (
 								<div className="foto-file__container" key={file}>
 									<Button

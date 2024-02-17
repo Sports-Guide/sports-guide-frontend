@@ -201,7 +201,6 @@ $width90: 90%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	width: 724px;
-	height: 175px;
 	border-radius: 8px;
 	gap: 8px;
 }
@@ -215,8 +214,6 @@ $width90: 90%;
 	height: 175px;
 	padding: 24px;
 	border-radius: 8px;
-	border: 2px;
-
 	border: 2px dashed rgba(20, 120, 255, 0.3);
 }
 
@@ -231,6 +228,24 @@ $width90: 90%;
 	cursor: pointer;
 }
 
+.test {
+	border: 1px solid red;
+}
+
+.test__two{
+	display: flex;
+}
+
+.foto__large-foto-small {
+	font-family: Roboto;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14px;
+	letter-spacing: 0em;
+	text-align: left;
+	margin-left: 10px;
+}
+
 .foto__file-text {
 	font-family: Roboto;
 	font-size: 13px;
@@ -240,6 +255,19 @@ $width90: 90%;
 	text-align: center;
 	width: 145px;
 	color: rgba(115, 122, 142, 1);
+}
+
+.foto__file-text-small {
+	width: 300px;
+	margin-top: 0;
+	font-family: Roboto;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: black;
+	border: 1px solid green;
 }
 
 .foto-file__add-server {
@@ -345,7 +373,25 @@ $width90: 90%;
 
 	.foto__container {
 		width: 100%;
+		grid-template-columns: 1fr 1fr;
+		border: 1px solid green;
+	}
+
+	foto__file-label {
+		padding-top: 20px;
+		padding-left: 20px;
+	}
+
+	.foto-file__container {
+		position: relative;
+		padding: 0;
 		height: 175px;
+	}
+
+	.foto-file__add-server {
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 
 	.app-area {
@@ -360,5 +406,8 @@ $width90: 90%;
 		letter-spacing: 0em;
 		text-align: left;
 		width: 100%;
+	}
+
+	@media screen and (max-width: 495px) {
 	}
 }

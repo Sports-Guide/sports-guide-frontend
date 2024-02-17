@@ -18,7 +18,6 @@ export default function FormPasswordRecovery() {
 
 	const handleSubmit = useCallback(
 		(values) => {
-			console.log(values);
 			dispatch(setEmail(values.Email));
 			dispatch(fetchInitiatingPasswordReset({ email: values.Email }));
 		},

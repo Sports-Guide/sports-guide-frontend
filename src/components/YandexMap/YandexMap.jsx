@@ -17,7 +17,6 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 	const ref = useRef();
 	const location = useLocation();
 	const areaPath = location.pathname === '/app-area';
-
 	const [points, setPoints] = useState([]);
 	const [coordsForArea, setCoordsForArea] = useState([]);
 	const [address, setAddress] = useState('');
