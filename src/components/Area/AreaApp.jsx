@@ -20,9 +20,12 @@ function AreaApp({ areas, categories, handleAddArea }) {
 	const [category, setCategory] = useState([]);
 	// добавление фотографий
 	const [addFoto, setAddFoto] = useState([]);
+	const [fotoFour, setFotoFour] = useState(true);
+	const [largeFoto, setLargeFoto] = useState('');
 	// координаты карт
 	const [coordinate, setCoordinate] = useState([]);
 	const [adressText, setAdressText] = useState([]);
+
 	// широта
 
 	const handlDescription = (e) => {
@@ -31,10 +34,15 @@ function AreaApp({ areas, categories, handleAddArea }) {
 
 	const handleFoto = (e) => {
 		const file = Array.from(e.target.files);
-		if (file.length > 3) {
-			console.log('Большое количество');
+		if (file.length === 4) {
+			setFotoFour(false);
+			setAddFoto(file);
+			setLargeFoto('');
+		} else if (file.length > 4) {
+			setLargeFoto('Можно добавлять не больше 4 фотографий за раз');
 		} else {
 			setAddFoto(file);
+			setLargeFoto('');
 		}
 	};
 
@@ -60,7 +68,13 @@ function AreaApp({ areas, categories, handleAddArea }) {
 		);
 	};
 
-	useEffect(() => {}, [addFoto]);
+	useEffect(() => {
+		if (addFoto.length === 4) {
+			setFotoFour(false);
+		} else {
+			setFotoFour(true);
+		}
+	}, [addFoto]);
 
 	return (
 		<div className="area-app">
@@ -115,7 +129,12 @@ function AreaApp({ areas, categories, handleAddArea }) {
 						<h3 className="foto__title">Фотографии</h3>
 
 						<div className="foto__container">
-							<label htmlFor="add-file" className="foto__file-label">
+							<label
+								htmlFor="add-file"
+								className={
+									fotoFour ? 'foto__file-label' : 'foto__file-label_none'
+								}
+							>
 								<input
 									type="file"
 									className="foto__file-add"
@@ -149,6 +168,7 @@ function AreaApp({ areas, categories, handleAddArea }) {
 								</div>
 							))}
 						</div>
+						<p className="foto__large-foto">{largeFoto}</p>
 					</div>
 					<div className="app-area">
 						<p className="app-area__subtitle">

@@ -219,6 +219,12 @@ $width90: 90%;
 
 	border: 2px dashed rgba(20, 120, 255, 0.3);
 }
+
+.foto__file-label_none{
+	display: none;
+}
+
+
 .foto__file-add {
 	display: none;
 }
@@ -244,6 +250,10 @@ $width90: 90%;
 	border-radius: 8px;
 	object-fit: cover;
 	bottom: 19px;
+}
+
+.foto__large-foto{
+	color: red;
 }
 
 .app-area {
