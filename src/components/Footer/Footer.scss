@@ -10,6 +10,16 @@ $text-centering: center;
 	line-height: 16px;
 }
 
+@mixin fontStyle635 {
+	//styleName: Aneliza/Chips/mob;
+	font-family: Aneliza;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 18px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
 .footer {
 	background-color: rgba(252, 252, 252, 1);
 	color: $primary-text-color;
@@ -50,4 +60,30 @@ $text-centering: center;
 		width: 100%;
 		padding: 0 20px 0 20px;
 	}
+}
+
+@media screen and (max-width: 635px) {
+	.footer__copyright {
+		@include fontStyle635;
+	
+	}
+
+	.footer__nav-link {
+		@include fontStyle635;
+	}
+}
+
+
+@media screen and (max-width: 525px) {
+     .footer__container{
+		display: grid;
+	 }
+	 .footer__copyright {
+	   margin: 0;
+	
+	}
+
+	.footer__nav-link {
+		margin: 0;
+   }
 }

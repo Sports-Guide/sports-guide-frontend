@@ -122,3 +122,25 @@
 	justify-content: center;
 	align-items: center;
 }
+
+
+@media screen and (max-width: 495px) {
+
+
+	.button-clouse-foto-file {
+		left: 130px;
+	}
+
+}
+
+@media screen and (max-width: 435px) {
+	.button-clouse-foto-file {
+		left: 110px;
+	}
+}
+
+@media screen and (max-width: 375px) {
+	.button-clouse-foto-file {
+		left: 100px;
+	}
+}

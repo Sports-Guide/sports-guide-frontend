@@ -68,3 +68,20 @@ $container-border-radius: 8px;
 	color: $text-font-family;
 	cursor: pointer;
 }
+
+
+@media screen and (max-width: 1150px) {
+	.policy {
+		display: flex;
+		flex-direction: column;
+		margin: 0 auto;
+		// align-self: center;
+		width: 90%;
+		background-color: #f2f3f7;
+		gap: 16px;
+		margin-bottom: 30px;
+	}
+	.policy-header {
+		width: 100%;
+	}
+}

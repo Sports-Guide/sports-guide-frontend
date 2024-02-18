@@ -42,7 +42,6 @@ function AreaApp({ areas, categories, handleAddArea }) {
 			setLargeFoto('');
 		} else if (file.length > 4) {
 			setLargeFoto('Можно добавлять не больше 4 фотографий за раз');
-			setWindowSize(true);
 		} else {
 			setAddFoto(file);
 			setLargeFoto('');
@@ -89,14 +88,16 @@ function AreaApp({ areas, categories, handleAddArea }) {
 		};
 		CheckWindowWidth();
 		window.addEventListener('resize', CheckWindowWidth);
+		console.log(browserWindowSize);
 	}, [browserWindowSize]);
-
-	console.log(browserWindowSize);
 
 	return (
 		<div className="area-app">
 			<div className="area-app__information">
-				<NavLink className="area-app__link" to="/">
+				<NavLink
+					className={windowSize ? 'area-app__link' : 'area-app__link-none'}
+					to="/"
+				>
 					К выбору площадки
 				</NavLink>
 				<h2 className="area-app__title">Добавление площадки</h2>
@@ -172,7 +173,6 @@ function AreaApp({ areas, categories, handleAddArea }) {
 									</label>
 									<p className="foto__large-foto-small">Не более 4 фото.</p>
 								</div>
-								<p className="foto__large-foto">{largeFoto}</p>
 							</div>
 						)}
 						<div className="foto__container">
