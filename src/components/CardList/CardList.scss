@@ -1,0 +1,12 @@
+.card-list {
+	width: 1040px;
+	display: grid;
+	justify-items: center;
+	margin: 0;
+	list-style-type: none;
+	grid-template-columns: repeat(auto-fit, minmax(min-content, 325px));
+	grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+	gap: 32px 32px;
+	justify-content: center;
+	padding: 24px 0 0 0;
+}
