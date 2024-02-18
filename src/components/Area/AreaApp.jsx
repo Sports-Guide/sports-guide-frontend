@@ -26,8 +26,9 @@ function AreaApp({ areas, categories, handleAddArea }) {
 	// координаты карт
 	const [coordinate, setCoordinate] = useState([]);
 	const [adressText, setAdressText] = useState([]);
-
-	const [windowSize, setWindowSize] = useState(false);
+	// настройка под разные разрешения экрана
+	const browserWindowSize = window.innerWidth;
+	const [windowSize, setWindowSize] = useState(true);
 
 	const handlDescription = (e) => {
 		setAreaDiscriptin(e.target.value);
@@ -77,6 +78,20 @@ function AreaApp({ areas, categories, handleAddArea }) {
 			setFotoFour(true);
 		}
 	}, [addFoto, windowSize]);
+
+	useEffect(() => {
+		const CheckWindowWidth = () => {
+			if (browserWindowSize >= 495) {
+				setWindowSize(true);
+			} else {
+				setWindowSize(false);
+			}
+		};
+		CheckWindowWidth();
+		window.addEventListener('resize', CheckWindowWidth);
+	}, [browserWindowSize]);
+
+	console.log(browserWindowSize);
 
 	return (
 		<div className="area-app">
@@ -132,11 +147,17 @@ function AreaApp({ areas, categories, handleAddArea }) {
 						{windowSize ? (
 							''
 						) : (
-							<div className={fotoFour ? 'test' : 'test__none'}>
+							<div
+								className={
+									fotoFour
+										? 'foto__file-label-small'
+										: 'foto__file-label-small-none'
+								}
+							>
 								<p className="foto__file-text-small">
 									Макс. размер: 5 Мб. Формат: JPEG или PNG.
 								</p>
-								<div className="test__two">
+								<div className="foto-file__small">
 									<label htmlFor="add-file-small" className="button-add-foto">
 										Загрузить фото
 										<input

@@ -228,15 +228,15 @@ $width90: 90%;
 	cursor: pointer;
 }
 
-.test{
+.foto__file-label-small {
 	margin-bottom: 10px;
 }
 
-.test__none{
+.foto__file-label-small-none {
 	display: none;
 }
 
-.test__two {
+.foto-file__small {
 	display: flex;
 }
 
@@ -271,7 +271,6 @@ $width90: 90%;
 	letter-spacing: 0em;
 	text-align: left;
 	color: black;
-	
 }
 
 .foto-file__add-server {
@@ -412,20 +411,34 @@ $width90: 90%;
 	}
 
 	@media screen and (max-width: 495px) {
+	
 		.foto__container {
 			width: 100%;
+			margin-left: -12px;
 		}
 
 		.button-clouse-foto-file{
-			left: 140px;
+            left: 130px;
 		}
 
-		.foto-file__container{
+		.foto-file__container {
 			width: 162px;
 		}
-		.foto-file__add-server{
+		.foto-file__add-server {
 			width: 162px;
 		}
-	
+	}
+
+	@media screen and (max-width: 460px) {
+		.foto {
+			padding: 14px;
+			padding-left: 12px;
+		}
+	}
+
+	@media screen and (max-width: 375px) {
+		.foto__container {
+			margin-left: -30px;
+		}
 	}
 }
