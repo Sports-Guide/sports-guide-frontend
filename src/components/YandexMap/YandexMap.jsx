@@ -243,6 +243,7 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}
 							properties={{
 								balloonContentBody: `
+								   <a class = "yandex-link" href="http://localhost:3000/sports-ground">
 									<div class = "yandex">
 									<img class = "yandex__images" src="${area.images.map((img) => img.image)}">
 									<div class = "yandex__contetn">
@@ -258,6 +259,7 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 									</div>
 									</div>
 									</div>
+									</a>
 									`,
 							}}
 							options={{
