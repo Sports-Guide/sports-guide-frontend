@@ -65,7 +65,6 @@ $text-centering: center;
 @media screen and (max-width: 635px) {
 	.footer__copyright {
 		@include fontStyle635;
-	
 	}
 
 	.footer__nav-link {
@@ -73,17 +72,15 @@ $text-centering: center;
 	}
 }
 
-
 @media screen and (max-width: 525px) {
-     .footer__container{
+	.footer__container {
 		display: grid;
-	 }
-	 .footer__copyright {
-	   margin: 0;
-	
+	}
+	.footer__copyright {
+		margin: 0;
 	}
 
 	.footer__nav-link {
 		margin: 0;
-   }
+	}
 }
