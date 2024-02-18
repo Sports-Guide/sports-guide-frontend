@@ -10,8 +10,19 @@ import { Button } from '../Button/Button';
 import '../Button/Button.scss';
 import YandexMap from '../YandexMap/YandexMap';
 import { openModal } from '../../services/slices/modalSlice';
+import SearchBar from '../SearchBar/SearchBar';
 
-function AreaApp({ areas, categories, handleAddArea }) {
+function AreaApp({
+	areas,
+	categories,
+	handleAddArea,
+	setAddress,
+	address,
+	setAreasToShow,
+	areasToShow,
+	coordinates,
+	setCoordinates,
+}) {
 	const dispatch = useDispatch();
 
 	const [options] = useState(categories);
@@ -21,14 +32,15 @@ function AreaApp({ areas, categories, handleAddArea }) {
 	const [category, setCategory] = useState([]);
 	// добавление фотографий
 	const [addFoto, setAddFoto] = useState([]);
+
 	const [fotoFour, setFotoFour] = useState(true);
 	const [largeFoto, setLargeFoto] = useState('');
-	// координаты карт
-	const [coordinate, setCoordinate] = useState([]);
-	const [adressText, setAdressText] = useState([]);
+
 	// настройка под разные разрешения экрана
 	const browserWindowSize = window.innerWidth;
 	const [windowSize, setWindowSize] = useState(true);
+
+	// широта
 
 	const handlDescription = (e) => {
 		setAreaDiscriptin(e.target.value);
@@ -61,10 +73,10 @@ function AreaApp({ areas, categories, handleAddArea }) {
 		dispatch(openModal('createAreasSuccess'));
 		event.preventDefault();
 		handleAddArea(
-			adressText,
+			address,
 			areaDescription,
-			coordinate.map((cord) => cord[0]),
-			coordinate.map((cord) => cord[1]),
+			coordinates.map((cord) => cord[0]),
+			coordinates.map((cord) => cord[1]),
 			category.map((categor) => categor.id),
 			addFoto
 		);
@@ -123,12 +135,15 @@ function AreaApp({ areas, categories, handleAddArea }) {
 						<p htmlFor="text" className="location__label">
 							Адрес площадки
 						</p>
+						<SearchBar address={address} setAddress={setAddress} />
 						<YandexMap
 							areas={areas}
-							areaAppClass="map_area-app"
-							setCoordinate={setCoordinate}
-							setAdressText={setAdressText}
-							placeholder="Двигайте ползунок на карте, чтобы указать адрес"
+							coordinates={coordinates}
+							setCoordinates={setCoordinates}
+							setAddress={setAddress}
+							address={address}
+							areasToShow={areasToShow}
+							setAreasToShow={setAreasToShow}
 						/>
 					</div>
 					<div className="description-of-the-site">
@@ -243,5 +258,11 @@ AreaApp.propTypes = {
 	areas: PropTypes.arrayOf.isRequired,
 	categories: PropTypes.arrayOf.isRequired,
 	handleAddArea: PropTypes.arrayOf.isRequired,
+	address: PropTypes.string.isRequired,
+	setAddress: PropTypes.string.isRequired,
+	areasToShow: PropTypes.arrayOf.isRequired,
+	setAreasToShow: PropTypes.arrayOf.isRequired,
+	coordinates: PropTypes.arrayOf.isRequired,
+	setCoordinates: PropTypes.arrayOf.isRequired,
 };
 export default AreaApp;

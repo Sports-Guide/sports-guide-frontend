@@ -1,11 +1,10 @@
 /* eslint-disable */
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './YandexMap.scss';
 import { Map, Placemark, Clusterer, Polygon } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import * as api from '../../utils/MainApi';
-import buttonMap from '../../images/buttonMap.png';
 
 import {
 	displayBorder,
@@ -13,24 +12,30 @@ import {
 	areasCoord,
 } from '../../constants/MapConstants';
 
-function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
-	const ref = useRef();
+function YandexMap({
+	areas,
+	areasToShow,
+	isPolygonShow,
+	setIsPolygonShow,
+	selectedArea,
+	setAddress,
+	coordinates,
+	setCoordinates,
+}) {
 	const location = useLocation();
+	const ref = useRef();
 	const areaPath = location.pathname === '/app-area';
-	const [points, setPoints] = useState([]);
+
+	const areasToDisplay = areaPath ? areas : areasToShow;
+
 	const [coordsForArea, setCoordsForArea] = useState([]);
-	const [address, setAddress] = useState('');
-	const [selectedArea, setSelectedArea] = useState('');
-	const [isPolygonShow, setIsPolygonShow] = useState(false);
-	const [areasToShow, setAreasToShow] = useState([]);
 	const [mapState, setMapState] = useState({
 		center: [37.618879, 55.751426],
 		zoom: 10,
 		controls: ['zoomControl', 'fullscreenControl'],
 	});
-	const areasToDisplay = areasToShow.length > 0 ? areasToShow : areas;
 
-	//рендер границ округов
+	// рендер границ округов
 	useEffect(() => {
 		if (selectedArea) {
 			api
@@ -62,22 +67,16 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 		}
 	}, [selectedArea]);
 
-	//Добавление клика на карту, запись адреса и координат в стейт
+	// Добавление клика на карту, запись адреса и координат в стейт
 	const handleMapClick = useCallback((e, ymaps) => {
 		const point = e.get('coords');
-		setPoints([point]);
-		setCoordinate([point]);
+		setCoordinates([point]);
 		ymaps.geocode(point).then((res) => {
 			const firstGeoObject = res.geoObjects.get(0);
 			const addressLine = firstGeoObject.getAddressLine();
 			setAddress(addressLine);
-			setAdressText(addressLine);
-		});
+		}); // eslint-disable-next-line
 	}, []);
-
-	const handleChange = (e) => {
-		setAddress(e.target.value);
-	};
 
 	const loadSuggest = (ymaps) => {
 		// Подключение поисковой подсказки
@@ -103,7 +102,7 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 					const bounds = firstGeoObject.properties.get('boundedBy');
 					// обновление стейтов
 					ref.current.setBounds(bounds, { checkZoomRange: true });
-					setPoints([coords]);
+					setCoordinates([coords]);
 					setMapState((prevState) => ({
 						...prevState,
 						center: coords,
@@ -115,10 +114,8 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 		});
 	};
 
-	//Зум при выборе округа
-	const handleAreaChange = (event) => {
-		setIsPolygonShow(true);
-		const selectedArea = event.target.value;
+	// Зум при выборе округа
+	useEffect(() => {
 		areasCoord.find((area) => {
 			const { place, coords } = area;
 			if (place === selectedArea) {
@@ -126,70 +123,10 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 			}
 			return null;
 		});
-		if (selectedArea === 'Все округа') {
-			return setSelectedArea('город Москва');
-		}
-		setSelectedArea(selectedArea);
-	};
-
-	const handleCategoryChange = (event) => {
-		const selectedCategory = event.target.value;
-		// console.log(selectedCategory);
-		if (selectedCategory === 'Вид спорта') {
-			return setAreasToShow(areas);
-		}
-		const filteredAreas = areas.filter((area) =>
-			area.categories.some((category) => category.name === selectedCategory)
-		);
-		console.log(filteredAreas);
-		setAreasToShow(filteredAreas);
-	};
+	}, [selectedArea]);
 
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
-			<div className="map__inputs map__inputs_aprea">
-				<button
-					className={areaPath ? 'map__button_none' : 'map__button'}
-				></button>
-				<select
-					type="text"
-					className="map__search-bar map__search-bar_kinds-of-sports"
-					onChange={handleCategoryChange}
-				>
-					<option selected>Вид спорта</option>
-					<option>Футбол</option>
-					<option>Баскетбол</option>
-					<option>Волейбол</option>
-					<option>Теннис</option>
-					<option>Воркаут</option>
-				</select>
-				<select
-					type="text"
-					className="map__search-bar map__search-bar_area"
-					onChange={handleAreaChange}
-				>
-					<option selected>Все округа</option>
-					<option>Центральный округ</option>
-					<option>Северный округ</option>
-					<option>Северо-Восточный округ</option>
-					<option>Восточный округ</option>
-					<option>Юго-Восточный округ</option>
-					<option>Южный округ</option>
-					<option>Юго-Западный округ</option>
-					<option>Западный округ</option>
-					<option>Северо-Западный округ</option>
-					<option>Зеленоградский округ</option>
-				</select>
-				<input
-					type="text"
-					className="map__search-bar map__search-bar_type_search"
-					id="suggest"
-					placeholder={placeholder}
-					onChange={handleChange}
-					value={address}
-				/>
-			</div>
-
 			<Map
 				instanceRef={ref}
 				state={mapState}
@@ -198,16 +135,18 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 				onLoad={(ymaps) => {
 					loadSuggest(ymaps);
 					if (areaPath) {
-						//добавление клика на карту
+						// добавление клика на карту
 						ref.current.events.add('click', (e) => handleMapClick(e, ymaps));
 					}
-					//отслеживание зума
-					ref.current.events.add('boundschange', (e) => {
-						const newZoom = e.get('newZoom');
-						if (newZoom >= 13) {
-							setIsPolygonShow(false);
-						}
-					});
+					if (isPolygonShow) {
+						ref.current.events.add('boundschange', (e) => {
+							const newZoom = e.get('newZoom');
+
+							if (newZoom >= 13) {
+								setIsPolygonShow(false);
+							}
+						});
+					}
 				}}
 				options={{
 					// ограничение максимальной зоны отображения - граница России
@@ -222,12 +161,11 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 							strokeColor: '#f50505',
 							strokeWidth: 1,
 							fillOpacity: 0.05,
-							// strokeStyle: 'dash',
 						}}
 					/>
 				) : null}
 				{areaPath
-					? points.map((point, index) => (
+					? coordinates.map((point, index) => (
 							<Placemark key={index} geometry={point} draggable />
 						))
 					: null}
@@ -278,9 +216,13 @@ function YandexMap({ areas, setCoordinate, setAdressText, placeholder }) {
 
 YandexMap.propTypes = {
 	areas: PropTypes.arrayOf.isRequired,
-	setCoordinate: PropTypes.arrayOf.isRequired,
-	setAdressText: PropTypes.arrayOf.isRequired,
-	placeholder: PropTypes.arrayOf.isRequired,
+	selectedArea: PropTypes.arrayOf.isRequired,
+	isPolygonShow: PropTypes.bool.isRequired,
+	areasToShow: PropTypes.arrayOf.isRequired,
+	setIsPolygonShow: PropTypes.bool.isRequired,
+	setAddress: PropTypes.string.isRequired,
+	coordinates: PropTypes.arrayOf.isRequired,
+	setCoordinates: PropTypes.arrayOf.isRequired,
 };
 
 export default YandexMap;

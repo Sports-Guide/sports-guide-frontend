@@ -26,6 +26,9 @@ import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 export function App() {
 	// eslint-disable-next-line no-unused-vars
 	const [areas, setAreas] = useState([]);
+	const [address, setAddress] = useState('');
+	const [coordinates, setCoordinates] = useState([]);
+	const [areasToShow, setAreasToShow] = useState([]);
 
 	const [categories, setCategories] = useState([]);
 
@@ -82,7 +85,7 @@ export function App() {
 
 	// Функция добавления площадки
 	const handleAddArea = (
-		address,
+		GivenAddress,
 		description,
 		latitude,
 		longitude,
@@ -90,7 +93,14 @@ export function App() {
 		images
 	) => {
 		api
-			.addNewArea(address, description, latitude, longitude, categorie, images)
+			.addNewArea(
+				GivenAddress,
+				description,
+				latitude,
+				longitude,
+				categorie,
+				images
+			)
 			.then((result) => {
 				console.log(result);
 			})
@@ -98,22 +108,25 @@ export function App() {
 				console.log(error);
 			});
 	};
-	// useEffect(() => {
-	// 	api
-	// 		.getCoords()
-	// 		.then((res) => {
-	// 			console.log(res);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-	// }, []);
 
 	return (
 		<>
 			<Routes>
 				<Route path="/" element={<Layuot />}>
-					<Route index element={<Main areas={areas} />} />
+					<Route
+						index
+						element={
+							<Main
+								areas={areas}
+								setAddress={setAddress}
+								address={address}
+								setAreasToShow={setAreasToShow}
+								areasToShow={areasToShow}
+								coordinates={coordinates}
+								setCoordinates={setCoordinates}
+							/>
+						}
+					/>
 					<Route
 						path="/activate/:uid/:token"
 						element={<Main areas={areas} />}
@@ -127,6 +140,12 @@ export function App() {
 										areas={areas}
 										categories={categories}
 										handleAddArea={handleAddArea}
+										setAreasToShow={setAreasToShow}
+										areasToShow={areasToShow}
+										setAddress={setAddress}
+										address={address}
+										coordinates={coordinates}
+										setCoordinates={setCoordinates}
 									/>
 								}
 							/>
