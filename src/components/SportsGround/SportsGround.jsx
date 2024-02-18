@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './SportsGround.css';
+import { Map, Placemark } from '@pbe/react-yandex-maps';
 import { Button } from '../Button/Button';
 import { Comment } from '../Comment/Comment';
 import { Form } from '../Form/Form';
 import { Input } from '../Input/Input';
 import { Slider } from '../Slider/Slider';
 import { photos } from '../../constants/SliderConstants';
-// import YandexMap from '../YandexMap/YandexMap';
+import { bordersOfRussia } from '../../constants/MapConstants';
 
-export function SportsGround({ onCommentSubmit }) {
+export function SportsGround({ onCommentSubmit, areas }) {
+	const [mapState, setMapState] = useState({
+		center: [37.618879, 55.751426],
+		zoom: 12,
+		controls: ['zoomControl', 'fullscreenControl'],
+	});
+
+	console.log(setMapState);
 	const comments = [
 		{
 			author: 'John',
@@ -92,7 +100,47 @@ export function SportsGround({ onCommentSubmit }) {
 						/>
 					</div>
 				</Form>
-				{/* <YandexMap /> */}
+				<Map
+					state={mapState}
+					className="map__container"
+					options={{
+						restrictMapArea: bordersOfRussia,
+					}}
+				>
+					{areas.map((area) => (
+						<Placemark
+							key={area.id}
+							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}
+							properties={{
+								balloonContentBody: `
+								   <a class = "yandex-link" href="http://localhost:3000/sports-ground">
+									<div class = "yandex">
+									<img class = "yandex__images" src="${area.images.map((img) => img.image)}">
+									<div class = "yandex__contetn">
+									<h1 class = "yandex__title" >${area.name}</h1>
+									<p class = "yandex__subtitle">${area.description}</p>
+									<div class = "yandex__categories">
+									<div class = "yandex__category">
+									<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+									<p class = "yandex__small-text">${area.categories.map(
+										(categor) => categor.name
+									)}</p>
+									</div>
+									</div>
+									</div>
+									</div>
+									</a>
+									`,
+							}}
+							options={{
+								preset: 'islands#blueSportIcon',
+								controls: [],
+								visible: true,
+								cursor: 'pointer',
+							}}
+						/>
+					))}
+				</Map>
 			</div>
 		</main>
 	);
@@ -100,6 +148,7 @@ export function SportsGround({ onCommentSubmit }) {
 
 SportsGround.propTypes = {
 	onCommentSubmit: PropTypes.func.isRequired,
+	areas: PropTypes.arrayOf.isRequired,
 };
 
 export default SportsGround;

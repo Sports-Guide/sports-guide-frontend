@@ -158,7 +158,10 @@ export function App() {
 						<Route index element={<PersonalData />} />
 						<Route path="password" element={<PasswordData />} />
 					</Route>
-					<Route path="sports-ground" element={<SportsGround />} />
+					<Route
+						path="sports-ground"
+						element={<SportsGround areas={areas} />}
+					/>
 					<Route
 						path="password/reset/confirm/:uid/:token"
 						element={<FormPasswordResetPage />}
