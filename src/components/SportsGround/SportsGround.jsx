@@ -18,17 +18,13 @@ export function SportsGround({ onCommentSubmit, areas }) {
 		zoom: 12,
 		controls: ['zoomControl', 'fullscreenControl'],
 	});
-	console.log(setMapState);
 
-	// Найдем площадку по ее id
 	const selectedArea = areas.find((area) => area.id.toString() === id);
-	// console.log(selectedArea.longitude);
 
 	useEffect(() => {
 		if (selectedArea) {
 			const latitude = parseFloat(selectedArea.latitude);
 			const longitude = parseFloat(selectedArea.longitude);
-			console.log(longitude);
 			setMapState((prevState) => ({
 				...prevState,
 				center: [latitude, longitude],
@@ -68,7 +64,16 @@ export function SportsGround({ onCommentSubmit, areas }) {
 				<div className="sports-ground__adress-icon" />
 				<p className="sports-ground__adress">{selectedArea.address}</p>
 			</div>
-			{/* <div className="photo-container"> */}
+			<div className="sports-ground__button-container">
+				<button className="sports-ground__button">
+					<p className="sports-ground__button-like" />
+					<p className="sports-ground__button-text">Добавить в избранное</p>
+				</button>
+				<button className="sports-ground__button">
+					<p className="sports-ground__button-warning" />
+					<p className="sports-ground__button-text">Сообщить о неточности</p>
+				</button>
+			</div>
 			<Slider>
 				{selectedArea.images.map((imageObj) => (
 					<img
@@ -85,6 +90,11 @@ export function SportsGround({ onCommentSubmit, areas }) {
 				<div className="category-container">
 					{selectedArea.categories.map((category) => (
 						<span className="category-background">
+							<img
+								src={category.icon}
+								alt="знак категории"
+								className="category-ball"
+							/>
 							<span key={category.id} className="category-name">
 								{category.name}
 							</span>

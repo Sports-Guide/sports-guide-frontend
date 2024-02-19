@@ -26,7 +26,7 @@
 }
 
 .card__categories {
-	width: 59px;
+	width: min-content;
 	height: 20px;
 	display: flex;
 	background-color: rgba(229, 240, 255, 0.5);
@@ -41,6 +41,14 @@
 	line-height: 12px;
 	text-align: left;
 	color: rgba(21, 62, 140);
+	width: min-content;
+	padding: 0 4px 0 4px;
+}
+
+.card__categories-ball {
+	width: 12px;
+	height: 12px;
+	margin-left: 3px;
 }
 
 .card__like {
