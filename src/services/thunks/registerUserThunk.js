@@ -42,3 +42,22 @@ export const fetchUserActivation = createAsyncThunk(
 		return data.email;
 	}
 );
+
+const urlResendActivation = `${baseURL}/users/resend_activation/`;
+
+export const fetchResendActivation = createAsyncThunk(
+	'resendActivation/post',
+	async ({ email }) => {
+		const data = await request(urlResendActivation, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body: JSON.stringify({
+				email,
+			}),
+		});
+		return data.email;
+	}
+);

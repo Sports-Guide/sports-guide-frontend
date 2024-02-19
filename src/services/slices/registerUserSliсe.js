@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
 	fetchRegister,
+	fetchResendActivation,
 	fetchUserActivation,
 } from '../thunks/registerUserThunk';
 
@@ -16,6 +17,11 @@ export const initialState = {
 	isLoadingUserActivation: false,
 	errorUserActivation: false,
 	errorMessageUserActivation: '',
+	// user resend activation
+	isResendActivation: false,
+	isLoadingResendActivation: false,
+	errorResendActivation: false,
+	errorMessageResendActivation: '',
 };
 
 const registerUserSlice = createSlice({
@@ -28,6 +34,9 @@ const registerUserSlice = createSlice({
 		clearRegisterError: (state) => {
 			state.errorRegister = false;
 			state.errorMessageRegister = '';
+		},
+		setIsResendActivation: (state) => {
+			state.isResendActivation = false;
 		},
 	},
 	extraReducers: (builder) => {
@@ -68,9 +77,30 @@ const registerUserSlice = createSlice({
 				state.errorUserActivation = true;
 				state.errorMessageUserActivation =
 					action.error.message || 'Произошла неизвестная ошибка';
+			})
+			// user resend activation
+			.addCase(fetchResendActivation.fulfilled, (state, action) => {
+				state.email = action.payload;
+				state.isResendActivation = true;
+				state.isLoadingResendActivation = false;
+				state.errorResendActivation = false;
+				console.log(action.payload);
+			})
+			.addCase(fetchResendActivation.pending, (state) => {
+				state.isResendActivation = false;
+				state.isLoadingResendActivation = true;
+				state.errorResendActivation = false;
+			})
+			.addCase(fetchResendActivation.rejected, (state, action) => {
+				state.isResendActivation = false;
+				state.isLoadingResendActivation = false;
+				state.errorResendActivation = true;
+				state.errorMessageResendActivation =
+					action.error.message || 'Произошла неизвестная ошибка';
 			});
 	},
 });
 
-export const { setIsRegister, clearRegisterError } = registerUserSlice.actions;
+export const { setIsRegister, clearRegisterError, setIsResendActivation } =
+	registerUserSlice.actions;
 export default registerUserSlice.reducer;
