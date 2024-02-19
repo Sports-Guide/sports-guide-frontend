@@ -19,20 +19,33 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 12px;
+}
+
+.login-form__error-container {
+	text-align: center;
+	min-height: 18px;
+	max-height: 44px;
+	margin: 4px 0 8px;
 }
 
 .login-form__server-error {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	min-height: 18px;
 	max-height: 32px;
 	color: #f92e2e;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 14px;
-	margin: 4px 0 8px;
+}
+
+.login-form__mail_activate {
+	text-align: center;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	border: none;
+	color: var(--Primary-Black-light, #515151);
+	text-decoration-line: underline;
+	background-color: inherit;
 }
 
 .login-form__button-signin {
