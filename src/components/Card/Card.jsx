@@ -3,7 +3,7 @@ import './Card.scss';
 import PropTypes from 'prop-types';
 
 function Card({ area }) {
-	console.log(area);
+	console.log(area.categories);
 	const [isLiked, setIsLiked] = useState(false);
 	return (
 		<div className="card">
@@ -26,6 +26,11 @@ function Card({ area }) {
 					<div className="card__categories-container">
 						{area.categories.map((category) => (
 							<span className="card__categories">
+								<img
+									src={category.icon}
+									alt="знак категории"
+									className="card__categories-ball"
+								/>
 								<span key={category.id} className="card__categories-name">
 									{category.name}
 								</span>
