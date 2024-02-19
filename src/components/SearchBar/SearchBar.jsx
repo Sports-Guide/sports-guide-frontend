@@ -9,6 +9,8 @@ function SearchBar({
 	handleAreaChange,
 	address,
 	setAddress,
+	setIsCardListShow,
+	isCardListShow,
 }) {
 	const location = useLocation();
 	const areaPath = location.pathname === '/app-area';
@@ -39,8 +41,11 @@ function SearchBar({
 			) : (
 				<div className="map__inputs map__inputs_aprea">
 					<button
-						className="map__button"
+						className={
+							isCardListShow ? 'map__button map__button_active' : 'map__button'
+						}
 						aria-label="Переключатель отображения"
+						onClick={() => setIsCardListShow(!isCardListShow)}
 					/>
 					<select
 						type="text"
@@ -90,6 +95,8 @@ SearchBar.propTypes = {
 	setAddress: PropTypes.string.isRequired,
 	handleAreaChange: PropTypes.func.isRequired,
 	handleCategoryChange: PropTypes.func.isRequired,
+	setIsCardListShow: PropTypes.bool.isRequired,
+	isCardListShow: PropTypes.bool.isRequired,
 };
 
 export default SearchBar;

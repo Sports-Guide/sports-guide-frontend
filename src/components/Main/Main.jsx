@@ -8,6 +8,7 @@ import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
 import YandexMap from '../YandexMap/YandexMap';
 import { openModal } from '../../services/slices/modalSlice';
 import SearchBar from '../SearchBar/SearchBar';
+import CardList from '../CardList/CardList';
 
 export function Main({
 	areas,
@@ -23,6 +24,7 @@ export function Main({
 
 	const [selectedArea, setSelectedArea] = useState('');
 	const [isPolygonShow, setIsPolygonShow] = useState(false);
+	const [isCardListShow, setIsCardListShow] = useState(false);
 
 	useEffect(() => {
 		if (uid && token) {
@@ -45,12 +47,15 @@ export function Main({
 
 	// Выбор округа
 	const handleAreaChange = (event) => {
+		if (isCardListShow) {
+			return;
+		}
 		setIsPolygonShow(true);
 		const selectedCurrentArea = event.target.value;
 		if (selectedCurrentArea === 'Все округа') {
-			return setSelectedArea('город Москва');
+			setSelectedArea('город Москва');
 		}
-		return setSelectedArea(selectedCurrentArea);
+		setSelectedArea(selectedCurrentArea);
 	};
 
 	useEffect(() => {
@@ -58,24 +63,31 @@ export function Main({
 	}, [areas, setAreasToShow]);
 
 	return (
-		<main>
+		<main className="main">
 			<WelcomeBanner />
 			<SearchBar
 				handleCategoryChange={handleCategoryChange}
 				handleAreaChange={handleAreaChange}
 				address={address}
 				setAddress={setAddress}
+				setIsCardListShow={setIsCardListShow}
+				isCardListShow={isCardListShow}
 			/>
-			<YandexMap
-				areas={areas}
-				handleAreaChange={handleAreaChange}
-				areasToShow={areasToShow}
-				selectedArea={selectedArea}
-				isPolygonShow={isPolygonShow}
-				setAddress={setAddress}
-				coordinates={coordinates}
-				setCoordinates={setCoordinates}
-			/>
+			{isCardListShow ? (
+				<CardList areasToShow={areasToShow} />
+			) : (
+				<YandexMap
+					areas={areas}
+					handleAreaChange={handleAreaChange}
+					areasToShow={areasToShow}
+					selectedArea={selectedArea}
+					isPolygonShow={isPolygonShow}
+					setAddress={setAddress}
+					coordinates={coordinates}
+					setCoordinates={setCoordinates}
+					isCardListShow={isCardListShow}
+				/>
+			)}
 		</main>
 	);
 }

@@ -1,23 +1,44 @@
-// import React from 'react';
-// import photo from '../../images/Frame 36.png';
-// import icon from '../../images/Frame 39.png';
-// /* import chat from '../../images/basil_cross-outline.png'; */
-// import './Card.css';
+import React, { useState } from 'react';
+import './Card.scss';
+import PropTypes from 'prop-types';
 
-// function Card() {
-// 	return (
-// 		<div className="card-container">
-// 			<img className="card-photo" src={photo} alt="place" />
+function Card({ area }) {
+	// console.log(area.categories[0].name);
+	const [isLiked, setIsLiked] = useState(false);
+	return (
+		<div className="card">
+			<button
+				className={isLiked ? 'card__like card__like_active' : 'card__like'}
+				aria-label="лайк"
+				onClick={() => setIsLiked(!isLiked)}
+			/>
+			<a
+				className="card__link"
+				href="/sports-ground"
+				aria-label="ссылка"
+				target="blank"
+			>
+				<div
+					className="card__image"
+					style={{ backgroundImage: `url(${area.images[0].image})` }}
+				>
+					<span className="card__categories">
+						<span className="card__categories-name">
+							{area.categories[0].name}
+						</span>
+					</span>
+				</div>
+				<div className="card__container">
+					<h3 className="card__title">{area.name}</h3>
+					<p className="card__subtitle">{area.address}</p>
+				</div>
+			</a>
+		</div>
+	);
+}
 
-// 			<div className="card-description">
-// 				<h2 className="card-title">Футбольное поле</h2>
-// 				<p className="card-adress">
-// 					Россия, Москва, Южный административный округ, район Зябликово
-// 				</p>
-// 				<img className="card-icon" src={icon} alt="icon" />
-// 			</div>
-// 		</div>
-// 	);
-// }
+Card.propTypes = {
+	area: PropTypes.arrayOf.isRequired,
+};
 
-// export default Card;
+export default Card;

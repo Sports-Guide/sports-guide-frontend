@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './YandexMap.scss';
 import { Map, Placemark, Clusterer, Polygon } from '@pbe/react-yandex-maps';
@@ -21,6 +20,7 @@ function YandexMap({
 	setAddress,
 	coordinates,
 	setCoordinates,
+	isCardListShow,
 }) {
 	const location = useLocation();
 	const ref = useRef();
@@ -37,6 +37,9 @@ function YandexMap({
 
 	// рендер границ округов
 	useEffect(() => {
+		if (isCardListShow) {
+			return;
+		}
 		if (selectedArea) {
 			api
 				.getCoords(selectedArea)
@@ -65,7 +68,7 @@ function YandexMap({
 					console.error('Ошибка при выполнении запроса:', error);
 				});
 		}
-	}, [selectedArea]);
+	}, [selectedArea, isCardListShow]);
 
 	// Добавление клика на карту, запись адреса и координат в стейт
 	const handleMapClick = useCallback((e, ymaps) => {
@@ -90,6 +93,9 @@ function YandexMap({
 		suggestView.events.add('select', (event) => {
 			selectedItem = event.get('item');
 			setAddress(selectedItem.value);
+			if (isCardListShow || !ref.current) {
+				return;
+			}
 			ymaps
 				.geocode(selectedItem.value, {
 					results: 2,
@@ -116,6 +122,9 @@ function YandexMap({
 
 	// Зум при выборе округа
 	useEffect(() => {
+		if (isCardListShow || !ref.current) {
+			return;
+		}
 		areasCoord.find((area) => {
 			const { place, coords } = area;
 			if (place === selectedArea) {
@@ -123,7 +132,7 @@ function YandexMap({
 			}
 			return null;
 		});
-	}, [selectedArea]);
+	}, [selectedArea, isCardListShow]);
 
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
@@ -166,6 +175,7 @@ function YandexMap({
 				) : null}
 				{areaPath
 					? coordinates.map((point, index) => (
+							// eslint-disable-next-line
 							<Placemark key={index} geometry={point} draggable />
 						))
 					: null}
@@ -223,6 +233,7 @@ YandexMap.propTypes = {
 	setAddress: PropTypes.string.isRequired,
 	coordinates: PropTypes.arrayOf.isRequired,
 	setCoordinates: PropTypes.arrayOf.isRequired,
+	isCardListShow: PropTypes.bool.isRequired,
 };
 
 export default YandexMap;
