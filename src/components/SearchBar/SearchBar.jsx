@@ -33,7 +33,11 @@ function SearchBar({
 			{areaPath ? (
 				<input
 					type="text"
-					className="map__search-bar map__search-bar_type_search"
+					className={
+						areaPath
+							? 'map__search-bar_type_search-area'
+							: 'map__search-bar map__search-bar_type_search'
+					}
 					id="suggest"
 					placeholder="Двигайте ползунок на карте, чтобы указать адрес"
 					onChange={handleChange}
