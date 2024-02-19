@@ -40,7 +40,7 @@ export const fetchConfirmPasswordReset = createAsyncThunk(
 				new_password,
 			}),
 		});
-		return data.email;
+		return data;
 	}
 );
 
