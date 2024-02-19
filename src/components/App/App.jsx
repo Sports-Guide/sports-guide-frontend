@@ -129,7 +129,17 @@ export function App() {
 					/>
 					<Route
 						path="/activate/:uid/:token"
-						element={<Main areas={areas} />}
+						element={
+							<Main
+								areas={areas}
+								setAddress={setAddress}
+								address={address}
+								setAreasToShow={setAreasToShow}
+								areasToShow={areasToShow}
+								coordinates={coordinates}
+								setCoordinates={setCoordinates}
+							/>
+						}
 					/>
 					<Route
 						path="app-area"
