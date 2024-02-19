@@ -109,7 +109,7 @@ export function SportsGround({ areas }) {
 										.map(
 											(categor) =>
 												`<div class = "yandex__category">
-											<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+											<img class = "yandex__small-img" src="${categor.icon}" alt="значек категории">
 											<p class = "yandex__small-text">${categor.name}</p>
 											</div>`
 										)
