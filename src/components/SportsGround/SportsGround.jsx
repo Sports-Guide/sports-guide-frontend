@@ -37,20 +37,22 @@ export function SportsGround({ areas }) {
 			{/* <NavLink to="/" className="sports-ground__link">
 				← К выбору площадки
 			</NavLink> */}
-			<h1 className="sports-ground__title">{selectedArea.name}</h1>
-			<div className="sports-ground__adress-container">
-				<div className="sports-ground__adress-icon" />
-				<p className="sports-ground__adress">{selectedArea.address}</p>
-			</div>
-			<div className="sports-ground__button-container">
-				<button className="sports-ground__button">
-					<p className="sports-ground__button-like" />
-					<p className="sports-ground__button-text">Добавить в избранное</p>
-				</button>
-				<button className="sports-ground__button">
-					<p className="sports-ground__button-warning" />
-					<p className="sports-ground__button-text">Сообщить о неточности</p>
-				</button>
+			<div className="sports-ground__data">
+				<h1 className="sports-ground__title">{selectedArea.name}</h1>
+				<div className="sports-ground__adress-container">
+					<div className="sports-ground__adress-icon" />
+					<p className="sports-ground__adress">{selectedArea.address}</p>
+				</div>
+				<div className="sports-ground__button-container">
+					<button className="sports-ground__button">
+						<p className="sports-ground__button-like" />
+						<p className="sports-ground__button-text">Добавить в избранное</p>
+					</button>
+					<button className="sports-ground__button">
+						<p className="sports-ground__button-warning" />
+						<p className="sports-ground__button-text">Сообщить о неточности</p>
+					</button>
+				</div>
 			</div>
 			<Slider>
 				{selectedArea.images.map((imageObj) => (

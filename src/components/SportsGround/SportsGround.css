@@ -9,7 +9,7 @@
 }
 
 .sports-ground {
-	padding: 0 260px;
+	padding: 0 200px;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
@@ -119,6 +119,7 @@
 
 .category-section {
 	margin-top: 40px;
+	margin-bottom: 20px;
 }
 
 .category-title {
@@ -126,7 +127,8 @@
 	font-size: 28px;
 	font-style: normal;
 	font-weight: 850;
-	line-height: 32px; /* 114.286% */
+	line-height: 32px;
+	/* 114.286% */
 	margin: 0;
 	text-align: left;
 }
@@ -197,7 +199,8 @@
 	font-size: 28px;
 	font-style: normal;
 	font-weight: 850;
-	line-height: 32px; /* 114.286% */
+	line-height: 32px;
+	/* 114.286% */
 }
 
 /* .comments-container {
@@ -216,10 +219,31 @@
 @media screen and (max-width: 1245px) {
 	.sports-ground {
 		margin: 0 auto;
-		padding: 0px;
+		padding: 0;
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	.sports-ground__adress {
+		font-family: Roboto;
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 14px;
+		letter-spacing: 0em;
+		text-align: left;
+	}
+}
+
+@media screen and (max-width: 469px) {
+	.sports-ground__adress {
+		width: 90%;
 	}
 
-	.slider-container {
-		width: 80%;
+	.sports-ground__button {
+		width: 150px;
+	}
+	.sports-ground__button-text {
+		display: none;
 	}
 }
