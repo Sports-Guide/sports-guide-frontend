@@ -169,7 +169,7 @@ export function App() {
 						<Route path="password" element={<PasswordData />} />
 					</Route>
 					<Route
-						path="sports-ground"
+						path="sports-ground/:id"
 						element={<SportsGround areas={areas} />}
 					/>
 					<Route

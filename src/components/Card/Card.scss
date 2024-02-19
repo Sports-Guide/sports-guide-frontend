@@ -18,16 +18,21 @@
 	display: flex;
 }
 
+.card__categories-container {
+	margin: 0px 0 16px 16px;
+	display: flex;
+	align-self: end;
+	gap: 4px;
+}
+
 .card__categories {
 	width: 59px;
 	height: 20px;
 	display: flex;
 	background-color: rgba(229, 240, 255, 0.5);
-	align-self: end;
 	border-radius: 6px;
 	justify-content: center;
 	align-items: center;
-	margin: 0px 0 16px 16px;
 }
 
 .card__categories-name {

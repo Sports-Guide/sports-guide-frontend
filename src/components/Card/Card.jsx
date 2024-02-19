@@ -3,7 +3,7 @@ import './Card.scss';
 import PropTypes from 'prop-types';
 
 function Card({ area }) {
-	// console.log(area.categories[0].name);
+	console.log(area);
 	const [isLiked, setIsLiked] = useState(false);
 	return (
 		<div className="card">
@@ -14,19 +14,24 @@ function Card({ area }) {
 			/>
 			<a
 				className="card__link"
-				href="/sports-ground"
+				href={`/sports-ground/${area.id}`}
 				aria-label="ссылка"
-				target="blank"
+				target="_blank"
+				rel="noreferrer"
 			>
 				<div
 					className="card__image"
 					style={{ backgroundImage: `url(${area.images[0].image})` }}
 				>
-					<span className="card__categories">
-						<span className="card__categories-name">
-							{area.categories[0].name}
-						</span>
-					</span>
+					<div className="card__categories-container">
+						{area.categories.map((category) => (
+							<span className="card__categories">
+								<span key={category.id} className="card__categories-name">
+									{category.name}
+								</span>
+							</span>
+						))}
+					</div>
 				</div>
 				<div className="card__container">
 					<h3 className="card__title">{area.name}</h3>

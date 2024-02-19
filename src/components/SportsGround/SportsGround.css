@@ -1,5 +1,4 @@
 .sports-ground__title {
-	font-family: Garet;
 	font-size: 36px;
 	font-weight: 850;
 	line-height: 40px;
@@ -32,7 +31,6 @@
 .sports-ground__link {
 	color: #1478ff;
 	text-decoration: none;
-	font-family: Roboto;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 700;
@@ -45,7 +43,6 @@
 .sports-ground__adress {
 	color: #515151;
 	text-align: center;
-	font-family: Roboto;
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 400;
@@ -71,7 +68,6 @@
 
 .category-title {
 	color: #030303;
-	font-family: Garet;
 	font-size: 28px;
 	font-style: normal;
 	font-weight: 850;
@@ -84,6 +80,7 @@
 	margin-top: 20px;
 	display: flex;
 	gap: 12px;
+	justify-content: flex-start;
 }
 
 .category {
@@ -108,15 +105,23 @@
 }
 
 .category-name {
-	color: #030303;
-	font-family: Roboto;
-	font-size: 16px;
-	font-style: normal;
+	font-size: 14px;
 	font-weight: 500;
-	line-height: 20px; /* 125% */
-	margin: 0;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #153e8c;
 }
 
+.category-background {
+	width: 89px;
+	height: 36px;
+	background-color: rgba(229, 240, 255, 0.8);
+	border-radius: 6px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .comments-section {
 	margin-top: 20px;
 }
@@ -125,12 +130,21 @@
 	margin: 0;
 	text-align: left;
 	color: #030303;
-	font-family: Garet;
 	font-size: 28px;
 	font-style: normal;
 	font-weight: 850;
 	line-height: 32px; /* 114.286% */
 }
 
-.comments-container {
+/* .comments-container {
+} */
+
+.sports-ground__not-found {
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	display: flex;
+	align-self: center;
+	padding: 80px 0 0 0;
 }
