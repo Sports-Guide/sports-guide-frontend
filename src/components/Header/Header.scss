@@ -60,7 +60,7 @@
 	display: none;
 }
 
-.header__buttons-burger{
+.header__buttons-burger {
 	position: static;
 	display: flex;
 	flex-direction: column;
@@ -72,10 +72,9 @@
 	height: 150px;
 }
 
-.header__buttons-burger-none{
+.header__buttons-burger-none {
 	display: none;
 }
-
 
 @media screen and (max-width: 1088px) {
 	.header__container {
