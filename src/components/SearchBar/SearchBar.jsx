@@ -35,7 +35,7 @@ function SearchBar({
 					type="text"
 					className={
 						areaPath
-							? 'map__search-bar_type_search-area'
+							? 'map__search-bar map__search-bar_type_search-area'
 							: 'map__search-bar map__search-bar_type_search'
 					}
 					id="suggest"
