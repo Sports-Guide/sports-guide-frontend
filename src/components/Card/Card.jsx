@@ -1,36 +1,49 @@
-import React from 'react';
-import photo from '../../images/Frame 36.png';
-import icon from '../../images/Frame 39.png';
-/* import chat from '../../images/basil_cross-outline.png'; */
-import './Card.css';
+import React, { useState } from 'react';
+import './Card.scss';
+import PropTypes from 'prop-types';
 
-export function Card() {
+function Card({ area }) {
+	console.log(area);
+	const [isLiked, setIsLiked] = useState(false);
 	return (
-		<div className="card-container">
-			<img className="card-photo" src={photo} alt="place" />
-
-			<div className="card-description">
-				<h2 className="card-title">Футбольное поле</h2>
-				<p className="card-adress">
-					Россия, Москва, Южный административный округ, район Зябликово
-				</p>
-				<img className="card-icon" src={icon} alt="icon" />
-			</div>
+		<div className="card">
+			<button
+				className={isLiked ? 'card__like card__like_active' : 'card__like'}
+				aria-label="лайк"
+				onClick={() => setIsLiked(!isLiked)}
+			/>
+			<a
+				className="card__link"
+				href={`/sports-ground/${area.id}`}
+				aria-label="ссылка"
+				target="_blank"
+				rel="noreferrer"
+			>
+				<div
+					className="card__image"
+					style={{ backgroundImage: `url(${area.images[0].image})` }}
+				>
+					<div className="card__categories-container">
+						{area.categories.map((category) => (
+							<span className="card__categories">
+								<span key={category.id} className="card__categories-name">
+									{category.name}
+								</span>
+							</span>
+						))}
+					</div>
+				</div>
+				<div className="card__container">
+					<h3 className="card__title">{area.name}</h3>
+					<p className="card__subtitle">{area.address}</p>
+				</div>
+			</a>
 		</div>
-
-		/* 		<div className="card-container">
-			<img className="card-photo" src={photo} alt="place" />
-			<img className="card-icon" src={icon} alt="icon" />
-			<h2 className="card-title">Футбольное поле</h2>
-			<p className="card-adress">
-				Россия, Москва, Южный административный округ, район Зябликово
-			</p>
-			<div className="chat-container">
-				<img className="chat-icon" src={chat} alt="chat" />
-				<span className="chat-number">(15)</span>
-			</div>
-		</div> */
 	);
 }
+
+Card.propTypes = {
+	area: PropTypes.arrayOf.isRequired,
+};
 
 export default Card;

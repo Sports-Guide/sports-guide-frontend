@@ -1,0 +1,103 @@
+.card {
+	width: 325px;
+	height: 312px;
+	border-radius: 12px;
+	position: relative;
+}
+
+.card__link {
+	text-decoration: none;
+}
+
+.card__image {
+	width: 325px;
+	height: 220px;
+	border-top-left-radius: 12px;
+	border-top-right-radius: 12px;
+	background-size: cover;
+	display: flex;
+}
+
+.card__categories-container {
+	margin: 0px 0 16px 16px;
+	display: flex;
+	align-self: end;
+	gap: 4px;
+}
+
+.card__categories {
+	width: 59px;
+	height: 20px;
+	display: flex;
+	background-color: rgba(229, 240, 255, 0.5);
+	border-radius: 6px;
+	justify-content: center;
+	align-items: center;
+}
+
+.card__categories-name {
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 12px;
+	text-align: left;
+	color: rgba(21, 62, 140);
+}
+
+.card__like {
+	border: none;
+	width: 28px;
+	height: 28px;
+	background-image: url(../../images/noLike.svg);
+	background-color: rgba(252, 252, 252, 0.5);
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+	position: absolute;
+	right: 12px;
+	top: 12px;
+}
+
+.card__like:hover {
+	cursor: pointer;
+}
+
+.card__like_active {
+	background-image: url(../../images/like.svg);
+}
+
+.card__container {
+	width: 325px;
+	height: 92px;
+	background: #fcfcfc;
+	padding: 9px 0 0 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+}
+
+.card__title {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 900;
+	line-height: 22px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #212121;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 90%;
+}
+
+.card__subtitle {
+	margin: 0;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #515151;
+	width: 90%;
+}

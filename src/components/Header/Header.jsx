@@ -1,20 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
+import { ButtonLoginSite } from '../Button/ButtonLoginSite';
 import { ButtonMap } from '../Button/ButtonMap';
 import logo from '../../images/logo.svg';
-import './Header.scss';
 
-export function Header({ onLogIn, loggedIn }) {
+import { getIsUserAuth } from '../../services/selectors/userSelector';
+import './Header.scss';
+import { openModal } from '../../services/slices/modalSlice';
+
+export function Header() {
+	const isUserAuth = useSelector(getIsUserAuth);
+
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
-		navigate('/app-area');
+		navigate('app-area');
 	};
 
 	const navigateToPersonalArea = () => {
-		navigate('/profile');
+		navigate('profile');
+	};
+
+	const dispatch = useDispatch();
+
+	const handleOpenModal = (type) => {
+		dispatch(openModal(type));
 	};
 
 	return (
@@ -23,26 +35,25 @@ export function Header({ onLogIn, loggedIn }) {
 				<Link to="/" className="header__logo">
 					<img className="logo" src={logo} alt="" />
 					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
-					<ButtonMap label="Москва" />
 				</Link>
+				<Button className="button__menu-burger" />
 				<div className="header__buttons">
+					<ButtonMap label="Москва" />
 					<Button
 						className="button-app"
-						onClick={navigateHome}
+						onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
 						label="Добавить площадку"
 					/>
-					{loggedIn ? (
-						<Button
+					{isUserAuth ? (
+						<ButtonLoginSite
 							onClick={navigateToPersonalArea}
-							label="Личный кабинет"
-							className="button-login-site"
+							label="Личный&nbsp;кабинет"
 						/>
 					) : (
-						<Button
-							className="button-login-site"
-							onClick={onLogIn}
+						<ButtonLoginSite
+							onClick={() => dispatch(openModal('login'))}
 							type="button"
-							label="Личный кабинет"
+							label="Войти"
 						/>
 					)}
 				</div>
@@ -50,8 +61,3 @@ export function Header({ onLogIn, loggedIn }) {
 		</header>
 	);
 }
-
-Header.propTypes = {
-	onLogIn: PropTypes.func.isRequired,
-	loggedIn: PropTypes.bool.isRequired,
-};

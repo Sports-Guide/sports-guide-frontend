@@ -9,6 +9,7 @@
 .map__container {
 	width: 1040px;
 	height: 500px;
+	padding-top: 32px;
 }
 
 .map__baloon {
@@ -18,34 +19,117 @@
 	background-image: url(../../images/location.png);
 }
 
-.map__search-bar {
-	width: 540px;
+.map__inputs {
+	display: flex;
+	justify-content: center;
+	width: 1040px;
+	gap: 8px;
+	background: #fcfcfc;
+	padding: 0 36px 24px 36px;
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
+}
+
+.map__button {
+	padding: 0;
+	border: 0;
+	width: 104px;
 	height: 52px;
+	background-image: url(../../images/buttonMap.png);
+	border-radius: 8px;
+}
+
+.map__button_active {
+	background-image: url(../../images/buttonCards.png);
+}
+
+.map__search-bar {
+	border: none;
+	width: 203.5px;
+	height: 52px;
+	border: 1px solid #c9d1e5;
+	background: #fcfcfc;
+	border-radius: 8px;
+	padding-left: 10px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 20px;
+}
+
+.map__search-bar::placeholder {
+	color: #898787;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 20px;
+}
+
+.map__search-bar_type_search {
+	width: 100%;
 }
 
 .ymaps-2-1-79-balloon__layout {
 	border-radius: 8px;
 	width: 358px;
-	height: 112px;
+	height: auto;
 }
 
 .ymaps-2-1-79-balloon {
 	border-radius: 8px;
 }
-/*
-.ymaps-2-1-79-balloon__content {
-	border: 1px solid red;
-}*/
+
+.yandex-link {
+	text-decoration: none;
+	color: black;
+}
 
 .yandex {
 	display: flex;
-
 	width: 318px;
-	height: 88px;
 }
 
 .yandex__contetn {
 	margin-left: 10px;
+	width: 218px;
+}
+
+.yandex__categories {
+	display: grid;
+	width: 200px;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	justify-content: end;
+	row-gap: 6px;
+}
+
+.yandex__category {
+	min-height: 100%;
+	height: 20px;
+	background: rgba(229, 240, 255, 1);
+	display: flex;
+	align-items: center;
+	border-radius: 6px;
+	justify-content: start;
+}
+
+.yandex__small-img {
+	width: 12px;
+	height: 12px;
+	margin-left: 8px;
+}
+
+.yandex__small-text {
+	//styleName: Desktop/Caption 3_Regular;
+	font-family: Roboto;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 12px;
+	letter-spacing: 0em;
+	text-align: left;
+	margin: 0;
+	margin-left: 8px;
+	margin-right: 8px;
 }
 
 .yandex__images {
@@ -72,37 +156,123 @@
 	line-height: 12px;
 	letter-spacing: 0em;
 	text-align: left;
+	margin-bottom: 5px;
 }
 
 // .ymaps-2-1-79-copyrights-pane {
 // 	display: none;
 // }
 
+// Карта добавления карточки
+
 .map_area-app {
 	width: 100%;
-	height: 100%;
+	height: 80%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
-	border: 1px solid green;
 
 	.map__container {
-		width: 1040px;
-		height: 500px;
-		border: 1px solid red;
+		width: 724px;
+		height: 340px;
 	}
 
 	.map__baloon {
-		border: 1px solid red;
 		width: 150px;
 		height: 150px;
 		background-image: url(../../images/location.png);
 	}
 
+	.map__button_none {
+		display: none;
+	}
+
+	.map__inputs_aprea {
+		display: flex;
+		width: 100%;
+		padding: 0;
+	}
+
 	.map__search-bar {
-		width: 540px;
-		height: 52px;
-		border: 1px solid hotpink;
+		width: 724px;
+		height: 42px;
+		border-radius: 8px;
+		margin-bottom: 10px;
+		border: 1px solid rgba(201, 209, 229, 1);
+	}
+
+	.map__search-bar_kinds-of-sports {
+		display: none;
+	}
+
+	.map__search-bar_area {
+		display: none;
+	}
+
+	.ymaps-2-1-79-inner-panes {
+		border-radius: 12px;
+	}
+
+	.ymaps-2-1-79-controls__control_toolbar {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 878px) {
+	.map_area-app {
+		.map__container {
+			width: 100%;
+			padding: 0;
+		}
+
+		.map__baloon {
+			width: 150px;
+			height: 150px;
+			background-image: url(../../images/location.png);
+		}
+
+		.map__inputs_aprea {
+			display: flex;
+			width: 100%;
+			padding: 0;
+		}
+
+		.map__search-bar {
+			width: 724px;
+			height: 42px;
+			border-radius: 8px;
+			border: 1px solid rgba(201, 209, 229, 1);
+		}
+
+		.map__search-bar_kinds-of-sports {
+			display: none;
+		}
+
+		.map__search-bar_area {
+			display: none;
+		}
+
+		.ymaps-2-1-79-inner-panes {
+			border-radius: 12px;
+		}
+
+		.ymaps-2-1-79-controls__control_toolbar {
+			display: none;
+		}
+	}
+}
+
+@media screen and (max-width: 495px) {
+	.map__search-bar_type_search::placeholder {
+		font-family: Roboto;
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 14px;
+		letter-spacing: 0em;
+		text-align: left;
+	}
+	.map__search-bar_type_search {
+		width: 100%;
 	}
 }

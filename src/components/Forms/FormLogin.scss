@@ -1,0 +1,81 @@
+.login-form__container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 425px;
+}
+
+.login-form {
+	margin: 0;
+	margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.login-form__down_group {
+	margin: 0;
+	height: 44px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.login-form__error-container {
+	text-align: center;
+	min-height: 18px;
+	max-height: 44px;
+	margin: 4px 0 8px;
+}
+
+.login-form__server-error {
+	min-height: 18px;
+	max-height: 32px;
+	color: #f92e2e;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+}
+
+.login-form__mail_activate {
+	text-align: center;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	border: none;
+	color: var(--Primary-Black-light, #515151);
+	text-decoration-line: underline;
+	background-color: inherit;
+}
+
+.login-form__button-signin {
+	margin: 0;
+	border-radius: 8px;
+	background: var(--Accent-Blue, #1478ff);
+	padding: 0;
+	width: 326px;
+	height: 44px;
+	color: var(--Primary-White, #fcfcfc);
+	font-family: Roboto;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	text-align: center;
+	align-self: center;
+	cursor: pointer;
+}
+
+.login-form__paragraph {
+	margin: 0;
+	padding: 16px 0px;
+	color: var(--Primary-Gray-blue-dark, #737a8e);
+	font-family: Roboto;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 20px;
+	display: flex;
+	gap: 4px;
+	align-self: center;
+}

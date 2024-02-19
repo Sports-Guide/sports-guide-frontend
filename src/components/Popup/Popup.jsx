@@ -2,24 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Popup.scss';
 
-export function Popup({
-	isOpen,
-	onClose,
-	title,
-	headerClassName,
-	children,
-	checkPopup,
-}) {
+export function Popup({ handleClose, title, titleStyle, children }) {
+	// Останавливает закрытие попапа при нажатии на основной контент
+	const stopPropagation = (e) => e.stopPropagation();
+
 	return (
-		<div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
-			<div className={`popup__container ${checkPopup}`}>
+		/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+		<div className="popup" onClick={handleClose}>
+			<div className="popup__container" onClick={stopPropagation}>
 				<button
 					className="popup__close-button"
 					type="button"
-					onClick={onClose}
+					onClick={handleClose}
 					aria-label="close-popup-button"
 				/>
-				<h2 className={`popup__header ${headerClassName}`}>{title}</h2>
+				<h2 className={`${titleStyle} popup__title`}>{title}</h2>
 				{children}
 			</div>
 		</div>
@@ -27,17 +24,10 @@ export function Popup({
 }
 
 Popup.propTypes = {
-	isOpen: PropTypes.bool,
-	onClose: PropTypes.func.isRequired,
+	handleClose: PropTypes.func.isRequired,
 	title: PropTypes.string.isRequired,
-	headerClassName: PropTypes.string,
+	titleStyle: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
-	checkPopup: PropTypes.string.isRequired,
-};
-
-Popup.defaultProps = {
-	headerClassName: '',
-	isOpen: false,
 };
 
 export default Popup;

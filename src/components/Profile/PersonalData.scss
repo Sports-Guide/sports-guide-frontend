@@ -4,6 +4,7 @@ $secondary-text-color: #515151;
 $error-color: #f92e2e;
 $button-bg-color: #1478ff;
 $button-text-color: #fcfcfc;
+$cancel-button-text: #737a8e;
 $form-border-color: #c9d1e5;
 $input-padding: 16px 12px;
 $input-border-radius: 8px;
@@ -11,10 +12,6 @@ $input-border-radius: 8px;
 // Mixins
 @mixin border-radius($radius) {
 	border-radius: $radius;
-	-webkit-border-radius: $radius;
-	-moz-border-radius: $radius;
-	-ms-border-radius: $radius;
-	-o-border-radius: $radius;
 }
 
 // Styles
@@ -41,6 +38,13 @@ $input-border-radius: 8px;
 	width: 52px;
 	@include border-radius(50%);
 	background-color: transparent;
+	cursor: pointer;
+}
+
+.profile__avatar {
+	height: 100%;
+	width: 100%;
+	margin: 0;
 }
 
 .profile__name-container {
@@ -104,20 +108,20 @@ $input-border-radius: 8px;
 }
 
 .error {
-	font-weight: 400;
-	font-size: 12px;
-	line-height: 16px;
-	height: calc(16px * 2);
-	text-align: left;
-	width: 100%;
-	margin: 0;
-	padding: 4px 0 0;
-	visibility: hidden;
+	font-family: 'Roboto', sans-serif;
+	display: block;
+	min-height: 26px;
+	margin: 4px 0 0;
+	padding: 0;
 }
 
 .error_active {
-	visibility: visible;
 	color: $error-color;
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 14px;
+	text-align: left;
+	width: 100%;
 }
 
 .profile__info-container {
@@ -138,16 +142,38 @@ $input-border-radius: 8px;
 
 .profile__field-name {
 	font-size: 15px;
-	font-weight: 500;
+	font-weight: 400;
 	line-height: 20px;
 	text-align: left;
 	color: $primary-text-color;
 	padding: 0;
-	margin: 0 0 16px;
+	margin: 0 0 30px;
 }
 
 .profile__field-name:last-child {
 	margin-bottom: 0;
+}
+
+.profile__input-label {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+	text-align: left;
+	color: $secondary-text-color;
+	// margin: 0 0 26px;
+	margin: 0 0 7px;
+	padding: 0;
+}
+
+.profile__input-label:nth-last-child(2) {
+	margin-bottom: 0;
+}
+
+.profile__button-container {
+	display: flex;
+	margin-top: calc(42px - 32px - 4px);
+	gap: 8px;
 }
 
 .profile__change-button {
@@ -158,12 +184,62 @@ $input-border-radius: 8px;
 	background-color: $button-bg-color;
 	border: none;
 	outline: none;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 700;
 	line-height: 20px;
 	text-align: center;
-	padding: 8px 24px;
-	margin-top: 24px;
+	padding: 8px 16px;
+	margin-top: 42px;
 	@include border-radius($input-border-radius);
 	cursor: pointer;
+}
+
+.no-margin {
+	margin: 0;
+}
+
+.profile__cancel-button {
+	font-family: 'Roboto', sans-serif, system-ui;
+	width: fit-content;
+	color: $cancel-button-text;
+	background-color: transparent;
+	height: 36px;
+	border: none;
+	outline: none;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	text-align: center;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+.profile__server-error {
+	display: block;
+	justify-content: center;
+	align-items: center;
+	min-height: 18px;
+	max-height: 32px;
+	color: #f92e2e;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	margin: 0;
+	// margin: 20px 0 8px;
+}
+
+@media screen and (max-width: 800px) {
+	.profile__personal-info-container {
+		margin-bottom: 16px;
+	}
+	.profile__field-name {
+		margin-bottom: 24px;
+	}
+	.profile__change-button {
+		margin-top: 36px;
+		height: 40px;
+	}
+	.form_place_profile {
+		width: 100%;
+	}
 }

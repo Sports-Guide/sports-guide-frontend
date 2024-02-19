@@ -1,6 +1,7 @@
 .button-login-site {
 	margin: 0;
 	padding: 0;
+	outline: none;
 	color: var(--Accent, #1478ff);
 	font-family: Roboto;
 	font-size: 14px;
@@ -8,7 +9,7 @@
 	font-weight: 700;
 	line-height: 20px;
 	display: flex;
-	padding: 6px 20px;
+	padding: 8px 16px;
 	justify-content: center;
 	align-items: center;
 	align-self: center;
@@ -17,5 +18,4 @@
 	background: #e5f0ff;
 	border: 0;
 	cursor: pointer;
-	margin-left: 26px;
 }

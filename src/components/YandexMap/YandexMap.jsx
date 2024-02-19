@@ -1,108 +1,242 @@
-/* eslint-disable */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './YandexMap.scss';
-import {
-	YMaps,
-	Map,
-	Placemark,
-	SearchControl,
-	Clusterer,
-} from '@pbe/react-yandex-maps';
+import { Map, Placemark, Clusterer, Polygon } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
+import * as api from '../../utils/MainApi';
 
-function YandexMap({ areas, areaAppClass }) {
-	const defaultState = {
-		center: [55.751426, 37.618879],
+import {
+	displayBorder,
+	bordersOfRussia,
+	areasCoord,
+} from '../../constants/MapConstants';
+
+function YandexMap({
+	areas,
+	areasToShow,
+	isPolygonShow,
+	setIsPolygonShow,
+	selectedArea,
+	setAddress,
+	coordinates,
+	setCoordinates,
+	isCardListShow,
+}) {
+	const location = useLocation();
+	const ref = useRef();
+	const areaPath = location.pathname === '/app-area';
+
+	const areasToDisplay = areaPath ? areas : areasToShow;
+	console.log(areas);
+	const [coordsForArea, setCoordsForArea] = useState([]);
+	const [mapState, setMapState] = useState({
+		center: [37.618879, 55.751426],
 		zoom: 10,
 		controls: ['zoomControl', 'fullscreenControl'],
-	};
+	});
 
-	// function MapSuggestComponent(props) {
-	// 	const { ymaps } = props;
+	// рендер границ округов
+	useEffect(() => {
+		if (isCardListShow) {
+			return;
+		}
+		if (selectedArea) {
+			api
+				.getCoords(selectedArea)
+				.then((data) => {
+					if (data && data.length > 0) {
+						const firstResult = data[0];
+						if (firstResult.geojson && firstResult.geojson.coordinates) {
+							const polygonCoordinates = firstResult.geojson.coordinates;
+							let modifiedCoordinates = [];
+							if (
+								polygonCoordinates.every((subArray) => subArray.length === 1)
+							) {
+								modifiedCoordinates = polygonCoordinates.flat();
+							} else {
+								modifiedCoordinates = polygonCoordinates;
+							}
+							setCoordsForArea(modifiedCoordinates);
+						} else {
+							console.error('Полигон не найден в ответе API');
+						}
+					} else {
+						console.error('Данные не получены от API');
+					}
+				})
+				.catch((error) => {
+					console.error('Ошибка при выполнении запроса:', error);
+				});
+		}
+	}, [selectedArea, isCardListShow]);
 
-	// 	React.useEffect(() => {
-	// 		const suggestView = new ymaps.SuggestView('suggest');
-	// 	}, [ymaps.SuggestView]);
+	// Добавление клика на карту, запись адреса и координат в стейт
+	const handleMapClick = useCallback((e, ymaps) => {
+		const point = e.get('coords');
+		setCoordinates([point]);
+		ymaps.geocode(point).then((res) => {
+			const firstGeoObject = res.geoObjects.get(0);
+			const addressLine = firstGeoObject.getAddressLine();
+			setAddress(addressLine);
+		}); // eslint-disable-next-line
+	}, []);
 
-	// 	return <input type="text" id="suggest" />;
-	// }
-
-	// const SuggestComponent = React.useMemo(() => {
-	// 	return withYMaps(MapSuggestComponent, true, [
-	// 		'SuggestView',
-	// 		'geocode',
-	// 		'coordSystem.geo',
-	// 	]);
-	// }, []);
 	const loadSuggest = (ymaps) => {
-		const suggestView = new ymaps.SuggestView('suggest');
+		// Подключение поисковой подсказки
+		const suggestView = new ymaps.SuggestView('suggest', {
+			// ограничение зоны поисковой подсказки
+			boundedBy: displayBorder,
+			strictBounds: displayBorder,
+		});
+		let selectedItem = null;
+		// Получение коодинат по поисковому запросу
+		suggestView.events.add('select', (event) => {
+			selectedItem = event.get('item');
+			setAddress(selectedItem.value);
+			if (isCardListShow || !ref.current) {
+				return;
+			}
+			ymaps
+				.geocode(selectedItem.value, {
+					results: 2,
+				})
+				.then((res) => {
+					const firstGeoObject = res.geoObjects.get(0);
+					// координаты запрашиваемого обьекта
+					const coords = firstGeoObject.geometry.getCoordinates();
+					// координаты для корректного зума карты
+					const bounds = firstGeoObject.properties.get('boundedBy');
+					// обновление стейтов
+					ref.current.setBounds(bounds, { checkZoomRange: true });
+					setCoordinates([coords]);
+					setMapState((prevState) => ({
+						...prevState,
+						center: coords,
+					}));
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		});
 	};
+
+	// Зум при выборе округа
+	useEffect(() => {
+		if (isCardListShow || !ref.current) {
+			return;
+		}
+		areasCoord.find((area) => {
+			const { place, coords } = area;
+			if (place === selectedArea) {
+				return ref.current.setBounds(coords, { checkZoomRange: true });
+			}
+			return null;
+		});
+	}, [selectedArea, isCardListShow]);
 
 	return (
-		<div className={`map ${areaAppClass}`}>
-			{/* <SearchBar /> */}
-			<input type="text" className="map__search-bar" id="suggest" />
-			<YMaps
-				query={{
-					ns: 'use-load-option',
-					load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon',
-					apikey: 'c062e9ac-db0c-4d73-b5b2-71830702f484',
-					suggest_apikey: '7841f93a-196d-47c1-9184-54f3c937df30',
+		<div className={areaPath ? 'map_area-app' : 'map'}>
+			<Map
+				instanceRef={ref}
+				state={mapState}
+				className="map__container"
+				modules={['SuggestView', 'geocode', 'coordSystem.geo']}
+				onLoad={(ymaps) => {
+					loadSuggest(ymaps);
+					if (areaPath) {
+						// добавление клика на карту
+						ref.current.events.add('click', (e) => handleMapClick(e, ymaps));
+					}
+					if (isPolygonShow) {
+						ref.current.events.add('boundschange', (e) => {
+							const newZoom = e.get('newZoom');
+
+							if (newZoom >= 13) {
+								setIsPolygonShow(false);
+							}
+						});
+					}
+				}}
+				options={{
+					// ограничение максимальной зоны отображения - граница России
+					restrictMapArea: bordersOfRussia,
 				}}
 			>
-				{/* <SuggestComponent /> */}
-
-				<Map
-					defaultState={defaultState}
-					className="map__container"
-					modules={['SuggestView']}
-					onLoad={(ymaps) => loadSuggest(ymaps)}
-				>
-					<SearchControl options={{ float: 'right' }} />
-					<Clusterer
+				{isPolygonShow && coordsForArea ? (
+					<Polygon
+						geometry={coordsForArea}
 						options={{
-							preset: 'islands#invertedVioletClusterIcons',
-							groupByCoordinates: false,
+							fillColor: '#f54747',
+							strokeColor: '#f50505',
+							strokeWidth: 1,
+							fillOpacity: 0.05,
 						}}
-					>
-						{/* {points.map((coordinates) => (
-							<Placemark geometry={coordinates} />
-						))} */}
-						{areas.map((area) => (
-							<Placemark
-								key={area.id}
-								geometry={[
-									parseFloat(area.latitude),
-									parseFloat(area.longitude),
-								]}
-								properties={{
-									balloonContentBody: `
+					/>
+				) : null}
+				{areaPath
+					? coordinates.map((point, index) => (
+							// eslint-disable-next-line
+							<Placemark key={index} geometry={point} draggable />
+						))
+					: null}
+				<Clusterer
+					options={{
+						preset: 'islands#invertedVioletClusterIcons',
+						groupByCoordinates: false,
+					}}
+				>
+					{areasToDisplay.map((area) => (
+						<Placemark
+							key={area.id}
+							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}
+							properties={{
+								balloonContentBody: `
+								   <a class = "yandex-link" href="http://localhost:3000/sports-ground">
 									<div class = "yandex">
-									<img class = "yandex__images" src="https://r4p.org/image/cache/data/msport_new/1-silnyj-dvor-nojabrsk/3_sil_dv/2-max-900.jpg">
+									<img class="yandex__images" src="${area.images[0].image}">
 									<div class = "yandex__contetn">
-									<h1 class = "yandex__title" >Спортивная площадка</h1>
-									<p class = "yandex__subtitle">Муниципальное автономное учреждение «Центр спортивных мероприятий и физкультурно-массовой работы» (МАУ "ЦСМ и ФМР")</p>
+									<h1 class = "yandex__title" >${area.name}</h1>
+									<p class = "yandex__subtitle">${area.description}</p>
+									<div class = "yandex__categories">
+									${area.categories
+										.map(
+											(categor) =>
+												`<div class = "yandex__category">
+											<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+											<p class = "yandex__small-text">${categor.name}</p>
+											</div>`
+										)
+										.join('')}
 									</div>
 									</div>
+									</div>
+									</a>
 									`,
-								}}
-								options={{
-									preset: 'islands#blueSportIcon',
-									controls: [],
-									visible: true,
-									cursor: 'pointer',
-								}}
-							/>
-						))}
-					</Clusterer>
-				</Map>
-			</YMaps>
+							}}
+							options={{
+								preset: 'islands#blueSportIcon',
+								controls: [],
+								visible: true,
+								cursor: 'pointer',
+							}}
+						/>
+					))}
+				</Clusterer>
+			</Map>
 		</div>
 	);
 }
 
 YandexMap.propTypes = {
 	areas: PropTypes.arrayOf.isRequired,
+	selectedArea: PropTypes.arrayOf.isRequired,
+	isPolygonShow: PropTypes.bool.isRequired,
+	areasToShow: PropTypes.arrayOf.isRequired,
+	setIsPolygonShow: PropTypes.bool.isRequired,
+	setAddress: PropTypes.string.isRequired,
+	coordinates: PropTypes.arrayOf.isRequired,
+	setCoordinates: PropTypes.arrayOf.isRequired,
+	isCardListShow: PropTypes.bool.isRequired,
 };
 
 export default YandexMap;

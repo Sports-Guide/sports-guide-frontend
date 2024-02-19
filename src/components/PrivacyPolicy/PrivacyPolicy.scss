@@ -1,0 +1,86 @@
+// Variables
+$primary-text-color: #515151;
+$title-text-color: #212121;
+$container-bg-color: #fcfcfc;
+$title-font-family: 'Roboto Flex', sans-serif;
+$text-font-family: 'Roboto', sans-serif;
+$font-weight: 400;
+$font-size: 16px;
+$line-height: 20px;
+$container-border-radius: 8px;
+
+// Mixins
+@mixin border-radius($radius) {
+	border-radius: $radius;
+}
+
+.policy {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto 207px 200px;
+	// align-self: center;
+	width: 772px;
+	background-color: #f2f3f7;
+	gap: 16px;
+}
+
+.policy-header {
+	width: 538px;
+	margin: 40px 0 24px;
+	font-family: $title-font-family;
+	font-weight: 900;
+	letter-spacing: 0.01em;
+	font-size: 27px;
+	line-height: 32px;
+	text-align: left;
+	color: $title-text-color;
+}
+
+.policy-container {
+	background-color: $container-bg-color;
+	text-align: left;
+	padding: 24px;
+	margin: 0;
+	@include border-radius(12px);
+}
+
+.poliy-item {
+	list-style: none;
+}
+
+.policy-title {
+	font-family: $title-font-family;
+	margin: 0;
+	padding: 0;
+}
+
+.policy-text {
+	font-family: $text-font-family;
+	font-weight: $font-weight;
+	font-size: $font-size;
+	line-height: $line-height;
+	margin: 12px 0 0;
+	padding: 0;
+}
+
+.policy__main-page-link {
+	text-decoration: none;
+	color: $text-font-family;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 1150px) {
+	.policy {
+		display: flex;
+		flex-direction: column;
+		margin: 0 auto;
+		// align-self: center;
+		width: 90%;
+		background-color: #f2f3f7;
+		gap: 16px;
+		margin-bottom: 30px;
+	}
+	.policy-header {
+		width: 100%;
+	}
+}

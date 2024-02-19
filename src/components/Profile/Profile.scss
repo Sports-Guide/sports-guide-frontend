@@ -2,8 +2,10 @@
 $primary-bg-color: #f2f3f7;
 $secondary-bg-color: #fcfcfc;
 $text-color: #0e0e0e;
-$button-bg-color: #1478ff;
-$button-secondary-bg-color: #e5f0ff;
+$logout-button-text-color: #1478ff;
+$logout-button-bg-color: #e5f0ff;
+$button-final-color: #f36565;
+$button-secondary-text-color: #737a8e;
 $button-text-color: #fff;
 $button-border-radius: 8px;
 $form-border-color: #aaa;
@@ -11,10 +13,6 @@ $form-border-color: #aaa;
 // Mixins
 @mixin border-radius($radius) {
 	border-radius: $radius;
-	-webkit-border-radius: $radius;
-	-moz-border-radius: $radius;
-	-ms-border-radius: $radius;
-	-o-border-radius: $radius;
 }
 
 // Styles
@@ -26,7 +24,7 @@ $form-border-color: #aaa;
 
 .profile__container {
 	display: flex;
-	width: calc(415px + 593px + 32px);
+	max-width: calc(415px + 593px + 32px);
 	justify-content: center;
 	padding: 62px 0 0;
 	margin: 0 auto;
@@ -67,7 +65,7 @@ $form-border-color: #aaa;
 	gap: 4px;
 }
 
-.profile__menu-button {
+.profile__menu-link {
 	font-family: 'Roboto', sans-serif;
 	display: flex;
 	width: 100%;
@@ -78,24 +76,25 @@ $form-border-color: #aaa;
 	font-weight: 400;
 	line-height: 20px;
 	background-color: transparent;
-	color: #737a8e;
+	color: $button-secondary-text-color;
 	outline: none;
 	border: none;
 	@include border-radius(8px);
 	cursor: pointer;
+	text-decoration: none;
 }
 
-.profile__menu-button_active {
+.profile__menu-link_active {
 	background-color: $primary-bg-color;
 }
 
-.profile__menu-button_inactive {
+.profile__menu-link_inactive {
 	background-color: transparent;
 }
 
-.profile__menu-button-icon {
-	width: 24px;
-	height: 24px;
+.profile__menu-link-icon {
+	width: 20px;
+	height: 20px;
 	display: flex;
 	align-items: center;
 	margin-right: 8px;
@@ -125,9 +124,6 @@ $form-border-color: #aaa;
 .profile__nav-button {
 	width: 100%;
 	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 20px;
 	outline: none;
 	border: none;
 	text-decoration: none;
@@ -138,16 +134,23 @@ $form-border-color: #aaa;
 .profile__button-logout {
 	height: 44px;
 	padding: 0;
-	color: $button-text-color;
-	background-color: $button-bg-color;
+	color: $logout-button-text-color;
+	background-color: $logout-button-bg-color;
 	@include border-radius(8px);
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
 }
 
 .profile__button-account-delete {
 	background-color: transparent;
 	height: 36px;
-	color: #737a8e;
+	color: $button-secondary-text-color;
 	padding: 4px 0 0 0;
+	font-size: 14px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
 }
 
 .button-y {
@@ -182,7 +185,7 @@ $form-border-color: #aaa;
 	max-width: 312px;
 	gap: 12px;
 	justify-content: left;
-	padding: 32px 0 0;
+	padding: 28px 0 0;
 }
 
 .popup__button {
@@ -194,19 +197,111 @@ $form-border-color: #aaa;
 	text-align: center;
 	width: calc(312px / 2 - 12px);
 	height: 44px;
-	font-weight: 700;
-	line-height: 18px;
 	cursor: pointer;
 	@include border-radius(8px);
 }
 
 .popup__button.popup__button-n {
-	background-color: $button-secondary-bg-color;
-	color: $button-bg-color;
+	background: none;
+	color: $button-secondary-text-color;
+	width: fit-content;
+	font-weight: 700;
+	line-height: 18px;
+	font-size: 16px;
 }
 
 .popup__button.popup__button-y {
-	background: $button-bg-color;
+	background: $button-final-color;
 	color: $button-text-color;
+	text-align: center;
+	font-weight: 700;
+	line-height: 18px;
 	font-size: 16px;
+}
+
+@media screen and (max-width: 1080px) {
+	.profile__container {
+		width: 90%;
+	}
+	.profile__personal-info {
+		width: 43.52em;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.profile {
+		background-color: $secondary-bg-color;
+	}
+	.profile__container {
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-areas:
+			'menu'
+			'menu-content';
+		padding: 0;
+		// flex-direction: column;
+	}
+	.profile__navigation {
+		grid-area: menu;
+		flex-direction: row;
+		gap: 0;
+		width: 100%;
+		background-color: transparent;
+		padding: 10px;
+		border-bottom: 1px solid #e8eaf1;
+	}
+	.profile__menu {
+		flex-direction: row;
+		background-color: transparent;
+		padding: 0;
+		gap: 0;
+	}
+	.profile__button-account-delete {
+		display: none;
+	}
+	.profile__menu-link {
+		height: 32px;
+		padding: 6px 12px;
+	}
+	.profile__menu-link_active {
+		height: 32px;
+		background-color: transparent;
+		border: 1px solid #c9d1e5;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+		color: $logout-button-text-color;
+		text-align: center;
+	}
+	.profile__menu-link_inactive {
+		background-color: transparent;
+		color: $button-secondary-text-color;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+	}
+	.profile__menu-link-icon {
+		display: none;
+	}
+	.profile__nav-button {
+		background-color: transparent;
+	}
+	.profile__button-logout {
+		background: url(../../images/logout-icon.png) no-repeat left;
+		padding: 0 14px;
+		background-size: 10px 13px;
+		height: 32px;
+		color: $button-secondary-text-color;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+		margin-left: 15px;
+	}
+	.form__title_place_profile {
+		display: none;
+	}
+	.profile__personal-info {
+		padding: 20px 0;
+		width: 100%;
+	}
 }

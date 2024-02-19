@@ -1,40 +1,86 @@
+// Variables
+$primary-text-color: #737a8e;
+$text-centering: center;
+
+@mixin fontStyle {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+}
+
+@mixin fontStyle635 {
+	//styleName: Aneliza/Chips/mob;
+	font-family: Aneliza;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 18px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
 .footer {
 	background-color: rgba(252, 252, 252, 1);
-	color: #030303;
+	color: $primary-text-color;
 	display: flex;
-	width: 100%;
-	padding: 16px 200px;
-	align-items: center;
+	/* width: 100%;
+	align-items: $text-centering; */
 	gap: 64px;
+	margin-top: auto;
 }
 
 .footer__container {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
-	width: 100%;
+	align-items: $text-centering;
+	/* width: 90%; */
+	width: 1040px;
+	margin: 0 auto;
 }
 
 .footer__copyright {
-	font-family: Roboto;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
+	@include fontStyle;
 	text-align: left;
 }
 
 .footer__nav-link {
-	font-family: Roboto;
-	color: #030303;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
+	@include fontStyle;
+	color: $primary-text-color;
 	text-decoration: none;
 	transition: opacity 0.3s ease;
 }
 
 .footer__nav-link:hover {
 	opacity: 0.7;
+}
+
+@media screen and (max-width: 1040px) {
+	.footer__container {
+		width: 100%;
+		padding: 0 20px 0 20px;
+	}
+}
+
+@media screen and (max-width: 635px) {
+	.footer__copyright {
+		@include fontStyle635;
+	}
+
+	.footer__nav-link {
+		@include fontStyle635;
+	}
+}
+
+@media screen and (max-width: 525px) {
+	.footer__container {
+		display: grid;
+	}
+	.footer__copyright {
+		margin: 0;
+	}
+
+	.footer__nav-link {
+		margin: 0;
+	}
 }

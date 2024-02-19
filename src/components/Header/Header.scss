@@ -32,17 +32,75 @@
 .header__title {
 	margin: 0;
 	color: var(--Primary-Black-light, #515151);
-	/* Bold/Logo_text */
-	font-family: Roboto;
+	/*Bold/Logo_text*/
+	font-family: Roboto Flex;
 	font-size: 20px;
 	font-style: normal;
-	font-weight: 600;
-	line-height: 28px; /* 140% */
+	transform: skewX(-5deg);
+	font-weight: 750;
+	// font-weight: 600; было, подгонка под макет
+	line-height: 28px;
+	/*140%*/
 	text-transform: uppercase;
+	-webkit-transform: skewX(-5deg);
+	-moz-transform: skewX(-5deg);
+	-ms-transform: skewX(-5deg);
+	-o-transform: skewX(-5deg);
 }
 
 .header__buttons {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: 16px;
+}
+
+.button__menu-burger {
+	display: none;
+}
+
+@media screen and (max-width: 1088px) {
+	.header__container {
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 1088px) {
+	.header__title {
+		font-family: Roboto Flex;
+		font-size: 16px;
+		font-style: italic;
+		font-weight: 600;
+		line-height: 20px;
+		letter-spacing: 0em;
+		text-align: left;
+		font-variation-settings:
+			'wdth' 111,
+			'GRAD' 150,
+			'slnt' -4,
+			'XTRA' 468,
+			'XOPQ' 96,
+			'YOPQ' 79,
+			'YTLC' 514,
+			'YTUC' 657,
+			'YTAS' 750,
+			'YTDE' -203,
+			'YTFI' 738;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.header__buttons {
+		display: none;
+	}
+	.button__menu-burger {
+		display: block;
+		position: absolute;
+		right: 10%;
+		z-index: 1;
+		width: 28px;
+		height: 28px;
+	}
+	.header__title {
+		width: 300px;
+	}
 }

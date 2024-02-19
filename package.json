@@ -4,9 +4,11 @@
 	"private": true,
 	"dependencies": {
 		"@pbe/react-yandex-maps": "^1.2.5",
+		"@reduxjs/toolkit": "^2.1.0",
 		"@testing-library/jest-dom": "^5.17.0",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
+		"formik": "^2.4.5",
 		"leaflet": "^1.9.4",
 		"leaflet-control-geocoder": "^2.4.0",
 		"leaflet-geosearch": "^3.11.0",
@@ -18,6 +20,7 @@
 		"react-icons": "^5.0.1",
 		"react-leaflet": "^4.2.1",
 		"react-leaflet-cluster": "^2.1.0",
+		"react-redux": "^9.1.0",
 		"react-router-dom": "^6.21.0",
 		"react-scripts": "5.0.1",
 		"sass": "^1.69.5",
@@ -59,7 +62,35 @@
 			"react/function-component-definition": "off",
 			"react/jsx-props-no-spreading": "off",
 			"react/no-unescaped-entities": "off",
-			"react/button-has-type": "off"
+			"react/button-has-type": "off",
+			"no-param-reassign": [
+				"error",
+				{
+					"props": false
+				}
+			],
+			"jsx-a11y/label-has-associated-control": [
+				"error",
+				{
+					"required": {
+						"some": [
+							"nesting",
+							"id"
+						]
+					}
+				}
+			],
+			"jsx-a11y/label-has-for": [
+				"error",
+				{
+					"required": {
+						"some": [
+							"nesting",
+							"id"
+						]
+					}
+				}
+			]
 		},
 		"overrides": [
 			{
@@ -96,6 +127,7 @@
 		"@storybook/react": "^7.6.6",
 		"@storybook/react-webpack5": "^7.6.6",
 		"@storybook/test": "^7.6.6",
+		"autoprefixer": "^10.4.17",
 		"commitizen": "^4.3.0",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint-config-airbnb": "^19.0.4",
@@ -104,6 +136,7 @@
 		"eslint-plugin-storybook": "^0.6.15",
 		"husky": "^8.0.3",
 		"lint-staged": "^15.2.0",
+		"postcss": "^8.4.33",
 		"prettier": "3.1.1",
 		"storybook": "^7.6.6",
 		"webpack": "^5.89.0"
