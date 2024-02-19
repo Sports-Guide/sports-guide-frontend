@@ -1,6 +1,7 @@
 // /* eslint-disable */
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import '../YandexMap/YandexMap.scss';
 
 import PropTypes from 'prop-types';
 
@@ -28,7 +29,7 @@ function SearchBar({
 	}, [location]);
 
 	return (
-		<div className={areaPath ? 'map_area-app' : 'map'}>
+		<div className="map__search">
 			{areaPath ? (
 				<input
 					type="text"

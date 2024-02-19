@@ -167,7 +167,7 @@
 
 .map_area-app {
 	width: 100%;
-	height: 100%;
+	height: 80%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -271,5 +271,8 @@
 		line-height: 14px;
 		letter-spacing: 0em;
 		text-align: left;
+	}
+	.map__search-bar_type_search {
+		width: 100%;
 	}
 }
