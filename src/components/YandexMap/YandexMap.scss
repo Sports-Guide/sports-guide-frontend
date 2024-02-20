@@ -6,6 +6,7 @@
 	flex-direction: column;
 	align-items: center;
 }
+
 .map__container {
 	width: 1040px;
 	height: 500px;
@@ -37,6 +38,7 @@
 	height: 52px;
 	background-image: url(../../images/buttonMap.png);
 	border-radius: 8px;
+	background-size: cover;
 }
 
 .map__button_active {
@@ -70,6 +72,121 @@
 }
 .map__search-bar_type_search-area {
 	width: 100%;
+}
+
+@media screen and (max-width: 1060px) {
+	.map__container {
+		width: 100%;
+	}
+	.map__inputs {
+		width: 100%;
+		padding: 0 44px 24px 44px;
+	}
+	.map__search-bar_area {
+		width: 170px;
+	}
+	.map__search-bar_kinds-of-sports {
+		width: 170px;
+	}
+	.map__search-bar_type_search {
+		width: 270px;
+	}
+}
+
+@media screen and (max-width: 866px) {
+	.map__inputs {
+		padding: 0 18px 16px 18px;
+		// display: grid;
+		// grid-template-columns: 1fr 1fr;
+		// gap: 10px;
+		// display: flex;
+		// flex-direction: column;
+		display: grid;
+		grid-template-rows: auto auto;
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas:
+			'button search'
+			'area kinds';
+	}
+	.map__button {
+		grid-area: button;
+		// width: 72px;
+	}
+	.map__search-bar_area {
+		grid-area: area;
+		width: 100%;
+	}
+	.map__search-bar_kinds-of-sports {
+		grid-area: kinds;
+		width: 100%;
+	}
+	.map__search-bar_type_search {
+		grid-area: search;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 495px) {
+	.map__inputs {
+		padding: 0 18px 16px 18px;
+		// display: grid;
+		// grid-template-columns: 1fr 1fr;
+		// gap: 10px;
+		// display: flex;
+		// flex-direction: column;
+		display: grid;
+		grid-template-rows: auto auto;
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas:
+			'button search'
+			'area kinds';
+	}
+	.map__search-bar {
+		font-size: 12px;
+		line-height: 16px;
+	}
+	.map__search-bar::placeholder {
+		font-size: 12px;
+		line-height: 16px;
+	}
+
+	// .map__inputs-row {
+	// 	display: grid;
+	// 	grid-auto-flow: column;
+	// 	direction: rtl;
+	// 	// display: flex;
+	// 	// gap: 10px;
+	// 	// flex-direction: column;
+	// }
+	// .map__inputs-row-reverse {
+	// 	display: grid;
+	// 	// grid-template-columns: 1fr 1fr;
+	// 	grid-auto-flow: column;
+	// 	direction: rtl;
+	// 	// display: flex;
+	// 	// flex-direction: column-reverse;
+	// 	// gap: 10px;
+	// }
+	.map__button {
+		grid-area: button;
+		width: 72px;
+		height: 36px;
+	}
+	.map__search-bar_area {
+		grid-area: area;
+		width: 100%;
+		height: 36px;
+	}
+	.map__search-bar_kinds-of-sports {
+		grid-area: kinds;
+		width: 100%;
+		height: 36px;
+	}
+	.map__search-bar_type_search {
+		grid-area: search;
+		width: 100%;
+		height: 36px;
+	}
 }
 
 .ymaps-2-1-79-balloon__layout {
@@ -268,15 +385,17 @@
 }
 
 @media screen and (max-width: 495px) {
-	.map__search-bar_type_search::placeholder {
-		font-family: Roboto;
-		font-size: 12px;
-		font-weight: 400;
-		line-height: 14px;
-		letter-spacing: 0em;
-		text-align: left;
-	}
-	.map__search-bar_type_search {
-		width: 100%;
+	.map_area-app {
+		.map__search-bar_type_search::placeholder {
+			font-family: Roboto;
+			font-size: 12px;
+			font-weight: 400;
+			line-height: 14px;
+			letter-spacing: 0em;
+			text-align: left;
+		}
+		.map__search-bar_type_search {
+			width: 100%;
+		}
 	}
 }

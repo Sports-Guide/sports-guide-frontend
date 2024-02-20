@@ -6,6 +6,18 @@
 	letter-spacing: 0em;
 	text-align: left;
 	margin: 35px 0 0;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 516,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
 }
 
 .sports-ground {
@@ -124,13 +136,25 @@
 
 .category-title {
 	color: #030303;
-	font-size: 28px;
-	font-style: normal;
-	font-weight: 850;
-	line-height: 32px;
-	/* 114.286% */
 	margin: 0;
 	text-align: left;
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
 }
 
 .category-container {
