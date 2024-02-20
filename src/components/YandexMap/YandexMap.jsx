@@ -192,7 +192,7 @@ function YandexMap({
 							properties={{
 								balloonContentBody: `
 							
-								   <a class = "yandex-link" href="https://sports-map.ru//sports-ground/${
+								   <a class = "yandex-link" href="https://sports-map.ru/sports-ground/${
 											area.id
 										}">
 									<div class = "yandex">
