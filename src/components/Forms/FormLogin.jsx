@@ -9,12 +9,12 @@ import { Button } from '../Button/Button';
 import { ButtonOnRegister } from '../Button/ButtonOnRegister';
 import InputEmail from '../Inputs/InputEmail';
 import InputPassword from '../Inputs/InputPassword';
-import InputCheckbox from '../Inputs/InputCheckbox';
 import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
 import { openModal } from '../../services/slices/modalSlice';
 import { clearLoginError } from '../../services/slices/userSlice';
 import { fetchResendActivation } from '../../services/thunks/registerUserThunk';
 import { setIsResendActivation } from '../../services/slices/registerUserSliсe';
+import InputCheckboxLogin from '../Inputs/InputCheckboxLogin';
 
 export default function FormLogin({ handleClose }) {
 	const dispatch = useDispatch();
@@ -99,7 +99,9 @@ function FormComponent() {
 			<InputEmail />
 			<InputPassword labelText="Пароль" inputId="Password" />
 			<div className="login-form__down_group">
-				<InputCheckbox inputId="RememberMe">Запомнить меня</InputCheckbox>
+				<InputCheckboxLogin inputId="RememberMe">
+					Запомнить меня
+				</InputCheckboxLogin>
 				<ButtonOnPasswordRecovery
 					onClick={() => dispatch(openModal('passwordRecovery'))}
 					label="Забыли пароль?"

@@ -6,11 +6,11 @@ import { Button } from '../Button/Button';
 import InputEmail from '../Inputs/InputEmail';
 import InputPassword from '../Inputs/InputPassword';
 import InputNickname from '../Inputs/InputNickname';
-import InputCheckbox from '../Inputs/InputCheckbox';
 import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
 import { fetchRegister } from '../../services/thunks/registerUserThunk';
 import { openModal } from '../../services/slices/modalSlice';
 import { clearRegisterError } from '../../services/slices/registerUserSliсe';
+import InputCheckboxRegister from '../Inputs/InputCheckboxRegister';
 
 export default function FormRegister() {
 	const dispatch = useDispatch();
@@ -94,7 +94,7 @@ function FormComponent() {
 			<InputEmail />
 			<InputPassword labelText="Пароль" inputId="Password" />
 			<InputPassword labelText="Повторите пароль" inputId="PasswordRepeat" />
-			<InputCheckbox inputId="AgreeWithPolitiks">
+			<InputCheckboxRegister inputId="AgreeWithPolitiks">
 				<span>
 					Я соглашаюсь с{' '}
 					<a
@@ -105,7 +105,7 @@ function FormComponent() {
 						Политикой обработки персональных данных
 					</a>
 				</span>
-			</InputCheckbox>
+			</InputCheckboxRegister>
 
 			<span className="register-form__server-error">
 				{errorMessageRegister || ''}

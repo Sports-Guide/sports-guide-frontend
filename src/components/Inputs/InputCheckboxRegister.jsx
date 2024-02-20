@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { Field, ErrorMessage } from 'formik'; // https://formik.org/ - документация библиотеки formik
-import './InputCheckbox.scss';
+import './InputCheckboxRegister.scss';
 
-export default function InputCheckbox({ inputId, children }) {
+export default function InputCheckboxRegister({ inputId, children }) {
 	return (
-		<div className="checkbox__container">
+		<div className="checkbox-register__container">
 			<label htmlFor={inputId} className="checkbox__label">
 				<Field
 					id={inputId}
@@ -16,7 +16,7 @@ export default function InputCheckbox({ inputId, children }) {
 			</label>
 			<div className="checkbox__error-container">
 				<ErrorMessage
-					className="input__error"
+					className="input-checkbox-register__error"
 					component="span"
 					name={inputId}
 				/>
@@ -25,7 +25,7 @@ export default function InputCheckbox({ inputId, children }) {
 	);
 }
 
-InputCheckbox.propTypes = {
+InputCheckboxRegister.propTypes = {
 	inputId: PropTypes.string.isRequired,
 	children: PropTypes.node.isRequired,
 };
