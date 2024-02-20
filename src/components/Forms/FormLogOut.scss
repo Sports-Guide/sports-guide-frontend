@@ -20,3 +20,10 @@
 	text-align: start;
 	align-self: start;
 }
+
+@media screen and (max-width: 648px) {
+	.popup__title-left {
+		text-align: left;
+		align-self: baseline;
+	}
+}

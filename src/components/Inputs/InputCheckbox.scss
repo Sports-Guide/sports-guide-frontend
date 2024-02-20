@@ -50,3 +50,15 @@
 	text-align: left;
 	color: #f92e2e;
 }
+
+@media screen and (max-width: 648px) {
+	.checkbox__label {
+		font-size: 12px;
+	}
+	.checkbox__container {
+		height: 24px;
+	}
+	.input__error {
+		font-size: 11px;
+	}
+}

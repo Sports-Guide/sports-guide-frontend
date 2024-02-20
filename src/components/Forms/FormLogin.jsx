@@ -57,15 +57,15 @@ export default function FormLogin({ handleClose }) {
 			>
 				{() => <FormComponent />}
 			</Formik>
-			<p className="login-form__paragraph">
-				Нет аккаунта?
-				<ButtonOnRegister
-					onClick={() => dispatch(openModal('register'))}
-					label="Зарегистрироваться"
-					type="button"
-					disabled={false}
-				/>
-			</p>
+			{/* <p className="login-form__paragraph">
+				Нет аккаунта? */}
+			<ButtonOnRegister
+				onClick={() => dispatch(openModal('register'))}
+				label="Зарегистрироваться"
+				type="button"
+				disabled={false}
+			/>
+			{/* </p> */}
 		</div>
 	);
 }
