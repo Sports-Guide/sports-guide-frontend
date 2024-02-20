@@ -40,7 +40,9 @@
 .checkbox__error-container {
 	min-height: 19px;
 	// width: 100%;
-	display: block;
+	// display: block;
+	display: flex;
+    align-self: start;
 }
 
 .input-checkbox-register__error {
