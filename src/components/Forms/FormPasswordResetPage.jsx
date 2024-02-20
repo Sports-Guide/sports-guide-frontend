@@ -109,7 +109,7 @@ function FormComponent() {
 				{errorMessageConfirmPassword || ''}
 			</span>
 			<button className="reset-password-form__button" type="submit">
-				{isLoadingConfirmPassword ? 'Отправка...' : 'Отправить'}
+				{isLoadingConfirmPassword ? 'Сохраняю...' : 'Сохранить'}
 			</button>
 		</Form>
 	);

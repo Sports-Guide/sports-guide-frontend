@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
@@ -13,7 +13,13 @@ import { openModal } from '../../services/slices/modalSlice';
 export function Header() {
 	const isUserAuth = useSelector(getIsUserAuth);
 
+	const [burger, setBurger] = useState(false);
+
 	const navigate = useNavigate();
+
+	const handleBurgerMenu = () => {
+		setBurger(!burger);
+	};
 
 	const navigateHome = () => {
 		navigate('app-area');
@@ -36,7 +42,13 @@ export function Header() {
 					<img className="logo" src={logo} alt="" />
 					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
 				</Link>
-				<Button className="button__menu-burger" />
+				<Button
+					className={
+						burger ? 'button__menu-burger-close' : 'button__menu-burger'
+					}
+					onClick={handleBurgerMenu}
+				/>
+
 				<div className="header__buttons">
 					<ButtonMap label="Москва" />
 					<Button
@@ -57,6 +69,30 @@ export function Header() {
 						/>
 					)}
 				</div>
+			</div>
+			<div
+				className={
+					burger ? 'header__buttons-burger' : 'header__buttons-burger-none'
+				}
+			>
+				<ButtonMap label="Москва" />
+				<Button
+					className="button-app"
+					onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
+					label="Добавить площадку"
+				/>
+				{isUserAuth ? (
+					<ButtonLoginSite
+						onClick={navigateToPersonalArea}
+						label="Личный&nbsp;кабинет"
+					/>
+				) : (
+					<ButtonLoginSite
+						onClick={() => dispatch(openModal('login'))}
+						type="button"
+						label="Войти"
+					/>
+				)}
 			</div>
 		</header>
 	);

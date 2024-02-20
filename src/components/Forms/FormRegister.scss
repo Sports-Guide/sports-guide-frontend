@@ -9,6 +9,7 @@
 	margin-top: 16px;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 .register-form__link-politiks {
@@ -34,11 +35,12 @@
 	border-radius: 8px;
 	background: var(--Accent-Blue, #1478ff);
 	padding: 0;
-	width: 326px;
+	width: 100%;
+	// width: 326px;
 	height: 44px;
 	color: var(--Primary-White, #fcfcfc);
 	font-family: Roboto;
-	font-size: 14px;
+	font-size: 16px;
 	font-style: normal;
 	font-weight: 700;
 	line-height: 20px;
@@ -59,4 +61,10 @@
 	display: flex;
 	gap: 4px;
 	align-self: center;
+}
+
+@media screen and (max-width: 648px) {
+	.register-form__container {
+		width: calc(335px - (16px * 2));
+	}
 }

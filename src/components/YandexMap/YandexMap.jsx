@@ -27,7 +27,7 @@ function YandexMap({
 	const areaPath = location.pathname === '/app-area';
 
 	const areasToDisplay = areaPath ? areas : areasToShow;
-	console.log(areas);
+
 	const [coordsForArea, setCoordsForArea] = useState([]);
 	const [mapState, setMapState] = useState({
 		center: [37.618879, 55.751426],
@@ -191,7 +191,10 @@ function YandexMap({
 							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}
 							properties={{
 								balloonContentBody: `
-								   <a class = "yandex-link" href="http://localhost:3000/sports-ground">
+							
+								   <a class = "yandex-link" href="https://sports-map.ru/sports-ground/${
+											area.id
+										}">
 									<div class = "yandex">
 									<img class="yandex__images" src="${area.images[0].image}">
 									<div class = "yandex__contetn">
@@ -202,7 +205,7 @@ function YandexMap({
 										.map(
 											(categor) =>
 												`<div class = "yandex__category">
-											<img class = "yandex__small-img" src="https://avatars.mds.yandex.net/i?id=67ce2d97b46eb337086a0e3dde047b5a0815933b-4219583-images-thumbs&n=13" alt="значек категории">
+											<img class = "yandex__small-img" src="${categor.icon}" alt="значек категории">
 											<p class = "yandex__small-text">${categor.name}</p>
 											</div>`
 										)

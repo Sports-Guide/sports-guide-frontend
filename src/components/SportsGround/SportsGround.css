@@ -1,10 +1,23 @@
 .sports-ground__title {
-	font-size: 36px;
-	font-weight: 850;
-	line-height: 40px;
+	font-family: Roboto Flex;
+	font-size: 28px;
+	font-weight: 900;
+	line-height: 36px;
 	letter-spacing: 0em;
 	text-align: left;
-	margin: 20px 0 0;
+	margin: 35px 0 0;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 516,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
 }
 
 .sports-ground {
@@ -17,11 +30,12 @@
 .sports-ground__adress-container {
 	display: flex;
 	margin: 8px 0 0;
+	align-items: center;
 }
 
 .sports-ground__adress-icon {
-	width: 20px;
-	height: 20px;
+	width: 16px;
+	height: 16px;
 	background-image: url(../../images/adress-icon.svg);
 	background-position: center;
 	background-size: cover;
@@ -44,10 +58,10 @@
 	color: #515151;
 	text-align: center;
 	font-size: 16px;
-	font-style: normal;
 	font-weight: 400;
-	line-height: normal;
-	padding: 0;
+	line-height: 19px;
+	letter-spacing: 0em;
+	text-align: center;
 	margin: 0;
 }
 
@@ -56,24 +70,91 @@
 	height: 400px;
 } */
 
+.sports-ground__button-container {
+	display: flex;
+	flex-direction: row;
+	gap: 8px;
+}
+
+.sports-ground__button {
+	border: none;
+	padding: 0;
+	width: 206px;
+	height: 36px;
+	font-family: Roboto;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #737a8e;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin: 21px 0 0px 0;
+	border-radius: 8px;
+}
+
+.sports-ground__button-text {
+	font-family: Roboto;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.sports-ground__button-like {
+	margin: 0;
+	width: 16px;
+	height: 16px;
+	background-image: url(../../images/LikeSportground.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.sports-ground__button-warning {
+	margin: 0;
+	width: 16px;
+	height: 16px;
+	background-image: url(../../images/icn_warning.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 .sports-ground__photo {
-	width: 861px;
+	width: 772px;
 	height: 400px;
 	border-radius: 10px;
 }
 
 .category-section {
 	margin-top: 40px;
+	margin-bottom: 20px;
 }
 
 .category-title {
 	color: #030303;
-	font-size: 28px;
-	font-style: normal;
-	font-weight: 850;
-	line-height: 32px; /* 114.286% */
 	margin: 0;
 	text-align: left;
+	font-size: 20px;
+	font-weight: 900;
+	line-height: 24px;
+	letter-spacing: 0.01em;
+	text-align: left;
+	font-variation-settings:
+		'wdth' 128,
+		'GRAD' 42,
+		'slnt' 0,
+		'XTRA' 486,
+		'XOPQ' 96,
+		'YOPQ' 79,
+		'YTLC' 544,
+		'YTUC' 712,
+		'YTAS' 750,
+		'YTDE' -203,
+		'YTFI' 738;
 }
 
 .category-container {
@@ -111,17 +192,26 @@
 	letter-spacing: 0em;
 	text-align: left;
 	color: #153e8c;
+	padding: 0 4px 0 12px;
+	width: min-content;
 }
 
 .category-background {
-	width: 89px;
+	width: min-content;
 	height: 36px;
-	background-color: rgba(229, 240, 255, 0.8);
+	background-color: rgba(229, 240, 255, 1);
 	border-radius: 6px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
+.category-ball {
+	width: 16px;
+	height: 16px;
+	margin-left: 3px;
+}
+
 .comments-section {
 	margin-top: 20px;
 }
@@ -133,7 +223,8 @@
 	font-size: 28px;
 	font-style: normal;
 	font-weight: 850;
-	line-height: 32px; /* 114.286% */
+	line-height: 32px;
+	/* 114.286% */
 }
 
 /* .comments-container {
@@ -147,4 +238,36 @@
 	display: flex;
 	align-self: center;
 	padding: 80px 0 0 0;
+}
+
+@media screen and (max-width: 1245px) {
+	.sports-ground {
+		margin: 0 auto;
+		padding: 0;
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	.sports-ground__adress {
+		font-family: Roboto;
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 14px;
+		letter-spacing: 0em;
+		text-align: left;
+	}
+}
+
+@media screen and (max-width: 469px) {
+	.sports-ground__adress {
+		width: 90%;
+	}
+
+	.sports-ground__button {
+		width: 150px;
+	}
+	.sports-ground__button-text {
+		display: none;
+	}
 }

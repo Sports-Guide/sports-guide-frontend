@@ -33,7 +33,11 @@ function SearchBar({
 			{areaPath ? (
 				<input
 					type="text"
-					className="map__search-bar map__search-bar_type_search"
+					className={
+						areaPath
+							? 'map__search-bar map__search-bar_type_search-area'
+							: 'map__search-bar map__search-bar_type_search'
+					}
 					id="suggest"
 					placeholder="Двигайте ползунок на карте, чтобы указать адрес"
 					onChange={handleChange}
@@ -41,6 +45,7 @@ function SearchBar({
 				/>
 			) : (
 				<div className="map__inputs map__inputs_aprea">
+					{/* <div className="map__inputs-row"> */}
 					<button
 						className={
 							isCardListShow ? 'map__button map__button_active' : 'map__button'
@@ -60,6 +65,8 @@ function SearchBar({
 						<option>Теннис</option>
 						<option>Воркаут</option>
 					</select>
+					{/* </div>
+					<div className="map__inputs-row-reverse"> */}
 					<select
 						type="text"
 						className="map__search-bar map__search-bar_area"
@@ -79,13 +86,14 @@ function SearchBar({
 					</select>
 					<input
 						type="text"
-						className="map__search-bar map__search-bar_type_search"
+						className="map__search-bar map__search-bar_type_search "
 						id="suggest"
 						placeholder="Введите адрес"
 						onChange={handleChange}
 						value={address}
 					/>
 				</div>
+				// </div>
 			)}
 		</div>
 	);

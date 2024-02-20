@@ -62,15 +62,12 @@ export default function FormRegister() {
 			>
 				{() => <FormComponent />}
 			</Formik>
-			<p className="register-form__paragraph">
-				Уже есть аккаунт?
-				<ButtonOnLoginPopUp
-					onClick={() => dispatch(openModal('login'))}
-					label="Войти"
-					type="button"
-					disabled={false}
-				/>
-			</p>
+			<ButtonOnLoginPopUp
+				onClick={() => dispatch(openModal('login'))}
+				label="Войти"
+				type="button"
+				disabled={false}
+			/>
 		</div>
 	);
 }
