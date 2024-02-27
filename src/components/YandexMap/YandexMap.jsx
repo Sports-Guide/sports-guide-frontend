@@ -134,16 +134,16 @@ function YandexMap({
 		});
 	}, [selectedArea, isCardListShow]);
 
-	useEffect(() => {
-		if (isPolygonShow) {
-			ref.current.events.add('boundschange', (e) => {
-				const newZoom = e.get('newZoom');
-				if (newZoom >= 13) {
-					setIsPolygonShow(false);
-				}
-			});
-		}
-	}, [isPolygonShow, setIsPolygonShow]);
+	// useEffect(() => {
+	// 	if (isPolygonShow) {
+	// 		ref.current.events.add('boundschange', (e) => {
+	// 			const newZoom = e.get('newZoom');
+	// 			if (newZoom >= 13) {
+	// 				setIsPolygonShow(false);
+	// 			}
+	// 		});
+	// 	}
+	// }, [isPolygonShow, setIsPolygonShow]);
 
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
@@ -158,15 +158,14 @@ function YandexMap({
 						// добавление клика на карту
 						ref.current.events.add('click', (e) => handleMapClick(e, ymaps));
 					}
-					// if (isPolygonShow) {
-					// 	ref.current.events.add('boundschange', (e) => {
-					// 		const newZoom = e.get('newZoom');
-					// 		console.log(e);
-					// 		if (newZoom >= 13) {
-					// 			setIsPolygonShow(false);
-					// 		}
-					// 	});
-					// }
+					if (isPolygonShow) {
+						ref.current.events.add('boundschange', (e) => {
+							const newZoom = e.get('newZoom');
+							if (newZoom >= 13) {
+								setIsPolygonShow(false);
+							}
+						});
+					}
 				}}
 				options={{
 					// ограничение максимальной зоны отображения - граница России
