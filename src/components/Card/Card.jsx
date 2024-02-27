@@ -3,7 +3,6 @@ import './Card.scss';
 import PropTypes from 'prop-types';
 
 function Card({ area }) {
-	console.log(area.categories);
 	const [isLiked, setIsLiked] = useState(false);
 	return (
 		<div className="card">

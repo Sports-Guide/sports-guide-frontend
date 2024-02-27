@@ -41,6 +41,10 @@
 	background-size: cover;
 }
 
+.map__button:hover {
+	cursor: pointer;
+}
+
 .map__button_active {
 	background-image: url(../../images/buttonCards.png);
 }
@@ -74,6 +78,10 @@
 	width: 100%;
 }
 
+.map__filter-button {
+	display: none;
+}
+
 @media screen and (max-width: 1060px) {
 	.map__container {
 		width: 100%;
@@ -96,11 +104,6 @@
 @media screen and (max-width: 866px) {
 	.map__inputs {
 		padding: 0 18px 16px 18px;
-		// display: grid;
-		// grid-template-columns: 1fr 1fr;
-		// gap: 10px;
-		// display: flex;
-		// flex-direction: column;
 		display: grid;
 		grid-template-rows: auto auto;
 		grid-template-columns: 1fr 2fr;
@@ -126,66 +129,93 @@
 	}
 }
 
+// @media screen and (max-width: 495px) {
+// 	.map__inputs {
+// 		padding: 0 18px 16px 18px;
+// 		display: grid;
+// 		grid-template-rows: auto auto;
+// 		grid-template-columns: 1fr 2fr;
+// 		grid-template-areas:
+// 			'button search'
+// 			'area kinds';
+// 	}
+// 	.map__search-bar {
+// 		font-size: 12px;
+// 		line-height: 16px;
+// 	}
+// 	.map__search-bar::placeholder {
+// 		font-size: 12px;
+// 		line-height: 16px;
+// 	}
+
+// 	.map__button {
+// 		grid-area: button;
+// 		width: 72px;
+// 		height: 36px;
+// 	}
+// 	.map__search-bar_area {
+// 		grid-area: area;
+// 		width: 100%;
+// 		height: 36px;
+// 	}
+// 	.map__search-bar_kinds-of-sports {
+// 		grid-area: kinds;
+// 		width: 100%;
+// 		height: 36px;
+// 	}
+// 	.map__search-bar_type_search {
+// 		grid-area: search;
+// 		width: 100%;
+// 		height: 36px;
+// 	}
+// }
+
 @media screen and (max-width: 495px) {
 	.map__inputs {
-		padding: 0 18px 16px 18px;
-		// display: grid;
-		// grid-template-columns: 1fr 1fr;
-		// gap: 10px;
-		// display: flex;
-		// flex-direction: column;
-		display: grid;
-		grid-template-rows: auto auto;
-		grid-template-columns: 1fr 2fr;
-		grid-template-areas:
-			'button search'
-			'area kinds';
+		display: flex;
+		flex-direction: row;
 	}
-	.map__search-bar {
-		font-size: 12px;
-		line-height: 16px;
-	}
-	.map__search-bar::placeholder {
-		font-size: 12px;
-		line-height: 16px;
-	}
-
-	// .map__inputs-row {
-	// 	display: grid;
-	// 	grid-auto-flow: column;
-	// 	direction: rtl;
-	// 	// display: flex;
-	// 	// gap: 10px;
-	// 	// flex-direction: column;
-	// }
-	// .map__inputs-row-reverse {
-	// 	display: grid;
-	// 	// grid-template-columns: 1fr 1fr;
-	// 	grid-auto-flow: column;
-	// 	direction: rtl;
-	// 	// display: flex;
-	// 	// flex-direction: column-reverse;
-	// 	// gap: 10px;
-	// }
 	.map__button {
-		grid-area: button;
-		width: 72px;
-		height: 36px;
+		display: none;
 	}
-	.map__search-bar_area {
-		grid-area: area;
-		width: 100%;
-		height: 36px;
+	.map__button-mobile {
+		display: block;
+		width: 93px;
+		height: 32px;
+		border-radius: 40px;
+		position: fixed;
+		bottom: 5%;
+		left: 37.6%;
+		background: rgba(81, 81, 81, 0.95);
+		z-index: 1;
+		background-image: url(../../images/ButtonList.svg);
+		background-position: center;
+	}
+	.map__button-mobile_active {
+		background-image: url(../../images/ButtonMap.svg);
 	}
 	.map__search-bar_kinds-of-sports {
-		grid-area: kinds;
-		width: 100%;
-		height: 36px;
+		display: none;
+	}
+	.map__search-bar_area {
+		display: none;
 	}
 	.map__search-bar_type_search {
-		grid-area: search;
-		width: 100%;
 		height: 36px;
+	}
+	.map__filter-button {
+		border: none;
+		padding: 0;
+		display: block;
+		background-image: url(../../images/Button-filter.svg);
+		width: 40px;
+		height: 36px;
+		background-size: cover;
+		background-position: center;
+		border-radius: 6px;
+	}
+	.map__filter-button {
+		cursor: pointer;
 	}
 }
 
@@ -241,7 +271,6 @@
 }
 
 .yandex__small-text {
-	//styleName: Desktop/Caption 3_Regular;
 	font-family: Roboto;
 	font-size: 10px;
 	font-weight: 400;
@@ -260,7 +289,6 @@
 }
 
 .yandex__title {
-	//styleName: Desktop/Subhead_Black;
 	font-family: Roboto Flex;
 	font-size: 14px;
 	font-weight: 900;
@@ -270,7 +298,6 @@
 }
 
 .yandex__subtitle {
-	//styleName: Desktop/Caption 3_Regular;
 	font-family: Roboto;
 	font-size: 10px;
 	font-weight: 400;

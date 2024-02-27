@@ -1,9 +1,11 @@
 // /* eslint-disable */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../YandexMap/YandexMap.scss';
-
 import PropTypes from 'prop-types';
+import { sportsOptions, areaOptions } from '../../constants/OptionsConstants';
+import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
+import MobileMenu from '../MobileMenu/MobileMenu';
 
 function SearchBar({
 	handleCategoryChange,
@@ -12,9 +14,11 @@ function SearchBar({
 	setAddress,
 	setIsCardListShow,
 	isCardListShow,
+	setIsPolygonShow,
 }) {
 	const location = useLocation();
 	const areaPath = location.pathname === '/app-area';
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	const handleChange = (e) => {
 		setAddress(e.target.value);
@@ -44,56 +48,62 @@ function SearchBar({
 					value={address}
 				/>
 			) : (
-				<div className="map__inputs map__inputs_aprea">
-					{/* <div className="map__inputs-row"> */}
-					<button
-						className={
-							isCardListShow ? 'map__button map__button_active' : 'map__button'
-						}
-						aria-label="Переключатель отображения"
-						onClick={() => setIsCardListShow(!isCardListShow)}
-					/>
-					<select
-						type="text"
-						className="map__search-bar map__search-bar_kinds-of-sports"
-						onChange={handleCategoryChange}
-					>
-						<option selected>Вид спорта</option>
-						<option>Футбол</option>
-						<option>Баскетбол</option>
-						<option>Волейбол</option>
-						<option>Теннис</option>
-						<option>Воркаут</option>
-					</select>
-					{/* </div>
-					<div className="map__inputs-row-reverse"> */}
-					<select
-						type="text"
-						className="map__search-bar map__search-bar_area"
-						onChange={handleAreaChange}
-					>
-						<option selected>Все округа</option>
-						<option>Центральный округ</option>
-						<option>Северный округ</option>
-						<option>Северо-Восточный округ</option>
-						<option>Восточный округ</option>
-						<option>Юго-Восточный округ</option>
-						<option>Южный округ</option>
-						<option>Юго-Западный округ</option>
-						<option>Западный округ</option>
-						<option>Северо-Западный округ</option>
-						<option>Зеленоградский округ</option>
-					</select>
-					<input
-						type="text"
-						className="map__search-bar map__search-bar_type_search "
-						id="suggest"
-						placeholder="Введите адрес"
-						onChange={handleChange}
-						value={address}
+				<div className="map__search-container">
+					<WelcomeBanner />
+					<div className="map__inputs map__inputs_aprea">
+						<button
+							className={`map__button map__button-mobile ${
+								isCardListShow
+									? 'map__button_active map__button-mobile_active'
+									: ''
+							}`}
+							aria-label="Переключатель отображения"
+							onClick={() => setIsCardListShow(!isCardListShow)}
+						/>
+						<select
+							type="text"
+							className="map__search-bar map__search-bar_kinds-of-sports"
+							onChange={handleCategoryChange}
+						>
+							{sportsOptions.map((option) => (
+								<option key={option.id} selected={option.id === 1}>
+									{option.value}
+								</option>
+							))}
+						</select>
+						<select
+							type="text"
+							className="map__search-bar map__search-bar_area"
+							onChange={handleAreaChange}
+						>
+							{areaOptions.map((option) => (
+								<option key={option.id} selected={option.id === 1}>
+									{option.value}
+								</option>
+							))}
+						</select>
+						<input
+							type="text"
+							className="map__search-bar map__search-bar_type_search "
+							id="suggest"
+							placeholder="Введите адрес"
+							onChange={handleChange}
+							value={address}
+						/>
+						<button
+							className="map__filter-button"
+							aria-label="меню фильтров"
+							onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+						/>
+					</div>
+					<MobileMenu
+						setIsMobileMenuOpen={setIsMobileMenuOpen}
+						isMobileMenuOpen={isMobileMenuOpen}
+						handleAreaChange={handleAreaChange}
+						handleCategoryChange={handleCategoryChange}
+						setIsPolygonShow={setIsPolygonShow}
 					/>
 				</div>
-				// </div>
 			)}
 		</div>
 	);
@@ -106,6 +116,7 @@ SearchBar.propTypes = {
 	handleCategoryChange: PropTypes.func.isRequired,
 	setIsCardListShow: PropTypes.bool.isRequired,
 	isCardListShow: PropTypes.bool.isRequired,
+	setIsPolygonShow: PropTypes.bool.isRequired,
 };
 
 export default SearchBar;

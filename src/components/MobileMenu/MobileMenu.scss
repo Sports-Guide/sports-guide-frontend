@@ -1,0 +1,108 @@
+.mobile-menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	transition: transform 0.3s linear;
+	background-color: #fcfcfc;
+	transform: translateX(+100%);
+	z-index: 2600;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.mobile-menu_opened {
+	transform: translateX(0);
+}
+
+.mobile-menu__container {
+	border: none;
+	padding: 0;
+	width: 100%;
+	height: 44px;
+	background: #fcfcfc;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 22px 12px 20px;
+	border-bottom: 1px solid #f2f3f7;
+}
+
+.mobile-menu__button-close {
+	border: none;
+	padding: 0;
+	background-image: url(../../images/icon_close.svg);
+	background-position: center;
+	background-color: #fcfcfc;
+	width: 20px;
+	height: 20px;
+	transition: opacity 0.3s linear;
+}
+
+// .mobile-menu__button-close:hover {
+// 	opacity: 0.7;
+// 	cursor: pointer;
+// }
+
+.mobile-menu__button-clear {
+	border: none;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: left;
+	background-position: center;
+	background-color: #fcfcfc;
+	color: #737a8e;
+	transition: opacity 0.3s linear;
+}
+
+// .mobile-menu__button-clear:hover {
+// 	opacity: 0.7;
+// 	cursor: pointer;
+// }
+
+.mobile-menu__input-container {
+	width: 100%;
+	height: 148px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	gap: 20px;
+}
+
+.mobile-menu__input {
+	width: 100%;
+	height: 36px;
+	background-color: #fcfcfc;
+	border: 1px solid #c9d1e5;
+	padding: 0;
+	border-radius: 6px;
+	color: #212121;
+	padding: 0 0 0 28px;
+}
+
+.mobile-menu__button-confirmation {
+	padding: 0;
+	color: #fcfcfc;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	border-radius: 8px;
+	width: 335px;
+	height: 40px;
+	background: #1478ff;
+	font-family: Roboto;
+	text-align: center;
+	border: none;
+	transition: opacity 0.3s linear;
+}
+
+// .mobile-menu__button-confirmation:hover {
+// 	opacity: 0.7;
+// 	cursor: pointer;
+// }

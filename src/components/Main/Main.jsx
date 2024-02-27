@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchUserActivation } from '../../services/thunks/registerUserThunk';
-import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
 import YandexMap from '../YandexMap/YandexMap';
 import { openModal } from '../../services/slices/modalSlice';
 import SearchBar from '../SearchBar/SearchBar';
@@ -54,6 +53,7 @@ export function Main({
 		const selectedCurrentArea = event.target.value;
 		if (selectedCurrentArea === 'Все округа') {
 			setSelectedArea('город Москва');
+			return;
 		}
 		setSelectedArea(selectedCurrentArea);
 	};
@@ -64,7 +64,6 @@ export function Main({
 
 	return (
 		<main className="main">
-			<WelcomeBanner />
 			<SearchBar
 				handleCategoryChange={handleCategoryChange}
 				handleAreaChange={handleAreaChange}
@@ -72,6 +71,7 @@ export function Main({
 				setAddress={setAddress}
 				setIsCardListShow={setIsCardListShow}
 				isCardListShow={isCardListShow}
+				setIsPolygonShow={setIsPolygonShow}
 			/>
 			{isCardListShow ? (
 				<CardList areasToShow={areasToShow} />
@@ -82,6 +82,7 @@ export function Main({
 					areasToShow={areasToShow}
 					selectedArea={selectedArea}
 					isPolygonShow={isPolygonShow}
+					setIsPolygonShow={setIsPolygonShow}
 					setAddress={setAddress}
 					coordinates={coordinates}
 					setCoordinates={setCoordinates}

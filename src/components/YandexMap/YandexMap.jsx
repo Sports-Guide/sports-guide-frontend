@@ -134,6 +134,17 @@ function YandexMap({
 		});
 	}, [selectedArea, isCardListShow]);
 
+	useEffect(() => {
+		if (isPolygonShow) {
+			ref.current.events.add('boundschange', (e) => {
+				const newZoom = e.get('newZoom');
+				if (newZoom >= 13) {
+					setIsPolygonShow(false);
+				}
+			});
+		}
+	}, [isPolygonShow, setIsPolygonShow]);
+
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
 			<Map
@@ -147,15 +158,15 @@ function YandexMap({
 						// добавление клика на карту
 						ref.current.events.add('click', (e) => handleMapClick(e, ymaps));
 					}
-					if (isPolygonShow) {
-						ref.current.events.add('boundschange', (e) => {
-							const newZoom = e.get('newZoom');
-
-							if (newZoom >= 13) {
-								setIsPolygonShow(false);
-							}
-						});
-					}
+					// if (isPolygonShow) {
+					// 	ref.current.events.add('boundschange', (e) => {
+					// 		const newZoom = e.get('newZoom');
+					// 		console.log(e);
+					// 		if (newZoom >= 13) {
+					// 			setIsPolygonShow(false);
+					// 		}
+					// 	});
+					// }
 				}}
 				options={{
 					// ограничение максимальной зоны отображения - граница России
@@ -235,7 +246,7 @@ YandexMap.propTypes = {
 	selectedArea: PropTypes.arrayOf.isRequired,
 	isPolygonShow: PropTypes.bool.isRequired,
 	areasToShow: PropTypes.arrayOf.isRequired,
-	setIsPolygonShow: PropTypes.bool.isRequired,
+	setIsPolygonShow: PropTypes.func.isRequired,
 	setAddress: PropTypes.string.isRequired,
 	coordinates: PropTypes.arrayOf.isRequired,
 	setCoordinates: PropTypes.arrayOf.isRequired,
