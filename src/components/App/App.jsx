@@ -22,6 +22,7 @@ import { Popup } from '../Popup/Popup';
 import { closeModal } from '../../services/slices/modalSlice';
 import { FormPasswordResetPage } from '../Forms/FormPasswordResetPage';
 import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
+import { MetaTags } from '../MetaTags/MetaTags';
 
 export function App() {
 	// eslint-disable-next-line no-unused-vars
@@ -111,6 +112,7 @@ export function App() {
 
 	return (
 		<>
+			<MetaTags />
 			<Routes>
 				<Route path="/" element={<Layuot />}>
 					<Route
