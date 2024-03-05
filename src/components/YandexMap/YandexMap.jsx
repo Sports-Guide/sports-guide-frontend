@@ -204,7 +204,7 @@ function YandexMap({
 							
 								   <a class = "yandex-link" href="https://sports-map.ru/sports-ground/${
 											area.id
-										}">
+										}" target="_blank">
 									<div class = "yandex">
 									<img class="yandex__images" src="${area.images[0].image}">
 									<div class = "yandex__contetn">
