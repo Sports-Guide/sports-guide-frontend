@@ -25,6 +25,9 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/sports-guide-frontend:latest
+          build-args: |
+            REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}
+            REACT_APP_SUGGEST_API_KEY=${{ secrets.REACT_APP_SUGGEST_API_KEY }}
   deploy:
     name: Deploy project
     needs:
