@@ -6,13 +6,13 @@ import './AreaApp.scss';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import addPictures from '../../images/Camera.svg';
-import { Button } from '../Button/Button';
-import '../Button/Button.scss';
-import YandexMap from '../YandexMap/YandexMap';
+import { Button } from '../../components/Button/Button';
+import '../../components/Button/Button.scss';
+import YandexMap from '../../components/YandexMap/YandexMap';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import { openModal } from '../../services/slices/modalSlice';
-import SearchBar from '../SearchBar/SearchBar';
 
-function AreaApp({
+export default function AreaApp({
 	areas,
 	categories,
 	handleAddArea,
@@ -265,4 +265,3 @@ AreaApp.propTypes = {
 	coordinates: PropTypes.arrayOf.isRequired,
 	setCoordinates: PropTypes.arrayOf.isRequired,
 };
-export default AreaApp;

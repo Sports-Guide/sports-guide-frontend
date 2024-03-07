@@ -3,13 +3,13 @@ import './Main.scss';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import YandexMap from '../../components/YandexMap/YandexMap';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import CardList from '../../components/CardList/CardList';
 import { fetchUserActivation } from '../../services/thunks/registerUserThunk';
-import YandexMap from '../YandexMap/YandexMap';
 import { openModal } from '../../services/slices/modalSlice';
-import SearchBar from '../SearchBar/SearchBar';
-import CardList from '../CardList/CardList';
 
-export function Main({
+export default function Main({
 	areas,
 	address,
 	setAddress,

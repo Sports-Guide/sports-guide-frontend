@@ -4,22 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
 	fetchUserInfo,
 	fetchEditUserInfo,
-} from '../../services/thunks/userThunk';
+} from '../../../services/thunks/userThunk';
 import {
 	getUserInfo,
 	getIsUserDataEditing,
 	getErrorMessageEditUserData,
-} from '../../services/selectors/userSelector';
+} from '../../../services/selectors/userSelector';
 import {
 	setIsUserDataEditingTrue,
 	setIsUserDataEditingFalse,
 	clearEditUserDataError,
-} from '../../services/slices/userSlice';
+} from '../../../services/slices/userSlice';
 import './PersonalData.scss';
-import InputNickname from '../Inputs/InputNickname';
+import InputNickname from '../../../components/Inputs/InputNickname';
 // import InputEmail from '../Inputs/InputEmail';
 
-export function PersonalData() {
+export default function PersonalData() {
 	const dispatch = useDispatch();
 	const user = useSelector(getUserInfo);
 	const isUserDataEditing = useSelector(getIsUserDataEditing);
@@ -114,8 +114,6 @@ export function PersonalData() {
 		</>
 	);
 }
-
-export default PersonalData;
 
 function FormComponent() {
 	const user = useSelector(getUserInfo);
