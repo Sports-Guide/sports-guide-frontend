@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../services/slices/modalSlice';
-import { fetchUserInfo } from '../../services/thunks/userThunk';
-import { fetchInitiatingPasswordReset } from '../../services/thunks/resetPasswordThunk';
-import { getUserInfo } from '../../services/selectors/userSelector';
+import { openModal } from '../../../services/slices/modalSlice';
+import { fetchUserInfo } from '../../../services/thunks/userThunk';
+import { fetchInitiatingPasswordReset } from '../../../services/thunks/resetPasswordThunk';
+import { getUserInfo } from '../../../services/selectors/userSelector';
 
 import './PasswordData.scss';
 
-export function PasswordData() {
+export default function PasswordData() {
 	const dispatch = useDispatch();
 	const user = useSelector(getUserInfo);
 
@@ -40,5 +40,3 @@ export function PasswordData() {
 		</>
 	);
 }
-
-export default PasswordData;

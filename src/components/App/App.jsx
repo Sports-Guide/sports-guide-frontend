@@ -3,25 +3,25 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUserAuth } from '../../services/thunks/checkUserAuthThunk';
-import { Main } from '../Main/Main';
-import { Profile } from '../Profile/Profile';
-import AreaApp from '../Area/AreaApp';
-import NotFoundPage from '../NotFoundPage/NotFoundPage';
-import { SportsGround } from '../SportsGround/SportsGround';
+import Main from '../../pages/Main/Main';
+import Profile from '../../pages/Profile/Profile';
+import AreaApp from '../../pages/Area/AreaApp';
+import SportsGround from '../../pages/SportsGround/SportsGround';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+import PrivacyPolicy from '../../pages/PrivacyPolicy/PrivacyPolicy';
+import PasswordResetPage from '../../pages/PasswordResetPage/PasswordResetPage';
 import Layuot from '../Layout/Layout';
-import { PersonalData } from '../Profile/PersonalData';
-import { PasswordData } from '../Profile/PasswordData';
-import * as api from '../../utils/MainApi';
+import { Popup } from '../Popup/Popup';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
+import PersonalData from '../../pages/Profile/PersonalData/PersonalData';
+import PasswordData from '../../pages/Profile/PasswordData/PasswordData';
+import * as api from '../../utils/MainApi';
 import {
 	getContentByType,
 	getTitleByType,
 	getTitleStyleByType,
 } from '../../utils/modal';
-import { Popup } from '../Popup/Popup';
 import { closeModal } from '../../services/slices/modalSlice';
-import { FormPasswordResetPage } from '../Forms/FormPasswordResetPage';
-import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 import { MetaTags } from '../MetaTags/MetaTags';
 
 export function App() {
@@ -176,7 +176,7 @@ export function App() {
 					/>
 					<Route
 						path="password/reset/confirm/:uid/:token"
-						element={<FormPasswordResetPage />}
+						element={<PasswordResetPage />}
 					/>
 					<Route path="privacy-policy" element={<PrivacyPolicy />} />
 					<Route path="*" element={<NotFoundPage />} />

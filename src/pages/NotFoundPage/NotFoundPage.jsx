@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './NotFoundPage.scss';
 import image404 from '../../images/image404.svg';
 
-function PageNotFound() {
+export default function PageNotFound() {
 	const navigate = useNavigate();
 
 	const handleGoBack = () => {
@@ -25,5 +25,3 @@ function PageNotFound() {
 		</main>
 	);
 }
-
-export default PageNotFound;

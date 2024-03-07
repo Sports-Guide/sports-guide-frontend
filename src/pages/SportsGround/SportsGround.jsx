@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './SportsGround.css';
 import { Map, Placemark } from '@pbe/react-yandex-maps';
-import { Slider } from '../Slider/Slider';
+import { Slider } from '../../components/Slider/Slider';
 import { bordersOfRussia } from '../../constants/MapConstants';
 
-export function SportsGround({ areas }) {
+export default function SportsGround({ areas }) {
 	const { id } = useParams();
 
 	const [mapState, setMapState] = useState({
@@ -136,5 +136,3 @@ export function SportsGround({ areas }) {
 SportsGround.propTypes = {
 	areas: PropTypes.arrayOf.isRequired,
 };
-
-export default SportsGround;

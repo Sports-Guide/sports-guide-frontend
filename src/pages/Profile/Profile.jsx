@@ -5,7 +5,7 @@ import PersonalDataIcon from '../../images/personal-info-icon.svg';
 import PassBtnIcon from '../../images/password-lock-icon.svg';
 import { openModal } from '../../services/slices/modalSlice';
 
-export function Profile() {
+export default function Profile() {
 	const dispatch = useDispatch();
 
 	const linkClass = ({ isActive }) =>
@@ -58,5 +58,3 @@ export function Profile() {
 		</main>
 	);
 }
-
-export default Profile;
