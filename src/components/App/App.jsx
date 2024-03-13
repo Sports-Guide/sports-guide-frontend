@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUserAuth } from '../../services/thunks/checkUserAuthThunk';
@@ -23,18 +23,11 @@ import {
 } from '../../utils/modal';
 import { closeModal } from '../../services/slices/modalSlice';
 import { MetaTags } from '../MetaTags/MetaTags';
+import { fetchGetAreas } from '../../services/thunks/getAreasThunk';
+import { fetchGetCategory } from '../../services/thunks/getCategoryThunk';
 
 export function App() {
-	// eslint-disable-next-line no-unused-vars
-	const [areas, setAreas] = useState([]);
-	const [address, setAddress] = useState('');
-	const [coordinates, setCoordinates] = useState([]);
-	const [areasToShow, setAreasToShow] = useState([]);
-
-	const [categories, setCategories] = useState([]);
-
 	const dispatch = useDispatch();
-
 	const location = useLocation(); // Получение текущего местоположения
 
 	// проверка авторизован ли пользователь
@@ -65,24 +58,9 @@ export function App() {
 
 	// получаем данные площадок
 	useEffect(() => {
-		api
-			.getAreas()
-			.then((areasData) => {
-				setAreas(areasData);
-			})
-			.catch((err) => {
-				console.log(`Ошибка при получении данных о площадках: ${err}`);
-			});
-
-		api
-			.getCategory()
-			.then((category) => {
-				setCategories(category);
-			})
-			.catch((err) => {
-				console.log(`Ошибка при получении данных о категориях: ${err}`);
-			});
-	}, []);
+		dispatch(fetchGetAreas());
+		dispatch(fetchGetCategory());
+	}, [dispatch]);
 
 	// Функция добавления площадки
 	const handleAddArea = (
@@ -115,51 +93,13 @@ export function App() {
 			<MetaTags />
 			<Routes>
 				<Route path="/" element={<Layuot />}>
-					<Route
-						index
-						element={
-							<Main
-								areas={areas}
-								setAddress={setAddress}
-								address={address}
-								setAreasToShow={setAreasToShow}
-								areasToShow={areasToShow}
-								coordinates={coordinates}
-								setCoordinates={setCoordinates}
-							/>
-						}
-					/>
-					<Route
-						path="/activate/:uid/:token"
-						element={
-							<Main
-								areas={areas}
-								setAddress={setAddress}
-								address={address}
-								setAreasToShow={setAreasToShow}
-								areasToShow={areasToShow}
-								coordinates={coordinates}
-								setCoordinates={setCoordinates}
-							/>
-						}
-					/>
+					<Route index element={<Main />} />
+					<Route path="/activate/:uid/:token" element={<Main />} />
 					<Route
 						path="app-area"
 						element={
 							<ProtectedOnlyAuth
-								component={
-									<AreaApp
-										areas={areas}
-										categories={categories}
-										handleAddArea={handleAddArea}
-										setAreasToShow={setAreasToShow}
-										areasToShow={areasToShow}
-										setAddress={setAddress}
-										address={address}
-										coordinates={coordinates}
-										setCoordinates={setCoordinates}
-									/>
-								}
+								component={<AreaApp handleAddArea={handleAddArea} />}
 							/>
 						}
 					/>
@@ -170,10 +110,7 @@ export function App() {
 						<Route index element={<PersonalData />} />
 						<Route path="password" element={<PasswordData />} />
 					</Route>
-					<Route
-						path="sports-ground/:id"
-						element={<SportsGround areas={areas} />}
-					/>
+					<Route path="sports-ground/:id" element={<SportsGround />} />
 					<Route
 						path="password/reset/confirm/:uid/:token"
 						element={<PasswordResetPage />}

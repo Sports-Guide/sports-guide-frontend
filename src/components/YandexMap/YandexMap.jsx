@@ -3,37 +3,39 @@ import './YandexMap.scss';
 import { Map, Placemark, Clusterer, Polygon } from '@pbe/react-yandex-maps';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-import * as api from '../../utils/MainApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGetCoordsForArea } from '../../services/thunks/getCoordsForAreaThunk';
+import { setAddress, setCoordinates } from '../../services/slices/areaSlice';
+import {
+	coordinatesSelector,
+	areasToShowSelector,
+} from '../../services/selectors/areaSelector';
 
 import {
 	displayBorder,
 	bordersOfRussia,
 	areasCoord,
+	defaultState,
 } from '../../constants/MapConstants';
 
 function YandexMap({
 	areas,
-	areasToShow,
 	isPolygonShow,
 	setIsPolygonShow,
 	selectedArea,
-	setAddress,
-	coordinates,
-	setCoordinates,
 	isCardListShow,
 }) {
 	const location = useLocation();
 	const ref = useRef();
 	const areaPath = location.pathname === '/app-area';
+	const dispatch = useDispatch();
 
+	const areasToShow = useSelector(areasToShowSelector);
 	const areasToDisplay = areaPath ? areas : areasToShow;
 
+	const coordinates = useSelector(coordinatesSelector);
 	const [coordsForArea, setCoordsForArea] = useState([]);
-	const [mapState, setMapState] = useState({
-		center: [37.618879, 55.751426],
-		zoom: 10,
-		controls: ['zoomControl', 'fullscreenControl'],
-	});
+	const [mapState, setMapState] = useState(defaultState);
 
 	// рендер границ округов
 	useEffect(() => {
@@ -41,11 +43,10 @@ function YandexMap({
 			return;
 		}
 		if (selectedArea) {
-			api
-				.getCoords(selectedArea)
+			dispatch(fetchGetCoordsForArea(selectedArea))
 				.then((data) => {
-					if (data && data.length > 0) {
-						const firstResult = data[0];
+					if (data && data.payload.length > 0) {
+						const firstResult = data.payload[0];
 						if (firstResult.geojson && firstResult.geojson.coordinates) {
 							const polygonCoordinates = firstResult.geojson.coordinates;
 							let modifiedCoordinates = [];
@@ -68,16 +69,16 @@ function YandexMap({
 					console.error('Ошибка при выполнении запроса:', error);
 				});
 		}
-	}, [selectedArea, isCardListShow]);
+	}, [selectedArea, isCardListShow, dispatch]);
 
 	// Добавление клика на карту, запись адреса и координат в стейт
 	const handleMapClick = useCallback((e, ymaps) => {
 		const point = e.get('coords');
-		setCoordinates([point]);
+		dispatch(setCoordinates([point]));
 		ymaps.geocode(point).then((res) => {
 			const firstGeoObject = res.geoObjects.get(0);
 			const addressLine = firstGeoObject.getAddressLine();
-			setAddress(addressLine);
+			dispatch(setAddress(addressLine));
 		}); // eslint-disable-next-line
 	}, []);
 
@@ -92,7 +93,7 @@ function YandexMap({
 		// Получение коодинат по поисковому запросу
 		suggestView.events.add('select', (event) => {
 			selectedItem = event.get('item');
-			setAddress(selectedItem.value);
+			dispatch(setAddress(selectedItem.value));
 			if (isCardListShow || !ref.current) {
 				return;
 			}
@@ -108,7 +109,7 @@ function YandexMap({
 					const bounds = firstGeoObject.properties.get('boundedBy');
 					// обновление стейтов
 					ref.current.setBounds(bounds, { checkZoomRange: true });
-					setCoordinates([coords]);
+					dispatch(setCoordinates([coords]));
 					setMapState((prevState) => ({
 						...prevState,
 						center: coords,
@@ -134,16 +135,16 @@ function YandexMap({
 		});
 	}, [selectedArea, isCardListShow]);
 
-	// useEffect(() => {
-	// 	if (isPolygonShow) {
-	// 		ref.current.events.add('boundschange', (e) => {
-	// 			const newZoom = e.get('newZoom');
-	// 			if (newZoom >= 13) {
-	// 				setIsPolygonShow(false);
-	// 			}
-	// 		});
-	// 	}
-	// }, [isPolygonShow, setIsPolygonShow]);
+	useEffect(() => {
+		if (isPolygonShow) {
+			ref.current.events.add('boundschange', (e) => {
+				const newZoom = e.get('newZoom');
+				if (newZoom >= 13) {
+					setIsPolygonShow(false);
+				}
+			});
+		}
+	}, [isPolygonShow, setIsPolygonShow]);
 
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
@@ -158,14 +159,14 @@ function YandexMap({
 						// добавление клика на карту
 						ref.current.events.add('click', (e) => handleMapClick(e, ymaps));
 					}
-					if (isPolygonShow) {
-						ref.current.events.add('boundschange', (e) => {
-							const newZoom = e.get('newZoom');
-							if (newZoom >= 13) {
-								setIsPolygonShow(false);
-							}
-						});
-					}
+					// if (isPolygonShow) {
+					// 	ref.current.events.add('boundschange', (e) => {
+					// 		const newZoom = e.get('newZoom');
+					// 		if (newZoom >= 13) {
+					// 			setIsPolygonShow(false);
+					// 		}
+					// 	});
+					// }
 				}}
 				options={{
 					// ограничение максимальной зоны отображения - граница России
@@ -244,11 +245,7 @@ YandexMap.propTypes = {
 	areas: PropTypes.arrayOf.isRequired,
 	selectedArea: PropTypes.arrayOf.isRequired,
 	isPolygonShow: PropTypes.bool.isRequired,
-	areasToShow: PropTypes.arrayOf.isRequired,
 	setIsPolygonShow: PropTypes.func.isRequired,
-	setAddress: PropTypes.string.isRequired,
-	coordinates: PropTypes.arrayOf.isRequired,
-	setCoordinates: PropTypes.arrayOf.isRequired,
 	isCardListShow: PropTypes.bool.isRequired,
 };
 

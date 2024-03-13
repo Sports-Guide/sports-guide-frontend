@@ -58,26 +58,26 @@ export const editPassword = (currentPassword, newPassword) => {
 	}).then(validateResponse);
 };
 
-// получаем площадки
-export function getAreas() {
-	return fetch(`${SPORT_GROUNDS_URL}/areas/`, {
-		method: 'GET',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-	}).then(validateResponse);
-}
+// // получаем площадки
+// export function getAreas() {
+// 	return fetch(`${SPORT_GROUNDS_URL}/areas/`, {
+// 		method: 'GET',
+// 		headers: {
+// 			Accept: 'application/json',
+// 			'Content-Type': 'application/json',
+// 		},
+// 	}).then(validateResponse);
+// }
 
-export function getCategory() {
-	return fetch(`${SPORT_GROUNDS_URL}/categories/`, {
-		method: 'GET',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		},
-	}).then(validateResponse);
-}
+// export function getCategory() {
+// 	return fetch(`${SPORT_GROUNDS_URL}/categories/`, {
+// 		method: 'GET',
+// 		headers: {
+// 			Accept: 'application/json',
+// 			'Content-Type': 'application/json',
+// 		},
+// 	}).then(validateResponse);
+// }
 
 export const addNewArea = (
 	address,
@@ -108,15 +108,15 @@ export const addNewArea = (
 	}).then(validateResponse);
 };
 
-export function getCoords(area) {
-	const params = new URLSearchParams({
-		q:
-			area === 'город Москва' ? area : `${area} административный округ, Москва`,
-		format: 'json',
-		polygon_geojson: 1,
-	});
+// export function getCoords(area) {
+// 	const params = new URLSearchParams({
+// 		q:
+// 			area === 'город Москва' ? area : `${area} административный округ, Москва`,
+// 		format: 'json',
+// 		polygon_geojson: 1,
+// 	});
 
-	return fetch(`https://nominatim.openstreetmap.org/search?${params}`, {
-		method: 'GET',
-	}).then(validateResponse);
-}
+// 	return fetch(`https://nominatim.openstreetmap.org/search?${params}`, {
+// 		method: 'GET',
+// 	}).then(validateResponse);
+// }

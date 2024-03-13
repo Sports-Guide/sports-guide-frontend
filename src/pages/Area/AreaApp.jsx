@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Multiselect from 'multiselect-react-dropdown';
 import PropTypes from 'prop-types';
 import './AreaApp.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import addPictures from '../../images/Camera.svg';
 import { Button } from '../../components/Button/Button';
@@ -11,21 +11,22 @@ import '../../components/Button/Button.scss';
 import YandexMap from '../../components/YandexMap/YandexMap';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { openModal } from '../../services/slices/modalSlice';
+import {
+	areasList,
+	categoryList,
+	addressSelector,
+	coordinatesSelector,
+} from '../../services/selectors/areaSelector';
 
-export default function AreaApp({
-	areas,
-	categories,
-	handleAddArea,
-	setAddress,
-	address,
-	setAreasToShow,
-	areasToShow,
-	coordinates,
-	setCoordinates,
-}) {
+export default function AreaApp({ handleAddArea }) {
 	const dispatch = useDispatch();
+	const areas = useSelector(areasList);
+	const categories = useSelector(categoryList);
+	const address = useSelector(addressSelector);
+	const coordinates = useSelector(coordinatesSelector);
 
-	const [options] = useState(categories);
+	const [options, setOptions] = useState(categories);
+
 	// отправка формы на сервер
 	const [areaDescription, setAreaDiscriptin] = useState([]);
 	// добавление категорий
@@ -83,6 +84,10 @@ export default function AreaApp({
 	};
 
 	useEffect(() => {
+		setOptions(categories);
+	}, [categories]);
+
+	useEffect(() => {
 		if (addFoto.length === 4) {
 			setFotoFour(false);
 		} else {
@@ -100,7 +105,6 @@ export default function AreaApp({
 		};
 		CheckWindowWidth();
 		window.addEventListener('resize', CheckWindowWidth);
-		console.log(browserWindowSize);
 	}, [browserWindowSize]);
 
 	return (
@@ -135,16 +139,8 @@ export default function AreaApp({
 						<p htmlFor="text" className="location__label">
 							Адрес площадки
 						</p>
-						<SearchBar address={address} setAddress={setAddress} />
-						<YandexMap
-							areas={areas}
-							coordinates={coordinates}
-							setCoordinates={setCoordinates}
-							setAddress={setAddress}
-							address={address}
-							areasToShow={areasToShow}
-							setAreasToShow={setAreasToShow}
-						/>
+						<SearchBar />
+						<YandexMap areas={areas} />
 					</div>
 					<div className="description-of-the-site">
 						<h3 className="description-of-the-site__title">
@@ -255,13 +251,5 @@ export default function AreaApp({
 }
 
 AreaApp.propTypes = {
-	areas: PropTypes.arrayOf.isRequired,
-	categories: PropTypes.arrayOf.isRequired,
 	handleAddArea: PropTypes.arrayOf.isRequired,
-	address: PropTypes.string.isRequired,
-	setAddress: PropTypes.string.isRequired,
-	areasToShow: PropTypes.arrayOf.isRequired,
-	setAreasToShow: PropTypes.arrayOf.isRequired,
-	coordinates: PropTypes.arrayOf.isRequired,
-	setCoordinates: PropTypes.arrayOf.isRequired,
 };

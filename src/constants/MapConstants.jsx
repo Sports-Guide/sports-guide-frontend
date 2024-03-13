@@ -1,3 +1,10 @@
+// defaultState
+const defaultState = {
+	center: [37.618879, 55.751426],
+	zoom: 10,
+	controls: ['zoomControl', 'fullscreenControl'],
+};
+
 // Границы Москвы
 const displayBorder = [
 	[37.286549, 55.503749],
@@ -96,7 +103,7 @@ const areasCoord = [
 	},
 ];
 
-export { displayBorder, bordersOfRussia, areasCoord };
+export { displayBorder, bordersOfRussia, areasCoord, defaultState };
 
 // // Границы Москвы
 // const displayBorder = [

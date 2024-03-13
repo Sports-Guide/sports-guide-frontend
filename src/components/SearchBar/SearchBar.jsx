@@ -3,25 +3,28 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../YandexMap/YandexMap.scss';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { sportsOptions, areaOptions } from '../../constants/OptionsConstants';
 import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
 import MobileMenu from '../MobileMenu/MobileMenu';
+import { setAddress } from '../../services/slices/areaSlice';
+import { addressSelector } from '../../services/selectors/areaSelector';
 
 function SearchBar({
 	handleCategoryChange,
 	handleAreaChange,
-	address,
-	setAddress,
 	setIsCardListShow,
 	isCardListShow,
 	setIsPolygonShow,
 }) {
 	const location = useLocation();
+	const dispatch = useDispatch();
 	const areaPath = location.pathname === '/app-area';
+	const address = useSelector(addressSelector);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	const handleChange = (e) => {
-		setAddress(e.target.value);
+		dispatch(setAddress(e.target.value));
 	};
 
 	// Обнулиние значения инпута при каждом изменении страницы
@@ -110,8 +113,6 @@ function SearchBar({
 }
 
 SearchBar.propTypes = {
-	address: PropTypes.string.isRequired,
-	setAddress: PropTypes.string.isRequired,
 	handleAreaChange: PropTypes.func.isRequired,
 	handleCategoryChange: PropTypes.func.isRequired,
 	setIsCardListShow: PropTypes.bool.isRequired,

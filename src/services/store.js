@@ -3,12 +3,18 @@ import userSlice from './slices/userSlice';
 import registerUserSlice from './slices/registerUserSliсe';
 import modalSlice from './slices/modalSlice';
 import resetPasswordSliсe from './slices/resetPasswordSliсe';
+import getAreasSlice from './slices/getAreasSlice';
+import getCategorySlice from './slices/getCategorySlice';
+import areaSlice from './slices/areaSlice';
 
 const rootReducer = combineReducers({
 	user: userSlice,
 	registerUser: registerUserSlice,
 	modal: modalSlice,
 	resetPassword: resetPasswordSliсe,
+	getAreas: getAreasSlice,
+	getCategory: getCategorySlice,
+	area: areaSlice,
 });
 
 export const store = configureStore({

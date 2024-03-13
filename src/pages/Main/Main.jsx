@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './Main.scss';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import YandexMap from '../../components/YandexMap/YandexMap';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CardList from '../../components/CardList/CardList';
 import { fetchUserActivation } from '../../services/thunks/registerUserThunk';
 import { openModal } from '../../services/slices/modalSlice';
+import { setAreasToShow } from '../../services/slices/areaSlice';
+import { areasList } from '../../services/selectors/areaSelector';
 
-export default function Main({
-	areas,
-	address,
-	setAddress,
-	areasToShow,
-	setAreasToShow,
-	coordinates,
-	setCoordinates,
-}) {
+export default function Main() {
 	const { uid, token } = useParams();
 	const dispatch = useDispatch();
+	const areas = useSelector(areasList);
 
 	const [selectedArea, setSelectedArea] = useState('');
 	const [isPolygonShow, setIsPolygonShow] = useState(false);
@@ -36,12 +30,12 @@ export default function Main({
 	const handleCategoryChange = (event) => {
 		const selectedCategory = event.target.value;
 		if (selectedCategory === 'Вид спорта') {
-			return setAreasToShow(areas);
+			return dispatch(setAreasToShow(areas));
 		}
 		const filteredAreas = areas.filter((area) =>
 			area.categories.some((category) => category.name === selectedCategory)
 		);
-		return setAreasToShow(filteredAreas);
+		return dispatch(setAreasToShow(filteredAreas));
 	};
 
 	// Выбор округа
@@ -59,46 +53,30 @@ export default function Main({
 	};
 
 	useEffect(() => {
-		setAreasToShow(areas);
-	}, [areas, setAreasToShow]);
+		dispatch(setAreasToShow(areas));
+	}, [areas, dispatch]);
 
 	return (
 		<main className="main">
 			<SearchBar
 				handleCategoryChange={handleCategoryChange}
 				handleAreaChange={handleAreaChange}
-				address={address}
-				setAddress={setAddress}
 				setIsCardListShow={setIsCardListShow}
 				isCardListShow={isCardListShow}
 				setIsPolygonShow={setIsPolygonShow}
 			/>
 			{isCardListShow ? (
-				<CardList areasToShow={areasToShow} />
+				<CardList />
 			) : (
 				<YandexMap
 					areas={areas}
 					handleAreaChange={handleAreaChange}
-					areasToShow={areasToShow}
 					selectedArea={selectedArea}
 					isPolygonShow={isPolygonShow}
 					setIsPolygonShow={setIsPolygonShow}
-					setAddress={setAddress}
-					coordinates={coordinates}
-					setCoordinates={setCoordinates}
 					isCardListShow={isCardListShow}
 				/>
 			)}
 		</main>
 	);
 }
-
-Main.propTypes = {
-	areas: PropTypes.arrayOf.isRequired,
-	address: PropTypes.string.isRequired,
-	setAddress: PropTypes.string.isRequired,
-	areasToShow: PropTypes.arrayOf.isRequired,
-	setAreasToShow: PropTypes.arrayOf.isRequired,
-	coordinates: PropTypes.arrayOf.isRequired,
-	setCoordinates: PropTypes.arrayOf.isRequired,
-};

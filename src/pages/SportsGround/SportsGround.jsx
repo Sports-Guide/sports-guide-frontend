@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import './SportsGround.css';
 import { Map, Placemark } from '@pbe/react-yandex-maps';
+import { useSelector } from 'react-redux';
 import { Slider } from '../../components/Slider/Slider';
-import { bordersOfRussia } from '../../constants/MapConstants';
 
-export default function SportsGround({ areas }) {
+import { bordersOfRussia, defaultState } from '../../constants/MapConstants';
+import { areasList } from '../../services/selectors/areaSelector';
+
+export default function SportsGround() {
 	const { id } = useParams();
+	const areas = useSelector(areasList);
 
-	const [mapState, setMapState] = useState({
-		center: [37.618879, 55.751426],
-		zoom: 12,
-		controls: ['zoomControl', 'fullscreenControl'],
-	});
+	const [mapState, setMapState] = useState(defaultState);
 
 	const selectedArea = areas.find((area) => area.id.toString() === id);
 
@@ -132,7 +131,3 @@ export default function SportsGround({ areas }) {
 		</main>
 	);
 }
-
-SportsGround.propTypes = {
-	areas: PropTypes.arrayOf.isRequired,
-};

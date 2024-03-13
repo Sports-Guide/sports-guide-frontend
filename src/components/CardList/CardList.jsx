@@ -1,9 +1,11 @@
 import React from 'react';
 import './CardList.scss';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
+import { areasToShowSelector } from '../../services/selectors/areaSelector';
 
-function CardList({ areasToShow }) {
+function CardList() {
+	const areasToShow = useSelector(areasToShowSelector);
 	return (
 		<article className="card-list">
 			{areasToShow.map((area) => (
@@ -12,9 +14,5 @@ function CardList({ areasToShow }) {
 		</article>
 	);
 }
-
-CardList.propTypes = {
-	areasToShow: PropTypes.arrayOf.isRequired,
-};
 
 export default CardList;
