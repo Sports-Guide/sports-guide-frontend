@@ -9,6 +9,7 @@ import { setAddress, setCoordinates } from '../../services/slices/areaSlice';
 import {
 	coordinatesSelector,
 	areasToShowSelector,
+	areasList,
 } from '../../services/selectors/areaSelector';
 
 import {
@@ -19,7 +20,6 @@ import {
 } from '../../constants/MapConstants';
 
 function YandexMap({
-	areas,
 	isPolygonShow,
 	setIsPolygonShow,
 	selectedArea,
@@ -31,6 +31,7 @@ function YandexMap({
 	const dispatch = useDispatch();
 
 	const areasToShow = useSelector(areasToShowSelector);
+	const areas = useSelector(areasList);
 	const areasToDisplay = areaPath ? areas : areasToShow;
 
 	const coordinates = useSelector(coordinatesSelector);
@@ -144,7 +145,7 @@ function YandexMap({
 				}
 			});
 		}
-	}, [isPolygonShow, setIsPolygonShow]);
+	}, [isPolygonShow, setIsPolygonShow, isCardListShow]);
 
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
@@ -242,7 +243,6 @@ function YandexMap({
 }
 
 YandexMap.propTypes = {
-	areas: PropTypes.arrayOf.isRequired,
 	selectedArea: PropTypes.arrayOf.isRequired,
 	isPolygonShow: PropTypes.bool.isRequired,
 	setIsPolygonShow: PropTypes.func.isRequired,

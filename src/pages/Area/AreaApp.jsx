@@ -12,7 +12,6 @@ import YandexMap from '../../components/YandexMap/YandexMap';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { openModal } from '../../services/slices/modalSlice';
 import {
-	areasList,
 	categoryList,
 	addressSelector,
 	coordinatesSelector,
@@ -20,7 +19,6 @@ import {
 
 export default function AreaApp({ handleAddArea }) {
 	const dispatch = useDispatch();
-	const areas = useSelector(areasList);
 	const categories = useSelector(categoryList);
 	const address = useSelector(addressSelector);
 	const coordinates = useSelector(coordinatesSelector);
@@ -140,7 +138,7 @@ export default function AreaApp({ handleAddArea }) {
 							Адрес площадки
 						</p>
 						<SearchBar />
-						<YandexMap areas={areas} />
+						<YandexMap />
 					</div>
 					<div className="description-of-the-site">
 						<h3 className="description-of-the-site__title">

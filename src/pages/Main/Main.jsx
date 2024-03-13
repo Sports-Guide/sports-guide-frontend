@@ -69,7 +69,6 @@ export default function Main() {
 				<CardList />
 			) : (
 				<YandexMap
-					areas={areas}
 					handleAreaChange={handleAreaChange}
 					selectedArea={selectedArea}
 					isPolygonShow={isPolygonShow}

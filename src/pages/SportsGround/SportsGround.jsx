@@ -4,14 +4,12 @@ import './SportsGround.css';
 import { Map, Placemark } from '@pbe/react-yandex-maps';
 import { useSelector } from 'react-redux';
 import { Slider } from '../../components/Slider/Slider';
-
 import { bordersOfRussia, defaultState } from '../../constants/MapConstants';
 import { areasList } from '../../services/selectors/areaSelector';
 
 export default function SportsGround() {
 	const { id } = useParams();
 	const areas = useSelector(areasList);
-
 	const [mapState, setMapState] = useState(defaultState);
 
 	const selectedArea = areas.find((area) => area.id.toString() === id);
@@ -33,9 +31,6 @@ export default function SportsGround() {
 
 	return (
 		<main className="sports-ground">
-			{/* <NavLink to="/" className="sports-ground__link">
-				← К выбору площадки
-			</NavLink> */}
 			<div className="sports-ground__data">
 				<h1 className="sports-ground__title">{selectedArea.name}</h1>
 				<div className="sports-ground__adress-container">
@@ -63,7 +58,6 @@ export default function SportsGround() {
 					/>
 				))}
 			</Slider>
-			{/* </div> */}
 			<div className="category-section">
 				<h2 className="category-title">Виды спорта</h2>
 				<div className="category-container">

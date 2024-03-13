@@ -61,7 +61,10 @@ function SearchBar({
 									: ''
 							}`}
 							aria-label="Переключатель отображения"
-							onClick={() => setIsCardListShow(!isCardListShow)}
+							onClick={() => {
+								setIsCardListShow(!isCardListShow);
+								setIsPolygonShow(false);
+							}}
 						/>
 						<select
 							type="text"
