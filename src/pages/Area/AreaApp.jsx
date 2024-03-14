@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Multiselect from 'multiselect-react-dropdown';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './AreaApp.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -16,8 +16,9 @@ import {
 	addressSelector,
 	coordinatesSelector,
 } from '../../services/selectors/areaSelector';
+import { fetchAddArea } from '../../services/thunks/addAreaThunk';
 
-export default function AreaApp({ handleAddArea }) {
+export default function AreaApp() {
 	const dispatch = useDispatch();
 	const categories = useSelector(categoryList);
 	const address = useSelector(addressSelector);
@@ -71,13 +72,15 @@ export default function AreaApp({ handleAddArea }) {
 	const handleSubmit = (event) => {
 		dispatch(openModal('createAreasSuccess'));
 		event.preventDefault();
-		handleAddArea(
-			address,
-			areaDescription,
-			coordinates.map((cord) => cord[0]),
-			coordinates.map((cord) => cord[1]),
-			category.map((categor) => categor.id),
-			addFoto
+		dispatch(
+			fetchAddArea({
+				address,
+				description: areaDescription,
+				latitude: coordinates.map((cord) => cord[0]),
+				longitude: coordinates.map((cord) => cord[1]),
+				categories: category.map((categor) => categor.id),
+				images: addFoto,
+			})
 		);
 	};
 
@@ -248,6 +251,6 @@ export default function AreaApp({ handleAddArea }) {
 	);
 }
 
-AreaApp.propTypes = {
-	handleAddArea: PropTypes.arrayOf.isRequired,
-};
+// AreaApp.propTypes = {
+// 	// handleAddArea: PropTypes.arrayOf.isRequired,
+// };

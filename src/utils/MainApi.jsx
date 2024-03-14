@@ -1,5 +1,5 @@
 const BASE_URL = 'https://sports-map.ru/api/auth';
-const SPORT_GROUNDS_URL = 'https://sports-map.ru/api';
+// const SPORT_GROUNDS_URL = 'https://sports-map.ru/api';
 // const COORDS_URL = 'https://nominatim.openstreetmap.org/search';
 // const BASE_URL = 'http://localhost:3000';
 
@@ -79,34 +79,34 @@ export const editPassword = (currentPassword, newPassword) => {
 // 	}).then(validateResponse);
 // }
 
-export const addNewArea = (
-	address,
-	description,
-	latitude,
-	longitude,
-	categories,
-	images
-) => {
-	const token = localStorage.getItem('accessToken');
+// export const addNewArea = (
+// 	address,
+// 	description,
+// 	latitude,
+// 	longitude,
+// 	categories,
+// 	images
+// ) => {
+// 	const token = localStorage.getItem('accessToken');
 
-	const data = new FormData();
-	data.append('address', address);
-	data.append('description', description);
-	data.append('latitude', latitude);
-	data.append('longitude', longitude);
-	data.append('categories', categories);
-	images.forEach((foto) => {
-		data.append('images', foto);
-	});
+// 	const data = new FormData();
+// 	data.append('address', address);
+// 	data.append('description', description);
+// 	data.append('latitude', latitude);
+// 	data.append('longitude', longitude);
+// 	data.append('categories', categories);
+// 	images.forEach((foto) => {
+// 		data.append('images', foto);
+// 	});
 
-	return fetch(`${SPORT_GROUNDS_URL}/areas/`, {
-		method: 'POST',
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-		body: data,
-	}).then(validateResponse);
-};
+// 	return fetch(`${SPORT_GROUNDS_URL}/areas/`, {
+// 		method: 'POST',
+// 		headers: {
+// 			Authorization: `Bearer ${token}`,
+// 		},
+// 		body: data,
+// 	}).then(validateResponse);
+// };
 
 // export function getCoords(area) {
 // 	const params = new URLSearchParams({

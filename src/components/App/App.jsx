@@ -15,7 +15,6 @@ import { Popup } from '../Popup/Popup';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
 import PersonalData from '../../pages/Profile/PersonalData/PersonalData';
 import PasswordData from '../../pages/Profile/PasswordData/PasswordData';
-import * as api from '../../utils/MainApi';
 import {
 	getContentByType,
 	getTitleByType,
@@ -62,32 +61,6 @@ export function App() {
 		dispatch(fetchGetCategory());
 	}, [dispatch]);
 
-	// Функция добавления площадки
-	const handleAddArea = (
-		GivenAddress,
-		description,
-		latitude,
-		longitude,
-		categorie,
-		images
-	) => {
-		api
-			.addNewArea(
-				GivenAddress,
-				description,
-				latitude,
-				longitude,
-				categorie,
-				images
-			)
-			.then((result) => {
-				console.log(result);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
-
 	return (
 		<>
 			<MetaTags />
@@ -97,11 +70,7 @@ export function App() {
 					<Route path="/activate/:uid/:token" element={<Main />} />
 					<Route
 						path="app-area"
-						element={
-							<ProtectedOnlyAuth
-								component={<AreaApp handleAddArea={handleAddArea} />}
-							/>
-						}
+						element={<ProtectedOnlyAuth component={<AreaApp />} />}
 					/>
 					<Route
 						path="profile"
