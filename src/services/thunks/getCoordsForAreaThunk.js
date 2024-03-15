@@ -24,6 +24,24 @@ export const fetchGetCoordsForArea = createAsyncThunk(
 		};
 
 		const data = await request(`${urlCoords}${params}`, options);
-		return data;
+		let coords = [];
+		if (data && data.length > 0) {
+			const firstResult = data[0];
+			if (firstResult.geojson && firstResult.geojson.coordinates) {
+				const polygonCoordinates = firstResult.geojson.coordinates;
+				let modifiedCoordinates = [];
+				if (polygonCoordinates.every((subArray) => subArray.length === 1)) {
+					modifiedCoordinates = polygonCoordinates.flat();
+				} else {
+					modifiedCoordinates = polygonCoordinates;
+				}
+				coords = modifiedCoordinates;
+			} else {
+				console.error('Полигон не найден в ответе API');
+			}
+		} else {
+			console.error('Данные не получены от API');
+		}
+		return coords;
 	}
 );

@@ -8,6 +8,7 @@ import ViewSuccessSentActivation from '../components/Popup/ViewSuccessSentActiva
 import ViewSuccessSentPasswordRecovery from '../components/Popup/ViewSuccessSentPasswordRecovery';
 import ViewSuccessCreateArea from '../components/Popup/ViewSuccessCreateArea';
 import ViewInformActivation from '../components/Popup/ViewInformActivation';
+import ViewGetAreasError from '../components/Popup/ViewGetAreasError';
 
 export const getTitleByType = (type) => {
 	switch (type) {
@@ -29,6 +30,12 @@ export const getTitleByType = (type) => {
 			return 'Удаление профиля';
 		case 'createAreasSuccess':
 			return 'Отправлено на проверку';
+		case 'getAreasError':
+			return 'Ошибка при получении площадок';
+		case 'getCategoryError':
+			return 'Ошибка при получении категорий площадок';
+		case 'coordsForAreaError':
+			return 'Ошибка при получении границ округа';
 		default:
 			return '';
 	}
@@ -75,6 +82,12 @@ export const getContentByType = (type, handleClose) => {
 			return <ViewSuccessCreateArea handleClose={handleClose} />;
 		case 'informActivation':
 			return <ViewInformActivation handleClose={handleClose} />;
+		case 'getAreasError':
+			return <ViewGetAreasError handleClose={handleClose} />;
+		case 'getCategoryError':
+			return <ViewGetAreasError handleClose={handleClose} />;
+		case 'coordsForAreaError':
+			return <ViewGetAreasError handleClose={handleClose} />;
 
 		default:
 			return null;

@@ -10,8 +10,10 @@ import {
 	coordinatesSelector,
 	areasToShowSelector,
 	areasList,
+	coordsForAreaList,
+	coordsForAreaErrorMessage,
 } from '../../services/selectors/areaSelector';
-
+import { openModal } from '../../services/slices/modalSlice';
 import {
 	displayBorder,
 	bordersOfRussia,
@@ -31,46 +33,27 @@ function YandexMap({
 	const dispatch = useDispatch();
 
 	const areasToShow = useSelector(areasToShowSelector);
+	const coordsForAreaError = useSelector(coordsForAreaErrorMessage);
 	const areas = useSelector(areasList);
+	const coordsForArea = useSelector(coordsForAreaList);
 	const areasToDisplay = areaPath ? areas : areasToShow;
 
 	const coordinates = useSelector(coordinatesSelector);
-	const [coordsForArea, setCoordsForArea] = useState([]);
+	// const [coordsForArea, setCoordsForArea] = useState([]);
 	const [mapState, setMapState] = useState(defaultState);
 
 	// рендер границ округов
 	useEffect(() => {
-		if (isCardListShow) {
-			return;
-		}
-		if (selectedArea) {
-			dispatch(fetchGetCoordsForArea(selectedArea))
-				.then((data) => {
-					if (data && data.payload.length > 0) {
-						const firstResult = data.payload[0];
-						if (firstResult.geojson && firstResult.geojson.coordinates) {
-							const polygonCoordinates = firstResult.geojson.coordinates;
-							let modifiedCoordinates = [];
-							if (
-								polygonCoordinates.every((subArray) => subArray.length === 1)
-							) {
-								modifiedCoordinates = polygonCoordinates.flat();
-							} else {
-								modifiedCoordinates = polygonCoordinates;
-							}
-							setCoordsForArea(modifiedCoordinates);
-						} else {
-							console.error('Полигон не найден в ответе API');
-						}
-					} else {
-						console.error('Данные не получены от API');
-					}
-				})
-				.catch((error) => {
-					console.error('Ошибка при выполнении запроса:', error);
-				});
+		if (!isCardListShow && selectedArea) {
+			dispatch(fetchGetCoordsForArea(selectedArea));
 		}
 	}, [selectedArea, isCardListShow, dispatch]);
+
+	useEffect(() => {
+		if (coordsForAreaError) {
+			dispatch(openModal('coordsForAreaError'));
+		}
+	}, [coordsForAreaError, dispatch]);
 
 	// Добавление клика на карту, запись адреса и координат в стейт
 	const handleMapClick = useCallback((e, ymaps) => {

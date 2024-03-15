@@ -18,14 +18,12 @@ export const fetchAddArea = createAsyncThunk(
 		images.forEach((foto) => {
 			dataArea.append('images', foto);
 		});
-		const data = await request(urlAddArea, {
+		await request(urlAddArea, {
 			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 			body: dataArea,
 		});
-
-		return data;
 	}
 );

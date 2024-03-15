@@ -15,6 +15,7 @@ import {
 	categoryList,
 	addressSelector,
 	coordinatesSelector,
+	categoryErrorMessage,
 } from '../../services/selectors/areaSelector';
 import { fetchAddArea } from '../../services/thunks/addAreaThunk';
 
@@ -23,6 +24,13 @@ export default function AreaApp() {
 	const categories = useSelector(categoryList);
 	const address = useSelector(addressSelector);
 	const coordinates = useSelector(coordinatesSelector);
+	const categoryError = useSelector(categoryErrorMessage);
+
+	useEffect(() => {
+		if (categoryError) {
+			dispatch(openModal('getCategoryError'));
+		}
+	}, [categoryError, dispatch]);
 
 	const [options, setOptions] = useState(categories);
 
