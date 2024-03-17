@@ -4,15 +4,14 @@ import './SportsGround.css';
 import { Map, Placemark } from '@pbe/react-yandex-maps';
 import { useSelector } from 'react-redux';
 import { Slider } from '../../components/Slider/Slider';
-
 import { bordersOfRussia, defaultState } from '../../constants/MapConstants';
 import { areasList } from '../../services/selectors/areaSelector';
 
 export default function SportsGround() {
 	const { id } = useParams();
 	const areas = useSelector(areasList);
-
 	const [mapState, setMapState] = useState(defaultState);
+	const [isLiked, setIsLiked] = useState(false);
 
 	const selectedArea = areas.find((area) => area.id.toString() === id);
 
@@ -31,21 +30,39 @@ export default function SportsGround() {
 		return <div className="sports-ground__not-found">Площадка не найдена</div>;
 	}
 
+	const addToFavorite = () => {
+		setIsLiked(!isLiked);
+	};
+
 	return (
 		<main className="sports-ground">
-			{/* <NavLink to="/" className="sports-ground__link">
-				← К выбору площадки
-			</NavLink> */}
 			<div className="sports-ground__data">
-				<h1 className="sports-ground__title">{selectedArea.name}</h1>
+				<h2 className="sports-ground__title">{selectedArea.name}</h2>
 				<div className="sports-ground__adress-container">
 					<div className="sports-ground__adress-icon" />
 					<p className="sports-ground__adress">{selectedArea.address}</p>
 				</div>
 				<div className="sports-ground__button-container">
-					<button className="sports-ground__button">
-						<p className="sports-ground__button-like" />
-						<p className="sports-ground__button-text">Добавить в избранное</p>
+					<button
+						type="button"
+						onClick={addToFavorite}
+						className="sports-ground__button"
+					>
+						{isLiked ? (
+							<>
+								<p className=" sports-ground__button-like sports-ground__button-like_active" />
+								<p className="sports-ground__button-text sports-ground__button-text_active">
+									В избранном
+								</p>
+							</>
+						) : (
+							<>
+								<p className="sports-ground__button-like" />
+								<p className="sports-ground__button-text">
+									Добавить в избранное
+								</p>
+							</>
+						)}
 					</button>
 					<button className="sports-ground__button">
 						<p className="sports-ground__button-warning" />
@@ -63,9 +80,8 @@ export default function SportsGround() {
 					/>
 				))}
 			</Slider>
-			{/* </div> */}
 			<div className="category-section">
-				<h2 className="category-title">Виды спорта</h2>
+				<h3 className="category-title">Виды спорта</h3>
 				<div className="category-container">
 					{selectedArea.categories.map((category) => (
 						<span className="category-background">
@@ -81,10 +97,15 @@ export default function SportsGround() {
 					))}
 				</div>
 			</div>
-			<div className="map_area-app">
+			<div className="sports-ground__description">
+				<h3 className="sports-ground__title">О площадке</h3>
+				<p className="sports-ground__subtitle">{selectedArea.description}</p>
+			</div>
+			<div className="sports-ground__map">
+				<h3 className="sports-ground__title">Расположение</h3>
 				<Map
 					state={mapState}
-					className="map__container"
+					className="sports-ground__map-container"
 					options={{
 						restrictMapArea: bordersOfRussia,
 					}}

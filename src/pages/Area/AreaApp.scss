@@ -315,6 +315,16 @@ $width90: 90%;
 	margin-bottom: 28px;
 }
 
+.app-area__error-message {
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 14px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #f36565;
+}
+
 .search-wrapper {
 	border-radius: 8px;
 	border: 1px solid rgba(201, 209, 229, 1);

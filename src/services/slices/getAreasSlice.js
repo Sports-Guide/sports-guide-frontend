@@ -28,11 +28,10 @@ const getAreasSlice = createSlice({
 				state.isLoadingGetAreas = false;
 				state.errorGetAreas = true;
 				state.errorMessageGetAreas =
-					action.error.message || 'Произошла неизвестная ошибка';
+					action.error.message ||
+					'Произошла неизвестная ошибка. Попробуйте повторить позже';
 			});
 	},
 });
-
-// export const { cleanAreasList, addPoint } = getAreasSlice.actions;
 
 export default getAreasSlice.reducer;

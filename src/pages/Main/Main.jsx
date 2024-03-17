@@ -8,16 +8,26 @@ import CardList from '../../components/CardList/CardList';
 import { fetchUserActivation } from '../../services/thunks/registerUserThunk';
 import { openModal } from '../../services/slices/modalSlice';
 import { setAreasToShow } from '../../services/slices/areaSlice';
-import { areasList } from '../../services/selectors/areaSelector';
+import {
+	areasList,
+	areasErrorMessage,
+} from '../../services/selectors/areaSelector';
 
 export default function Main() {
 	const { uid, token } = useParams();
 	const dispatch = useDispatch();
 	const areas = useSelector(areasList);
+	const areasError = useSelector(areasErrorMessage);
 
 	const [selectedArea, setSelectedArea] = useState('');
 	const [isPolygonShow, setIsPolygonShow] = useState(false);
 	const [isCardListShow, setIsCardListShow] = useState(false);
+
+	useEffect(() => {
+		if (areasError) {
+			dispatch(openModal('getAreasError'));
+		}
+	}, [areasError, dispatch]);
 
 	useEffect(() => {
 		if (uid && token) {
@@ -69,7 +79,6 @@ export default function Main() {
 				<CardList />
 			) : (
 				<YandexMap
-					areas={areas}
 					handleAreaChange={handleAreaChange}
 					selectedArea={selectedArea}
 					isPolygonShow={isPolygonShow}

@@ -6,11 +6,10 @@ import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 import { setIsRegister } from '../../services/slices/registerUserSliсe';
 
-export default function ViewSuccessCreateArea({ handleClose }) {
+export default function ViewGetError({ handleClose }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const text = `Как только площадка пройдет проверку, она будет доступна для
-	всех пользователей.`;
+	const text = `Произошла ошибка на сервере. Попробуйте перезагрузить страницу либо вернитесь позже.`;
 
 	const navigateHome = () => {
 		navigate('/');
@@ -21,12 +20,6 @@ export default function ViewSuccessCreateArea({ handleClose }) {
 		dispatch(setIsRegister(false));
 	}, [dispatch, handleClose]);
 
-	useEffect(() => {
-		if (handleClose) {
-			navigate('/');
-		}
-	}, [handleClose, navigate]);
-
 	return (
 		<>
 			<p className="popup__text popup__text_type_areas">{text}</p>
@@ -34,12 +27,12 @@ export default function ViewSuccessCreateArea({ handleClose }) {
 				className="register-form__button-register popup__button-y"
 				type="button"
 				onClick={navigateHome}
-				label="Жду, не дождусь"
+				label="На главную"
 			/>
 		</>
 	);
 }
 
-ViewSuccessCreateArea.propTypes = {
+ViewGetError.propTypes = {
 	handleClose: PropTypes.func.isRequired,
 };

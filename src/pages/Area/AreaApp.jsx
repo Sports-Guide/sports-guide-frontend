@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Multiselect from 'multiselect-react-dropdown';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import './AreaApp.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -12,18 +12,33 @@ import YandexMap from '../../components/YandexMap/YandexMap';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { openModal } from '../../services/slices/modalSlice';
 import {
-	areasList,
 	categoryList,
 	addressSelector,
 	coordinatesSelector,
+	categoryErrorMessage,
+	isAreaAddedStatus,
+	isAreaAddedError,
 } from '../../services/selectors/areaSelector';
+import { fetchAddArea } from '../../services/thunks/addAreaThunk';
+import {
+	setIsAreaAdded,
+	setIsAreaError,
+} from '../../services/slices/areaSlice';
 
-export default function AreaApp({ handleAddArea }) {
+export default function AreaApp() {
 	const dispatch = useDispatch();
-	const areas = useSelector(areasList);
 	const categories = useSelector(categoryList);
 	const address = useSelector(addressSelector);
 	const coordinates = useSelector(coordinatesSelector);
+	const categoryError = useSelector(categoryErrorMessage);
+	const isAreaAdded = useSelector(isAreaAddedStatus);
+	const isAreaAddError = useSelector(isAreaAddedError);
+
+	useEffect(() => {
+		if (categoryError) {
+			dispatch(openModal('getCategoryError'));
+		}
+	}, [categoryError, dispatch]);
 
 	const [options, setOptions] = useState(categories);
 
@@ -31,6 +46,7 @@ export default function AreaApp({ handleAddArea }) {
 	const [areaDescription, setAreaDiscriptin] = useState([]);
 	// добавление категорий
 	const [category, setCategory] = useState([]);
+	const [categoryCount, setCategoryCount] = useState(0);
 	// добавление фотографий
 	const [addFoto, setAddFoto] = useState([]);
 
@@ -40,6 +56,11 @@ export default function AreaApp({ handleAddArea }) {
 	// настройка под разные разрешения экрана
 	const browserWindowSize = window.innerWidth;
 	const [windowSize, setWindowSize] = useState(true);
+	const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
+
+	useEffect(() => {
+		setIsSubmitAvailable(categoryCount !== 0 && address !== '');
+	}, [address, categoryCount]);
 
 	// широта
 
@@ -71,17 +92,28 @@ export default function AreaApp({ handleAddArea }) {
 	};
 
 	const handleSubmit = (event) => {
-		dispatch(openModal('createAreasSuccess'));
 		event.preventDefault();
-		handleAddArea(
-			address,
-			areaDescription,
-			coordinates.map((cord) => cord[0]),
-			coordinates.map((cord) => cord[1]),
-			category.map((categor) => categor.id),
-			addFoto
+		dispatch(
+			fetchAddArea({
+				address,
+				description: areaDescription,
+				latitude: coordinates.map((cord) => cord[0]),
+				longitude: coordinates.map((cord) => cord[1]),
+				categories: category.map((categor) => categor.id),
+				images: addFoto,
+			})
 		);
 	};
+
+	useEffect(() => {
+		if (isAreaAdded) {
+			dispatch(openModal('createAreasSuccess'));
+			dispatch(setIsAreaAdded(false));
+		} else if (isAreaAddError) {
+			dispatch(openModal('createAreasError'));
+			dispatch(setIsAreaError(false));
+		}
+	}, [dispatch, isAreaAdded, isAreaAddError]);
 
 	useEffect(() => {
 		setOptions(categories);
@@ -128,9 +160,11 @@ export default function AreaApp({ handleAddArea }) {
 							customCloseIcon={<> </>}
 							onSelect={(event) => {
 								setCategory(event);
+								setCategoryCount((prevCount) => prevCount + 1);
 							}}
 							onRemove={(event) => {
 								setCategory(event);
+								setCategoryCount((prevCount) => prevCount - 1);
 							}}
 							onChange={handleCategories}
 						/>
@@ -140,7 +174,7 @@ export default function AreaApp({ handleAddArea }) {
 							Адрес площадки
 						</p>
 						<SearchBar />
-						<YandexMap areas={areas} />
+						<YandexMap />
 					</div>
 					<div className="description-of-the-site">
 						<h3 className="description-of-the-site__title">
@@ -237,11 +271,16 @@ export default function AreaApp({ handleAddArea }) {
 							Перед публикацией площадка будет проверена модерацией нашего
 							сервиса. Это может занять некоторое время.
 						</p>
-
+						{isSubmitAvailable ? null : (
+							<h4 className="app-area__error-message">
+								Поля выбора категорий и адреса обязательны к заполнению.
+							</h4>
+						)}
 						<Button
 							className="button-add"
 							label="Добавить площадку"
 							onClick={handleSubmit}
+							disabled={!isSubmitAvailable}
 						/>
 					</div>
 				</form>
@@ -249,7 +288,3 @@ export default function AreaApp({ handleAddArea }) {
 		</div>
 	);
 }
-
-AreaApp.propTypes = {
-	handleAddArea: PropTypes.arrayOf.isRequired,
-};

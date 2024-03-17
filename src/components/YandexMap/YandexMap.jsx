@@ -9,8 +9,11 @@ import { setAddress, setCoordinates } from '../../services/slices/areaSlice';
 import {
 	coordinatesSelector,
 	areasToShowSelector,
+	areasList,
+	coordsForAreaList,
+	coordsForAreaErrorMessage,
 } from '../../services/selectors/areaSelector';
-
+import { openModal } from '../../services/slices/modalSlice';
 import {
 	displayBorder,
 	bordersOfRussia,
@@ -19,7 +22,6 @@ import {
 } from '../../constants/MapConstants';
 
 function YandexMap({
-	areas,
 	isPolygonShow,
 	setIsPolygonShow,
 	selectedArea,
@@ -31,45 +33,27 @@ function YandexMap({
 	const dispatch = useDispatch();
 
 	const areasToShow = useSelector(areasToShowSelector);
+	const coordsForAreaError = useSelector(coordsForAreaErrorMessage);
+	const areas = useSelector(areasList);
+	const coordsForArea = useSelector(coordsForAreaList);
 	const areasToDisplay = areaPath ? areas : areasToShow;
 
 	const coordinates = useSelector(coordinatesSelector);
-	const [coordsForArea, setCoordsForArea] = useState([]);
+	// const [coordsForArea, setCoordsForArea] = useState([]);
 	const [mapState, setMapState] = useState(defaultState);
 
 	// рендер границ округов
 	useEffect(() => {
-		if (isCardListShow) {
-			return;
-		}
-		if (selectedArea) {
-			dispatch(fetchGetCoordsForArea(selectedArea))
-				.then((data) => {
-					if (data && data.payload.length > 0) {
-						const firstResult = data.payload[0];
-						if (firstResult.geojson && firstResult.geojson.coordinates) {
-							const polygonCoordinates = firstResult.geojson.coordinates;
-							let modifiedCoordinates = [];
-							if (
-								polygonCoordinates.every((subArray) => subArray.length === 1)
-							) {
-								modifiedCoordinates = polygonCoordinates.flat();
-							} else {
-								modifiedCoordinates = polygonCoordinates;
-							}
-							setCoordsForArea(modifiedCoordinates);
-						} else {
-							console.error('Полигон не найден в ответе API');
-						}
-					} else {
-						console.error('Данные не получены от API');
-					}
-				})
-				.catch((error) => {
-					console.error('Ошибка при выполнении запроса:', error);
-				});
+		if (!isCardListShow && selectedArea) {
+			dispatch(fetchGetCoordsForArea(selectedArea));
 		}
 	}, [selectedArea, isCardListShow, dispatch]);
+
+	useEffect(() => {
+		if (coordsForAreaError) {
+			dispatch(openModal('coordsForAreaError'));
+		}
+	}, [coordsForAreaError, dispatch]);
 
 	// Добавление клика на карту, запись адреса и координат в стейт
 	const handleMapClick = useCallback((e, ymaps) => {
@@ -144,7 +128,7 @@ function YandexMap({
 				}
 			});
 		}
-	}, [isPolygonShow, setIsPolygonShow]);
+	}, [isPolygonShow, setIsPolygonShow, isCardListShow]);
 
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>
@@ -200,10 +184,13 @@ function YandexMap({
 						<Placemark
 							key={area.id}
 							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}
+							// href="https://sports-map.ru/sports-ground/${
+							// 				area.id
+							// 			}"
 							properties={{
 								balloonContentBody: `
 							
-								   <a class = "yandex-link" href="https://sports-map.ru/sports-ground/${
+								   <a class = "yandex-link" href="http://localhost:3000/sports-ground/${
 											area.id
 										}" target="_blank">
 									<div class = "yandex">
@@ -242,7 +229,6 @@ function YandexMap({
 }
 
 YandexMap.propTypes = {
-	areas: PropTypes.arrayOf.isRequired,
 	selectedArea: PropTypes.arrayOf.isRequired,
 	isPolygonShow: PropTypes.bool.isRequired,
 	setIsPolygonShow: PropTypes.func.isRequired,
