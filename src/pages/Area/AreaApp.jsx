@@ -154,9 +154,11 @@ export default function AreaApp() {
 						<h3 className="kinds-of-sports__title">Виды спорта</h3>
 						<Multiselect
 							showCheckbox
-							placeholder=""
+							placeholder="Выберите из списка"
 							options={options}
 							displayValue="name"
+							emptyRecordMsg="Закончились доступные категории"
+							avoidHighlightFirstOption
 							customCloseIcon={<> </>}
 							onSelect={(event) => {
 								setCategory(event);
@@ -184,7 +186,7 @@ export default function AreaApp() {
 							className="description-of-the-site__textarea"
 							id="add-text"
 							name="add-text"
-							placeholder=" "
+							placeholder="Начните писать..."
 							onChange={handlDescription}
 						/>
 					</div>

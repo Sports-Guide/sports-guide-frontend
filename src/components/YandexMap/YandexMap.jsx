@@ -198,7 +198,7 @@ function YandexMap({
 									<img class="yandex__images" src="${area.images[0].image}">
 									<div class = "yandex__contetn">
 									<h1 class = "yandex__title" >${area.name}</h1>
-									<p class = "yandex__subtitle">${area.description}</p>
+									<p class = "yandex__subtitle">${area.address}</p>
 									<div class = "yandex__categories">
 									${area.categories
 										.map(
