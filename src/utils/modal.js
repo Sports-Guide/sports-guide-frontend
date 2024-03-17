@@ -8,7 +8,7 @@ import ViewSuccessSentActivation from '../components/Popup/ViewSuccessSentActiva
 import ViewSuccessSentPasswordRecovery from '../components/Popup/ViewSuccessSentPasswordRecovery';
 import ViewSuccessCreateArea from '../components/Popup/ViewSuccessCreateArea';
 import ViewInformActivation from '../components/Popup/ViewInformActivation';
-import ViewGetAreasError from '../components/Popup/ViewGetAreasError';
+import ViewGetError from '../components/Popup/ViewGetAreasError';
 
 export const getTitleByType = (type) => {
 	switch (type) {
@@ -30,6 +30,8 @@ export const getTitleByType = (type) => {
 			return 'Удаление профиля';
 		case 'createAreasSuccess':
 			return 'Отправлено на проверку';
+		case 'createAreasError':
+			return 'Произошла ошибка при добавлении площадки';
 		case 'getAreasError':
 			return 'Ошибка при получении площадок';
 		case 'getCategoryError':
@@ -80,14 +82,16 @@ export const getContentByType = (type, handleClose) => {
 			return <ViewSuccessSentPasswordRecovery handleClose={handleClose} />;
 		case 'createAreasSuccess':
 			return <ViewSuccessCreateArea handleClose={handleClose} />;
+		case 'createAreasError':
+			return <ViewGetError handleClose={handleClose} />;
 		case 'informActivation':
 			return <ViewInformActivation handleClose={handleClose} />;
 		case 'getAreasError':
-			return <ViewGetAreasError handleClose={handleClose} />;
+			return <ViewGetError handleClose={handleClose} />;
 		case 'getCategoryError':
-			return <ViewGetAreasError handleClose={handleClose} />;
+			return <ViewGetError handleClose={handleClose} />;
 		case 'coordsForAreaError':
-			return <ViewGetAreasError handleClose={handleClose} />;
+			return <ViewGetError handleClose={handleClose} />;
 
 		default:
 			return null;

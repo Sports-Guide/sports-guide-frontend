@@ -16,8 +16,14 @@ import {
 	addressSelector,
 	coordinatesSelector,
 	categoryErrorMessage,
+	isAreaAddedStatus,
+	isAreaAddedError,
 } from '../../services/selectors/areaSelector';
 import { fetchAddArea } from '../../services/thunks/addAreaThunk';
+import {
+	setIsAreaAdded,
+	setIsAreaError,
+} from '../../services/slices/areaSlice';
 
 export default function AreaApp() {
 	const dispatch = useDispatch();
@@ -25,6 +31,8 @@ export default function AreaApp() {
 	const address = useSelector(addressSelector);
 	const coordinates = useSelector(coordinatesSelector);
 	const categoryError = useSelector(categoryErrorMessage);
+	const isAreaAdded = useSelector(isAreaAddedStatus);
+	const isAreaAddError = useSelector(isAreaAddedError);
 
 	useEffect(() => {
 		if (categoryError) {
@@ -38,6 +46,7 @@ export default function AreaApp() {
 	const [areaDescription, setAreaDiscriptin] = useState([]);
 	// добавление категорий
 	const [category, setCategory] = useState([]);
+	const [categoryCount, setCategoryCount] = useState(0);
 	// добавление фотографий
 	const [addFoto, setAddFoto] = useState([]);
 
@@ -47,6 +56,11 @@ export default function AreaApp() {
 	// настройка под разные разрешения экрана
 	const browserWindowSize = window.innerWidth;
 	const [windowSize, setWindowSize] = useState(true);
+	const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
+
+	useEffect(() => {
+		setIsSubmitAvailable(categoryCount !== 0 && address !== '');
+	}, [address, categoryCount]);
 
 	// широта
 
@@ -78,7 +92,6 @@ export default function AreaApp() {
 	};
 
 	const handleSubmit = (event) => {
-		dispatch(openModal('createAreasSuccess'));
 		event.preventDefault();
 		dispatch(
 			fetchAddArea({
@@ -91,6 +104,16 @@ export default function AreaApp() {
 			})
 		);
 	};
+
+	useEffect(() => {
+		if (isAreaAdded) {
+			dispatch(openModal('createAreasSuccess'));
+			dispatch(setIsAreaAdded(false));
+		} else if (isAreaAddError) {
+			dispatch(openModal('createAreasError'));
+			dispatch(setIsAreaError(false));
+		}
+	}, [dispatch, isAreaAdded, isAreaAddError]);
 
 	useEffect(() => {
 		setOptions(categories);
@@ -137,9 +160,11 @@ export default function AreaApp() {
 							customCloseIcon={<> </>}
 							onSelect={(event) => {
 								setCategory(event);
+								setCategoryCount((prevCount) => prevCount + 1);
 							}}
 							onRemove={(event) => {
 								setCategory(event);
+								setCategoryCount((prevCount) => prevCount - 1);
 							}}
 							onChange={handleCategories}
 						/>
@@ -246,11 +271,16 @@ export default function AreaApp() {
 							Перед публикацией площадка будет проверена модерацией нашего
 							сервиса. Это может занять некоторое время.
 						</p>
-
+						{isSubmitAvailable ? null : (
+							<h4 className="app-area__error-message">
+								Поля выбора категорий и адреса обязательны к заполнению.
+							</h4>
+						)}
 						<Button
 							className="button-add"
 							label="Добавить площадку"
 							onClick={handleSubmit}
+							disabled={!isSubmitAvailable}
 						/>
 					</div>
 				</form>
@@ -258,7 +288,3 @@ export default function AreaApp() {
 		</div>
 	);
 }
-
-// AreaApp.propTypes = {
-// 	// handleAddArea: PropTypes.arrayOf.isRequired,
-// };

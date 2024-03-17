@@ -10,3 +10,5 @@ export const coordsForAreaList = (state) =>
 	state.getCoordsForArea.coordsForArea;
 export const coordsForAreaErrorMessage = (state) =>
 	state.getCoordsForArea.errorCoordsForArea;
+export const isAreaAddedStatus = (state) => state.area.isAreaAdded;
+export const isAreaAddedError = (state) => state.area.isAreaError;

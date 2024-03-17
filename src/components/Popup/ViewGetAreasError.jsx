@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 import { setIsRegister } from '../../services/slices/registerUserSliсe';
 
-export default function ViewGetAreasError({ handleClose }) {
+export default function ViewGetError({ handleClose }) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const text = `Произошла ошибка на сервере. Попробуйте перезагрузить страницу либо вернитесь позже.`;
@@ -33,6 +33,6 @@ export default function ViewGetAreasError({ handleClose }) {
 	);
 }
 
-ViewGetAreasError.propTypes = {
+ViewGetError.propTypes = {
 	handleClose: PropTypes.func.isRequired,
 };
