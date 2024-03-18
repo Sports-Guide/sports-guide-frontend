@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './SportsGround.css';
 import { Map, Placemark } from '@pbe/react-yandex-maps';
-import { useSelector } from 'react-redux';
 import { Slider } from '../../components/Slider/Slider';
 import { bordersOfRussia, defaultState } from '../../constants/MapConstants';
 import { areasList } from '../../services/selectors/areaSelector';
+import ButtonLike from '../../components/Button/ButtonLike';
 
 export default function SportsGround() {
 	const { id } = useParams();
 	const areas = useSelector(areasList);
 	const [mapState, setMapState] = useState(defaultState);
-	const [isLiked, setIsLiked] = useState(false);
 
 	const selectedArea = areas.find((area) => area.id.toString() === id);
 
@@ -30,10 +30,6 @@ export default function SportsGround() {
 		return <div className="sports-ground__not-found">Площадка не найдена</div>;
 	}
 
-	const addToFavorite = () => {
-		setIsLiked(!isLiked);
-	};
-
 	return (
 		<main className="sports-ground">
 			<div className="sports-ground__data">
@@ -43,27 +39,7 @@ export default function SportsGround() {
 					<p className="sports-ground__adress">{selectedArea.address}</p>
 				</div>
 				<div className="sports-ground__button-container">
-					<button
-						type="button"
-						onClick={addToFavorite}
-						className="sports-ground__button"
-					>
-						{isLiked ? (
-							<>
-								<p className=" sports-ground__button-like sports-ground__button-like_active" />
-								<p className="sports-ground__button-text sports-ground__button-text_active">
-									В избранном
-								</p>
-							</>
-						) : (
-							<>
-								<p className="sports-ground__button-like" />
-								<p className="sports-ground__button-text">
-									Добавить в избранное
-								</p>
-							</>
-						)}
-					</button>
+					<ButtonLike area={selectedArea} />
 					<button className="sports-ground__button">
 						<p className="sports-ground__button-warning" />
 						<p className="sports-ground__button-text">Сообщить о неточности</p>

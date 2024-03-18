@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Card.scss';
 import PropTypes from 'prop-types';
+import ButtonLike from '../Button/ButtonLike';
 
 function Card({ area }) {
-	const [isLiked, setIsLiked] = useState(false);
 	return (
 		<div className="card">
-			<button
-				className={isLiked ? 'card__like card__like_active' : 'card__like'}
-				aria-label="лайк"
-				onClick={() => setIsLiked(!isLiked)}
-			/>
+			<ButtonLike area={area} />
 			<a
 				className="card__link"
 				href={`/sports-ground/${area.id}`}
@@ -47,7 +43,7 @@ function Card({ area }) {
 }
 
 Card.propTypes = {
-	area: PropTypes.arrayOf.isRequired,
+	area: PropTypes.objectOf.isRequired,
 };
 
 export default Card;

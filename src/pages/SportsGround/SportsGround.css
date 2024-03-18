@@ -141,6 +141,7 @@
 }
 
 .category-title {
+	font-family: Roboto Flex;
 	color: #030303;
 	margin: 0;
 	text-align: left;
@@ -153,7 +154,7 @@
 		'wdth' 128,
 		'GRAD' 42,
 		'slnt' 0,
-		'XTRA' 486,
+		'XTRA' 516,
 		'XOPQ' 96,
 		'YOPQ' 79,
 		'YTLC' 544,

@@ -1,7 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseURL, request } from '../../utils/api';
 
-const urlAddArea = `${baseURL}/areas/`;
+const urlAreas = `${baseURL}/areas/`;
+const urlCategory = `${baseURL}/categories/`;
+
+export const fetchGetAreas = createAsyncThunk('areas/get', async () => {
+	const data = await request(urlAreas, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+		},
+	});
+	return data;
+});
 
 export const fetchAddArea = createAsyncThunk(
 	'area/post',
@@ -18,7 +30,7 @@ export const fetchAddArea = createAsyncThunk(
 		images.forEach((foto) => {
 			dataArea.append('images', foto);
 		});
-		await request(urlAddArea, {
+		await request(urlAreas, {
 			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${token}`,
@@ -27,3 +39,14 @@ export const fetchAddArea = createAsyncThunk(
 		});
 	}
 );
+
+export const fetchGetCategory = createAsyncThunk('category/get', async () => {
+	const data = await request(urlCategory, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+		},
+	});
+	return data;
+});

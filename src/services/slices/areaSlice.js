@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAddArea } from '../thunks/addAreaThunk';
+import {
+	fetchAddArea,
+	fetchGetAreas,
+	fetchGetCategory,
+} from '../thunks/areasThunk';
 
 export const initialState = {
 	address: '',
@@ -9,6 +13,14 @@ export const initialState = {
 	isAreaLoading: false,
 	isAreaError: false,
 	errorMessageAddArea: 'Произошла неизвестная ошибка',
+	areasList: [],
+	isLoadingGetAreas: false,
+	errorGetAreas: false,
+	errorMessageGetAreas: '',
+	categoryList: [],
+	isLoadingGetCategory: false,
+	errorGetCategory: false,
+	errorMessageGetCategory: '',
 };
 
 const areaSlice = createSlice({
@@ -50,6 +62,41 @@ const areaSlice = createSlice({
 				state.errorMessageAddArea =
 					action.error.message ||
 					'Произошла неизвестная ошибка. Попробуйте повторить позже';
+			})
+			.addCase(fetchGetAreas.fulfilled, (state, action) => {
+				state.areasList = action.payload;
+				state.isLoadingGetAreas = false;
+				state.errorGetAreas = false;
+			})
+			.addCase(fetchGetAreas.pending, (state) => {
+				state.areasList = [];
+				state.isLoadingGetAreas = true;
+				state.errorGetAreas = false;
+			})
+			.addCase(fetchGetAreas.rejected, (state, action) => {
+				state.areasList = [];
+				state.isLoadingGetAreas = false;
+				state.errorGetAreas = true;
+				state.errorMessageGetAreas =
+					action.error.message ||
+					'Произошла неизвестная ошибка. Попробуйте повторить позже';
+			})
+			.addCase(fetchGetCategory.fulfilled, (state, action) => {
+				state.categoryList = action.payload;
+				state.isLoadingGetCategory = false;
+				state.errorGetCategory = false;
+			})
+			.addCase(fetchGetCategory.pending, (state) => {
+				state.categoryList = [];
+				state.isLoadingGetCategory = true;
+				state.errorGetCategory = false;
+			})
+			.addCase(fetchGetCategory.rejected, (state, action) => {
+				state.categoryList = [];
+				state.isLoadingGetCategory = false;
+				state.errorGetCategory = true;
+				state.errorMessageGetCategory =
+					action.error.message || 'Произошла неизвестная ошибка';
 			});
 	},
 });

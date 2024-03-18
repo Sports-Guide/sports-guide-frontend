@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Multiselect from 'multiselect-react-dropdown';
-// import PropTypes from 'prop-types';
 import './AreaApp.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -19,7 +18,7 @@ import {
 	isAreaAddedStatus,
 	isAreaAddedError,
 } from '../../services/selectors/areaSelector';
-import { fetchAddArea } from '../../services/thunks/addAreaThunk';
+import { fetchAddArea } from '../../services/thunks/areasThunk';
 import {
 	setIsAreaAdded,
 	setIsAreaError,
@@ -33,12 +32,6 @@ export default function AreaApp() {
 	const categoryError = useSelector(categoryErrorMessage);
 	const isAreaAdded = useSelector(isAreaAddedStatus);
 	const isAreaAddError = useSelector(isAreaAddedError);
-
-	useEffect(() => {
-		if (categoryError) {
-			dispatch(openModal('getCategoryError'));
-		}
-	}, [categoryError, dispatch]);
 
 	const [options, setOptions] = useState(categories);
 
@@ -57,6 +50,12 @@ export default function AreaApp() {
 	const browserWindowSize = window.innerWidth;
 	const [windowSize, setWindowSize] = useState(true);
 	const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
+
+	useEffect(() => {
+		if (categoryError) {
+			dispatch(openModal('getCategoryError'));
+		}
+	}, [categoryError, dispatch]);
 
 	useEffect(() => {
 		setIsSubmitAvailable(categoryCount !== 0 && address !== '');
@@ -87,9 +86,9 @@ export default function AreaApp() {
 		setAddFoto(filteredFoto);
 	};
 
-	const handleCategories = (e) => {
-		setCategory(e.target.value);
-	};
+	// const handleCategories = (e) => {
+	// 	setCategory(e.target.value);
+	// };
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -155,6 +154,7 @@ export default function AreaApp() {
 						<Multiselect
 							showCheckbox
 							placeholder="Выберите из списка"
+							hidePlaceholder
 							options={options}
 							displayValue="name"
 							emptyRecordMsg="Закончились доступные категории"
@@ -168,7 +168,7 @@ export default function AreaApp() {
 								setCategory(event);
 								setCategoryCount((prevCount) => prevCount - 1);
 							}}
-							onChange={handleCategories}
+							// onChange={handleCategories}
 						/>
 					</div>
 					<div className="location">

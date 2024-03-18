@@ -22,8 +22,14 @@ import {
 } from '../../utils/modal';
 import { closeModal } from '../../services/slices/modalSlice';
 import { MetaTags } from '../MetaTags/MetaTags';
-import { fetchGetAreas } from '../../services/thunks/getAreasThunk';
-import { fetchGetCategory } from '../../services/thunks/getCategoryThunk';
+import {
+	fetchGetAreas,
+	fetchGetCategory,
+} from '../../services/thunks/areasThunk';
+import {
+	fetchGetFavoriteAreas,
+	fetchGetMyAreas,
+} from '../../services/thunks/favoriteAreasThunk';
 
 export function App() {
 	const dispatch = useDispatch();
@@ -59,6 +65,8 @@ export function App() {
 	useEffect(() => {
 		dispatch(fetchGetAreas());
 		dispatch(fetchGetCategory());
+		dispatch(fetchGetFavoriteAreas());
+		dispatch(fetchGetMyAreas());
 	}, [dispatch]);
 
 	return (
