@@ -4,6 +4,7 @@ $secondary-text-color: #515151;
 $error-color: #f92e2e;
 $button-secondary-text-color: #737a8e;
 $secondary-bg-color: #fcfcfc;
+$button-text-color: #fcfcfc;
 $form-border-color: #c9d1e5;
 $input-padding: 15px;
 $input-border-radius: 8px;
@@ -14,10 +15,9 @@ $input-border-radius: 8px;
 }
 
 // Styles
-.password-data {
+.favourites{
 	display: flex;
 	padding: 24px;
-	flex-direction: column;
 	background-color: $secondary-bg-color;
 	@include border-radius(12px);
 }

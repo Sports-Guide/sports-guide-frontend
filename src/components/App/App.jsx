@@ -15,6 +15,7 @@ import { Popup } from '../Popup/Popup';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
 import PersonalData from '../../pages/Profile/PersonalData/PersonalData';
 import PasswordData from '../../pages/Profile/PasswordData/PasswordData';
+import Favourites from '../../pages/Profile/Favourites/Favourites';
 import {
 	getContentByType,
 	getTitleByType,
@@ -86,6 +87,8 @@ export function App() {
 					>
 						<Route index element={<PersonalData />} />
 						<Route path="password" element={<PasswordData />} />
+						<Route path="favourites" element={<Favourites />} />
+						{/* здесь будет страница "Мои площадки" */}
 					</Route>
 					<Route path="sports-ground/:id" element={<SportsGround />} />
 					<Route

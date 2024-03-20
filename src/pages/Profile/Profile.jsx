@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import './Profile.scss';
 import PersonalDataIcon from '../../images/personal-info-icon.svg';
 import PassBtnIcon from '../../images/password-lock-icon.svg';
+import FavouritesIcon from '../../images/favourites-icon.svg';
+import MyAreasIcon from '../../images/my-areas-icon.svg';
 import { openModal } from '../../services/slices/modalSlice';
 
 export default function Profile() {
@@ -32,7 +34,23 @@ export default function Profile() {
 								src={PassBtnIcon}
 								alt="lock icon for a password field"
 							/>
-							Пароль
+							Безопасность и вход
+						</NavLink>
+						<NavLink to="favourites" className={linkClass}>
+							<img
+								className="profile__menu-link-icon"
+								src={FavouritesIcon}
+								alt="heart icon for favourite areas section"
+							/>
+							Избранное
+						</NavLink>
+						<NavLink to="my-areas" className={linkClass}>
+							<img
+								className="profile__menu-link-icon"
+								src={MyAreasIcon}
+								alt="football ball icon for personal areas section"
+							/>
+							Мои площадки
 						</NavLink>
 					</div>
 					<div className="profile__menu">
@@ -43,12 +61,12 @@ export default function Profile() {
 						>
 							Выйти
 						</button>
-						<button
+						{/* <button
 							className="profile__nav-button profile__button-account-delete"
 							onClick={() => dispatch(openModal('deleteProfile'))}
 						>
 							Удалить аккаунт
-						</button>
+						</button> */}
 					</div>
 				</nav>
 				<div className="profile__personal-info">

@@ -60,7 +60,7 @@ export default function PersonalData() {
 	);
 
 	return (
-		<>
+		<section className="personal-data">
 			<h2 className="form__title_place_profile">Личные данные</h2>
 			<div className="form_place_profile">
 				<div className="profile__personal-info-container">
@@ -111,7 +111,7 @@ export default function PersonalData() {
 					</>
 				)}
 			</div>
-		</>
+		</section>
 	);
 }
 

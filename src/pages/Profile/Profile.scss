@@ -3,7 +3,6 @@ $primary-bg-color: #f2f3f7;
 $secondary-bg-color: #fcfcfc;
 $text-color: #0e0e0e;
 $logout-button-text-color: #1478ff;
-$logout-button-bg-color: #e5f0ff;
 $button-final-color: #f36565;
 $button-secondary-text-color: #737a8e;
 $button-text-color: #fff;
@@ -92,6 +91,10 @@ $form-border-color: #aaa;
 	background-color: transparent;
 }
 
+.profile__menu:has(.profile__button-logout) {
+	padding: 8px 16px;
+}
+
 .profile__menu-link-icon {
 	width: 20px;
 	height: 20px;
@@ -103,54 +106,57 @@ $form-border-color: #aaa;
 .profile__personal-info {
 	display: flex;
 	height: fit-content;
+	gap: 12px;
 	width: 683px;
 	flex-direction: column;
-	background-color: $secondary-bg-color;
-	padding: 24px;
-	@include border-radius(12px);
+	padding: 0;
 }
 
 .form__title_place_profile {
 	font-family: 'Roboto Flex', sans-serif;
 	color: $text-color;
 	text-align: left;
-	font-size: 26px;
-	font-weight: 900;
-	line-height: 28px;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 22px;
 	letter-spacing: 0.01em;
 	margin: 0 0 16px;
+}
+
+.password-data > .form__title_place_profile {
+	margin: 0 0 12px;
 }
 
 .profile__nav-button {
 	width: 100%;
 	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
 	outline: none;
 	border: none;
 	text-decoration: none;
-	text-align: center;
+	text-align: left;
+	background-color: transparent;
+	color: $button-secondary-text-color;
 	cursor: pointer;
 }
 
 .profile__button-logout {
 	height: 44px;
-	padding: 0;
-	color: $logout-button-text-color;
-	background-color: $logout-button-bg-color;
+	background: url('../../images/logout-icon.svg') no-repeat 8.5% 50%;
+	background-size: 20px;
+    padding-left: 50px;
 	@include border-radius(8px);
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 20px;
 }
 
 .profile__button-account-delete {
-	background-color: transparent;
 	height: 36px;
-	color: $button-secondary-text-color;
-	padding: 4px 0 0 0;
-	font-size: 14px;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 20px;
+	display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 0;
+	background: url('../../images/profile-page-arrow-right-icon.svg') no-repeat 100% 50%;
 }
 
 .button-y {
@@ -287,9 +293,9 @@ $form-border-color: #aaa;
 		background-color: transparent;
 	}
 	.profile__button-logout {
-		background: url(../../images/logout-icon.png) no-repeat left;
-		padding: 0 14px;
-		background-size: 10px 13px;
+		background: url(../../images/logout-icon-mobile.svg) no-repeat left;
+		padding-left: 17px;
+		// background-size: 10px 13px;
 		height: 32px;
 		color: $button-secondary-text-color;
 		font-size: 14px;

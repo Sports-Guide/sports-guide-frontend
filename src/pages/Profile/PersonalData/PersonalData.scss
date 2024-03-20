@@ -15,6 +15,14 @@ $input-border-radius: 8px;
 }
 
 // Styles
+.personal-data {
+	display: flex;
+	flex-direction: column;
+	background-color: $button-text-color;
+	padding: 24px;
+	@include border-radius(12px);
+}
+
 .form_place_profile {
 	color: #767676;
 	width: 480px;
