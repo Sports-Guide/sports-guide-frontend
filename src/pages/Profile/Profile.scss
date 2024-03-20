@@ -146,17 +146,18 @@ $form-border-color: #aaa;
 	height: 44px;
 	background: url('../../images/logout-icon.svg') no-repeat 8.5% 50%;
 	background-size: 20px;
-    padding-left: 50px;
+	padding-left: 50px;
 	@include border-radius(8px);
 }
 
 .profile__button-account-delete {
 	height: 36px;
 	display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 0;
-	background: url('../../images/profile-page-arrow-right-icon.svg') no-repeat 100% 50%;
+	gap: 8px;
+	align-items: center;
+	padding: 0;
+	background: url('../../images/profile-page-arrow-right-icon.svg') no-repeat
+		100% 50%;
 }
 
 .button-y {
