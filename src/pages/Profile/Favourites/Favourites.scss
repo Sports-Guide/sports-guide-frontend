@@ -17,111 +17,224 @@ $input-border-radius: 8px;
 // Styles
 .favourites {
 	display: flex;
+	flex-direction: column;
 	padding: 24px;
 	background-color: $secondary-bg-color;
 	@include border-radius(12px);
 }
 
-.form__password-container {
-	margin: 8px 0 0;
+.favourites__title {
+    font-family: "Roboto Flex", sans-serif;
+    color: #0e0e0e;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+    margin: 0;
+}
+
+.favourites__navigation {
 	display: flex;
-	flex-direction: column;
-}
-
-.profile-password-label {
-	font-family: Roboto;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 20px;
-	text-align: left;
-	color: $secondary-text-color;
-	margin: 0;
-}
-
-.profile-password-label:first-of-type {
-	margin: 0;
-}
-
-.profile-password-input-container {
-	display: flex;
-	width: 425px;
-	flex-direction: column;
-	position: relative;
-}
-
-.profile-password-input {
 	width: 100%;
-	height: 40px;
-	border: 1px solid $form-border-color;
-	outline: none;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 18px;
-	text-align: left;
-	color: $primary-text-color;
-	margin-top: 4px;
-	padding: $input-padding;
-	@include border-radius($input-border-radius);
+	justify-content: space-between;
+	gap: 4px;
 }
 
-.profile-password-error {
-	font-family: 'Roboto', sans-serif;
-	display: block;
-	min-height: 26px;
-	font-weight: 400;
-	font-size: 13px;
-	line-height: 14px;
-	text-align: left;
-	color: $error-color;
-}
-
-.password-show-hide-btn-profile {
-	background: url(../../../images/show-hide-password-button-profile.svg)
-		no-repeat center;
-	width: 16px;
-	height: 16px;
-	display: flex;
-	position: absolute;
-	top: 13px;
-	right: 13px;
-	outline: none;
-	border: none;
-}
-
-.profile__pass-button-container {
-	display: flex;
-	margin-top: calc(42px - 26px);
-	gap: 8px;
-}
-
-.form__change-password-button {
-	font-family: 'Roboto', sans-serif, system-ui;
+.favourites__card-list {
 	width: 100%;
-	background: url('../../../images/profile-page-arrow-right-icon.svg') no-repeat
-		100% 50%;
-	height: 36px;
-	display: flex;
-	gap: 8px;
-	padding: 0;
-	align-items: center;
-	color: $button-secondary-text-color;
-	background-color: transparent;
-	border: none;
-	outline: none;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 20px;
-	@include border-radius($input-border-radius);
-	cursor: pointer;
-}
-
-.no-margin {
+	display: grid;
+	justify-items: center;
 	margin: 0;
+	list-style-type: none;
+	grid-template-columns: repeat(3, minmax(204px, max-content));
+    grid-template-rows: repeat(auto-fit, minmax(230px, max-content));
+	gap: 12px;
+	justify-content: center;
+	padding: 24px 0 0 0;
 }
 
-@media screen and (max-width: 800px) {
-	.form__change-password-button {
-		height: 40px;
-		padding: 10px 32px;
+.favourites__card-list {
+	.card {
+		width: 204px;
+		height: 230px;
+		box-shadow: 0px 4px 8px 0px #737A8E33;
+
+			&__image {
+				width: 100%;
+				height: 142px;
+			}
+			&__container {
+				width: 100%;
+				padding: 8px;
+			}
+			&__title {
+				font-family: Roboto Flex;
+				font-size: 13px;
+				font-weight: 900;
+				line-height: 16px;
+				letter-spacing: 0.01em;
+				text-align: left;
+			}
+			&__subtitle {
+				font-family: Roboto;
+				font-size: 10px;
+				font-weight: 400;
+				line-height: 12px;
+				text-align: left;
+				height: 24px;
+				display: -webkit-box;
+				-webkit-line-clamp: 2; /* ограничиваем кол-во строк до 2 */
+				-webkit-box-orient: vertical;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				margin: 0;
+			}
+			&__link {
+				position: relative;
+				box-shadow: 8px 8px 8px rgba(115, 122, 142, 0.2);
+
+			}
+			&__categories-container {
+				display: flex;
+				position: absolute;
+				bottom: 15px;
+				left: 0;
+				margin: 0 0 0 8px;
+			}
+			&__categories {
+				background-color: #E5F0FF;
+			}
 	}
+	.sports-ground__button {
+		margin: 0;
+		position: absolute;
+		right: 8px;
+		top: 8px;
+		z-index: 15;
+		background-color: rgba(252, 252, 252, 0.8);
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		-ms-border-radius: 50%;
+		-o-border-radius: 50%;
+}
+	.sports-ground__button-text.sports-ground__button-text_active {
+		display: none;
+	}
+}
+
+.favourites__list {
+	width: 100%;
+	display: grid;
+	margin: 0;
+	list-style-type: none;
+    grid-template-rows: repeat(auto-fit, minmax(72px, max-content));
+	padding: 0;
+}
+
+.favourites__list {
+	.card {
+		display: flex;
+		width: 100%;
+		height: 96px;
+		padding: 12px;
+			&__image {
+				width: 72px;
+				height: 72px;
+				@include border-radius(4px);
+			}
+			&__container {
+				width: 100%;
+				height: 72px;
+				padding: 0 0 0 8px;
+			}
+			&__title {
+				font-family: Roboto Flex;
+				font-size: 13px;
+				font-weight: 900;
+				line-height: 16px;
+				letter-spacing: 0.01em;
+				text-align: left;
+			}
+			&__subtitle {
+				font-family: Roboto;
+				font-size: 10px;
+				font-weight: 400;
+				line-height: 12px;
+				text-align: left;
+				height: 24px;
+				width: 234px;
+				display: -webkit-box;
+				-webkit-line-clamp: 2; /* ограничиваем кол-во строк до 2 */
+				-webkit-box-orient: vertical;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				margin: 0;
+			}
+			&__link {
+				position: relative;
+				display: flex;
+				width: 100%;
+			}
+			&__categories-container {
+				display: flex;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				margin: 0 0 0 72px;
+			}
+			&__categories {
+				background-color: #E5F0FF;
+			}
+	}
+	.sports-ground__button {
+		margin: 0;
+		position: absolute;
+		right: 8px;
+		top: 28px;
+		z-index: 15;
+		background-color: transparent;
+		width: 24px;
+		height: 24px;
+}
+	.sports-ground__button-text.sports-ground__button-text_active {
+		display: none;
+	}
+}
+
+.favourites__buttons {
+	display: flex;
+	width: calc(28px + 28px + 2px);
+	justify-content: space-between;
+	height: 28px;
+	gap: 2px;
+}
+
+.favourites__button {
+	outline: none;
+	border: none;
+	background-color: transparent;
+}
+
+.favourites__button_type_card {
+	background: url('../../../images/card-view-icon-profile-page.svg') no-repeat center;
+	width: 28px;
+}
+
+.favourites__button_type_card_active {
+	background: url('../../../images/card-view-icon-profile-page_active.svg') no-repeat center;
+	width: 28px;
+}
+
+.favourites__button_type_list {
+	background: url('../../../images/list-view-icon-profile-page.svg') no-repeat center;
+	width: 28px;
+}
+
+.favourites__button_type_list_active {
+	background: url('../../../images/list-view-icon-profile-page_active.svg') no-repeat center;
+	width: 28px;
 }
