@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import ButtonLike from '../Button/ButtonLike';
 
 function Card({ area }) {
+	// проверяем, что категорий > 2
+	const hasExtraCategories = area.categories.length > 2;
+
 	return (
 		<div className="card">
 			<ButtonLike area={area} />
@@ -19,18 +22,22 @@ function Card({ area }) {
 					style={{ backgroundImage: `url(${area.images[0].image})` }}
 				>
 					<div className="card__categories-container">
-						{area.categories.map((category) => (
-							<span className="card__categories">
+						{area.categories.slice(0, 2).map((category) => (
+							<span className="card__categories" key={category.id}>
 								<img
 									src={category.icon}
 									alt="знак категории"
 									className="card__categories-ball"
 								/>
-								<span key={category.id} className="card__categories-name">
-									{category.name}
-								</span>
+								<span className="card__categories-name">{category.name}</span>
 							</span>
 						))}
+						{/* отражаем кол-во категогий, если оно больше 2 */}
+						{hasExtraCategories && (
+							<span className="card__extra-categories">
+								+{area.categories.length - 2}
+							</span>
+						)}
 					</div>
 				</div>
 				<div className="card__container">

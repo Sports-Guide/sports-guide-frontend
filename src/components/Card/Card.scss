@@ -45,6 +45,22 @@
 	padding: 0 4px 0 4px;
 }
 
+.card__extra-categories {
+	display: flex;
+	height: 20px;
+	background-color: rgba(229, 240, 255, 0.5);
+	border-radius: 6px;
+	justify-content: center;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 12px;
+	text-align: left;
+	color: rgba(21, 62, 140);
+	width: min-content;
+	padding: 0 4px 0 4px;
+}
+
 .card__categories-ball {
 	width: 12px;
 	height: 12px;
