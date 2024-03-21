@@ -13,4 +13,3 @@ export const isAreaAddedStatus = (state) => state.area.isAreaAdded;
 export const isAreaAddedError = (state) => state.area.isAreaError;
 export const favoriteAreaList = (state) =>
 	state.favoriteAreas.favoriteAreasList;
-// export const areaIsLiked = (state) => state.favoriteAreas.isLiked;
