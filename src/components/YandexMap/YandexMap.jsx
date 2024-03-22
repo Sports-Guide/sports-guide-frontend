@@ -203,6 +203,7 @@ function YandexMap({
 									<p class = "yandex__subtitle">${area.address}</p>
 									<div class = "yandex__categories">
 									${area.categories
+										.slice(0, 2)
 										.map(
 											(categor) =>
 												`<div class = "yandex__category">
@@ -211,6 +212,13 @@ function YandexMap({
 											</div>`
 										)
 										.join('')}
+									${
+										area.categories.length > 2
+											? '<span class="card__extra-categories">' +
+												`+${area.categories.length - 2}` +
+												'</span>'
+											: ''
+									}
 									</div>
 									</div>
 									</div>
