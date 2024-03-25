@@ -50,3 +50,18 @@
 	outline: 1px solid var(--Accent, #1478ff);
 	text-transform: none;
 }
+
+.input-error {
+	outline: 1px solid #f92e2e;
+}
+
+@media screen and (max-width: 648px) {
+	.input__container {
+		width: 100%;
+	}
+
+	.input__error-container {
+		min-height: 20px;
+		margin: 0;
+	}
+}

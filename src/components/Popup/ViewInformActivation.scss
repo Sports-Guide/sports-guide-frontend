@@ -8,8 +8,9 @@
 	letter-spacing: 0.01em;
 	text-align: left;
 	display: flex;
-	justify-content: baseline;
+	align-self: baseline;
 	padding: 0;
+	width: 384px;
 }
 
 .message__text-error {
@@ -32,4 +33,12 @@
 	text-align: center;
 	align-self: baseline;
 	cursor: pointer;
+}
+
+@media screen and (max-width: 898px) {
+	.message__text {
+		width: 303px;
+		font-size: 27px;
+		line-height: 32px;
+	}
 }

@@ -1,4 +1,4 @@
-import { Profile } from '../components/Profile/Profile';
+import Profile from '../pages/Profile/Profile';
 
 export default {
 	title: 'Basic/Profile',

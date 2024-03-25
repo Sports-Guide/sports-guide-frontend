@@ -1,4 +1,4 @@
-import { SportsGround } from '../components/SportsGround/SportsGround';
+import SportsGround from '../pages/SportsGround/SportsGround';
 
 export default {
 	title: 'Basic/SportsGround',

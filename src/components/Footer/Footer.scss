@@ -27,7 +27,11 @@ $text-centering: center;
 	/* width: 100%;
 	align-items: $text-centering; */
 	gap: 64px;
-	margin-top: auto;
+	margin-top: 10px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	justify-content: center;
 }
 
 .footer__container {
@@ -62,7 +66,7 @@ $text-centering: center;
 	}
 }
 
-@media screen and (max-width: 635px) {
+@media screen and (max-width: 648px) {
 	.footer__copyright {
 		@include fontStyle635;
 	}

@@ -5,6 +5,7 @@ import InputContainer from './InputContainer';
 
 export default function InputNickname() {
 	const { values, setFieldValue } = useFormikContext();
+	// const { values, setFieldValue, errors } = useFormikContext();
 
 	// не даём пользователю нажать пробел в начале и конце строки
 	useEffect(() => {
@@ -31,6 +32,7 @@ export default function InputNickname() {
 				type="text"
 				name="Nickname"
 				className="input"
+				// className={`input ${errors.Nickname && "input-error"}`}
 				validate={validateNickname}
 				maxLength={20}
 			/>

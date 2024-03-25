@@ -1,4 +1,4 @@
-import { PersonalData } from '../components/Profile/PersonalData';
+import PersonalData from '../pages/Profile/PersonalData/PersonalData';
 
 export default {
 	title: 'Basic/PersonalData',

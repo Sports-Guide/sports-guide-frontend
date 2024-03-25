@@ -1,9 +1,25 @@
 .popup__register-form-link-to-signin {
 	color: #737a8e;
+	height: 44px;
 	font-family: Roboto;
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 700;
 	line-height: 20px;
+	margin: 16px 0 0;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.popup__register-form-link-to-signin:hover {
 	text-decoration-line: underline;
+}
+
+@media screen and (max-width: 648px) {
+	.popup__register-form-link-to-signin {
+		height: 40px;
+		margin: 4px 0 0;
+		display: flex;
+		align-items: center;
+	}
 }

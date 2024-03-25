@@ -21,14 +21,20 @@ export default function ViewSuccessCreateArea({ handleClose }) {
 		dispatch(setIsRegister(false));
 	}, [dispatch, handleClose]);
 
+	useEffect(() => {
+		if (handleClose) {
+			navigate('/');
+		}
+	}, [handleClose, navigate]);
+
 	return (
 		<>
-			<p className="popup__text">{text}</p>
+			<p className="popup__text popup__text_type_areas">{text}</p>
 			<Button
 				className="register-form__button-register popup__button-y"
 				type="button"
 				onClick={navigateHome}
-				label="На главную"
+				label="Жду, не дождусь"
 			/>
 		</>
 	);

@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Card.scss';
 import PropTypes from 'prop-types';
+import ButtonLike from '../Button/ButtonLike';
 
 function Card({ area }) {
-	console.log(area);
-	const [isLiked, setIsLiked] = useState(false);
+	// проверяем, что категорий > 2
+	const hasExtraCategories = area.categories.length > 2;
+
 	return (
 		<div className="card">
-			<button
-				className={isLiked ? 'card__like card__like_active' : 'card__like'}
-				aria-label="лайк"
-				onClick={() => setIsLiked(!isLiked)}
-			/>
+			<ButtonLike area={area} />
 			<a
 				className="card__link"
 				href={`/sports-ground/${area.id}`}
@@ -24,13 +22,22 @@ function Card({ area }) {
 					style={{ backgroundImage: `url(${area.images[0].image})` }}
 				>
 					<div className="card__categories-container">
-						{area.categories.map((category) => (
-							<span className="card__categories">
-								<span key={category.id} className="card__categories-name">
-									{category.name}
-								</span>
+						{area.categories.slice(0, 2).map((category) => (
+							<span className="card__categories" key={category.id}>
+								<img
+									src={category.icon}
+									alt="знак категории"
+									className="card__categories-ball"
+								/>
+								<span className="card__categories-name">{category.name}</span>
 							</span>
 						))}
+						{/* отражаем кол-во категогий, если оно больше 2 */}
+						{hasExtraCategories && (
+							<span className="card__extra-categories">
+								+{area.categories.length - 2}
+							</span>
+						)}
 					</div>
 				</div>
 				<div className="card__container">
@@ -43,7 +50,7 @@ function Card({ area }) {
 }
 
 Card.propTypes = {
-	area: PropTypes.arrayOf.isRequired,
+	area: PropTypes.objectOf.isRequired,
 };
 
 export default Card;

@@ -1,4 +1,4 @@
-import { PasswordData } from '../components/Profile/PasswordData';
+import PasswordData from '../pages/Profile/PasswordData/PasswordData';
 
 export default {
 	title: 'Basic/PasswordData',

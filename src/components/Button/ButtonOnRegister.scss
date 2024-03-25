@@ -1,10 +1,25 @@
 .popup__login-form-link-to-signup {
 	color: var(--Primary-Gray-blue-dark, #737a8e);
 	font-family: Roboto;
+	height: 44px;
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 700;
 	line-height: 20px;
-	text-decoration-line: underline;
 	cursor: pointer;
+	text-decoration: none;
+	margin: 16px 0 0;
+}
+
+.popup__login-form-link-to-signup:hover {
+	text-decoration-line: underline;
+}
+
+@media screen and (max-width: 648px) {
+	.popup__login-form-link-to-signup {
+		height: 40px;
+		margin: 4px 0 0;
+		display: flex;
+		align-items: center;
+	}
 }

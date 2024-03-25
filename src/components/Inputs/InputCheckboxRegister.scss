@@ -39,13 +39,16 @@
 
 .checkbox__error-container {
 	min-height: 19px;
-	display: block;
+	// width: 100%;
+	// display: block;
+	display: flex;
+	align-self: start;
 }
 
 .input-checkbox-register__error {
 	display: flex;
+	align-items: self-start;
 	padding-top: 5px;
-	width: 425px;
 	margin: 0;
 	font-family: Roboto;
 	font-size: 13px;
@@ -54,4 +57,10 @@
 	text-align: left;
 	color: #f92e2e;
 	text-align: start;
+}
+
+@media screen and (max-width: 648px) {
+	.input-checkbox-register__error {
+		font-size: 11px;
+	}
 }
