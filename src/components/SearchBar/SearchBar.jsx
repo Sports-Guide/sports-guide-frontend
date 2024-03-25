@@ -1,14 +1,14 @@
-// /* eslint-disable */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../YandexMap/YandexMap.scss';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { sportsOptions, areaOptions } from '../../constants/OptionsConstants';
+import { useSelector } from 'react-redux';
+import { areaOptions } from '../../constants/OptionsConstants';
 import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
 import MobileMenu from '../MobileMenu/MobileMenu';
-import { setAddress } from '../../services/slices/areaSlice';
-import { addressSelector } from '../../services/selectors/areaSelector';
+
+import { categoryList } from '../../services/selectors/areaSelector';
+import InputSuggest from '../Inputs/InputSuggest';
 
 function SearchBar({
 	handleCategoryChange,
@@ -18,38 +18,14 @@ function SearchBar({
 	setIsPolygonShow,
 }) {
 	const location = useLocation();
-	const dispatch = useDispatch();
 	const areaPath = location.pathname === '/app-area';
-	const address = useSelector(addressSelector);
+	const categories = useSelector(categoryList);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-	const handleChange = (e) => {
-		dispatch(setAddress(e.target.value));
-	};
-
-	// Обнулиние значения инпута при каждом изменении страницы
-	useEffect(() => {
-		const suggestInput = document.getElementById('suggest');
-		if (suggestInput) {
-			suggestInput.value = '';
-		}
-	}, [location]);
 
 	return (
 		<div className="map__search">
 			{areaPath ? (
-				<input
-					type="text"
-					className={
-						areaPath
-							? 'map__search-bar map__search-bar_type_search-area'
-							: 'map__search-bar map__search-bar_type_search'
-					}
-					id="suggest"
-					placeholder="Двигайте ползунок на карте, чтобы указать адрес"
-					onChange={handleChange}
-					value={address}
-				/>
+				<InputSuggest />
 			) : (
 				<div className="map__search-container">
 					<WelcomeBanner />
@@ -71,10 +47,9 @@ function SearchBar({
 							className="map__search-bar map__search-bar_kinds-of-sports"
 							onChange={handleCategoryChange}
 						>
-							{sportsOptions.map((option) => (
-								<option key={option.id} selected={option.id === 1}>
-									{option.value}
-								</option>
+							<option selected>Вид спорта</option>
+							{categories.map((option) => (
+								<option key={option.id}>{option.name}</option>
 							))}
 						</select>
 						<select
@@ -88,14 +63,7 @@ function SearchBar({
 								</option>
 							))}
 						</select>
-						<input
-							type="text"
-							className="map__search-bar map__search-bar_type_search "
-							id="suggest"
-							placeholder="Введите адрес"
-							onChange={handleChange}
-							value={address}
-						/>
+						<InputSuggest />
 						<button
 							className="map__filter-button"
 							aria-label="меню фильтров"

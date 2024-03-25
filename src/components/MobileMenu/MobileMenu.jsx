@@ -1,7 +1,9 @@
 import './MobileMenu.scss';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { sportsOptions, areaOptions } from '../../constants/OptionsConstants';
+import { useSelector } from 'react-redux';
+import { areaOptions } from '../../constants/OptionsConstants';
+import { categoryList } from '../../services/selectors/areaSelector';
 
 function MobileMenu({
 	isMobileMenuOpen,
@@ -12,6 +14,7 @@ function MobileMenu({
 }) {
 	const [selectedCategory, setSelectedCategory] = useState('');
 	const [selectedMobileArea, setSelectedMobileArea] = useState('');
+	const categories = useSelector(categoryList);
 
 	const handleClear = () => {
 		setSelectedCategory('Вид спорта');
@@ -54,10 +57,9 @@ function MobileMenu({
 					value={selectedCategory}
 					onChange={(e) => setSelectedCategory(e.target.value)}
 				>
-					{sportsOptions.map((option) => (
-						<option key={option.id} selected={option.id === 1}>
-							{option.value}
-						</option>
+					<option selected>Вид спорта</option>
+					{categories.map((option) => (
+						<option key={option.id}>{option.name}</option>
 					))}
 				</select>
 				<select

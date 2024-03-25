@@ -39,7 +39,6 @@ function YandexMap({
 	const areasToDisplay = areaPath ? areas : areasToShow;
 
 	const coordinates = useSelector(coordinatesSelector);
-	// const [coordsForArea, setCoordsForArea] = useState([]);
 	const [mapState, setMapState] = useState(defaultState);
 
 	// рендер границ округов
@@ -192,8 +191,7 @@ function YandexMap({
 							// }"
 							properties={{
 								balloonContentBody: `
-							
-								   <a class = "yandex-link"  href="http://localhost:3000/sports-ground/${
+								   <a class = "yandex-link"  href="https://sports-map.ru/sports-ground/${
 											area.id
 										}" target="_blank">
 									<div class = "yandex">

@@ -1,12 +1,3 @@
-const sportsOptions = [
-	{ id: 1, value: 'Вид спорта' },
-	{ id: 2, value: 'Футбол' },
-	{ id: 3, value: 'Баскетбол' },
-	{ id: 4, value: 'Волейбол' },
-	{ id: 5, value: 'Теннис' },
-	{ id: 6, value: 'Воркаут' },
-];
-
 const areaOptions = [
 	{ id: 1, value: 'Все округа' },
 	{ id: 2, value: 'Центральный округ' },
@@ -21,4 +12,4 @@ const areaOptions = [
 	{ id: 11, value: 'Зеленоградский округ' },
 ];
 
-export { sportsOptions, areaOptions };
+export { areaOptions };
