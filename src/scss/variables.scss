@@ -1,0 +1,53 @@
+// Цвета
+$main-white: #fcfcfc;
+$main-black: #212121;
+$main-black-light: #515151;
+$main-gray-blue-dark: #737a8e;
+$main-gray-blue-light: #c9d1e5;
+$main-gray-light: #e8eaf1;
+$main-background: #f2f3f7;
+$main-shadow: rgba(81, 81, 81, 0.8);
+$accent-dark-blue: #153e8c;
+$accent-blue: #1478ff; //$user-blue: #1478FF;
+$accent-light-blue: #e5f0ff;
+$accent-blue-button-focused: #1867d1;
+$accent-light-blue-button-focused: #cee3ff;
+$accent-pin_hover: rgba(20, 120, 255, 0.3);
+$system-error: #e05f5f;
+$user-purple: #8914ff;
+$user-light-green: #00d5af;
+$user-green: #00c738;
+$user-orange: #ff9314;
+$user-pink: #ff1484;
+$user-red: #ff1414;
+
+// Шрифты
+$font-family-roboto-flex: 'Roboto Flex';
+$font-family-roboto: 'Roboto';
+$font-variation-settings-title: (
+	'wdth' 128,
+	'GRAD' 42,
+	'slnt' 0,
+	'XTRA' 486,
+	'XOPQ' 96,
+	'YOPQ' 79,
+	'YTLC' 544,
+	'YTUC' 712,
+	'YTAS' 750,
+	'YTDE' -203,
+	'YTFI' 738
+);
+
+$font-variation-settings-logo: (
+	'wdth' 111,
+	'GRAD' 150,
+	'slnt' -4,
+	'XTRA' 468,
+	'XOPQ' 96,
+	'YOPQ' 79,
+	'YTLC' 514,
+	'YTUC' 657,
+	'YTAS' 750,
+	'YTDE' -203,
+	'YTFI' 738
+);
