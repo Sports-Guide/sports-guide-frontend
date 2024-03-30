@@ -1,0 +1,68 @@
+@import '../../../scss/variables.scss';
+@import '../../../scss/mixins.scss';
+
+.button {
+	@include flex-center;
+	border: none;
+	border-radius: 8px;
+	column-gap: 8px;
+
+	&_big {
+		@include button-text;
+		padding: 12px 16px;
+		height: 44px;
+	}
+
+	&_small {
+		@include button-text-small-size;
+		padding: 8px 16px;
+		height: 36px;
+	}
+
+	&_primary {
+		background: $accent-blue;
+		color: $main-white;
+
+		&:hover,
+		&:focus {
+			background-color: $accent-blue-button-focused;
+		}
+	}
+	&_secondary {
+		background: $accent-light-blue;
+		color: $accent-blue;
+
+		&:hover,
+		&:focus {
+			background-color: $accent-light-blue-button-focused;
+		}
+	}
+
+	&_flat {
+		color: $main-gray-blue-dark;
+		background-color: inherit;
+
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+		}
+	}
+}
+
+// @media screen and (max-width: 495px) {
+// 	.button-clouse-foto-file {
+// 		left: 130px;
+// 	}
+// }
+
+// @media screen and (max-width: 435px) {
+// 	.button-clouse-foto-file {
+// 		left: 110px;
+// 	}
+// }
+
+// @media screen and (max-width: 375px) {
+// 	.button-clouse-foto-file {
+// 		left: 100px;
+// 	}
+// }
