@@ -21,6 +21,8 @@ export const initialState = {
 	isLoadingGetCategory: false,
 	errorGetCategory: false,
 	errorMessageGetCategory: '',
+	// при добавлении площадки, она сперва проверяется модератором и только после - добавляется в базу
+	isVerified: false,
 };
 
 const areaSlice = createSlice({
