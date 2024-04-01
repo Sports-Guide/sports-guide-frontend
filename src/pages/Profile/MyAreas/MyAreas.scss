@@ -15,7 +15,7 @@ $input-border-radius: 8px;
 }
 
 // Styles
-.favourites {
+.my-areas {
 	display: flex;
 	flex-direction: column;
 	padding: 24px;
@@ -23,7 +23,7 @@ $input-border-radius: 8px;
 	@include border-radius(12px);
 }
 
-.favourites__title {
+.my-areas__title {
 	font-family: 'Roboto Flex', sans-serif;
 	color: #0e0e0e;
 	text-align: left;
@@ -34,14 +34,14 @@ $input-border-radius: 8px;
 	margin: 0;
 }
 
-.favourites__navigation {
+.my-areas__navigation {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
 	gap: 4px;
 }
 
-.favourites__card-list {
+.my-areas__card-list {
 	width: 100%;
 	display: grid;
 	justify-items: center;
@@ -54,7 +54,7 @@ $input-border-radius: 8px;
 	padding: 24px 0 0 0;
 }
 
-.favourites__card-list {
+.my-areas__card-list {
 	.card {
 		width: 204px;
 		height: 230px;
@@ -131,7 +131,7 @@ $input-border-radius: 8px;
 	}
 }
 
-.favourites__list {
+.my-areas__list {
 	width: 100%;
 	display: grid;
 	margin: 0;
@@ -140,7 +140,7 @@ $input-border-radius: 8px;
 	padding: 0;
 }
 
-.favourites__list {
+.my-areas__list {
 	.card {
 		display: flex;
 		width: 100%;
@@ -214,9 +214,12 @@ $input-border-radius: 8px;
 	.sports-ground__button-like_active {
 		background-image: url('../../../images/button-like-active-profile.svg');
 	}
+	.card__button-settings {
+		top: 15px;
+	}
 }
 
-.favourites__buttons {
+.my-areas__buttons {
 	display: flex;
 	width: calc(28px + 28px + 2px);
 	justify-content: space-between;
@@ -224,31 +227,31 @@ $input-border-radius: 8px;
 	gap: 2px;
 }
 
-.favourites__button {
+.my-areas__button {
 	outline: none;
 	border: none;
 	background-color: transparent;
 }
 
-.favourites__button_type_card {
+.my-areas__button_type_card {
 	background: url('../../../images/card-view-icon-profile-page.svg') no-repeat
 		center;
 	width: 28px;
 }
 
-.favourites__button_type_card_active {
+.my-areas__button_type_card_active {
 	background: url('../../../images/card-view-icon-profile-page_active.svg')
 		no-repeat center;
 	width: 28px;
 }
 
-.favourites__button_type_list {
+.my-areas__button_type_list {
 	background: url('../../../images/list-view-icon-profile-page.svg') no-repeat
 		center;
 	width: 28px;
 }
 
-.favourites__button_type_list_active {
+.my-areas__button_type_list_active {
 	background: url('../../../images/list-view-icon-profile-page_active.svg')
 		no-repeat center;
 	width: 28px;

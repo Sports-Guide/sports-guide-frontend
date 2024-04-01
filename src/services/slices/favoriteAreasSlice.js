@@ -3,6 +3,7 @@ import {
 	fetchGetFavoriteAreas,
 	fetchAddAreaToFavorite,
 	fetchDeleteAreaFromFavorite,
+	fetchGetMyAreas,
 } from '../thunks/favoriteAreasThunk';
 
 export const initialState = {
@@ -14,6 +15,10 @@ export const initialState = {
 	errorAddToFavoriteAreas: false,
 	isLoadingDeleteFromFavoriteAreas: false,
 	errorDeleteFromFavoriteAreas: false,
+	myAreasList: [],
+	isLoadingGetMyAreas: false,
+	errorGetMyAreas: false,
+	errorMessageMyAreas: '',
 };
 
 const favoriteAreasSlice = createSlice({
@@ -71,6 +76,23 @@ const favoriteAreasSlice = createSlice({
 				state.errorDeleteFromFavoriteAreas = true;
 				state.errorMessageFavoriteAreas =
 					action.error.message || 'Произошла неизвестная ошибка';
+			})
+			.addCase(fetchGetMyAreas.fulfilled, (state, action) => {
+				state.myAreasList = action.payload;
+				state.isLoadingGetMyAreas = false;
+				state.errorGetMyAreas = false;
+			})
+			.addCase(fetchGetMyAreas.pending, (state) => {
+				state.myAreasList = [];
+				state.isLoadingGetMyAreas = true;
+				state.errorGetMyAreas = false;
+			})
+			.addCase(fetchGetMyAreas.rejected, (state, action) => {
+				state.myAreasList = [];
+				state.isLoadingGetMyAreas = false;
+				state.errorGetMyAreas = true;
+				state.errorMessageMyAreas =
+					action.error.message || 'Произошла ошибка загрузки моих площадок';
 			});
 	},
 });
