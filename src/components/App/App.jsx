@@ -16,6 +16,7 @@ import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
 import PersonalData from '../../pages/Profile/PersonalData/PersonalData';
 import PasswordData from '../../pages/Profile/PasswordData/PasswordData';
 import Favourites from '../../pages/Profile/Favourites/Favourites';
+import MyAreas from '../../pages/Profile/MyAreas/MyAreas';
 import {
 	getContentByType,
 	getTitleByType,
@@ -88,7 +89,7 @@ export function App() {
 						<Route index element={<PersonalData />} />
 						<Route path="password" element={<PasswordData />} />
 						<Route path="favourites" element={<Favourites />} />
-						{/* здесь будет страница "Мои площадки" */}
+						<Route path="my-areas" element={<MyAreas />} />
 					</Route>
 					<Route path="sports-ground/:id" element={<SportsGround />} />
 					<Route

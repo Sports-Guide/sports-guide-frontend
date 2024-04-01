@@ -89,6 +89,25 @@
 	background-image: url(../../images/like.svg);
 }
 
+.card__buttons-container {
+	display: flex;
+}
+
+.card__button-settings {
+	border: none;
+	width: 20px;
+	height: 20px;
+	background-image: url('../../images/card-settings-button.svg');
+	background-color: rgba(252, 252, 252, 0.5);
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+	position: absolute;
+	right: 35px;
+    top: 8px;
+	z-index: 1;
+}
+
 .card__container {
 	width: 325px;
 	height: 92px;

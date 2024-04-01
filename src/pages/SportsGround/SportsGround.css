@@ -108,7 +108,8 @@
 	margin: 0;
 	width: 16px;
 	height: 16px;
-	background-image: url(../../images/LikeSportground.svg);
+	background-image: url('../../images/noLike.svg');
+	/* background-image: url(../../images/LikeSportground.svg); */
 	background-repeat: no-repeat;
 	background-position: center;
 }
