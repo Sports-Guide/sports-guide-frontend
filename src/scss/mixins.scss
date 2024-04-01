@@ -42,7 +42,7 @@
 	font-family: $font-family-roboto-flex;
 }
 
-@mixin text-700 {
+@mixin text-roboto-700 {
 	@include text;
 	font-weight: 700;
 	font-family: $font-family-roboto;
@@ -131,7 +131,7 @@
 	line-height: 20px;
 }
 
-@mixin small-size-button-text {
+@mixin button-text-small-size {
 	// Используется в тексте кнопок
 	@include text-roboto-700;
 	font-size: 14px;
@@ -145,7 +145,6 @@
 	line-height: 20px;
 }
 
-
 @mixin main-text {
 	// Используется во вспомогательных сообщениях в модальных окнах / Меню раздела ЛК
 	@include text-roboto-400;
@@ -153,32 +152,30 @@
 	line-height: 20px;
 }
 
-
 @mixin input-text {
-	// Используется в качестве текста внутри инпутов / как текст в выпадающих списках 
+	// Используется в качестве текста внутри инпутов / как текст в выпадающих списках
 	@include text-roboto-400;
 	font-size: 15px;
 	line-height: 20px;
 }
-
 
 @mixin mini-card-text {
 	// Используется в мини-карточках площадки на карте
 	@include text-roboto-flex-900;
 	font-size: 14px;
 	line-height: 16px;
-    letter-spacing: 0.14px;
+	letter-spacing: 0.14px;
 }
 
 @mixin big-tag-text {
-	// Используется в больших тэгах вида спорта 
+	// Используется в больших тэгах вида спорта
 	@include text-roboto-500;
 	font-size: 14px;
 	line-height: 16px;
 }
 
 @mixin small-tag-text {
-	// Используется в больших тэгах вида спорта 
+	// Используется в больших тэгах вида спорта
 	@include text-roboto-400;
 	font-size: 10px;
 	line-height: 12px;
@@ -192,9 +189,8 @@
 }
 
 @mixin input-help-text {
-	// Используется в инпутах в Help Text 
+	// Используется в инпутах в Help Text
 	@include text-roboto-400;
 	font-size: 13px;
 	line-height: 14px;
 }
-
