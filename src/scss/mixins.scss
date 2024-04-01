@@ -42,7 +42,7 @@
 	font-family: $font-family-roboto-flex;
 }
 
-@mixin text-700 {
+@mixin text-roboto-700 {
 	@include text;
 	font-weight: 700;
 	font-family: $font-family-roboto;
@@ -131,7 +131,7 @@
 	line-height: 20px;
 }
 
-@mixin small-size-button-text {
+@mixin button-text-small-size {
 	// Используется в тексте кнопок
 	@include text-roboto-700;
 	font-size: 14px;
