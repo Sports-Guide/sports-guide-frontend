@@ -1,7 +1,7 @@
 @import '../../../scss/variables.scss';
 @import '../../../scss/mixins.scss';
 
-.button {
+.default-button {
 	@include flex-center;
 	border: none;
 	border-radius: 8px;
@@ -22,6 +22,9 @@
 	&_primary {
 		background: $accent-blue;
 		color: $main-white;
+		svg path {
+			fill: $main-white; // задает цвет svg
+		}
 
 		&:hover,
 		&:focus {
@@ -32,6 +35,10 @@
 		background: $accent-light-blue;
 		color: $accent-blue;
 
+		svg path {
+			fill: $accent-blue; // задает цвет svg
+		}
+
 		&:hover,
 		&:focus {
 			background-color: $accent-light-blue-button-focused;
@@ -41,11 +48,42 @@
 	&_flat {
 		color: $main-gray-blue-dark;
 		background-color: inherit;
+		svg path {
+			fill: $main-gray-blue-dark; // задает цвет svg
+		}
 
 		&:hover,
 		&:focus {
 			text-decoration: underline;
 		}
+	}
+}
+
+.btn-add-photo {
+	@include flex-center;
+	border: none;
+	border-radius: 8px;
+	column-gap: 16px;
+	@include chat-username-text;
+	padding: 12px 16px;
+	height: 36px;
+	background: rgba(252, 252, 252, 0.8);
+	color: $accent-blue-button-focused;
+	svg path {
+		fill: $accent-blue-button-focused; // задает цвет svg
+	}
+}
+
+.btn-add-photo-small {
+	@include flex-center;
+	background: rgba(252, 252, 252, 0.8);
+	padding: 6px;
+	height: 36px;
+	width: 36px;
+	border: none;
+	border-radius: 50%;
+	svg path {
+		fill: $accent-blue-button-focused; // задает цвет svg
 	}
 }
 
