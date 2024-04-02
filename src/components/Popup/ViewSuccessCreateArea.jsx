@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './ViewSuccessSentActivation.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Button } from '../Button/Button';
+import { ButtonOld } from '../Button/ButtonOld';
 import { setIsRegister } from '../../services/slices/registerUserSliсe';
 
 export default function ViewSuccessCreateArea({ handleClose }) {
@@ -30,7 +30,7 @@ export default function ViewSuccessCreateArea({ handleClose }) {
 	return (
 		<>
 			<p className="popup__text popup__text_type_areas">{text}</p>
-			<Button
+			<ButtonOld
 				className="register-form__button-register popup__button-y"
 				type="button"
 				onClick={navigateHome}

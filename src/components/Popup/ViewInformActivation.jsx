@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './ViewInformActivation.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../Button/Button';
+import { ButtonOld } from '../Button/ButtonOld';
 import { openModal } from '../../services/slices/modalSlice';
 
 export default function ViewInformActivation({ handleClose }) {
@@ -36,7 +36,7 @@ export default function ViewInformActivation({ handleClose }) {
 			{isUserActivation && (
 				<>
 					<p className="message__text">Регистрация прошла успешно</p>
-					<Button
+					<ButtonOld
 						className="view-form__button-signin"
 						type="button"
 						label={isLoadingLogin ? 'Вход...' : 'Войти'}
