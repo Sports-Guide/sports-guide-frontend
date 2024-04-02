@@ -1,5 +1,5 @@
-import PhotoImg from '../../svg/PhotoImg';
-import SearchImg from '../../svg/SearchImg';
+import PhotoIcon from '../svg/PhotoIcon';
+import SearchIcon from '../svg/SearchIcon';
 import { Button } from './Button';
 
 export default {
@@ -38,7 +38,7 @@ Default.args = {
 	btnStyle: 'primary',
 	size: 'big',
 	disabled: false,
-	startIcon: <SearchImg />,
+	startIcon: <SearchIcon />,
 };
 
 export const Secondary = Template.bind({});
@@ -48,7 +48,7 @@ Secondary.args = {
 	btnStyle: 'secondary',
 	size: 'small',
 	disabled: false,
-	endIcon: <SearchImg />,
+	endIcon: <SearchIcon />,
 };
 
 export const Flat = Template.bind({});
@@ -58,7 +58,7 @@ Flat.args = {
 	btnStyle: 'flat',
 	size: 'small',
 	disabled: false,
-	startIcon: <SearchImg />,
+	startIcon: <SearchIcon />,
 };
 
 export const СustomAddPhoto = Template.bind({});
@@ -66,12 +66,12 @@ export const СustomAddPhoto = Template.bind({});
 	label: 'Добавить фото',
 	disabled: false,
 	customStyle: 'btn-add-photo',
-	startIcon: <PhotoImg />,
+	startIcon: <PhotoIcon />,
 };
 
 export const СustomAddPhotoSmall = Template.bind({});
 СustomAddPhotoSmall.args = {
 	disabled: false,
 	customStyle: 'btn-add-photo-small',
-	startIcon: <PhotoImg />,
+	startIcon: <PhotoIcon />,
 };

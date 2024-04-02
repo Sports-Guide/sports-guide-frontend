@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAuthFalse } from '../../services/slices/userSlice';
-import { Button } from '../Button/Button';
+import { ButtonOld } from '../Button/ButtonOld';
 import { closeModal } from '../../services/slices/modalSlice';
 import './FormLogOut.scss';
 
@@ -27,13 +27,13 @@ export default function FormLogOut({ handleClose }) {
 				{() => (
 					<Form noValidate className="logout-form-container">
 						<div className="popup__button-container">
-							<Button
+							<ButtonOld
 								className="popup__button popup__button-y"
 								type="button"
 								label="Выйти"
 								onClick={handleLogOutSubmit}
 							/>
-							<Button
+							<ButtonOld
 								className="popup__button popup__button-n"
 								type="button"
 								label="Отмена"

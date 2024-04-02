@@ -1,4 +1,4 @@
-const SearchImg = () => (
+const SearchIcon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="16"
@@ -13,4 +13,4 @@ const SearchImg = () => (
 	</svg>
 );
 
-export default SearchImg;
+export default SearchIcon;

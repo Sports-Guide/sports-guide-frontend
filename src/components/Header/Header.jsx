@@ -1,25 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
-import { ButtonLoginSite } from '../Button/ButtonLoginSite';
-import { ButtonMap } from '../Button/ButtonMap';
 import logo from '../../images/logo.svg';
 
 import { getIsUserAuth } from '../../services/selectors/userSelector';
 import './Header.scss';
 import { openModal } from '../../services/slices/modalSlice';
+import LocationIcon from '../svg/LocationIcon';
+import PlusIcon from '../svg/PlusIcon';
 
 export function Header() {
 	const isUserAuth = useSelector(getIsUserAuth);
-
-	const [burger, setBurger] = useState(false);
-
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-	const handleBurgerMenu = () => {
-		setBurger(!burger);
-	};
 
 	const navigateHome = () => {
 		navigate('app-area');
@@ -28,8 +22,6 @@ export function Header() {
 	const navigateToPersonalArea = () => {
 		navigate('profile');
 	};
-
-	const dispatch = useDispatch();
 
 	const handleOpenModal = (type) => {
 		dispatch(openModal(type));
@@ -42,57 +34,41 @@ export function Header() {
 					<img className="logo" src={logo} alt="" />
 					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
 				</Link>
-				<Button
-					className={
-						burger ? 'button__menu-burger-close' : 'button__menu-burger'
-					}
-					onClick={handleBurgerMenu}
-				/>
-
 				<div className="header__buttons">
-					<ButtonMap label="Москва" />
 					<Button
-						className="button-app"
-						onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
+						label="Москва"
+						type="button"
+						btnStyle="flat"
+						size="small"
+						disabled={false}
+						startIcon={<LocationIcon />}
+					/>
+					<Button
 						label="Добавить площадку"
+						type="button"
+						btnStyle="primary"
+						size="small"
+						onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
+						startIcon={<PlusIcon />}
 					/>
 					{isUserAuth ? (
-						<ButtonLoginSite
-							onClick={navigateToPersonalArea}
+						<Button
 							label="Личный&nbsp;кабинет"
+							type="button"
+							btnStyle="secondary"
+							size="small"
+							onClick={navigateToPersonalArea}
 						/>
 					) : (
-						<ButtonLoginSite
-							onClick={() => dispatch(openModal('login'))}
-							type="button"
+						<Button
 							label="Войти"
+							type="button"
+							btnStyle="secondary"
+							size="small"
+							onClick={() => dispatch(openModal('login'))}
 						/>
 					)}
 				</div>
-			</div>
-			<div
-				className={
-					burger ? 'header__buttons-burger' : 'header__buttons-burger-none'
-				}
-			>
-				<ButtonMap label="Москва" />
-				<Button
-					className="button-app"
-					onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
-					label="Добавить площадку"
-				/>
-				{isUserAuth ? (
-					<ButtonLoginSite
-						onClick={navigateToPersonalArea}
-						label="Личный&nbsp;кабинет"
-					/>
-				) : (
-					<ButtonLoginSite
-						onClick={() => dispatch(openModal('login'))}
-						type="button"
-						label="Войти"
-					/>
-				)}
 			</div>
 		</header>
 	);

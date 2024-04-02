@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './FormLogin.scss';
 import React, { useCallback, useEffect } from 'react';
 import { fetchLogin } from '../../services/thunks/userThunk';
-import { Button } from '../Button/Button';
+import { ButtonOld } from '../Button/ButtonOld';
 import { ButtonOnRegister } from '../Button/ButtonOnRegister';
 import InputEmail from '../Inputs/InputEmail';
 import InputPassword from '../Inputs/InputPassword';
@@ -124,7 +124,7 @@ function FormComponent() {
 					</button>
 				) : null}
 			</div>
-			<Button
+			<ButtonOld
 				className="login-form__button-signin"
 				type="submit"
 				label={isLoadingLogin ? 'Вход...' : 'Войти'}

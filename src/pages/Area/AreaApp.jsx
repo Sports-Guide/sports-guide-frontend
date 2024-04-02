@@ -5,8 +5,8 @@ import './AreaApp.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import addPictures from '../../images/Camera.svg';
-import { Button } from '../../components/Button/Button';
-import '../../components/Button/Button.scss';
+import { ButtonOld } from '../../components/Button/ButtonOld';
+import '../../components/Button/ButtonOld.scss';
 import YandexMap from '../../components/YandexMap/YandexMap';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { openModal } from '../../services/slices/modalSlice';
@@ -254,7 +254,7 @@ export default function AreaApp() {
 
 							{addFoto.map((file, index) => (
 								<div className="foto-file__container" key={file}>
-									<Button
+									<ButtonOld
 										className="button-clouse-foto-file"
 										onClick={() => handleDeletePhoto(index)}
 									/>
@@ -278,7 +278,7 @@ export default function AreaApp() {
 								Поля выбора категорий и адреса обязательны к заполнению.
 							</h4>
 						)}
-						<Button
+						<ButtonOld
 							className="button-add"
 							label="Добавить площадку"
 							onClick={handleSubmit}

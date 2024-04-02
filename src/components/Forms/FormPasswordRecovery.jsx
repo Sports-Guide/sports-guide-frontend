@@ -2,7 +2,7 @@ import { Formik, Form, useFormikContext } from 'formik'; // https://formik.org/ 
 import './FormPasswordRecovery.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useEffect } from 'react';
-import { Button } from '../Button/Button';
+import { ButtonOld } from '../Button/ButtonOld';
 // import Timer from '../Timer/Timer';
 import InputEmail from '../Inputs/InputEmail';
 import { fetchInitiatingPasswordReset } from '../../services/thunks/resetPasswordThunk';
@@ -99,7 +99,7 @@ function FormComponent() {
 					</button>
 				) : null}
 			</div>
-			<Button
+			<ButtonOld
 				className="password-recovery-form__button-send"
 				type="submit"
 				label={isLoadingSentEmail ? 'Отправка...' : 'Восстановить'}
