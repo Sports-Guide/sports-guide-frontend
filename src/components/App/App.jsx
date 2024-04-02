@@ -10,7 +10,7 @@ import SportsGround from '../../pages/SportsGround/SportsGround';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import PrivacyPolicy from '../../pages/PrivacyPolicy/PrivacyPolicy';
 import PasswordResetPage from '../../pages/PasswordResetPage/PasswordResetPage';
-import Layuot from '../Layout/Layout';
+import Layout from '../Layout/Layout';
 import { Popup } from '../Popup/Popup';
 import ProtectedOnlyAuth from '../ProtectedRoute/ProtectedRoute';
 import PersonalData from '../../pages/Profile/PersonalData/PersonalData';
@@ -75,7 +75,7 @@ export function App() {
 		<>
 			<MetaTags />
 			<Routes>
-				<Route path="/" element={<Layuot />}>
+				<Route path="/" element={<Layout />}>
 					<Route index element={<Main />} />
 					<Route path="/activate/:uid/:token" element={<Main />} />
 					<Route
