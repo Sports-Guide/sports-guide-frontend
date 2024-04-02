@@ -1,21 +1,29 @@
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createMockStore } from '../../stories/mockStore';
 import { Header } from './Header';
 
 export default {
-	title: 'Header',
+	title: 'Components/Header',
 	component: Header,
-	argTypes: {},
 };
 
-const Template = () => <Header />;
+const Template = (args, { parameters }) => (
+	<Provider store={createMockStore(parameters.storeState)}>
+		<Header {...args} />
+	</Provider>
+);
 
-export const UnAuth = Template.bind({});
+export const AuthorizedUser = Template.bind({});
+AuthorizedUser.parameters = {
+	storeState: {
+		user: { isUserAuth: true },
+	},
+};
 
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-// 	label: 'Button',
-// 	type: 'button',
-// 	btnStyle: 'secondary',
-// 	size: 'small',
-// 	disabled: false,
-// 	endIcon: <SearchImg />,
-// };
+export const UnauthorizedUser = Template.bind({});
+UnauthorizedUser.parameters = {
+	storeState: {
+		user: { isUserAuth: false },
+	},
+};

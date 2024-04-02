@@ -6,13 +6,33 @@
 	padding: 0;
 }
 
-// ------------LIST------------
+// ------------ MEDIA QUERIES ------------
+
+@mixin mobile {
+	@media screen and (max-width: $breakpoint-xs) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media screen and (max-width: $breakpoint-sm) {
+		@content;
+	}
+}
+
+@mixin small-laptop {
+	@media screen and (max-width: $breakpoint-md) {
+		@content;
+	}
+}
+
+// ---------------- LIST ----------------
 @mixin mp-null-list {
 	@include mp-null;
 	list-style-type: none;
 }
 
-// ------------FLEX------------
+// ---------------- FLEX ----------------
 @mixin flex-column {
 	display: flex;
 	flex-direction: column;
@@ -30,7 +50,7 @@
 	justify-content: center;
 }
 
-//  -------------- FONTS -----------------
+//  ---------------- FONTS ----------------
 @mixin text {
 	@include mp-null;
 	font-style: normal;
@@ -115,6 +135,11 @@
 	line-height: 28px;
 	text-transform: uppercase;
 	font-variation-settings: $font-variation-settings-logo;
+
+	@include tablet {
+		font-size: 16px;
+		line-height: 20px;
+	}
 }
 
 @mixin subtitle {
