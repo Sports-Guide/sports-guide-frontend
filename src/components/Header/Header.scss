@@ -5,12 +5,11 @@
 	align-items: center;
 	justify-content: center;
 	background-color: rgba(252, 252, 252, 1);
-	min-height: 68px;
+	height: 60px;
 }
 
 .header__container {
 	margin: 0;
-	margin-top: 10px;
 	display: flex;
 	justify-content: space-between;
 	width: 1040px;
@@ -21,22 +20,24 @@
 	padding: 0;
 	text-decoration: none;
 	display: flex;
-	gap: 12px;
+	gap: 8px;
 	align-items: center;
+	letter-spacing: 0.6px;
 }
 
 .logo {
 	margin: 0;
-	width: 24px;
-	height: 24px;
+	width: 20px;
+	height: 20px;
 }
 
 .header__title {
 	margin: 0;
 	color: var(--Primary-Black-light, #515151);
 	/*Bold/Logo_text*/
-	font-family: Roboto Flex;
-	font-size: 20px;
+	font-family: 'Roboto Flex';
+	font-size: 18px;
+	// font-size: 20px; было, подгонка под макет
 	font-style: normal;
 	transform: skewX(-5deg);
 	font-weight: 750;
