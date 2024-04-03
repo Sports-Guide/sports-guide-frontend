@@ -55,7 +55,7 @@
 }
 
 .profile__menu-link {
-	font-family: 'Roboto', sans-serif;
+	font-family: $font-family-roboto;
 	display: flex;
 	width: 100%;
 	height: 48px;
@@ -103,7 +103,7 @@
 }
 
 .form__title_place_profile {
-	font-family: 'Roboto Flex', sans-serif;
+	font-family: $font-family-roboto-flex;
 	color: $secondary-black;
 	text-align: left;
 	font-size: 20px;
@@ -119,7 +119,7 @@
 
 .profile__nav-button {
 	width: 100%;
-	font-family: 'Roboto', sans-serif;
+	font-family: $font-family-roboto;
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 20px;
@@ -163,12 +163,12 @@
 }
 
 .popup__title {
-	font-family: 'Roboto', sans-serif;
+	font-family: $font-family-roboto;
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 20px;
 	text-align: left;
-	color: #515151;
+	color: $main-black-light;
 	margin: 0;
 	padding-top: 12px;
 }
@@ -186,13 +186,12 @@
 }
 
 .popup__button {
-	font-family: inherit;
+	font-family: $font-family-roboto;
 	border: none;
 	outline: none;
 	padding: 0;
 	margin: 0;
 	text-align: center;
-	width: calc(312px / 2 - 12px);
 	height: 44px;
 	cursor: pointer;
 	@include border-radius(8px);
@@ -208,11 +207,13 @@
 }
 
 .popup__button.popup__button-y {
+	max-width: 146px;
+	padding: 12px 42px;
 	background: $modal-btn-red;
 	color: $main-white;
 	text-align: center;
 	font-weight: 700;
-	line-height: 18px;
+	line-height: 20px;
 	font-size: 16px;
 }
 
@@ -236,7 +237,6 @@
 			'menu'
 			'menu-content';
 		padding: 0;
-		// flex-direction: column;
 	}
 	.profile__navigation {
 		grid-area: menu;
@@ -286,7 +286,6 @@
 	.profile__button-logout {
 		background: url(../../images/logout-icon-mobile.svg) no-repeat left;
 		padding-left: 17px;
-		// background-size: 10px 13px;
 		height: 32px;
 		color: $main-gray-blue-dark;
 		font-size: 14px;
