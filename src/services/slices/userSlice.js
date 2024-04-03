@@ -5,6 +5,7 @@ import {
 	fetchEditUserInfo,
 	fetchNewPassword,
 	fetchDeleteProfile,
+	fetchChangeAvatar,
 } from '../thunks/userThunk';
 
 // initialState хранит начальное состояние(напоминает первый аргумент в хуке useState)
@@ -33,6 +34,9 @@ export const initialState = {
 	isLoadingPassword: false,
 	errorEditPassword: false,
 	errorMessageEditPassword: '',
+	isPhotoLoading: false,
+	errorUploadPhoto: false,
+	errorMessageUploadPhoto: '',
 	// Delete Profile
 	isLoadingDeleteProfile: false,
 	errorDeleteProfile: false,
@@ -172,6 +176,22 @@ const userSlice = createSlice({
 				state.errorMessageDeleteProfile =
 					action.error.message ||
 					'Произошла неизвестная ошибка при удалении профиля';
+			})
+			.addCase(fetchChangeAvatar.fulfilled, (state, action) => {
+				state.userData.photo = action.payload.photo;
+				state.isPhotoLoading = false;
+				state.errorUploadPhoto = false;
+			})
+			.addCase(fetchChangeAvatar.pending, (state) => {
+				state.isPhotoLoading = true;
+				state.errorUploadPhoto = false;
+			})
+			.addCase(fetchChangeAvatar.rejected, (state, action) => {
+				state.isPhotoLoading = false;
+				state.errorUploadPhoto = true;
+				state.errorMessageUploadPhoto =
+					action.error.message ||
+					'Произошла неизвестная ошибка при загрузке фото';
 			});
 	},
 });

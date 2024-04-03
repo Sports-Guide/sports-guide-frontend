@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../../../components/Card/Card';
 import { fetchGetMyAreas } from '../../../services/thunks/favoriteAreasThunk';
+import { Button } from '../../../components/Button/Button';
 
 import './MyAreas.scss';
 
@@ -25,8 +26,8 @@ export default function MyAreas() {
 			<nav className="my-areas__navigation">
 				<h2 className="my-areas__title">Мои площадки</h2>
 				<div className="my-areas__buttons">
-					<button
-						className={`my-areas__button ${
+					<Button
+						customStyle={`my-areas__button ${
 							isCardRendered
 								? 'my-areas__button_type_card_active'
 								: 'my-areas__button_type_card'
@@ -35,8 +36,8 @@ export default function MyAreas() {
 						aria-label="Переключатель отображения площадок в виде карточек"
 						onClick={handleSwitchCardsDisplay}
 					/>
-					<button
-						className={`my-areas__button my-areas__button_type_list ${
+					<Button
+						customStyle={`my-areas__button my-areas__button_type_list ${
 							!isCardRendered
 								? 'my-areas__button_type_list_active'
 								: 'my-areas__button_type_list'
