@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAuthFalse } from '../../services/slices/userSlice';
-import { ButtonOld } from '../Button/ButtonOld';
+import { Button } from '../Button/Button';
 import { closeModal } from '../../services/slices/modalSlice';
 import './FormLogOut.scss';
 
@@ -14,8 +14,6 @@ export default function FormLogOut({ handleClose }) {
 
 	const handleLogOutSubmit = useCallback(() => {
 		localStorage.clear();
-		// localStorage.removeItem('accessToken');
-		// localStorage.removeItem('refreshToken');
 		setAuthFalse();
 		dispatch(closeModal());
 		navigate('/', { replace: true });
@@ -27,16 +25,18 @@ export default function FormLogOut({ handleClose }) {
 				{() => (
 					<Form noValidate className="logout-form-container">
 						<div className="popup__button-container">
-							<ButtonOld
-								className="popup__button popup__button-y"
+							<Button
+								customStyle="popup__button popup__button-y"
 								type="button"
 								label="Выйти"
+								ariaLabel="Кнопка подтверждения выхода из аккаунта"
 								onClick={handleLogOutSubmit}
 							/>
-							<ButtonOld
-								className="popup__button popup__button-n"
+							<Button
+								customStyle="popup__button popup__button-n"
 								type="button"
 								label="Отмена"
+								ariaLabel="Кнопка отмены выхода из аккаунта и закрытия модального окна"
 								onClick={handleClose}
 							/>
 						</div>

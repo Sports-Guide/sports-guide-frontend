@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchDeleteProfile } from '../../services/thunks/userThunk';
-import { ButtonOld } from '../Button/ButtonOld';
 import { closeModal } from '../../services/slices/modalSlice';
 import { setAuthFalse } from '../../services/slices/userSlice';
+import { Button } from '../Button/Button';
 import './FormDeleteProfile.scss';
 
 export default function FormDeleteProfile({ handleClose }) {
@@ -37,20 +37,20 @@ export default function FormDeleteProfile({ handleClose }) {
 			<Formik onSubmit={handleLogOutSubmit}>
 				{() => (
 					<Form noValidate className="delete-profile-form-container">
-						<span className="delete-profile-form__error">
-							{/* {'ошибка от сервера' || ''} */}
-						</span>
+						<span className="delete-profile-form__error" />
 						<div className="popup__button-container">
-							<ButtonOld
-								className="popup__button popup__button-y"
+							<Button
+								customStyle="popup__button popup__button-y"
 								type="button"
 								label="Удалить"
+								ariaLabel="Кнопка подтверждения удаления профиля"
 								onClick={handleLogOutSubmit}
 							/>
-							<ButtonOld
-								className="popup__button popup__button-n"
+							<Button
+								customStyle="popup__button popup__button-n"
 								type="button"
 								label="Отмена"
+								ariaLabel="Кнопка отмены удаления профиля и закрытия модального окна"
 								onClick={handleClose}
 							/>
 						</div>
