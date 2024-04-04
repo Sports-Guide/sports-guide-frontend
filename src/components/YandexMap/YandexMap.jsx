@@ -183,15 +183,9 @@ function YandexMap({
 						<Placemark
 							key={area.id}
 							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}
-							// href="http://localhost:3000/sports-ground/${
-							// 		area.id
-							// 	}"
-							// href="https://sports-map.ru/sports-ground/${
-							// 	area.id
-							// }"
 							properties={{
 								balloonContentBody: `
-								   <a class = "yandex-link"  href="https://sports-map.ru/sports-ground/${
+								   <a class = "yandex-link"  href='/sports-ground/${area.id}' target="_blank"${
 											area.id
 										}" target="_blank">
 									<div class = "yandex">

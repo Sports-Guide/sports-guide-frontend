@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import './SportsGround.css';
+import './SportsGround.scss';
 import { Map, Placemark } from '@pbe/react-yandex-maps';
 import { Slider } from '../../components/Slider/Slider';
 import { bordersOfRussia, defaultState } from '../../constants/MapConstants';
@@ -46,16 +46,28 @@ export default function SportsGround() {
 					</button>
 				</div>
 			</div>
-			<Slider>
-				{selectedArea.images.map((imageObj) => (
-					<img
-						key={imageObj.image}
-						className="sports-ground__photo"
-						src={imageObj.image}
-						alt="Площадка"
-					/>
-				))}
-			</Slider>
+			<div className="sports-ground__grounds-gallery">
+				<Slider>
+					{selectedArea.images.map((imageObj) => (
+						<img
+							key={imageObj.image}
+							className="sports-ground__photo"
+							src={imageObj.image}
+							alt="Площадка"
+						/>
+					))}
+				</Slider>
+				<div className="sports-ground__gallery">
+					{selectedArea.images.map((area) => (
+						<img
+							key={area.id}
+							className="sports-ground__gallery-item"
+							src={area.image}
+							alt="Площадка"
+						/>
+					))}
+				</div>
+			</div>
 			<div className="category-section">
 				<h3 className="category-title">Виды спорта</h3>
 				<div className="category-container">
@@ -73,11 +85,15 @@ export default function SportsGround() {
 					))}
 				</div>
 			</div>
-			<div className="sports-ground__description">
+			<div className="category-section">
 				<h3 className="sports-ground__title">О площадке</h3>
 				<p className="sports-ground__subtitle">{selectedArea.description}</p>
 			</div>
-			<div className="sports-ground__map">
+			<div className="category-section">
+				<h3 className="sports-ground__title">Комментарии к площадке</h3>
+				<p className="sports-ground__subtitle">Здесь будут комментарии</p>
+			</div>
+			<div className="category-section">
 				<h3 className="sports-ground__title">Расположение</h3>
 				<Map
 					state={mapState}

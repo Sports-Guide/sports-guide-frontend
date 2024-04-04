@@ -3,6 +3,7 @@ import {
 	fetchAddArea,
 	fetchGetAreas,
 	fetchGetCategory,
+	fetchGetAreaComments,
 } from '../thunks/areasThunk';
 
 export const initialState = {
@@ -23,6 +24,10 @@ export const initialState = {
 	errorMessageGetCategory: '',
 	// при добавлении площадки, она сперва проверяется модератором и только после - добавляется в базу
 	isVerified: false,
+	areaInfo: null,
+	isLoadingAreaInfo: false,
+	errorAreaInfo: false,
+	errorMessageAreaInfo: '',
 };
 
 const areaSlice = createSlice({
@@ -98,6 +103,22 @@ const areaSlice = createSlice({
 				state.isLoadingGetCategory = false;
 				state.errorGetCategory = true;
 				state.errorMessageGetCategory =
+					action.error.message || 'Произошла неизвестная ошибка';
+			})
+			.addCase(fetchGetAreaComments.fulfilled, (state, action) => {
+				state.areaInfo = action.payload;
+				state.isLoadingAreaInfo = false;
+				state.errorAreaInfo = false;
+			})
+			.addCase(fetchGetAreaComments.pending, (state) => {
+				state.isLoadingAreaInfo = true;
+				state.errorAreaInfo = false;
+			})
+			.addCase(fetchGetAreaComments.rejected, (state, action) => {
+				state.areaInfo = null;
+				state.isLoadingAreaInfo = false;
+				state.errorAreaInfo = true;
+				state.errorMessageAreaInfo =
 					action.error.message || 'Произошла неизвестная ошибка';
 			});
 	},

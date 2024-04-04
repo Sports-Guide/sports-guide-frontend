@@ -50,3 +50,17 @@ export const fetchGetCategory = createAsyncThunk('category/get', async () => {
 	});
 	return data;
 });
+
+export const fetchGetAreaComments = createAsyncThunk(
+	'areaInfo/get',
+	async (id) => {
+		const data = await request(`${urlAreas}${id}/`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+		});
+		return data;
+	}
+);
