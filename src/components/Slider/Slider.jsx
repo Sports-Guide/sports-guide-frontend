@@ -1,6 +1,6 @@
 import React, { Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { Button } from '../Button/Button';
 import './Slider.scss';
 import { IMG_WIDTH } from '../../constants/SliderConstants';
 
@@ -39,8 +39,13 @@ export function Slider({ children }) {
 
 	return (
 		<div className="slider-container">
-			<FaChevronLeft className="arrow" onClick={handleLeftClick} />
 			<div className="slider-window">
+				<Button
+					type="button"
+					customStyle="arrow arrow-left"
+					onClick={handleLeftClick}
+					ariaLabel="Кнопка перемещения слайдера влево"
+				/>
 				<div
 					className="images-container"
 					style={{
@@ -49,8 +54,13 @@ export function Slider({ children }) {
 				>
 					{images}
 				</div>
+				<Button
+					type="button"
+					customStyle="arrow arrow-right"
+					onClick={handleRightClick}
+					ariaLabel="Кнопка перемещения слайдера вправо"
+				/>
 			</div>
-			<FaChevronRight className="arrow" onClick={handleRightClick} />
 		</div>
 	);
 }
