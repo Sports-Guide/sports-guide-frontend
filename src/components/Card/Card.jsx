@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import './Card.scss';
 import PropTypes from 'prop-types';
 import ButtonLike from '../Button/ButtonLike';
+import { renderImage } from '../../utils/renderImage';
 
 function Card({ area }) {
 	// проверяем, что категорий > 2
@@ -39,7 +40,7 @@ function Card({ area }) {
 			>
 				<div
 					className="card__image"
-					style={{ backgroundImage: `url(${area.images[0].image})` }}
+					style={{ backgroundImage: `url(${renderImage(area)})` }}
 				>
 					<div className="card__categories-container">
 						{area.categories.slice(0, 2).map((category) => (

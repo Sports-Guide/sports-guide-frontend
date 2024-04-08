@@ -20,6 +20,7 @@ import {
 	areasCoord,
 	defaultState,
 } from '../../constants/MapConstants';
+import { renderImage } from '../../utils/renderImage';
 
 function YandexMap({
 	isPolygonShow,
@@ -142,14 +143,6 @@ function YandexMap({
 						// добавление клика на карту
 						ref.current.events.add('click', (e) => handleMapClick(e, ymaps));
 					}
-					// if (isPolygonShow) {
-					// 	ref.current.events.add('boundschange', (e) => {
-					// 		const newZoom = e.get('newZoom');
-					// 		if (newZoom >= 13) {
-					// 			setIsPolygonShow(false);
-					// 		}
-					// 	});
-					// }
 				}}
 				options={{
 					// ограничение максимальной зоны отображения - граница России
@@ -189,7 +182,7 @@ function YandexMap({
 											area.id
 										}" target="_blank">
 									<div class = "yandex">
-									<img class="yandex__images" src="${area.images[0].image}">
+									<img class="yandex__images" src="${renderImage(area)}">
 									<div class = "yandex__contetn">
 									<h1 class = "yandex__title" >${area.name}</h1>
 									<p class = "yandex__subtitle">${area.address}</p>
