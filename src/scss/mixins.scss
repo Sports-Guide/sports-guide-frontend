@@ -219,3 +219,11 @@
 	font-size: 13px;
 	line-height: 14px;
 }
+
+// ---------------- FORM ----------------
+
+@mixin form-container {
+	@include flex-column;
+	align-items: center;
+	width: 384px;
+}

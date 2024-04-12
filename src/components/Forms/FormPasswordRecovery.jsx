@@ -2,8 +2,8 @@ import { Formik, Form, useFormikContext } from 'formik'; // https://formik.org/ 
 import './FormPasswordRecovery.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useCallback, useEffect } from 'react';
-import { ButtonOld } from '../Button/ButtonOld';
 // import Timer from '../Timer/Timer';
+import { Button } from '../Button/Button';
 import InputEmail from '../Inputs/InputEmail';
 import { fetchInitiatingPasswordReset } from '../../services/thunks/resetPasswordThunk';
 import { openModal } from '../../services/slices/modalSlice';
@@ -84,23 +84,21 @@ function FormComponent() {
 				с&nbsp;инструкцией.
 			</p>
 			<InputEmail />
-			<div>
-				<span className="password-recovery-form__error">
-					{errorMessageSentEmail || ''}
-				</span>
-
+			<div className="password-recovery-form__error-container">
+				<span>{errorMessageSentEmail || ''}</span>
 				{errorMessageSentEmail ===
-				'Пожалуйста, активируйте вашу учетную запись, перейдя по ссылке в письме.' ? (
-					<button
-						className="password-recovery-form__mail_activate"
+					`Пожалуйста, активируйте вашу учетную запись, перейдя по ссылке в письме.` && (
+					<Button
+						customStyle="password-recovery-form__btn-resend-activate"
 						onClick={(e) => handleResendActivation(e, { email: values.Email })}
-					>
-						Отправить письмо повторно
-					</button>
-				) : null}
+						label="Отправить письмо повторно"
+					/>
+				)}
 			</div>
-			<ButtonOld
-				className="password-recovery-form__button-send"
+			<Button
+				btnStyle="primary"
+				size="big"
+				additionalStyle="password-recovery-form__button-send"
 				type="submit"
 				label={isLoadingSentEmail ? 'Отправка...' : 'Восстановить'}
 			/>

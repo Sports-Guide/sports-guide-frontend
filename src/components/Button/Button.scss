@@ -27,8 +27,7 @@
 			fill: $main-white; // задает цвет svg
 		}
 
-		&:hover,
-		&:focus {
+		&:hover {
 			background-color: $accent-blue-button-focused;
 		}
 	}
@@ -40,8 +39,7 @@
 			fill: $accent-blue; // задает цвет svg
 		}
 
-		&:hover,
-		&:focus {
+		&:hover {
 			background-color: $accent-light-blue-button-focused;
 		}
 	}
@@ -53,8 +51,7 @@
 			fill: $main-gray-blue-dark; // задает цвет svg
 		}
 
-		&:hover,
-		&:focus {
+		&:hover {
 			text-decoration: underline;
 		}
 	}

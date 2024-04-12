@@ -5,11 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import './FormLogin.scss';
 import React, { useCallback, useEffect } from 'react';
 import { fetchLogin } from '../../services/thunks/userThunk';
-import { ButtonOld } from '../Button/ButtonOld';
-import { ButtonOnRegister } from '../Button/ButtonOnRegister';
+import { Button } from '../Button/Button';
 import InputEmail from '../Inputs/InputEmail';
 import InputPassword from '../Inputs/InputPassword';
-import { ButtonOnPasswordRecovery } from '../Button/ButtonOnPasswordRecovery';
 import { openModal } from '../../services/slices/modalSlice';
 import { clearLoginError } from '../../services/slices/userSlice';
 import { fetchResendActivation } from '../../services/thunks/registerUserThunk';
@@ -57,15 +55,14 @@ export default function FormLogin({ handleClose }) {
 			>
 				{() => <FormComponent />}
 			</Formik>
-			{/* <p className="login-form__paragraph">
-				Нет аккаунта? */}
-			<ButtonOnRegister
+
+			<Button
 				onClick={() => dispatch(openModal('register'))}
 				label="Зарегистрироваться"
 				type="button"
-				disabled={false}
+				btnStyle="flat"
+				size="big"
 			/>
-			{/* </p> */}
 		</div>
 	);
 }
@@ -102,30 +99,29 @@ function FormComponent() {
 				<InputCheckboxLogin inputId="RememberMe">
 					Запомнить меня
 				</InputCheckboxLogin>
-				<ButtonOnPasswordRecovery
+				<Button
 					onClick={() => dispatch(openModal('passwordRecovery'))}
 					label="Забыли пароль?"
 					type="button"
-					disabled={false}
+					btnStyle="flat"
+					size="big"
 				/>
 			</div>
 			<div className="login-form__error-container">
-				<span className="login-form__server-error">
-					{errorMessageLogin || ''}
-				</span>
-
+				<span>{errorMessageLogin || ''}</span>
 				{errorMessageLogin ===
-				'Пожалуйста, активируйте вашу учетную запись, перейдя по ссылке в письме.' ? (
-					<button
-						className="login-form__mail_activate"
+					`Пожалуйста, активируйте вашу учетную запись, перейдя по ссылке в письме.` && (
+					<Button
+						customStyle="login-form__btn-resend-activate"
 						onClick={(e) => handleResendActivation(e, { email: values.Email })}
-					>
-						Отправить письмо повторно
-					</button>
-				) : null}
+						label="Отправить письмо повторно"
+					/>
+				)}
 			</div>
-			<ButtonOld
-				className="login-form__button-signin"
+			<Button
+				additionalStyle="login-form__button-signin"
+				btnStyle="primary"
+				size="big"
 				type="submit"
 				label={isLoadingLogin ? 'Вход...' : 'Войти'}
 			/>
