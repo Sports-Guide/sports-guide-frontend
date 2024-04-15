@@ -1,0 +1,17 @@
+@import '../../scss/mixins.scss';
+
+.logo {
+	text-decoration: none;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+
+	&__icon {
+		width: 20px;
+		height: 20px;
+	}
+
+	&__title {
+		@include title-h4-logo;
+	}
+}

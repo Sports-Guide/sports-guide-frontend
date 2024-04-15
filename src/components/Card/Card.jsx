@@ -1,17 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './Card.scss';
 import PropTypes from 'prop-types';
+import ButtonLike from '../Button/ButtonLike';
+import { renderImage } from '../../utils/renderImage';
 
 function Card({ area }) {
-	console.log(area);
-	const [isLiked, setIsLiked] = useState(false);
+	// проверяем, что категорий > 2
+	const hasExtraCategories = area.categories.length > 2;
+	const areaModerationStatus = area.moderation_status;
+	const location = useLocation();
+
 	return (
 		<div className="card">
-			<button
-				className={isLiked ? 'card__like card__like_active' : 'card__like'}
-				aria-label="лайк"
-				onClick={() => setIsLiked(!isLiked)}
-			/>
+			{location.pathname === '/profile/my-areas' ? (
+				<nav className="card__buttons-container">
+					{areaModerationStatus === 'pending' ? (
+						<span className="card__status" role="status">
+							Идет проверка
+						</span>
+					) : (
+						<ButtonLike area={area} />
+					)}
+					<button
+						className="card__button-settings"
+						aria-label="лайк"
+						onClick={() => alert('тут скоро будут настройки карточки :)')}
+					/>
+				</nav>
+			) : (
+				<ButtonLike area={area} />
+			)}
 			<a
 				className="card__link"
 				href={`/sports-ground/${area.id}`}
@@ -21,16 +40,25 @@ function Card({ area }) {
 			>
 				<div
 					className="card__image"
-					style={{ backgroundImage: `url(${area.images[0].image})` }}
+					style={{ backgroundImage: `url(${renderImage(area)})` }}
 				>
 					<div className="card__categories-container">
-						{area.categories.map((category) => (
-							<span className="card__categories">
-								<span key={category.id} className="card__categories-name">
-									{category.name}
-								</span>
+						{area.categories.slice(0, 2).map((category) => (
+							<span className="card__categories" key={category.id}>
+								<img
+									src={category.icon}
+									alt="знак категории"
+									className="card__categories-ball"
+								/>
+								<span className="card__categories-name">{category.name}</span>
 							</span>
 						))}
+						{/* отражаем кол-во категогий, если оно больше 2 */}
+						{hasExtraCategories && (
+							<span className="card__extra-categories">
+								+{area.categories.length - 2}
+							</span>
+						)}
 					</div>
 				</div>
 				<div className="card__container">
@@ -43,7 +71,7 @@ function Card({ area }) {
 }
 
 Card.propTypes = {
-	area: PropTypes.arrayOf.isRequired,
+	area: PropTypes.objectOf.isRequired,
 };
 
 export default Card;

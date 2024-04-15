@@ -2,7 +2,7 @@ import { Formik, Form, useFormikContext } from 'formik'; // https://formik.org/ 
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './FormRegister.scss';
-import { Button } from '../Button/Button';
+import { ButtonOld } from '../Button/ButtonOld';
 import InputEmail from '../Inputs/InputEmail';
 import InputPassword from '../Inputs/InputPassword';
 import InputNickname from '../Inputs/InputNickname';
@@ -62,15 +62,12 @@ export default function FormRegister() {
 			>
 				{() => <FormComponent />}
 			</Formik>
-			<p className="register-form__paragraph">
-				Уже есть аккаунт?
-				<ButtonOnLoginPopUp
-					onClick={() => dispatch(openModal('login'))}
-					label="Войти"
-					type="button"
-					disabled={false}
-				/>
-			</p>
+			<ButtonOnLoginPopUp
+				onClick={() => dispatch(openModal('login'))}
+				label="Войти"
+				type="button"
+				disabled={false}
+			/>
 		</div>
 	);
 }
@@ -113,7 +110,7 @@ function FormComponent() {
 			<span className="register-form__server-error">
 				{errorMessageRegister || ''}
 			</span>
-			<Button
+			<ButtonOld
 				className="register-form__button-register"
 				type="submit"
 				label={isLoadingRegister ? 'Регистрация...' : 'Зарегистрироваться'}

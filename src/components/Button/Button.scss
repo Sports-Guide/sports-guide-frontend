@@ -1,142 +1,107 @@
-@mixin buttonAdd {
-	border-radius: 8px;
-	gap: 8px;
-	background: rgba(20, 120, 255, 1);
-	color: white;
-	font-family: Roboto;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 20px;
-	letter-spacing: 0em;
-	padding-left: 18px;
-	cursor: pointer;
-	text-decoration: none;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
 
-.button {
-	font-family: Roboto;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 20px;
-	letter-spacing: 0em;
-	text-align: left;
-	width: 131px;
-	height: 36px;
+.default-button {
+	@include flex-center;
 	border: none;
-	text-align: right;
-	background: rgba(252, 252, 252, 1);
-	background-image: url('../../images/User_icon.svg');
-	background-repeat: no-repeat;
-}
-
-.comment-submit-button {
-	display: flex;
-	width: 265px;
-	height: 45px;
-	padding: 10px;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	flex-shrink: 0;
-	border-radius: 10px;
-	background-color: #aaa;
-	color: #fff;
-	font-family: Inter;
-	font-size: 24px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 20px; /* 83.333% */
-}
-
-.button-app {
-	width: 188px;
-	height: 36px;
 	border-radius: 8px;
-	background: rgba(20, 120, 255, 1);
-	color: white;
-	font-family: Roboto;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 20px;
-	cursor: pointer;
-	text-decoration: none;
-	outline: none;
-	text-align: end;
-	margin-right: 0;
-	padding: 8px 16px;
-	background-image: url('../../images/btn_plus.svg');
-	background-repeat: no-repeat;
-	background-size: 11px 11px;
-	background-position: 7% 50%;
+	column-gap: 8px;
+	width: fit-content;
+
+	&_big {
+		@include button-text;
+		padding: 12px 16px;
+		height: 44px;
+	}
+
+	&_small {
+		@include button-text-small-size;
+		padding: 8px 16px;
+		height: 36px;
+	}
+
+	&_primary {
+		background: $accent-blue;
+		color: $main-white;
+		svg path {
+			fill: $main-white; // задает цвет svg
+		}
+
+		&:hover,
+		&:focus {
+			background-color: $accent-blue-button-focused;
+		}
+	}
+	&_secondary {
+		background: $accent-light-blue;
+		color: $accent-blue;
+
+		svg path {
+			fill: $accent-blue; // задает цвет svg
+		}
+
+		&:hover,
+		&:focus {
+			background-color: $accent-light-blue-button-focused;
+		}
+	}
+
+	&_flat {
+		color: $main-gray-blue-dark;
+		background-color: inherit;
+		svg path {
+			fill: $main-gray-blue-dark; // задает цвет svg
+		}
+
+		&:hover,
+		&:focus {
+			text-decoration: underline;
+		}
+	}
 }
 
-.button-add {
-	width: 204px;
-	height: 44px;
-	@include buttonAdd;
-}
-
-.button-add__check {
-	width: 184px;
-	height: 44px;
-	@include buttonAdd;
-	padding-right: 20px;
-}
-
-.button-clouse-foto-file {
-	position: relative;
-	z-index: 1;
-	background-image: url('../../images/button_close_foto.svg');
-	width: 16px;
-	height: 16px;
-	top: 10px;
-	left: 150px;
-	background-color: transparent;
-	padding: 0;
-	cursor: pointer;
-}
-
-.button__menu-burger {
-	background-image: url('../../images/burger.svg');
-}
-
-.button-add-foto {
-	width: 136px;
-	height: 36px;
+.btn-add-photo {
+	@include flex-center;
+	border: none;
 	border-radius: 8px;
-	gap: 8px;
-	background: rgba(20, 120, 255, 1);
-	color: white;
-	font-family: Roboto;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 20px;
-	letter-spacing: 0em;
-	padding-left: 0px;
-	cursor: pointer;
-	text-decoration: none;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-@media screen and (max-width: 495px) {
-	.button-clouse-foto-file {
-		left: 130px;
+	column-gap: 16px;
+	@include chat-username-text;
+	padding: 12px 16px;
+	height: 36px;
+	background: rgba(252, 252, 252, 0.8);
+	color: $accent-blue-button-focused;
+	svg path {
+		fill: $accent-blue-button-focused; // задает цвет svg
 	}
 }
 
-@media screen and (max-width: 435px) {
-	.button-clouse-foto-file {
-		left: 110px;
+.btn-add-photo-small {
+	@include flex-center;
+	background: rgba(252, 252, 252, 0.8);
+	padding: 6px;
+	height: 36px;
+	width: 36px;
+	border: none;
+	border-radius: 50%;
+	svg path {
+		fill: $accent-blue-button-focused; // задает цвет svg
 	}
 }
 
-@media screen and (max-width: 375px) {
-	.button-clouse-foto-file {
-		left: 100px;
-	}
-}
+// @media screen and (max-width: 495px) {
+// 	.button-clouse-foto-file {
+// 		left: 130px;
+// 	}
+// }
+
+// @media screen and (max-width: 435px) {
+// 	.button-clouse-foto-file {
+// 		left: 110px;
+// 	}
+// }
+
+// @media screen and (max-width: 375px) {
+// 	.button-clouse-foto-file {
+// 		left: 100px;
+// 	}
+// }

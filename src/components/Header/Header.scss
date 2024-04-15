@@ -1,106 +1,54 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+
 .header {
-	margin: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: rgba(252, 252, 252, 1);
-	height: 68px;
+	@include flex-center;
+	background-color: $main-white;
+	height: 60px;
+
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		width: 1040px;
+
+		@include small-laptop {
+			padding: 0 40px;
+		}
+
+		@include tablet {
+			padding: 0 30px;
+		}
+
+		@include mobile {
+			padding: 0 20px;
+		}
+	}
+
+	&__buttons {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+
+		@include tablet {
+			display: none;
+		}
+	}
 }
 
-.header__container {
-	margin: 0;
-	display: flex;
-	justify-content: space-between;
-	width: 1040px;
-}
-
-.header__logo {
-	margin: 0;
-	padding: 0;
-	text-decoration: none;
-	display: flex;
-	gap: 12px;
-	align-items: center;
-}
-
-.logo {
-	margin: 0;
-	width: 24px;
-	height: 24px;
-}
-
-.header__title {
-	margin: 0;
-	color: var(--Primary-Black-light, #515151);
-	/*Bold/Logo_text*/
-	font-family: Roboto Flex;
-	font-size: 20px;
-	font-style: normal;
-	transform: skewX(-5deg);
-	font-weight: 750;
-	// font-weight: 600; было, подгонка под макет
-	line-height: 28px;
-	/*140%*/
-	text-transform: uppercase;
-	-webkit-transform: skewX(-5deg);
-	-moz-transform: skewX(-5deg);
-	-ms-transform: skewX(-5deg);
-	-o-transform: skewX(-5deg);
-}
-
-.header__buttons {
-	display: flex;
-	align-items: center;
-	gap: 16px;
-}
-
-.button__menu-burger {
+.button-menu {
 	display: none;
-}
 
-@media screen and (max-width: 1088px) {
-	.header__container {
-		width: 90%;
-	}
-}
-
-@media screen and (max-width: 1088px) {
-	.header__title {
-		font-family: Roboto Flex;
-		font-size: 16px;
-		font-style: italic;
-		font-weight: 600;
-		line-height: 20px;
-		letter-spacing: 0em;
-		text-align: left;
-		font-variation-settings:
-			'wdth' 111,
-			'GRAD' 150,
-			'slnt' -4,
-			'XTRA' 468,
-			'XOPQ' 96,
-			'YOPQ' 79,
-			'YTLC' 514,
-			'YTUC' 657,
-			'YTAS' 750,
-			'YTDE' -203,
-			'YTFI' 738;
-	}
-}
-
-@media screen and (max-width: 800px) {
-	.header__buttons {
-		display: none;
-	}
-	.button__menu-burger {
-		display: block;
-		position: absolute;
-		right: 10%;
-		z-index: 1;
-		width: 28px;
+	@include tablet {
+		display: flex;
+		@include flex-center;
+		background: inherit;
+		padding: 6px;
 		height: 28px;
-	}
-	.header__title {
-		width: 300px;
+		width: 28px;
+		border: none;
+
+		svg path {
+			fill: $accent-blue; // задает цвет svg
+		}
 	}
 }

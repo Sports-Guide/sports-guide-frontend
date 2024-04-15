@@ -2,11 +2,13 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import './InputContainer.scss';
 import './InputPassword.scss';
-import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
+import { Field, useFormikContext } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import InputContainer from './InputContainer';
 
 export default function InputPassword({ labelText, inputId }) {
 	const [showPassword, setShowPassword] = useState(false);
+
+	const { errors } = useFormikContext();
 
 	// Функция для переключения отображения пароля
 	const togglePasswordVisibility = () => {
@@ -38,7 +40,7 @@ export default function InputPassword({ labelText, inputId }) {
 					id={inputId}
 					type={showPassword ? 'text' : 'password'}
 					name={inputId}
-					className="input"
+					className={`input ${errors[inputId] && 'input-error'}`}
 					validate={validatePassword}
 					maxLength={25}
 				/>

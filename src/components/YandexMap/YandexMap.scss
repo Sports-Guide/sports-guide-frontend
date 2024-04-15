@@ -5,7 +5,9 @@
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
+	margin-bottom: 70px;
 }
+
 .map__container {
 	width: 1040px;
 	height: 500px;
@@ -37,6 +39,11 @@
 	height: 52px;
 	background-image: url(../../images/buttonMap.png);
 	border-radius: 8px;
+	background-size: cover;
+}
+
+.map__button:hover {
+	cursor: pointer;
 }
 
 .map__button_active {
@@ -66,7 +73,111 @@
 }
 
 .map__search-bar_type_search {
+	width: 45%;
+}
+.map__search-bar_type_search-area {
 	width: 100%;
+}
+
+.map__filter-button {
+	display: none;
+}
+
+@media screen and (max-width: 1060px) {
+	.map__container {
+		width: 100%;
+	}
+	.map__inputs {
+		width: 100%;
+		padding: 0 44px 24px 44px;
+	}
+	.map__search-bar_area {
+		width: 170px;
+	}
+	.map__search-bar_kinds-of-sports {
+		width: 170px;
+	}
+	.map__search-bar_type_search {
+		width: 270px;
+	}
+}
+
+@media screen and (max-width: 866px) {
+	.map__inputs {
+		padding: 0 18px 16px 18px;
+		display: grid;
+		grid-template-rows: auto auto;
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas:
+			'button search'
+			'area kinds';
+	}
+	.map__button {
+		grid-area: button;
+	}
+	.map__search-bar_area {
+		grid-area: area;
+		width: 100%;
+	}
+	.map__search-bar_kinds-of-sports {
+		grid-area: kinds;
+		width: 100%;
+	}
+	.map__search-bar_type_search {
+		grid-area: search;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 495px) {
+	.map__inputs {
+		display: flex;
+		flex-direction: row;
+	}
+	.map__button {
+		display: none;
+	}
+	.map__button-mobile {
+		display: block;
+		width: 93px;
+		height: 32px;
+		border-radius: 40px;
+		position: fixed;
+		bottom: 5%;
+		left: 37.6%;
+		background: rgba(81, 81, 81, 0.95);
+		z-index: 1;
+		background-image: url(../../images/ButtonList.svg);
+		background-position: center;
+	}
+
+	.map__button-mobile_active {
+		background-image: url(../../images/ButtonMap.svg);
+	}
+
+	.map__search-bar_kinds-of-sports {
+		display: none;
+	}
+	.map__search-bar_area {
+		display: none;
+	}
+	.map__search-bar_type_search {
+		height: 36px;
+	}
+	.map__filter-button {
+		border: none;
+		padding: 0;
+		display: block;
+		background-image: url(../../images/Button-filter.svg);
+		width: 40px;
+		height: 36px;
+		background-size: cover;
+		background-position: center;
+		border-radius: 6px;
+	}
+	.map__filter-button {
+		cursor: pointer;
+	}
 }
 
 .ymaps-2-1-79-balloon__layout {
@@ -105,12 +216,14 @@
 
 .yandex__category {
 	min-height: 100%;
+	margin-right: 10px;
 	height: 20px;
 	background: rgba(229, 240, 255, 1);
 	display: flex;
 	align-items: center;
 	border-radius: 6px;
 	justify-content: start;
+	color: #153e8c;
 }
 
 .yandex__small-img {
@@ -120,7 +233,6 @@
 }
 
 .yandex__small-text {
-	//styleName: Desktop/Caption 3_Regular;
 	font-family: Roboto;
 	font-size: 10px;
 	font-weight: 400;
@@ -139,7 +251,6 @@
 }
 
 .yandex__title {
-	//styleName: Desktop/Subhead_Black;
 	font-family: Roboto Flex;
 	font-size: 14px;
 	font-weight: 900;
@@ -149,7 +260,6 @@
 }
 
 .yandex__subtitle {
-	//styleName: Desktop/Caption 3_Regular;
 	font-family: Roboto;
 	font-size: 10px;
 	font-weight: 400;
@@ -158,10 +268,6 @@
 	text-align: left;
 	margin-bottom: 5px;
 }
-
-// .ymaps-2-1-79-copyrights-pane {
-// 	display: none;
-// }
 
 // Карта добавления карточки
 
@@ -264,15 +370,17 @@
 }
 
 @media screen and (max-width: 495px) {
-	.map__search-bar_type_search::placeholder {
-		font-family: Roboto;
-		font-size: 12px;
-		font-weight: 400;
-		line-height: 14px;
-		letter-spacing: 0em;
-		text-align: left;
-	}
-	.map__search-bar_type_search {
-		width: 100%;
+	.map_area-app {
+		.map__search-bar_type_search::placeholder {
+			font-family: Roboto;
+			font-size: 12px;
+			font-weight: 400;
+			line-height: 14px;
+			letter-spacing: 0em;
+			text-align: left;
+		}
+		.map__search-bar_type_search {
+			width: 100%;
+		}
 	}
 }

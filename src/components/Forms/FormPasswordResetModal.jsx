@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { closeModal } from '../../services/slices/modalSlice';
 import { getUserInfo } from '../../services/selectors/userSelector';
-import { Button } from '../Button/Button';
+import { ButtonOld } from '../Button/ButtonOld';
 import { fetchUserInfo } from '../../services/thunks/userThunk';
 
 export default function FormPasswordResetModal() {
@@ -42,7 +42,7 @@ export default function FormPasswordResetModal() {
 						<span className="password-reset-form__error">
 							{/* {'ошибка от сервера' || ''} */}
 						</span>
-						<Button
+						<ButtonOld
 							className="password-reset-form__button"
 							type="button"
 							label="На главную"

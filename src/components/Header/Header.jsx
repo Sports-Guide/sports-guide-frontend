@@ -1,18 +1,18 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import './Header.scss';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
-import { ButtonLoginSite } from '../Button/ButtonLoginSite';
-import { ButtonMap } from '../Button/ButtonMap';
-import logo from '../../images/logo.svg';
-
+import LocationIcon from '../svg/LocationIcon';
+import PlusIcon from '../svg/PlusIcon';
+import MenuIcon from '../svg/MenuIcon';
 import { getIsUserAuth } from '../../services/selectors/userSelector';
-import './Header.scss';
 import { openModal } from '../../services/slices/modalSlice';
+import { LogoLink } from '../Logo/LogoLink';
 
 export function Header() {
 	const isUserAuth = useSelector(getIsUserAuth);
-
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
@@ -23,8 +23,6 @@ export function Header() {
 		navigate('profile');
 	};
 
-	const dispatch = useDispatch();
-
 	const handleOpenModal = (type) => {
 		dispatch(openModal(type));
 	};
@@ -32,30 +30,47 @@ export function Header() {
 	return (
 		<header className="header">
 			<div className="header__container">
-				<Link to="/" className="header__logo">
-					<img className="logo" src={logo} alt="" />
-					<h4 className="header__title">СПОРТИВНЫЙ ГИД</h4>
-				</Link>
-				<Button className="button__menu-burger" />
+				<LogoLink />
+				<Button
+					type="button"
+					startIcon={<MenuIcon />}
+					disabled={false}
+					customStyle="button-menu"
+					ariaLabel="Открыть меню"
+				/>
 				<div className="header__buttons">
-					<ButtonMap label="Москва" />
 					<Button
-						className="button-app"
-						onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
-						label="Добавить площадку"
+						label="Москва"
+						type="button"
+						btnStyle="flat"
+						size="small"
+						disabled={false}
+						startIcon={<LocationIcon />}
+						ariaLabel="Выбрать город"
 					/>
-					{isUserAuth ? (
-						<ButtonLoginSite
-							onClick={navigateToPersonalArea}
-							label="Личный&nbsp;кабинет"
-						/>
-					) : (
-						<ButtonLoginSite
-							onClick={() => dispatch(openModal('login'))}
-							type="button"
-							label="Войти"
-						/>
-					)}
+					<Button
+						label="Добавить площадку"
+						type="button"
+						btnStyle="primary"
+						size="small"
+						onClick={isUserAuth ? navigateHome : () => handleOpenModal('login')}
+						startIcon={<PlusIcon />}
+						ariaLabel="Добавить площадку"
+					/>
+					<Button
+						label={isUserAuth ? 'Личный кабинет' : 'Войти'}
+						type="button"
+						btnStyle="secondary"
+						size="small"
+						ariaLabel={
+							isUserAuth ? 'Открыть личный кабинет' : 'Войти в личный кабинет'
+						}
+						onClick={
+							isUserAuth
+								? navigateToPersonalArea
+								: () => handleOpenModal('login')
+						}
+					/>
 				</div>
 			</div>
 		</header>

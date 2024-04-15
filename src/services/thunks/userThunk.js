@@ -99,6 +99,46 @@ export const fetchEditUserInfo = createAsyncThunk(
 	}
 );
 
+// Изменение аватара
+const urlChangeAvatar = `${baseURL}/users/me/upload_photo/`;
+
+// export const fetchChangeAvatar = createAsyncThunk(
+// 	'changeAvatar/post',
+// 	async ({photo}) => {
+// 		const token = localStorage.getItem('accessToken');
+// 		const formData = new FormData();
+//         formData.append('photo', photo);
+// 		await request(urlChangeAvatar, {
+// 			method: 'POST',
+// 			headers: {
+// 				// 'Content-Type': 'multipart/form-data',
+// 				Accept: 'application/json',
+// 				'Authorization': `Bearer ${token}`,
+// 			},
+// 			// body: photo,
+// 			body: formData,
+// 			// body: JSON.stringify(photo),
+// 		});
+// 	}
+// );
+export const fetchChangeAvatar = createAsyncThunk(
+	'changeAvatar/post',
+	async ({ photo }) => {
+		const token = localStorage.getItem('accessToken');
+		const formData = new FormData();
+		formData.append('photo', photo);
+		const response = await fetch(urlChangeAvatar, {
+			method: 'POST',
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+			body: formData,
+		});
+		const data = await response.json(); // Возвращаемые данные от сервера
+		return data; // Возвращаем данные для обновления state
+	}
+);
+
 // Изменение пароля
 const urlChangePassword = `${baseURL}/users/set_password/`;
 

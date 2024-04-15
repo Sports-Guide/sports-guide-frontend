@@ -14,8 +14,6 @@ export default function FormLogOut({ handleClose }) {
 
 	const handleLogOutSubmit = useCallback(() => {
 		localStorage.clear();
-		// localStorage.removeItem('accessToken');
-		// localStorage.removeItem('refreshToken');
 		setAuthFalse();
 		dispatch(closeModal());
 		navigate('/', { replace: true });
@@ -28,15 +26,17 @@ export default function FormLogOut({ handleClose }) {
 					<Form noValidate className="logout-form-container">
 						<div className="popup__button-container">
 							<Button
-								className="popup__button popup__button-y"
+								customStyle="popup__button popup__button-y"
 								type="button"
 								label="Выйти"
+								ariaLabel="Кнопка подтверждения выхода из аккаунта"
 								onClick={handleLogOutSubmit}
 							/>
 							<Button
-								className="popup__button popup__button-n"
+								customStyle="popup__button popup__button-n"
 								type="button"
 								label="Отмена"
+								ariaLabel="Кнопка отмены выхода из аккаунта и закрытия модального окна"
 								onClick={handleClose}
 							/>
 						</div>

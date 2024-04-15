@@ -1,3 +1,5 @@
+@import '../../scss/variables.scss';
+
 .card {
 	width: 325px;
 	height: 312px;
@@ -16,6 +18,7 @@
 	border-top-right-radius: 12px;
 	background-size: cover;
 	display: flex;
+	background-position: center;
 }
 
 .card__categories-container {
@@ -26,7 +29,7 @@
 }
 
 .card__categories {
-	width: 59px;
+	width: min-content;
 	height: 20px;
 	display: flex;
 	background-color: rgba(229, 240, 255, 0.5);
@@ -41,6 +44,30 @@
 	line-height: 12px;
 	text-align: left;
 	color: rgba(21, 62, 140);
+	width: min-content;
+	padding: 0 4px 0 4px;
+}
+
+.card__extra-categories {
+	display: flex;
+	height: 20px;
+	background-color: rgba(229, 240, 255, 0.5);
+	border-radius: 6px;
+	justify-content: center;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 12px;
+	text-align: left;
+	color: rgba(21, 62, 140);
+	width: min-content;
+	padding: 0 4px 0 4px;
+}
+
+.card__categories-ball {
+	width: 12px;
+	height: 12px;
+	margin-left: 2px;
 }
 
 .card__like {
@@ -63,6 +90,48 @@
 
 .card__like_active {
 	background-image: url(../../images/like.svg);
+}
+
+.card__buttons-container {
+	display: flex;
+}
+
+.card__button-settings {
+	border: none;
+	width: 20px;
+	height: 20px;
+	background-image: url('../../images/card-settings-button.svg');
+	background-color: rgba(252, 252, 252, 0.5);
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+	position: absolute;
+	right: 8px;
+	// right: 35px;
+	top: 6.5px;
+	z-index: 1;
+}
+
+.card__status {
+	display: flex;
+	position: absolute;
+	z-index: 2;
+	top: 6.5px;
+	right: 31px;
+	border: none;
+	width: fit-content;
+	background-color: rgba(252, 252, 252, 0.8);
+	color: $modal-btn-red;
+	padding: 4px 8px;
+	font-family: $font-family-roboto;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 12px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
 }
 
 .card__container {

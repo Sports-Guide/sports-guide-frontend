@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './ViewSuccessSentActivation.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '../Button/Button';
+import { ButtonOld } from '../Button/ButtonOld';
 import { setIsSentEmail } from '../../services/slices/resetPasswordSliсe';
 
 export default function ViewSuccessSentPasswordRecovery({ handleClose }) {
@@ -24,7 +24,7 @@ export default function ViewSuccessSentPasswordRecovery({ handleClose }) {
 	return (
 		<div className="view__container">
 			<p className="view__text">{text}</p>
-			<Button
+			<ButtonOld
 				className="view__button-navigate-home"
 				type="button"
 				onClick={navigateHome}

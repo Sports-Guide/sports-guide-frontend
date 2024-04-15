@@ -1,9 +1,11 @@
 import React, { useCallback } from 'react';
-import { Field } from 'formik'; // https://formik.org/ - документация библиотеки formik
+import { Field, useFormikContext } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import './InputContainer.scss';
 import InputContainer from './InputContainer';
 
 export default function InputEmail() {
+	const { errors } = useFormikContext();
+
 	const validateEmail = useCallback((value) => {
 		if (!value) {
 			return 'Поле не может быть пустым';
@@ -23,7 +25,7 @@ export default function InputEmail() {
 				id="Email"
 				type="email"
 				name="Email"
-				className="input"
+				className={`input ${errors.Email && 'input-error'}`}
 				validate={validateEmail}
 				maxLength={50}
 			/>

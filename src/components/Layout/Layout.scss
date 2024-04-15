@@ -1,0 +1,10 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+
+.layout {
+	width: 100%;
+	min-height: 100vh;
+	margin: 0 auto;
+	background: $main-background;
+	@include flex-column;
+}

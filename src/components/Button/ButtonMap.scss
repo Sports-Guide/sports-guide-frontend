@@ -1,8 +1,10 @@
+@import '../../scss/variables.scss';
+
 .button-container {
 	margin: 0;
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 4px;
 }
 .button-container__marker {
 	margin: 0;
@@ -12,14 +14,14 @@
 
 .button-map {
 	margin: 0;
-	padding: 0;
-	padding-right: 24px;
+	padding: 0 9px 0 0;
 	border: 0;
 	background-color: transparent;
 	color: var(--Primary-Gray-blue-dark, #737a8e);
 	/* Bold/Button_text */
-	font-family: Roboto;
-	font-size: 16px;
+	font-family: $font-family-roboto;
+	font-size: 14px;
+	line-height: 16px;
 	font-style: normal;
-	font-weight: 700;
+	font-weight: 400;
 }
