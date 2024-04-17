@@ -9,9 +9,9 @@ export default function InputContainer({ labelText, inputId, children }) {
 				{labelText}
 				{children}
 			</label>
-			<div className="input__error-container">
+			<div className="input__text-error-container">
 				<ErrorMessage
-					className="input__error"
+					className="input__text-error"
 					component="span"
 					name={inputId}
 				/>

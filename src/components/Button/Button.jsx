@@ -18,6 +18,7 @@ export function Button({
 	type,
 	btnStyle,
 	size,
+	additionalStyle,
 	customStyle,
 	disabled,
 	onClick,
@@ -27,7 +28,7 @@ export function Button({
 		<button
 			className={
 				!customStyle
-					? `default-button default-button_${btnStyle} default-button_${size}`
+					? `default-button default-button_${btnStyle} default-button_${size} ${additionalStyle}`
 					: customStyle
 			}
 			onClick={onClick}
@@ -49,6 +50,7 @@ Button.propTypes = {
 	type: PropTypes.oneOf(['button', 'submit', 'reset']),
 	btnStyle: PropTypes.oneOf(['primary', 'secondary', 'flat']),
 	size: PropTypes.oneOf(['big', 'small']),
+	additionalStyle: PropTypes.string,
 	onClick: PropTypes.func.isRequired,
 	disabled: PropTypes.bool,
 	customStyle: PropTypes.string,
@@ -65,6 +67,7 @@ Button.defaultProps = {
 	size: null,
 	customStyle: null,
 	ariaLabel: '',
+	additionalStyle: null,
 };
 
 export default Button;
