@@ -40,7 +40,7 @@ export default function InputPassword({ labelText, inputId }) {
 					id={inputId}
 					type={showPassword ? 'text' : 'password'}
 					name={inputId}
-					className={`input ${errors[inputId] && 'input-error'}`}
+					className={`input ${errors[inputId] && 'input_error'}`}
 					validate={validatePassword}
 					maxLength={25}
 				/>

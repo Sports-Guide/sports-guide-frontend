@@ -5,18 +5,18 @@ import './InputCheckboxRegister.scss';
 export default function InputCheckboxRegister({ inputId, children }) {
 	return (
 		<div className="checkbox-register__container">
-			<label htmlFor={inputId} className="checkbox__label">
+			<label htmlFor={inputId} className="checkbox-input__label">
 				<Field
 					id={inputId}
 					type="checkbox"
 					name={inputId}
-					className="checkbox__input"
+					className="checkbox-input"
 				/>
 				{children}
 			</label>
 			<div className="checkbox__error-container">
 				<ErrorMessage
-					className="input-checkbox-register__error"
+					className="checkbox__error"
 					component="span"
 					name={inputId}
 				/>
