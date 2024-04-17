@@ -80,8 +80,8 @@ function FormComponent() {
 	return (
 		<Form noValidate className="password-recovery-form">
 			<p className="password-recovery-form__text">
-				Введите Ваш email, используемый для входа. Мы&nbsp;вышлем письмо
-				с&nbsp;инструкцией.
+				Введите Ваш email, используемый для&nbsp;входа. На&nbsp;него придет
+				письмо с&nbsp;инструкцией.
 			</p>
 			<InputEmail />
 			<div className="password-recovery-form__error-container">
