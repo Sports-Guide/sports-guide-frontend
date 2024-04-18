@@ -3,13 +3,14 @@ import {
 	fetchLogin,
 	fetchUserInfo,
 	fetchEditUserInfo,
-	fetchNewPassword,
+	// fetchNewPassword,
 	fetchDeleteProfile,
 	fetchChangeAvatar,
 } from '../thunks/userThunk';
+import { TUserState } from '../../utils/types';
 
 // initialState хранит начальное состояние(напоминает первый аргумент в хуке useState)
-export const initialState = {
+export const initialState: TUserState = {
 	// Login
 	isLogin: false,
 	isLoadingLogin: false,
@@ -17,7 +18,6 @@ export const initialState = {
 	errorMessageLogin: '',
 	// User
 	userData: null,
-	// userPassword: '',
 	isLoadingUser: false,
 	errorUser: false,
 	errorMessageUser: '',
@@ -29,11 +29,7 @@ export const initialState = {
 	isLoadingUserData: false, // загрузка/обновление данных
 	errorEditUserData: false,
 	errorMessageEditUserData: '',
-	// Edit Password
-	isPasswordEditing: false,
-	isLoadingPassword: false,
-	errorEditPassword: false,
-	errorMessageEditPassword: '',
+	// Change photo
 	isPhotoLoading: false,
 	errorUploadPhoto: false,
 	errorMessageUploadPhoto: '',
@@ -74,12 +70,6 @@ const userSlice = createSlice({
 		clearEditUserDataError: (state) => {
 			state.errorEditUserData = false;
 			state.errorMessageEditUserData = '';
-		},
-		setIsPasswordEditingTrue: (state) => {
-			state.isPasswordEditing = true;
-		},
-		setIsPasswordEditingFalse: (state) => {
-			state.isPasswordEditing = false;
 		},
 	},
 	// extraReducers используется для изменения состояния при выполнении АПИ запросов(напоминает второй аргумент в хука useState)
@@ -140,26 +130,7 @@ const userSlice = createSlice({
 					action.error.message ||
 					'Произошла неизвестная ошибка при изменении данных пользователя';
 			})
-			.addCase(fetchNewPassword.fulfilled, (state, action) => {
-				state.userData = action.payload;
-				// state.userPassword = action.payload;
-				state.isPasswordEditing = false;
-				state.isLoadingPassword = false;
-				state.errorEditPassword = false;
-				state.errorMessageEditPassword = '';
-			})
-			.addCase(fetchNewPassword.pending, (state) => {
-				state.isLoadingPassword = true;
-				state.errorEditPassword = false;
-			})
-			.addCase(fetchNewPassword.rejected, (state, action) => {
-				state.isPasswordEditing = false;
-				state.isLoadingPassword = false;
-				state.errorEditPassword = true;
-				state.errorMessageEditPassword =
-					action.error.message ||
-					'Произошла неизвестная ошибка при изменении пароля';
-			})
+			// удаление профиля
 			.addCase(fetchDeleteProfile.fulfilled, (state) => {
 				state.userData = null;
 				state.isLogin = false;
@@ -177,8 +148,12 @@ const userSlice = createSlice({
 					action.error.message ||
 					'Произошла неизвестная ошибка при удалении профиля';
 			})
+			// замена аватара
 			.addCase(fetchChangeAvatar.fulfilled, (state, action) => {
-				state.userData.photo = action.payload.photo;
+				if (state.userData) {
+					// Проверяем, что userData не null
+					state.userData.photo = action.payload.photo;
+				}
 				state.isPhotoLoading = false;
 				state.errorUploadPhoto = false;
 			})
@@ -202,8 +177,6 @@ export const {
 	setAuthInitializing,
 	setIsUserDataEditingTrue,
 	setIsUserDataEditingFalse,
-	setIsPasswordEditingTrue,
-	setIsPasswordEditingFalse,
 	clearLoginError,
 	clearEditUserDataError,
 } = userSlice.actions;

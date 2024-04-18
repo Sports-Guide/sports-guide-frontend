@@ -1,3 +1,4 @@
+import React from 'react';
 import FormLogin from '../components/Forms/FormLogin';
 import FormRegister from '../components/Forms/FormRegister';
 import FormPasswordRecovery from '../components/Forms/FormPasswordRecovery';
@@ -9,8 +10,9 @@ import ViewSuccessSentPasswordRecovery from '../components/Popup/ViewSuccessSent
 import ViewSuccessCreateArea from '../components/Popup/ViewSuccessCreateArea';
 import ViewInformActivation from '../components/Popup/ViewInformActivation';
 import ViewGetError from '../components/Popup/ViewGetAreasError';
+import { TPopupType } from './types';
 
-export const getTitleByType = (type) => {
+export const getTitleByType = (type: TPopupType) => {
 	switch (type) {
 		case 'login': // type popup
 			return 'Вход'; // главный заголовок
@@ -43,7 +45,7 @@ export const getTitleByType = (type) => {
 	}
 };
 
-export const getTitleStyleByType = (type) => {
+export const getTitleStyleByType = (type: TPopupType) => {
 	switch (type) {
 		case 'successSentActivation': // type popup
 			return 'popup__title-left'; // стиль для заголовка(если отличается от дефолтного)
@@ -62,16 +64,20 @@ export const getTitleStyleByType = (type) => {
 	}
 };
 
-export const getContentByType = (type, handleClose) => {
+export const getContentByType = (
+	type: TPopupType,
+	handleClose: () => void
+): React.ReactNode => {
 	switch (type) {
 		case 'login':
-			return <FormLogin handleClose={handleClose} />; // то что передается во внутрь попапа
+			return <FormLogin handleClose={handleClose} />;
+		// то что передается во внутрь попапа
 		case 'register':
 			return <FormRegister />;
 		case 'passwordRecovery':
-			return <FormPasswordRecovery handleClose={handleClose} />;
+			return <FormPasswordRecovery />;
 		case 'passwordReset':
-			return <FormPasswordResetModal handleClose={handleClose} />;
+			return <FormPasswordResetModal />;
 		case 'logout':
 			return <FormLogOut handleClose={handleClose} />;
 		case 'deleteProfile':

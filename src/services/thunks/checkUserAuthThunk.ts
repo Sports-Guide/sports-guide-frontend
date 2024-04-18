@@ -3,9 +3,10 @@ import {
 	setAuthInitializing,
 	setAuthTrue,
 } from '../slices/userSlice';
+import { AppDispatch } from '../store';
 import { fetchRefreshToken, fetchVerifyToken } from './userThunk';
 
-export const checkUserAuth = () => async (dispatch) => {
+export const checkUserAuth = () => async (dispatch: AppDispatch) => {
 	dispatch(setAuthInitializing()); // устанавливем состояние что начался процесс проверки: авторизован ли пользователь
 	const accessToken = localStorage.getItem('accessToken');
 	if (!accessToken) {

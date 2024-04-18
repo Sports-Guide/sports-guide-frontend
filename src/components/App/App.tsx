@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import React, { useEffect, useCallback } from 'react';
+import { FC, useEffect, useCallback } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUserAuth } from '../../services/thunks/checkUserAuthThunk';
@@ -32,9 +32,11 @@ import {
 	fetchGetFavoriteAreas,
 	fetchGetMyAreas,
 } from '../../services/thunks/favoriteAreasThunk';
+import { modalSelector } from '../../services/selectors/modalSelector';
+import { AppDispatch } from '../../services/store';
 
-export function App() {
-	const dispatch = useDispatch();
+export const App: FC = () => {
+	const dispatch = useDispatch<AppDispatch>();
 	const location = useLocation(); // Получение текущего местоположения
 
 	// проверка авторизован ли пользователь
@@ -43,7 +45,7 @@ export function App() {
 	}, [dispatch, location]);
 
 	// параметры для установки состояний popup
-	const { isOpen, type } = useSelector((state) => state.modal);
+	const { isOpen, type } = useSelector(modalSelector);
 
 	// Закрытие модального окна
 	const handleCloseModal = useCallback(() => {
@@ -52,7 +54,7 @@ export function App() {
 
 	// Закрытие модального окна по Escape
 	useEffect(() => {
-		const handleEsc = (event) => {
+		const handleEsc = (event: KeyboardEvent) => {
 			if (event.key === 'Escape') {
 				handleCloseModal();
 			}
@@ -111,6 +113,6 @@ export function App() {
 			)}
 		</>
 	);
-}
+};
 
 export default App;

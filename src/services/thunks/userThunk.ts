@@ -4,9 +4,14 @@ import { baseURL, request } from '../../utils/api';
 // Авторизация
 const urlLogin = `${baseURL}/auth/jwt/create/`;
 
+type TUserEmailPassword = {
+	email: string;
+	password: string;
+};
+
 export const fetchLogin = createAsyncThunk(
 	'login/post',
-	async ({ email, password }) => {
+	async ({ email, password }: TUserEmailPassword) => {
 		const data = await request(urlLogin, {
 			method: 'POST',
 			headers: {
@@ -28,7 +33,7 @@ const urlVerifyToken = `${baseURL}/auth/jwt/verify/`;
 
 export const fetchVerifyToken = createAsyncThunk(
 	'verifyToken/post',
-	async ({ token }) => {
+	async ({ token }: { token: string }) => {
 		await request(urlVerifyToken, {
 			method: 'POST',
 			headers: {
@@ -47,7 +52,7 @@ const urlRefreshToken = `${baseURL}/auth/jwt/refresh/`;
 
 export const fetchRefreshToken = createAsyncThunk(
 	'refreshToken/post',
-	async ({ refresh }) => {
+	async ({ refresh }: { refresh: string }) => {
 		const data = await request(urlRefreshToken, {
 			method: 'POST',
 			headers: {
@@ -78,10 +83,15 @@ export const fetchUserInfo = createAsyncThunk('userInfo/get', async () => {
 	return data;
 });
 
+type TUserEmailNickname = {
+	email: string;
+	nickname: string;
+};
+
 // Изменение данных пользователя
 export const fetchEditUserInfo = createAsyncThunk(
 	'userInfo/patch',
-	async ({ email, nickname }) => {
+	async ({ email, nickname }: TUserEmailNickname) => {
 		const token = localStorage.getItem('accessToken');
 		const data = await request(urlUserInfo, {
 			method: 'PATCH',
@@ -102,62 +112,20 @@ export const fetchEditUserInfo = createAsyncThunk(
 // Изменение аватара
 const urlChangeAvatar = `${baseURL}/users/me/upload_photo/`;
 
-// export const fetchChangeAvatar = createAsyncThunk(
-// 	'changeAvatar/post',
-// 	async ({photo}) => {
-// 		const token = localStorage.getItem('accessToken');
-// 		const formData = new FormData();
-//         formData.append('photo', photo);
-// 		await request(urlChangeAvatar, {
-// 			method: 'POST',
-// 			headers: {
-// 				// 'Content-Type': 'multipart/form-data',
-// 				Accept: 'application/json',
-// 				'Authorization': `Bearer ${token}`,
-// 			},
-// 			// body: photo,
-// 			body: formData,
-// 			// body: JSON.stringify(photo),
-// 		});
-// 	}
-// );
 export const fetchChangeAvatar = createAsyncThunk(
 	'changeAvatar/post',
-	async ({ photo }) => {
+	async ({ photo }: { photo: string }) => {
 		const token = localStorage.getItem('accessToken');
 		const formData = new FormData();
 		formData.append('photo', photo);
-		const response = await fetch(urlChangeAvatar, {
+		const data = await request(urlChangeAvatar, {
 			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 			body: formData,
 		});
-		const data = await response.json(); // Возвращаемые данные от сервера
-		return data; // Возвращаем данные для обновления state
-	}
-);
-
-// Изменение пароля
-const urlChangePassword = `${baseURL}/users/set_password/`;
-
-export const fetchNewPassword = createAsyncThunk(
-	'newPassword/post',
-	async ({ current_password: currentPassword, new_password: newPassword }) => {
-		const token = localStorage.getItem('accessToken');
-		await request(urlChangePassword, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				current_password: currentPassword,
-				new_password: newPassword,
-			}),
-		});
+		return data;
 	}
 );
 

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { TModalState } from '../../utils/types';
 
-const initialState = {
+const initialState: TModalState = {
 	isOpen: false,
 	type: null, // 'login', 'register', 'passwordRecovery'
 };
