@@ -28,10 +28,7 @@ import {
 	fetchGetAreas,
 	fetchGetCategory,
 } from '../../services/thunks/areasThunk';
-import {
-	fetchGetFavoriteAreas,
-	fetchGetMyAreas,
-} from '../../services/thunks/favoriteAreasThunk';
+import { fetchGetMyAreas } from '../../services/thunks/favoriteAreasThunk';
 
 export function App() {
 	const dispatch = useDispatch();
@@ -67,7 +64,6 @@ export function App() {
 	useEffect(() => {
 		dispatch(fetchGetAreas());
 		dispatch(fetchGetCategory());
-		dispatch(fetchGetFavoriteAreas());
 		dispatch(fetchGetMyAreas());
 	}, [dispatch]);
 
