@@ -86,6 +86,9 @@
 }
 
 .sports-ground__gallery-item {
+	padding: 0;
+	border: none;
+	outline: none;
 	width: 171px;
 	height: 94px;
 	border-radius: 8px;
@@ -93,6 +96,7 @@
 	-moz-border-radius: 8px;
 	-ms-border-radius: 8px;
 	-o-border-radius: 8px;
+	cursor: pointer;
 }
 
 .sports-ground__button {
