@@ -25,7 +25,7 @@ export default function InputEmail() {
 				id="Email"
 				type="email"
 				name="Email"
-				className={`input ${errors.Email && 'input-error'}`}
+				className={`input ${errors.Email && 'input_error'}`}
 				validate={validateEmail}
 				maxLength={50}
 			/>

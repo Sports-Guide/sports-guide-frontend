@@ -2,11 +2,10 @@ import { Formik, Form, useFormikContext } from 'formik'; // https://formik.org/ 
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './FormRegister.scss';
-import { ButtonOld } from '../Button/ButtonOld';
+import { Button } from '../Button/Button';
 import InputEmail from '../Inputs/InputEmail';
 import InputPassword from '../Inputs/InputPassword';
 import InputNickname from '../Inputs/InputNickname';
-import { ButtonOnLoginPopUp } from '../Button/ButtonOnLoginPopUp';
 import { fetchRegister } from '../../services/thunks/registerUserThunk';
 import { openModal } from '../../services/slices/modalSlice';
 import { clearRegisterError } from '../../services/slices/registerUserSliсe';
@@ -62,11 +61,12 @@ export default function FormRegister() {
 			>
 				{() => <FormComponent />}
 			</Formik>
-			<ButtonOnLoginPopUp
+			<Button
 				onClick={() => dispatch(openModal('login'))}
 				label="Войти"
 				type="button"
-				disabled={false}
+				btnStyle="flat"
+				size="big"
 			/>
 		</div>
 	);
@@ -110,8 +110,10 @@ function FormComponent() {
 			<span className="register-form__server-error">
 				{errorMessageRegister || ''}
 			</span>
-			<ButtonOld
-				className="register-form__button-register"
+			<Button
+				additionalStyle="register-form__button-register"
+				btnStyle="primary"
+				size="big"
 				type="submit"
 				label={isLoadingRegister ? 'Регистрация...' : 'Зарегистрироваться'}
 			/>

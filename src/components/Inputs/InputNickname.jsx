@@ -1,16 +1,19 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {
+	useCallback,
+	// useEffect
+} from 'react';
 import { Field, useFormikContext } from 'formik'; // https://formik.org/ - документация библиотеки formik
 import './InputContainer.scss';
 import InputContainer from './InputContainer';
 
 export default function InputNickname() {
-	const { values, setFieldValue } = useFormikContext();
-	// const { values, setFieldValue, errors } = useFormikContext();
+	// const { values, setFieldValue } = useFormikContext();
+	const { errors } = useFormikContext();
 
 	// не даём пользователю нажать пробел в начале и конце строки
-	useEffect(() => {
-		setFieldValue('Nickname', values.Nickname.trim());
-	}, [values.Nickname, setFieldValue]);
+	// useEffect(() => {
+	// 	setFieldValue('Nickname', values.Nickname.trim());
+	// }, [values.Nickname, setFieldValue]);
 
 	const validateNickname = useCallback((value) => {
 		if (!value) {
@@ -31,8 +34,8 @@ export default function InputNickname() {
 				id="Nickname"
 				type="text"
 				name="Nickname"
-				className="input"
-				// className={`input ${errors.Nickname && "input-error"}`}
+				// className="input"
+				className={`input ${errors.Nickname && 'input_error'}`}
 				validate={validateNickname}
 				maxLength={20}
 			/>

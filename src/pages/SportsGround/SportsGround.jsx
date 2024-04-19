@@ -7,6 +7,10 @@ import { Slider } from '../../components/Slider/Slider';
 import { bordersOfRussia, defaultState } from '../../constants/MapConstants';
 import { areasList } from '../../services/selectors/areaSelector';
 import ButtonLike from '../../components/Button/ButtonLike';
+import {
+	renderImageForSportsGround,
+	renderImage,
+} from '../../utils/renderImage';
 
 export default function SportsGround() {
 	const { id } = useParams();
@@ -48,17 +52,17 @@ export default function SportsGround() {
 			</div>
 			<div className="sports-ground__grounds-gallery">
 				<Slider>
-					{selectedArea.images.map((imageObj) => (
+					{renderImageForSportsGround(selectedArea).map((area) => (
 						<img
-							key={imageObj.image}
+							key={area.id}
 							className="sports-ground__photo"
-							src={imageObj.image}
+							src={area.image}
 							alt="Площадка"
 						/>
 					))}
 				</Slider>
 				<div className="sports-ground__gallery">
-					{selectedArea.images.map((area) => (
+					{renderImageForSportsGround(selectedArea).map((area) => (
 						<img
 							key={area.id}
 							className="sports-ground__gallery-item"
@@ -112,7 +116,7 @@ export default function SportsGround() {
 							balloonContentBody: `
 								
 									<div class = "yandex">
-									<img class = "yandex__images" src="${selectedArea.images[0].image}">
+									<img class = "yandex__images" src="${renderImage(selectedArea)}">
 									<div class = "yandex__contetn">
 									<h1 class = "yandex__title" >${selectedArea.name}</h1>
 									<p class = "yandex__subtitle">${selectedArea.description}</p>

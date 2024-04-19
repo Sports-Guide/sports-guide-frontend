@@ -103,7 +103,7 @@ const userSlice = createSlice({
 				state.errorLogin = true;
 				state.errorMessageLogin =
 					action.error.message || 'Произошла неизвестная ошибка';
-				console.log(action.error); // вывести описание ошибки
+				console.log(action); // вывести описание ошибки
 			})
 			// получение данных пользователя
 			.addCase(fetchUserInfo.fulfilled, (state, action) => {
