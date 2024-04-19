@@ -23,24 +23,24 @@
 }
 
 .arrow {
-    display: flex;
-    border: none;
-    outline: none;
-    width: 36px;
-    height: 36px;
-    position: absolute;
-    background-color: rgba(252, 252, 252, 0.8);
-    z-index: 2;
+	display: flex;
+	border: none;
+	outline: none;
+	width: 36px;
+	height: 36px;
+	position: absolute;
+	background-color: rgba(252, 252, 252, 0.8);
+	z-index: 2;
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
 	background-size: 20px;
 	top: 50%;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
 	cursor: pointer;
 }
 
