@@ -1,18 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchGetCoordsForArea } from '../thunks/getCoordsForAreaThunk';
+import { TCoordsForAreaState } from '../../utils/types';
 
-export const initialState = {
+const initialState: TCoordsForAreaState = {
 	coordsForArea: [],
 	isLoadingcoordsForArea: false,
 	errorCoordsForArea: false,
 	errorMessageCoordsForArea: '',
 };
 
-const getCoordsForAreaSliсe = createSlice({
+const getCoordsForAreaSlice = createSlice({
 	name: 'getCoordsForArea',
 	initialState,
 	reducers: {
-		setCoordsForArea: (state, action) => {
+		setCoordsForArea: (state, action: PayloadAction<number[][]>) => {
 			state.coordsForArea = action.payload;
 		},
 	},
@@ -32,12 +33,12 @@ const getCoordsForAreaSliсe = createSlice({
 				state.coordsForArea = [];
 				state.isLoadingcoordsForArea = false;
 				state.errorCoordsForArea = true;
-				state.errorMessageGetAreas =
+				state.errorMessageCoordsForArea =
 					action.error.message ||
 					'Произошла неизвестная ошибка. Попробуйте повторить позже';
 			});
 	},
 });
 
-export const { setCoordsForArea } = getCoordsForAreaSliсe.actions;
-export default getCoordsForAreaSliсe.reducer;
+export const { setCoordsForArea } = getCoordsForAreaSlice.actions;
+export default getCoordsForAreaSlice.reducer;

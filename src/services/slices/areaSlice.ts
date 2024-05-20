@@ -1,12 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
 	fetchAddArea,
 	fetchGetAreas,
 	fetchGetCategory,
 	fetchGetAreaComments,
 } from '../thunks/areasThunk';
+import {
+	TAreaState,
+	CoordinatesArray,
+	SportGrounds,
+	Comments,
+	Categories,
+} from '../../utils/types';
 
-export const initialState = {
+export const initialState: TAreaState = {
 	address: '',
 	coordinates: [],
 	areasToShow: [],
@@ -34,19 +41,19 @@ const areaSlice = createSlice({
 	name: 'area',
 	initialState,
 	reducers: {
-		setAddress: (state, action) => {
+		setAddress: (state, action: PayloadAction<string>) => {
 			state.address = action.payload;
 		},
-		setCoordinates: (state, action) => {
+		setCoordinates: (state, action: PayloadAction<CoordinatesArray>) => {
 			state.coordinates = action.payload;
 		},
-		setAreasToShow: (state, action) => {
+		setAreasToShow: (state, action: PayloadAction<SportGrounds>) => {
 			state.areasToShow = action.payload;
 		},
-		setIsAreaAdded: (state, action) => {
+		setIsAreaAdded: (state, action: PayloadAction<boolean>) => {
 			state.isAreaAdded = action.payload;
 		},
-		setIsAreaError: (state, action) => {
+		setIsAreaError: (state, action: PayloadAction<boolean>) => {
 			state.isAreaError = action.payload;
 		},
 	},
@@ -70,11 +77,14 @@ const areaSlice = createSlice({
 					action.error.message ||
 					'Произошла неизвестная ошибка. Попробуйте повторить позже';
 			})
-			.addCase(fetchGetAreas.fulfilled, (state, action) => {
-				state.areasList = action.payload;
-				state.isLoadingGetAreas = false;
-				state.errorGetAreas = false;
-			})
+			.addCase(
+				fetchGetAreas.fulfilled,
+				(state, action: PayloadAction<SportGrounds>) => {
+					state.areasList = action.payload;
+					state.isLoadingGetAreas = false;
+					state.errorGetAreas = false;
+				}
+			)
 			.addCase(fetchGetAreas.pending, (state) => {
 				state.areasList = [];
 				state.isLoadingGetAreas = true;
@@ -88,11 +98,14 @@ const areaSlice = createSlice({
 					action.error.message ||
 					'Произошла неизвестная ошибка. Попробуйте повторить позже';
 			})
-			.addCase(fetchGetCategory.fulfilled, (state, action) => {
-				state.categoryList = action.payload;
-				state.isLoadingGetCategory = false;
-				state.errorGetCategory = false;
-			})
+			.addCase(
+				fetchGetCategory.fulfilled,
+				(state, action: PayloadAction<Categories>) => {
+					state.categoryList = action.payload;
+					state.isLoadingGetCategory = false;
+					state.errorGetCategory = false;
+				}
+			)
 			.addCase(fetchGetCategory.pending, (state) => {
 				state.categoryList = [];
 				state.isLoadingGetCategory = true;
@@ -105,11 +118,15 @@ const areaSlice = createSlice({
 				state.errorMessageGetCategory =
 					action.error.message || 'Произошла неизвестная ошибка';
 			})
-			.addCase(fetchGetAreaComments.fulfilled, (state, action) => {
-				state.areaInfo = action.payload;
-				state.isLoadingAreaInfo = false;
-				state.errorAreaInfo = false;
-			})
+			.addCase(
+				fetchGetAreaComments.fulfilled,
+				(state, action: PayloadAction<Comments>) => {
+					state.areaInfo = action.payload;
+					console.log(action.payload);
+					state.isLoadingAreaInfo = false;
+					state.errorAreaInfo = false;
+				}
+			)
 			.addCase(fetchGetAreaComments.pending, (state) => {
 				state.isLoadingAreaInfo = true;
 				state.errorAreaInfo = false;

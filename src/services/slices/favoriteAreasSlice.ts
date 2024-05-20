@@ -1,12 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
 	fetchGetFavoriteAreas,
 	fetchAddAreaToFavorite,
 	fetchDeleteAreaFromFavorite,
 	fetchGetMyAreas,
 } from '../thunks/favoriteAreasThunk';
+import {
+	TFavoriteAreaState,
+	SportGround,
+	SportGrounds,
+} from '../../utils/types';
 
-export const initialState = {
+export const initialState: TFavoriteAreaState = {
 	favoriteAreasList: [],
 	isLoadingGetFavoriteAreas: false,
 	errorGetFavoriteAreas: false,
@@ -24,15 +29,17 @@ export const initialState = {
 const favoriteAreasSlice = createSlice({
 	name: 'favoriteAreas',
 	initialState,
-	// reducers: {
-	// },
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchGetFavoriteAreas.fulfilled, (state, action) => {
-				state.favoriteAreasList = action.payload;
-				state.isLoadingGetFavoriteAreas = false;
-				state.errorGetFavoriteAreas = false;
-			})
+			.addCase(
+				fetchGetFavoriteAreas.fulfilled,
+				(state, action: PayloadAction<SportGrounds>) => {
+					state.favoriteAreasList = action.payload;
+					state.isLoadingGetFavoriteAreas = false;
+					state.errorGetFavoriteAreas = false;
+				}
+			)
 			.addCase(fetchGetFavoriteAreas.pending, (state) => {
 				state.favoriteAreasList = [];
 				state.isLoadingGetFavoriteAreas = true;
@@ -45,11 +52,14 @@ const favoriteAreasSlice = createSlice({
 				state.errorMessageFavoriteAreas =
 					action.error.message || 'Произошла неизвестная ошибка';
 			})
-			.addCase(fetchAddAreaToFavorite.fulfilled, (state, action) => {
-				state.favoriteAreasList.push(action.payload);
-				state.isLoadingAddToFavoriteAreas = false;
-				state.errorAddToFavoriteAreas = false;
-			})
+			.addCase(
+				fetchAddAreaToFavorite.fulfilled,
+				(state, action: PayloadAction<SportGround>) => {
+					state.favoriteAreasList.push(action.payload);
+					state.isLoadingAddToFavoriteAreas = false;
+					state.errorAddToFavoriteAreas = false;
+				}
+			)
 			.addCase(fetchAddAreaToFavorite.pending, (state) => {
 				state.isLoadingAddToFavoriteAreas = true;
 				state.errorAddToFavoriteAreas = false;
@@ -60,13 +70,16 @@ const favoriteAreasSlice = createSlice({
 				state.errorMessageFavoriteAreas =
 					action.error.message || 'Произошла неизвестная ошибка';
 			})
-			.addCase(fetchDeleteAreaFromFavorite.fulfilled, (state, action) => {
-				state.favoriteAreasList = state.favoriteAreasList.filter(
-					(area) => area.id !== action.payload.id
-				);
-				state.isLoadingDeleteFromFavoriteAreas = false;
-				state.errorDeleteFromFavoriteAreas = false;
-			})
+			.addCase(
+				fetchDeleteAreaFromFavorite.fulfilled,
+				(state, action: PayloadAction<SportGround>) => {
+					state.favoriteAreasList = state.favoriteAreasList.filter(
+						(area) => area.id !== action.payload.id
+					);
+					state.isLoadingDeleteFromFavoriteAreas = false;
+					state.errorDeleteFromFavoriteAreas = false;
+				}
+			)
 			.addCase(fetchDeleteAreaFromFavorite.pending, (state) => {
 				state.isLoadingDeleteFromFavoriteAreas = true;
 				state.errorDeleteFromFavoriteAreas = false;
@@ -77,11 +90,14 @@ const favoriteAreasSlice = createSlice({
 				state.errorMessageFavoriteAreas =
 					action.error.message || 'Произошла неизвестная ошибка';
 			})
-			.addCase(fetchGetMyAreas.fulfilled, (state, action) => {
-				state.myAreasList = action.payload;
-				state.isLoadingGetMyAreas = false;
-				state.errorGetMyAreas = false;
-			})
+			.addCase(
+				fetchGetMyAreas.fulfilled,
+				(state, action: PayloadAction<SportGrounds>) => {
+					state.myAreasList = action.payload;
+					state.isLoadingGetMyAreas = false;
+					state.errorGetMyAreas = false;
+				}
+			)
 			.addCase(fetchGetMyAreas.pending, (state) => {
 				state.myAreasList = [];
 				state.isLoadingGetMyAreas = true;

@@ -1,21 +1,30 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseURL, request } from '../../utils/api';
+import {
+	SportGrounds,
+	Categories,
+	Comments,
+	AddAreaRequestData,
+} from '../../utils/types';
 
 const urlAreas = `${baseURL}/areas/`;
 const urlCategory = `${baseURL}/categories/`;
 
-export const fetchGetAreas = createAsyncThunk('areas/get', async () => {
-	const data = await request(urlAreas, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
-		},
-	});
-	return data;
-});
+export const fetchGetAreas = createAsyncThunk<SportGrounds>(
+	'areas/get',
+	async () => {
+		const data = await request(urlAreas, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+		});
+		return data;
+	}
+);
 
-export const fetchAddArea = createAsyncThunk(
+export const fetchAddArea = createAsyncThunk<void, AddAreaRequestData>(
 	'area/post',
 	async (requestData) => {
 		const { address, description, latitude, longitude, categories, images } =
@@ -40,18 +49,21 @@ export const fetchAddArea = createAsyncThunk(
 	}
 );
 
-export const fetchGetCategory = createAsyncThunk('category/get', async () => {
-	const data = await request(urlCategory, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			Accept: 'application/json',
-		},
-	});
-	return data;
-});
+export const fetchGetCategory = createAsyncThunk<Categories>(
+	'category/get',
+	async () => {
+		const data = await request(urlCategory, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+		});
+		return data;
+	}
+);
 
-export const fetchGetAreaComments = createAsyncThunk(
+export const fetchGetAreaComments = createAsyncThunk<Comments, number>(
 	'areaInfo/get',
 	async (id) => {
 		const data = await request(`${urlAreas}${id}/`, {

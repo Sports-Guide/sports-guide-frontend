@@ -3,7 +3,7 @@ import { request } from '../../utils/api';
 
 const urlCoords = 'https://nominatim.openstreetmap.org/search?';
 
-export const fetchGetCoordsForArea = createAsyncThunk(
+export const fetchGetCoordsForArea = createAsyncThunk<number[][], string>(
 	'coords/get',
 	async (area) => {
 		const params = new URLSearchParams({
@@ -12,7 +12,7 @@ export const fetchGetCoordsForArea = createAsyncThunk(
 					? area
 					: `${area} административный округ, Москва`,
 			format: 'json',
-			polygon_geojson: 1,
+			polygon_geojson: '1',
 		});
 
 		const options = {
@@ -24,13 +24,17 @@ export const fetchGetCoordsForArea = createAsyncThunk(
 		};
 
 		const data = await request(`${urlCoords}${params}`, options);
-		let coords = [];
+		let coords: number[][] = [];
 		if (data && data.length > 0) {
 			const firstResult = data[0];
 			if (firstResult.geojson && firstResult.geojson.coordinates) {
 				const polygonCoordinates = firstResult.geojson.coordinates;
-				let modifiedCoordinates = [];
-				if (polygonCoordinates.every((subArray) => subArray.length === 1)) {
+				let modifiedCoordinates: number[][] = [];
+				if (
+					polygonCoordinates.every(
+						(subArray: number[][]) => subArray.length === 1
+					)
+				) {
 					modifiedCoordinates = polygonCoordinates.flat();
 				} else {
 					modifiedCoordinates = polygonCoordinates;
