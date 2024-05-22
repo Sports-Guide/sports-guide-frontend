@@ -1,24 +1,24 @@
-// /* eslint-disable */
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../YandexMap/YandexMap.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../services/store'; // Предполагая, что у вас есть эти типы
 import { setAddress } from '../../services/slices/areaSlice';
 import { addressSelector } from '../../services/selectors/areaSelector';
 
-function InputSuggest() {
+const InputSuggest: React.FC = () => {
 	const location = useLocation();
-	const dispatch = useDispatch();
+	const dispatch: AppDispatch = useDispatch();
 	const areaPath = location.pathname === '/app-area';
-	const address = useSelector(addressSelector);
+	const address = useSelector((state: RootState) => addressSelector(state));
 
-	const handleChange = (e) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(setAddress(e.target.value));
 	};
 
 	// Обнуление значения инпута при каждом изменении страницы
 	useEffect(() => {
-		const suggestInput = document.getElementById('suggest');
+		const suggestInput = document.getElementById('suggest') as HTMLInputElement;
 		if (suggestInput) {
 			suggestInput.value = '';
 		}
@@ -40,13 +40,13 @@ function InputSuggest() {
 	) : (
 		<input
 			type="text"
-			className="map__search-bar map__search-bar_type_search "
+			className="map__search-bar map__search-bar_type_search"
 			id="suggest"
 			placeholder="Введите адрес"
 			onChange={handleChange}
 			value={address}
 		/>
 	);
-}
+};
 
 export default InputSuggest;

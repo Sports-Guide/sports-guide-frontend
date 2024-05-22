@@ -12,16 +12,17 @@ import {
 	areasList,
 	areasErrorMessage,
 } from '../../services/selectors/areaSelector';
+import { AppDispatch } from '../../services/store';
 
-export default function Main() {
-	const { uid, token } = useParams();
-	const dispatch = useDispatch();
+const Main: React.FC = () => {
+	const { uid, token } = useParams<{ uid: string; token: string }>();
+	const dispatch: AppDispatch = useDispatch();
 	const areas = useSelector(areasList);
 	const areasError = useSelector(areasErrorMessage);
 
-	const [selectedArea, setSelectedArea] = useState('');
-	const [isPolygonShow, setIsPolygonShow] = useState(false);
-	const [isCardListShow, setIsCardListShow] = useState(false);
+	const [selectedArea, setSelectedArea] = useState<string>('');
+	const [isPolygonShow, setIsPolygonShow] = useState<boolean>(false);
+	const [isCardListShow, setIsCardListShow] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (areasError) {
@@ -31,13 +32,14 @@ export default function Main() {
 
 	useEffect(() => {
 		if (uid && token) {
-			dispatch(openModal('informActivation'));
+			dispatch(openModal({ type: 'informActivation' }));
 			dispatch(fetchUserActivation({ uid, token }));
 		}
 	}, [uid, token, dispatch]);
 
-	// фильтрация по категории
-	const handleCategoryChange = (event) => {
+	const handleCategoryChange = (
+		event: React.ChangeEvent<HTMLSelectElement>
+	) => {
 		const selectedCategory = event.target.value;
 		if (selectedCategory === 'Вид спорта') {
 			return dispatch(setAreasToShow(areas));
@@ -48,8 +50,7 @@ export default function Main() {
 		return dispatch(setAreasToShow(filteredAreas));
 	};
 
-	// Выбор округа
-	const handleAreaChange = (event) => {
+	const handleAreaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		if (isCardListShow) {
 			return;
 		}
@@ -79,7 +80,6 @@ export default function Main() {
 				<CardList />
 			) : (
 				<YandexMap
-					handleAreaChange={handleAreaChange}
 					selectedArea={selectedArea}
 					isPolygonShow={isPolygonShow}
 					setIsPolygonShow={setIsPolygonShow}
@@ -88,4 +88,6 @@ export default function Main() {
 			)}
 		</main>
 	);
-}
+};
+
+export default Main;

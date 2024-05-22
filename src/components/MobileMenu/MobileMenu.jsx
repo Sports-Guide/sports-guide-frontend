@@ -89,7 +89,7 @@ function MobileMenu({
 
 MobileMenu.propTypes = {
 	isMobileMenuOpen: PropTypes.bool.isRequired,
-	setIsMobileMenuOpen: PropTypes.bool.isRequired,
+	setIsMobileMenuOpen: PropTypes.func.isRequired,
 	handleAreaChange: PropTypes.func.isRequired,
 	handleCategoryChange: PropTypes.func.isRequired,
 	setIsPolygonShow: PropTypes.func.isRequired,

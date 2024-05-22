@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './YandexMap.scss';
 import { Map, Placemark, Clusterer, Polygon } from '@pbe/react-yandex-maps';
-import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetCoordsForArea } from '../../services/thunks/getCoordsForAreaThunk';
@@ -21,17 +20,26 @@ import {
 	defaultState,
 } from '../../constants/MapConstants';
 import { renderImage } from '../../utils/renderImage';
+import { Coordinates, SportGround } from '../../utils/types';
+import { AppDispatch } from '../../services/store';
 
-function YandexMap({
+interface YandexMapProps {
+	isPolygonShow: boolean;
+	setIsPolygonShow: React.Dispatch<React.SetStateAction<boolean>>;
+	selectedArea: string | null;
+	isCardListShow: boolean;
+}
+
+const YandexMap: React.FC<YandexMapProps> = ({
 	isPolygonShow,
 	setIsPolygonShow,
 	selectedArea,
 	isCardListShow,
-}) {
+}) => {
 	const location = useLocation();
-	const ref = useRef();
+	const ref = useRef<any>(null);
 	const areaPath = location.pathname === '/app-area';
-	const dispatch = useDispatch();
+	const dispatch: AppDispatch = useDispatch();
 
 	const areasToShow = useSelector(areasToShowSelector);
 	const coordsForAreaError = useSelector(coordsForAreaErrorMessage);
@@ -42,7 +50,6 @@ function YandexMap({
 	const coordinates = useSelector(coordinatesSelector);
 	const [mapState, setMapState] = useState(defaultState);
 
-	// рендер границ округов
 	useEffect(() => {
 		if (!isCardListShow && selectedArea) {
 			dispatch(fetchGetCoordsForArea(selectedArea));
@@ -55,27 +62,26 @@ function YandexMap({
 		}
 	}, [coordsForAreaError, dispatch]);
 
-	// Добавление клика на карту, запись адреса и координат в стейт
-	const handleMapClick = useCallback((e, ymaps) => {
-		const point = e.get('coords');
-		dispatch(setCoordinates([point]));
-		ymaps.geocode(point).then((res) => {
-			const firstGeoObject = res.geoObjects.get(0);
-			const addressLine = firstGeoObject.getAddressLine();
-			dispatch(setAddress(addressLine));
-		}); // eslint-disable-next-line
-	}, []);
+	const handleMapClick = useCallback(
+		(e: any, ymaps: any) => {
+			const point: Coordinates = e.get('coords');
+			dispatch(setCoordinates([point]));
+			ymaps.geocode(point).then((res: any) => {
+				const firstGeoObject = res.geoObjects.get(0);
+				const addressLine = firstGeoObject.getAddressLine();
+				dispatch(setAddress(addressLine));
+			}); // eslint-disable-next-line
+		},
+		[dispatch]
+	);
 
-	const loadSuggest = (ymaps) => {
-		// Подключение поисковой подсказки
+	const loadSuggest = (ymaps: any) => {
 		const suggestView = new ymaps.SuggestView('suggest', {
-			// ограничение зоны поисковой подсказки
 			boundedBy: displayBorder,
 			strictBounds: displayBorder,
 		});
-		let selectedItem = null;
-		// Получение коодинат по поисковому запросу
-		suggestView.events.add('select', (event) => {
+		let selectedItem: any = null;
+		suggestView.events.add('select', (event: any) => {
 			selectedItem = event.get('item');
 			dispatch(setAddress(selectedItem.value));
 			if (isCardListShow || !ref.current) {
@@ -85,13 +91,10 @@ function YandexMap({
 				.geocode(selectedItem.value, {
 					results: 2,
 				})
-				.then((res) => {
+				.then((res: any) => {
 					const firstGeoObject = res.geoObjects.get(0);
-					// координаты запрашиваемого обьекта
 					const coords = firstGeoObject.geometry.getCoordinates();
-					// координаты для корректного зума карты
 					const bounds = firstGeoObject.properties.get('boundedBy');
-					// обновление стейтов
 					ref.current.setBounds(bounds, { checkZoomRange: true });
 					dispatch(setCoordinates([coords]));
 					setMapState((prevState) => ({
@@ -99,13 +102,12 @@ function YandexMap({
 						center: coords,
 					}));
 				})
-				.catch((err) => {
+				.catch((err: any) => {
 					console.log(err);
 				});
 		});
 	};
 
-	// Зум при выборе округа
 	useEffect(() => {
 		if (isCardListShow || !ref.current) {
 			return;
@@ -121,7 +123,7 @@ function YandexMap({
 
 	useEffect(() => {
 		if (isPolygonShow) {
-			ref.current.events.add('boundschange', (e) => {
+			ref.current.events.add('boundschange', (e: any) => {
 				const newZoom = e.get('newZoom');
 				if (newZoom >= 13) {
 					setIsPolygonShow(false);
@@ -140,12 +142,12 @@ function YandexMap({
 				onLoad={(ymaps) => {
 					loadSuggest(ymaps);
 					if (areaPath) {
-						// добавление клика на карту
-						ref.current.events.add('click', (e) => handleMapClick(e, ymaps));
+						ref.current.events.add('click', (e: any) =>
+							handleMapClick(e, ymaps)
+						);
 					}
 				}}
 				options={{
-					// ограничение максимальной зоны отображения - граница России
 					restrictMapArea: bordersOfRussia,
 				}}
 			>
@@ -161,9 +163,12 @@ function YandexMap({
 					/>
 				) : null}
 				{areaPath
-					? coordinates.map((point, index) => (
-							// eslint-disable-next-line
-							<Placemark key={index} geometry={point} draggable />
+					? coordinates.map((point) => (
+							<Placemark
+								key={`${point[0]}-${point[1]}`}
+								geometry={point}
+								draggable
+							/>
 						))
 					: null}
 				<Clusterer
@@ -172,47 +177,46 @@ function YandexMap({
 						groupByCoordinates: false,
 					}}
 				>
-					{areasToDisplay.map((area) => (
+					{areasToDisplay.map((area: SportGround) => (
 						<Placemark
 							key={area.id}
 							geometry={[parseFloat(area.latitude), parseFloat(area.longitude)]}
 							properties={{
 								balloonContentBody: `
-								   <a class = "yandex-link"  href='/sports-ground/${area.id}' target="_blank"${
-											area.id
-										}" target="_blank">
-									<div class = "yandex">
-									<img class="yandex__images" src="${renderImage(area)}">
-									<div class = "yandex__contetn">
-									<h1 class = "yandex__title" >${area.name}</h1>
-									<p class = "yandex__subtitle">${area.address}</p>
-									<div class = "yandex__categories">
-									${area.categories
-										.slice(0, 2)
-										.map(
-											(categor) =>
-												`<div class = "yandex__category">
-											<img class = "yandex__small-img" src="${categor.icon}" alt="значек категории">
-											<p class = "yandex__small-text">${categor.name}</p>
-											</div>`
-										)
-										.join('')}
-									${
-										area.categories.length > 2
-											? '<span class="card__extra-categories">' +
-												`+${area.categories.length - 2}` +
-												'</span>'
-											: ''
-									}
-									</div>
-									</div>
-									</div>
-									</a>
-									`,
+                  <a class="yandex-link" href='/sports-ground/${
+										area.id
+									}' target="_blank">
+                    <div class="yandex">
+                      <img class="yandex__images" src="${renderImage(area)}">
+                      <div class="yandex__content">
+                        <h1 class="yandex__title">${area.name}</h1>
+                        <p class="yandex__subtitle">${area.address}</p>
+                        <div class="yandex__categories">
+                          ${area.categories
+														.slice(0, 2)
+														.map(
+															(category) =>
+																`<div class="yandex__category">
+                                  <img class="yandex__small-img" src="${category.icon}" alt="значок категории">
+                                  <p class="yandex__small-text">${category.name}</p>
+                                </div>`
+														)
+														.join('')}
+                          ${
+														area.categories.length > 2
+															? '<span class="card__extra-categories">' +
+																`+${area.categories.length - 2}` +
+																'</span>'
+															: ''
+													}
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                `,
 							}}
 							options={{
 								preset: 'islands#blueSportIcon',
-								controls: [],
 								visible: true,
 								cursor: 'pointer',
 							}}
@@ -222,13 +226,6 @@ function YandexMap({
 			</Map>
 		</div>
 	);
-}
-
-YandexMap.propTypes = {
-	selectedArea: PropTypes.arrayOf.isRequired,
-	isPolygonShow: PropTypes.bool.isRequired,
-	setIsPolygonShow: PropTypes.func.isRequired,
-	isCardListShow: PropTypes.bool.isRequired,
 };
 
 export default YandexMap;

@@ -1,23 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
 	fetchRegister,
 	fetchResendActivation,
 	fetchUserActivation,
 } from '../thunks/registerUserThunk';
+import { TRegisterUserState } from '../../utils/types';
 
-export const initialState = {
-	// register
+// Начальное состояние
+const initialState: TRegisterUserState = {
 	email: '',
 	isRegister: false,
 	isLoadingRegister: false,
 	errorRegister: false,
 	errorMessageRegister: '',
-	// user activation
 	isUserActivation: false,
 	isLoadingUserActivation: false,
 	errorUserActivation: false,
 	errorMessageUserActivation: '',
-	// user resend activation
 	isResendActivation: false,
 	isLoadingResendActivation: false,
 	errorResendActivation: false,
@@ -42,12 +41,15 @@ const registerUserSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			// register
-			.addCase(fetchRegister.fulfilled, (state, action) => {
-				state.email = action.payload;
-				state.isRegister = true;
-				state.isLoadingRegister = false;
-				state.errorRegister = false;
-			})
+			.addCase(
+				fetchRegister.fulfilled,
+				(state, action: PayloadAction<string>) => {
+					state.email = action.payload;
+					state.isRegister = true;
+					state.isLoadingRegister = false;
+					state.errorRegister = false;
+				}
+			)
 			.addCase(fetchRegister.pending, (state) => {
 				state.isRegister = false;
 				state.isLoadingRegister = true;
@@ -79,13 +81,15 @@ const registerUserSlice = createSlice({
 					action.error.message || 'Произошла неизвестная ошибка';
 			})
 			// user resend activation
-			.addCase(fetchResendActivation.fulfilled, (state, action) => {
-				state.email = action.payload;
-				state.isResendActivation = true;
-				state.isLoadingResendActivation = false;
-				state.errorResendActivation = false;
-				console.log(action.payload);
-			})
+			.addCase(
+				fetchResendActivation.fulfilled,
+				(state, action: PayloadAction<string>) => {
+					state.email = action.payload;
+					state.isResendActivation = true;
+					state.isLoadingResendActivation = false;
+					state.errorResendActivation = false;
+				}
+			)
 			.addCase(fetchResendActivation.pending, (state) => {
 				state.isResendActivation = false;
 				state.isLoadingResendActivation = true;

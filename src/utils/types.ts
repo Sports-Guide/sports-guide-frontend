@@ -161,3 +161,31 @@ export interface TCoordsForAreaState {
 	errorCoordsForArea: boolean;
 	errorMessageCoordsForArea: string;
 }
+
+export interface TRegisterUserState {
+	email: string;
+	isRegister: boolean;
+	isLoadingRegister: boolean;
+	errorRegister: boolean;
+	errorMessageRegister: string;
+	isUserActivation: boolean;
+	isLoadingUserActivation: boolean;
+	errorUserActivation: boolean;
+	errorMessageUserActivation: string;
+	isResendActivation: boolean;
+	isLoadingResendActivation: boolean;
+	errorResendActivation: boolean;
+	errorMessageResendActivation: string;
+}
+
+export interface TResetPasswordState {
+	email: string;
+	isSentEmail: boolean;
+	isLoadingSentEmail: boolean;
+	errorSentEmail: boolean;
+	errorMessageSentEmail: string;
+	isConfirmPassword: boolean;
+	isLoadingConfirmPassword: boolean;
+	errorConfirmPassword: boolean;
+	errorMessageConfirmPassword: string;
+}

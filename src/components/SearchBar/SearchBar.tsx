@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../YandexMap/YandexMap.scss';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { areaOptions } from '../../constants/OptionsConstants';
 import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
 import MobileMenu from '../MobileMenu/MobileMenu';
-
 import { categoryList } from '../../services/selectors/areaSelector';
 import InputSuggest from '../Inputs/InputSuggest';
 
-function SearchBar({
+interface SearchBarProps {
+	// eslint-disable-next-line no-unused-vars
+	handleCategoryChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+	// eslint-disable-next-line no-unused-vars
+	handleAreaChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+	setIsCardListShow: React.Dispatch<React.SetStateAction<boolean>>;
+	isCardListShow: boolean;
+	setIsPolygonShow: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({
 	handleCategoryChange,
 	handleAreaChange,
 	setIsCardListShow,
 	isCardListShow,
 	setIsPolygonShow,
-}) {
+}) => {
 	const location = useLocation();
 	const areaPath = location.pathname === '/app-area';
 	const categories = useSelector(categoryList);
@@ -43,22 +51,26 @@ function SearchBar({
 							}}
 						/>
 						<select
-							type="text"
 							className="map__search-bar map__search-bar_kinds-of-sports"
 							onChange={handleCategoryChange}
 						>
 							<option selected>Вид спорта</option>
 							{categories.map((option) => (
-								<option key={option.id}>{option.name}</option>
+								<option key={option.id} value={option.name}>
+									{option.name}
+								</option>
 							))}
 						</select>
 						<select
-							type="text"
 							className="map__search-bar map__search-bar_area"
 							onChange={handleAreaChange}
 						>
 							{areaOptions.map((option) => (
-								<option key={option.id} selected={option.id === 1}>
+								<option
+									key={option.id}
+									value={option.value}
+									selected={option.id === 1}
+								>
 									{option.value}
 								</option>
 							))}
@@ -81,14 +93,6 @@ function SearchBar({
 			)}
 		</div>
 	);
-}
-
-SearchBar.propTypes = {
-	handleAreaChange: PropTypes.func.isRequired,
-	handleCategoryChange: PropTypes.func.isRequired,
-	setIsCardListShow: PropTypes.bool.isRequired,
-	isCardListShow: PropTypes.bool.isRequired,
-	setIsPolygonShow: PropTypes.bool.isRequired,
 };
 
 export default SearchBar;

@@ -1,32 +1,31 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
 	fetchConfirmPasswordReset,
 	fetchInitiatingPasswordReset,
 	fetchResendActivationEmail,
 } from '../thunks/resetPasswordThunk';
+import { TResetPasswordState } from '../../utils/types';
 
-export const initialState = {
-	// initiating password reset & resend activation
+const initialState: TResetPasswordState = {
 	email: '',
 	isSentEmail: false,
 	isLoadingSentEmail: false,
 	errorSentEmail: false,
 	errorMessageSentEmail: '',
-	// confirm password reset
 	isConfirmPassword: false,
 	isLoadingConfirmPassword: false,
 	errorConfirmPassword: false,
 	errorMessageConfirmPassword: '',
 };
 
-const resetPasswordSliсe = createSlice({
+const resetPasswordSlice = createSlice({
 	name: 'resetPassword',
 	initialState,
 	reducers: {
 		setIsSentEmail: (state) => {
 			state.isSentEmail = false;
 		},
-		setEmail: (state, action) => {
+		setEmail: (state, action: PayloadAction<string>) => {
 			state.email = action.payload;
 		},
 		clearSentEmailError: (state) => {
@@ -76,6 +75,7 @@ const resetPasswordSliсe = createSlice({
 				state.errorMessageConfirmPassword =
 					action.error.message || 'Произошла неизвестная ошибка';
 			})
+			// resend activation email
 			.addCase(fetchResendActivationEmail.fulfilled, (state) => {
 				state.isSentEmail = true;
 				state.isLoadingSentEmail = false;
@@ -101,5 +101,5 @@ export const {
 	clearSentEmailError,
 	setEmail,
 	clearConfirmPasswordError,
-} = resetPasswordSliсe.actions;
-export default resetPasswordSliсe.reducer;
+} = resetPasswordSlice.actions;
+export default resetPasswordSlice.reducer;
