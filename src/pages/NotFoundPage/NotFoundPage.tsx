@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NotFoundPage.scss';
 import image404 from '../../images/image404.svg';
 
-export default function PageNotFound() {
+const PageNotFound: FC = () => {
 	const navigate = useNavigate();
 
 	const handleGoBack = () => {
@@ -24,4 +24,6 @@ export default function PageNotFound() {
 			</div>
 		</main>
 	);
-}
+};
+
+export default PageNotFound;

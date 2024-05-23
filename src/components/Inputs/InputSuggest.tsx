@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../YandexMap/YandexMap.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../services/store'; // Предполагая, что у вас есть эти типы
+import { RootState, AppDispatch } from '../../services/store';
 import { setAddress } from '../../services/slices/areaSlice';
 import { addressSelector } from '../../services/selectors/areaSelector';
 

@@ -82,32 +82,32 @@ const SportsGround: React.FC = () => {
 					))}
 				</div>
 			</div>
-			<div className="category-section">
-				<h3 className="category-title">Виды спорта</h3>
-				<div className="category-container">
+			<div className="sports-ground__category-section">
+				<h3 className="sports-ground__category-title">Виды спорта</h3>
+				<div className="sports-ground__category-container">
 					{selectedArea.categories.map((category) => (
-						<span className="category-background">
+						<span className="sports-ground__category-background">
 							<img
 								src={category.icon}
 								alt="знак категории"
-								className="category-ball"
+								className="sports-ground__category-ball"
 							/>
-							<span key={category.id} className="category-name">
+							<span key={category.id} className="sports-ground__category-name">
 								{category.name}
 							</span>
 						</span>
 					))}
 				</div>
 			</div>
-			<div className="category-section">
+			<div className="sports-ground__category-section">
 				<h3 className="sports-ground__title">О площадке</h3>
 				<p className="sports-ground__subtitle">{selectedArea.description}</p>
 			</div>
-			<div className="category-section">
+			<div className="sports-ground__category-section">
 				<h3 className="sports-ground__title">Комментарии к площадке</h3>
 				<p className="sports-ground__subtitle">Здесь будут комментарии</p>
 			</div>
-			<div className="category-section">
+			<div className="sports-ground__category-section">
 				<h3 className="sports-ground__title">Расположение</h3>
 				<Map
 					state={mapState}

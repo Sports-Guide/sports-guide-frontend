@@ -1,226 +1,204 @@
 @import '../../scss/variables.scss';
-
-.sports-ground__title {
-	font-family: $font-family-roboto-flex;
-	font-size: 28px;
-	font-weight: 900;
-	line-height: 36px;
-	margin: 35px 0 0;
-	font-variation-settings:
-		'wdth' 128,
-		'GRAD' 42,
-		'slnt' 0,
-		'XTRA' 516,
-		'XOPQ' 96,
-		'YOPQ' 79,
-		'YTLC' 544,
-		'YTUC' 712,
-		'YTAS' 750,
-		'YTDE' -203,
-		'YTFI' 738;
-}
+@import '../../scss/mixins.scss';
 
 .sports-ground {
 	padding: 31px 0 126px 0;
-	display: flex;
-	flex-direction: column;
+	@include flex-column;
 	align-self: center;
 	width: 1040px;
-}
 
-.sports-ground__adress-container {
-	display: flex;
-	margin: 0;
-	align-items: center;
-}
-
-.sports-ground__adress-icon {
-	width: 16px;
-	height: 16px;
-	background-image: url(../../images/adress-icon.svg);
-	background-position: center;
-	background-size: cover;
-	margin-right: 8px;
-}
-
-.sports-ground__link {
-	color: $accent-blue;
-	text-decoration: none;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 20px;
-	text-align: left;
-	margin: 40px 0 0;
-	padding: 10px 0;
-}
-
-.sports-ground__adress {
-	color: $main-black-light;
-	text-align: center;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 19px;
-	text-align: center;
-	margin: 0;
-}
-
-.sports-ground__button-container {
-	display: flex;
-	flex-direction: row;
-	gap: 8px;
-}
-
-.sports-ground__grounds-gallery {
-	display: flex;
-	width: 772px;
-	margin: 20px 0;
-	gap: 8px;
-}
-
-.sports-ground__gallery {
-	display: flex;
-	flex-direction: column;
-	width: 171px;
-	gap: 8px;
-}
-
-.sports-ground__gallery-item {
-	width: 171px;
-	height: 94px;
-	border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	-ms-border-radius: 8px;
-	-o-border-radius: 8px;
-}
-
-.sports-ground__button {
-	border: none;
-	padding: 0;
-	width: 206px;
-	height: 36px;
-	font-family: $font-family-roboto;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 20px;
-	color: $main-gray-blue-dark;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	margin: 21px 0 0px 0;
-	border-radius: 8px;
-}
-
-.sports-ground__button-text {
-	font-family: $font-family-roboto;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 20px;
-}
-
-.sports-ground__button-text_active {
-	color: $accent-blue-button-focused;
-}
-
-.sports-ground__button-like {
-	margin: 0;
-	width: 16px;
-	height: 16px;
-	background-image: url('../../images/noLike.svg');
-	background-repeat: no-repeat;
-	background-position: center;
-}
-.sports-ground__button-like_active {
-	background-image: url(../../images/like.svg);
-}
-
-.sports-ground__button-warning {
-	margin: 0;
-	width: 16px;
-	height: 16px;
-	background-image: url(../../images/icn_warning.svg);
-	background-repeat: no-repeat;
-	background-position: center;
-}
-
-.sports-ground__photo {
-	width: 593px;
-	height: 400px;
-	border-radius: 10px;
-}
-
-.category-section {
-	margin-bottom: 32px;
-	background: $main-white;
-	padding: 24px 0 24px 24px;
-	max-width: 772px;
-	border-radius: 12px;
-}
-
-.category-title {
-	font-family: $font-family-roboto-flex;
-	color: $main-black;
-	margin: 0;
-	text-align: left;
-	font-size: 20px;
-	font-weight: 900;
-	line-height: 24px;
-	letter-spacing: 0.01em;
-	text-align: left;
-	font-variation-settings:
-		'wdth' 128,
-		'GRAD' 42,
-		'slnt' 0,
-		'XTRA' 516,
-		'XOPQ' 96,
-		'YOPQ' 79,
-		'YTLC' 544,
-		'YTUC' 712,
-		'YTAS' 750,
-		'YTDE' -203,
-		'YTFI' 738;
-}
-
-.category-container {
-	margin-top: 20px;
-	display: flex;
-	gap: 12px;
-	justify-content: flex-start;
-}
-
-.category-icon {
-	width: 24px;
-	height: 24px;
-	background-image: url(../../images/ion_football.png);
-	background-position: center;
-	background-size: cover;
-}
-
-.category-name {
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 16px;
-	color: $accent-dark-blue;
-	padding: 0 12px 0 4px;
-	width: min-content;
-}
-
-.category-background {
-	width: min-content;
-	height: 36px;
-	background-color: $accent-light-blue;
-	border-radius: 6px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.category-ball {
-	width: 16px;
-	height: 16px;
-	margin-left: 8px;
+	&__title {
+		font-family: $font-family-roboto-flex;
+		font-size: 28px;
+		font-weight: 900;
+		line-height: 36px;
+		margin: 35px 0 0;
+		font-variation-settings: $font-variation-settings-title;
+	}
+	&__adress-container {
+		display: flex;
+		margin: 0;
+		align-items: center;
+	}
+	&__adress-icon {
+		width: 16px;
+		height: 16px;
+		background-image: url(../../images/adress-icon.svg);
+		background-position: center;
+		background-size: cover;
+		margin-right: 8px;
+	}
+	&__link {
+		color: $accent-blue;
+		text-decoration: none;
+		@include button-text-small-size;
+		text-align: left;
+		margin: 40px 0 0;
+		padding: 10px 0;
+	}
+	&__adress {
+		color: $main-black-light;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 19px;
+		text-align: center;
+		margin: 0;
+	}
+	&__button-container {
+		display: flex;
+		flex-direction: row;
+		gap: 8px;
+	}
+	&__grounds-gallery {
+		display: flex;
+		width: 772px;
+		margin: 20px 0;
+		gap: 8px;
+	}
+	&__gallery {
+		@include flex-column;
+		width: 171px;
+		gap: 8px;
+	}
+	&__gallery-item {
+		width: 171px;
+		height: 94px;
+		border-radius: 8px;
+		-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		-ms-border-radius: 8px;
+		-o-border-radius: 8px;
+	}
+	&__button {
+		border: none;
+		padding: 0;
+		width: 206px;
+		height: 36px;
+		font-family: $font-family-roboto;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+		color: $main-gray-blue-dark;
+		@include flex-center;
+		gap: 8px;
+		margin: 21px 0 0px 0;
+		border-radius: 8px;
+	}
+	&__button-text {
+		font-family: $font-family-roboto;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 20px;
+	}
+	&__button-text_active {
+		color: $accent-blue-button-focused;
+	}
+	&__button-like {
+		margin: 0;
+		width: 16px;
+		height: 16px;
+		background-image: url('../../images/noLike.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	&__button-like_active {
+		background-image: url(../../images/like.svg);
+	}
+	&__button-warning {
+		margin: 0;
+		width: 16px;
+		height: 16px;
+		background-image: url(../../images/icn_warning.svg);
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	&__photo {
+		width: 593px;
+		height: 400px;
+		border-radius: 10px;
+	}
+	&__not-found {
+		font-size: 20px;
+		font-weight: 900;
+		line-height: 24px;
+		letter-spacing: 0.01em;
+		display: flex;
+		align-self: center;
+		padding: 80px 0 0 0;
+	}
+	&__title {
+		color: $main-black;
+		margin: 0;
+		text-align: left;
+		font-size: 20px;
+		font-weight: 900;
+		line-height: 24px;
+		letter-spacing: 0.01em;
+		padding-bottom: 8px;
+		font-variation-settings: $font-variation-settings-title;
+	}
+	&__subtitle {
+		font-family: $font-family-roboto;
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 20px;
+		text-align: left;
+		color: $main-black-light;
+		margin: 0;
+	}
+	&__map-container {
+		max-width: 724px;
+		height: 340px;
+	}
+	&__map-container .ymaps-2-1-79-map {
+		max-width: 724px;
+	}
+	&__category-section {
+		margin-bottom: 32px;
+		background: $main-white;
+		padding: 24px 0 24px 24px;
+		max-width: 772px;
+		border-radius: 12px;
+	}
+	&__category-title {
+		font-family: $font-family-roboto-flex;
+		color: $main-black;
+		margin: 0;
+		text-align: left;
+		font-size: 20px;
+		font-weight: 900;
+		line-height: 24px;
+		letter-spacing: 0.01em;
+		text-align: left;
+		font-variation-settings: $font-variation-settings-title;
+	}
+	&__category-container {
+		margin-top: 20px;
+		display: flex;
+		gap: 12px;
+		justify-content: flex-start;
+	}
+	&__category-name {
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 16px;
+		color: $accent-dark-blue;
+		padding: 0 12px 0 4px;
+		width: min-content;
+	}
+	&__category-background {
+		width: min-content;
+		height: 36px;
+		background-color: $accent-light-blue;
+		border-radius: 6px;
+		@include flex-center;
+	}
+	&__category-ball {
+		width: 16px;
+		height: 16px;
+		margin-left: 8px;
+	}
 }
 
 .comments-section {
@@ -237,58 +215,6 @@
 	line-height: 32px;
 }
 
-.sports-ground__not-found {
-	font-size: 20px;
-	font-weight: 900;
-	line-height: 24px;
-	letter-spacing: 0.01em;
-	display: flex;
-	align-self: center;
-	padding: 80px 0 0 0;
-}
-
-.sports-ground__title {
-	color: $main-black;
-	margin: 0;
-	text-align: left;
-	font-size: 20px;
-	font-weight: 900;
-	line-height: 24px;
-	letter-spacing: 0.01em;
-	padding-bottom: 8px;
-	font-variation-settings:
-		'wdth' 128,
-		'GRAD' 42,
-		'slnt' 0,
-		'XTRA' 486,
-		'XOPQ' 96,
-		'YOPQ' 79,
-		'YTLC' 544,
-		'YTUC' 712,
-		'YTAS' 750,
-		'YTDE' -203,
-		'YTFI' 738;
-}
-
-.sports-ground__subtitle {
-	font-family: $font-family-roboto;
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 20px;
-	text-align: left;
-	color: $main-black-light;
-	margin: 0;
-}
-
-.sports-ground__map-container {
-	max-width: 724px;
-	height: 340px;
-}
-
-.sports-ground__map-container .ymaps-2-1-79-map {
-	max-width: 724px;
-}
-
 @media screen and (max-width: 660px) {
 	.sports-ground__adress {
 		font-family: $font-family-roboto;
@@ -300,43 +226,45 @@
 }
 
 @media screen and (max-width: 469px) {
-	.sports-ground__adress {
-		width: 90%;
-	}
+	.sports-ground {
+		&__adress {
+			width: 90%;
+		}
 
-	.sports-ground__button {
-		width: 150px;
-	}
-	.sports-ground__button-text {
-		display: none;
-	}
-	.sports-ground__map {
-		height: 392px;
-		padding: 12px 12px 12px 12px;
-	}
-	.sports-ground__title {
-		padding-bottom: 8px;
-		font-size: 16px;
-		font-weight: 700;
-		line-height: 20px;
-	}
-	.sports-ground__subtitle {
-		font-size: 12px;
-		font-weight: 400;
-		line-height: 20px;
-	}
-	.sports-ground__description {
-		padding: 12px 12px 12px 12px;
-	}
-	.category-section {
-		padding: 12px 0 12px 12px;
-	}
-	.category-title {
-		font-size: 16px;
-		font-weight: 700;
-		line-height: 20px;
-	}
-	.category-container {
-		margin-top: 12px;
+		&__button {
+			width: 150px;
+		}
+		&__button-text {
+			display: none;
+		}
+		&__map {
+			height: 392px;
+			padding: 12px 12px 12px 12px;
+		}
+		&__title {
+			padding-bottom: 8px;
+			font-size: 16px;
+			font-weight: 700;
+			line-height: 20px;
+		}
+		&__subtitle {
+			font-size: 12px;
+			font-weight: 400;
+			line-height: 20px;
+		}
+		&__description {
+			padding: 12px 12px 12px 12px;
+		}
+		&__category-section {
+			padding: 12px 0 12px 12px;
+		}
+		&__category-title {
+			font-size: 16px;
+			font-weight: 700;
+			line-height: 20px;
+		}
+		&__category-container {
+			margin-top: 12px;
+		}
 	}
 }
