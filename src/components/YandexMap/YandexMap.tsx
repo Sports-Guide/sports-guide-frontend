@@ -4,13 +4,20 @@ import { Map, Placemark, Clusterer, Polygon } from '@pbe/react-yandex-maps';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGetCoordsForArea } from '../../services/thunks/getCoordsForAreaThunk';
-import { setAddress, setCoordinates } from '../../services/slices/areaSlice';
+import {
+	setAddress,
+	setCoordinates,
+	setIsPolygonShow,
+} from '../../services/slices/areaSlice';
 import {
 	coordinatesSelector,
 	areasToShowSelector,
 	areasList,
 	coordsForAreaList,
 	coordsForAreaErrorMessage,
+	isCardListShowStatus,
+	isPolygonShowStatus,
+	selectedAreaStatus,
 } from '../../services/selectors/areaSelector';
 import { openModal } from '../../services/slices/modalSlice';
 import {
@@ -23,31 +30,22 @@ import { renderImage } from '../../utils/renderImage';
 import { Coordinates, SportGround } from '../../utils/types';
 import { AppDispatch } from '../../services/store';
 
-interface YandexMapProps {
-	isPolygonShow: boolean;
-	setIsPolygonShow: React.Dispatch<React.SetStateAction<boolean>>;
-	selectedArea: string | null;
-	isCardListShow: boolean;
-}
-
-const YandexMap: React.FC<YandexMapProps> = ({
-	isPolygonShow,
-	setIsPolygonShow,
-	selectedArea,
-	isCardListShow,
-}) => {
+const YandexMap: React.FC = () => {
 	const location = useLocation();
 	const ref = useRef<any>(null);
 	const areaPath = location.pathname === '/app-area';
 	const dispatch: AppDispatch = useDispatch();
 
 	const areasToShow = useSelector(areasToShowSelector);
+	const selectedArea = useSelector(selectedAreaStatus);
 	const coordsForAreaError = useSelector(coordsForAreaErrorMessage);
 	const areas = useSelector(areasList);
 	const coordsForArea = useSelector(coordsForAreaList);
+	const isCardListShow = useSelector(isCardListShowStatus);
 	const areasToDisplay = areaPath ? areas : areasToShow;
 
 	const coordinates = useSelector(coordinatesSelector);
+	const isPolygonShow = useSelector(isPolygonShowStatus);
 	const [mapState, setMapState] = useState(defaultState);
 
 	useEffect(() => {
@@ -70,7 +68,7 @@ const YandexMap: React.FC<YandexMapProps> = ({
 				const firstGeoObject = res.geoObjects.get(0);
 				const addressLine = firstGeoObject.getAddressLine();
 				dispatch(setAddress(addressLine));
-			}); // eslint-disable-next-line
+			});
 		},
 		[dispatch]
 	);
@@ -103,6 +101,7 @@ const YandexMap: React.FC<YandexMapProps> = ({
 					}));
 				})
 				.catch((err: any) => {
+					// eslint-disable-next-line
 					console.log(err);
 				});
 		});
@@ -122,15 +121,18 @@ const YandexMap: React.FC<YandexMapProps> = ({
 	}, [selectedArea, isCardListShow]);
 
 	useEffect(() => {
-		if (isPolygonShow) {
+		if (areaPath) {
+			dispatch(setIsPolygonShow(false));
+		}
+		if (isPolygonShow && !areaPath) {
 			ref.current.events.add('boundschange', (e: any) => {
 				const newZoom = e.get('newZoom');
 				if (newZoom >= 13) {
-					setIsPolygonShow(false);
+					dispatch(setIsPolygonShow(false));
 				}
 			});
 		}
-	}, [isPolygonShow, setIsPolygonShow, isCardListShow]);
+	}, [isPolygonShow, isCardListShow, dispatch, areaPath]);
 
 	return (
 		<div className={areaPath ? 'map_area-app' : 'map'}>

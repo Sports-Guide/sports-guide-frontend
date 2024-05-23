@@ -1,11 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './Card.scss';
-import PropTypes from 'prop-types';
 import ButtonLike from '../Button/ButtonLike';
 import { renderImage } from '../../utils/renderImage';
+import { SportGround } from '../../utils/types';
 
-function Card({ area }) {
+interface CardProps {
+	area: SportGround;
+}
+
+const Card: React.FC<CardProps> = ({ area }) => {
 	// проверяем, что категорий > 2
 	const hasExtraCategories = area.categories.length > 2;
 	const areaModerationStatus = area.moderation_status;
@@ -68,10 +72,6 @@ function Card({ area }) {
 			</a>
 		</div>
 	);
-}
-
-Card.propTypes = {
-	area: PropTypes.objectOf.isRequired,
 };
 
 export default Card;

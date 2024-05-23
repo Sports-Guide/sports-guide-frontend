@@ -1,19 +1,23 @@
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	fetchAddAreaToFavorite,
 	fetchDeleteAreaFromFavorite,
 } from '../../services/thunks/favoriteAreasThunk';
 import { favoriteAreaList } from '../../services/selectors/areaSelector';
+import { SportGround } from '../../utils/types';
+import { AppDispatch } from '../../services/store';
 
-function ButtonLike({ area }) {
+interface ButtonLikeProps {
+	area: SportGround;
+}
+const ButtonLike: React.FC<ButtonLikeProps> = ({ area }) => {
 	const location = useLocation();
-	const dispatch = useDispatch();
+	const dispatch: AppDispatch = useDispatch();
 	const mainPath = location.pathname === '/';
 	const favoriteAreasList = useSelector(favoriteAreaList);
-	const [isLiked, setIsLiked] = useState(false);
+	const [isLiked, setIsLiked] = useState<boolean>(false);
 
 	useEffect(() => {
 		const isAreaLiked = favoriteAreasList.some(
@@ -58,10 +62,6 @@ function ButtonLike({ area }) {
 			)}
 		</button>
 	);
-}
-
-ButtonLike.propTypes = {
-	area: PropTypes.objectOf.isRequired,
 };
 
 export default ButtonLike;

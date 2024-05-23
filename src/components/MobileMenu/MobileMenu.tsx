@@ -1,30 +1,44 @@
 import './MobileMenu.scss';
-import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { areaOptions } from '../../constants/OptionsConstants';
 import { categoryList } from '../../services/selectors/areaSelector';
+import { setIsPolygonShow } from '../../services/slices/areaSlice';
+import { AppDispatch } from '../../services/store';
 
-function MobileMenu({
+interface MobileMenuProps {
+	isMobileMenuOpen: boolean;
+	setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	// eslint-disable-next-line no-unused-vars
+	handleCategoryChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+	// eslint-disable-next-line no-unused-vars
+	handleAreaChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+const MobileMenu: React.FC<MobileMenuProps> = ({
 	isMobileMenuOpen,
 	setIsMobileMenuOpen,
 	handleCategoryChange,
 	handleAreaChange,
-	setIsPolygonShow,
-}) {
-	const [selectedCategory, setSelectedCategory] = useState('');
-	const [selectedMobileArea, setSelectedMobileArea] = useState('');
+}) => {
+	const [selectedCategory, setSelectedCategory] = useState<string>('');
+	const [selectedMobileArea, setSelectedMobileArea] = useState<string>('');
 	const categories = useSelector(categoryList);
+	const dispatch: AppDispatch = useDispatch();
 
 	const handleClear = () => {
 		setSelectedCategory('Вид спорта');
 		setSelectedMobileArea('Все округа');
-		setIsPolygonShow(false);
+		dispatch(setIsPolygonShow(false));
 	};
 
 	const handleClick = () => {
-		handleCategoryChange({ target: { value: selectedCategory } });
-		handleAreaChange({ target: { value: selectedMobileArea } });
+		handleCategoryChange({
+			target: { value: selectedCategory },
+		} as React.ChangeEvent<HTMLSelectElement>);
+		handleAreaChange({
+			target: { value: selectedMobileArea },
+		} as React.ChangeEvent<HTMLSelectElement>);
 		setIsMobileMenuOpen(!isMobileMenuOpen);
 	};
 
@@ -52,7 +66,6 @@ function MobileMenu({
 			</div>
 			<div className="mobile-menu__input-container">
 				<select
-					type="text"
 					className="mobile-menu__input"
 					value={selectedCategory}
 					onChange={(e) => setSelectedCategory(e.target.value)}
@@ -63,7 +76,6 @@ function MobileMenu({
 					))}
 				</select>
 				<select
-					type="text"
 					className="mobile-menu__input"
 					value={selectedMobileArea}
 					onChange={(e) => setSelectedMobileArea(e.target.value)}
@@ -85,14 +97,6 @@ function MobileMenu({
 			</button>
 		</aside>
 	);
-}
-
-MobileMenu.propTypes = {
-	isMobileMenuOpen: PropTypes.bool.isRequired,
-	setIsMobileMenuOpen: PropTypes.func.isRequired,
-	handleAreaChange: PropTypes.func.isRequired,
-	handleCategoryChange: PropTypes.func.isRequired,
-	setIsPolygonShow: PropTypes.func.isRequired,
 };
 
 export default MobileMenu;

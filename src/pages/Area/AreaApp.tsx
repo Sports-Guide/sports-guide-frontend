@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Multiselect from 'multiselect-react-dropdown';
 import './AreaApp.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,9 +22,11 @@ import {
 	setIsAreaAdded,
 	setIsAreaError,
 } from '../../services/slices/areaSlice';
+import { AppDispatch } from '../../services/store';
+import { Categories, AddAreaRequestData } from '../../utils/types';
 
-export default function AreaApp() {
-	const dispatch = useDispatch();
+const AreaApp: React.FC = () => {
+	const dispatch: AppDispatch = useDispatch();
 	const categories = useSelector(categoryList);
 	const address = useSelector(addressSelector);
 	const coordinates = useSelector(coordinatesSelector);
@@ -33,23 +34,23 @@ export default function AreaApp() {
 	const isAreaAdded = useSelector(isAreaAddedStatus);
 	const isAreaAddError = useSelector(isAreaAddedError);
 
-	const [options, setOptions] = useState(categories);
+	const [options, setOptions] = useState<Categories>(categories);
 
 	// отправка формы на сервер
-	const [areaDescription, setAreaDiscriptin] = useState([]);
+	const [areaDescription, setAreaDiscriptin] = useState<string>('');
 	// добавление категорий
-	const [category, setCategory] = useState([]);
-	const [categoryCount, setCategoryCount] = useState(0);
+	const [category, setCategory] = useState<any[]>([]);
+	const [categoryCount, setCategoryCount] = useState<number>(0);
 	// добавление фотографий
-	const [addFoto, setAddFoto] = useState([]);
+	const [addFoto, setAddFoto] = useState<File[]>([]);
 
-	const [fotoFour, setFotoFour] = useState(true);
-	const [largeFoto, setLargeFoto] = useState('');
+	const [fotoFour, setFotoFour] = useState<boolean>(true);
+	const [largeFoto, setLargeFoto] = useState<string>('');
 
 	// настройка под разные разрешения экрана
 	const browserWindowSize = window.innerWidth;
-	const [windowSize, setWindowSize] = useState(true);
-	const [isSubmitAvailable, setIsSubmitAvailable] = useState(false);
+	const [windowSize, setWindowSize] = useState<boolean>(true);
+	const [isSubmitAvailable, setIsSubmitAvailable] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (categoryError) {
@@ -63,12 +64,12 @@ export default function AreaApp() {
 
 	// широта
 
-	const handlDescription = (e) => {
+	const handlDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		setAreaDiscriptin(e.target.value);
 	};
 
-	const handleFoto = (e) => {
-		const file = Array.from(e.target.files);
+	const handleFoto = (e: ChangeEvent<HTMLInputElement>) => {
+		const file = Array.from(e.target.files || []);
 		if (file.length === 4) {
 			setFotoFour(false);
 			setAddFoto(file);
@@ -81,27 +82,22 @@ export default function AreaApp() {
 		}
 	};
 
-	const handleDeletePhoto = (index) => {
+	const handleDeletePhoto = (index: number) => {
 		const filteredFoto = addFoto.filter((_, i) => i !== index);
 		setAddFoto(filteredFoto);
 	};
 
-	// const handleCategories = (e) => {
-	// 	setCategory(e.target.value);
-	// };
-
-	const handleSubmit = (event) => {
+	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		dispatch(
-			fetchAddArea({
-				address,
-				description: areaDescription,
-				latitude: coordinates.map((cord) => cord[0]),
-				longitude: coordinates.map((cord) => cord[1]),
-				categories: category.map((categor) => categor.id),
-				images: addFoto,
-			})
-		);
+		const requestData: AddAreaRequestData = {
+			address,
+			description: areaDescription,
+			latitude: coordinates.map((cord) => cord[0].toString()).join(', '),
+			longitude: coordinates.map((cord) => cord[1].toString()).join(', '),
+			categories: category.map((categor) => categor.id.toString()),
+			images: addFoto,
+		};
+		dispatch(fetchAddArea(requestData));
 	};
 
 	useEffect(() => {
@@ -168,13 +164,10 @@ export default function AreaApp() {
 								setCategory(event);
 								setCategoryCount((prevCount) => prevCount - 1);
 							}}
-							// onChange={handleCategories}
 						/>
 					</div>
 					<div className="location">
-						<p htmlFor="text" className="location__label">
-							Адрес площадки
-						</p>
+						<p className="location__label">Адрес площадки</p>
 						<SearchBar />
 						<YandexMap />
 					</div>
@@ -253,10 +246,12 @@ export default function AreaApp() {
 							)}
 
 							{addFoto.map((file, index) => (
-								<div className="foto-file__container" key={file}>
+								// eslint-disable-next-line
+								<div className="foto-file__container" key={index}>
 									<ButtonOld
 										className="button-clouse-foto-file"
 										onClick={() => handleDeletePhoto(index)}
+										disabled={!isSubmitAvailable}
 									/>
 									<img
 										className="foto-file__add-server"
@@ -289,4 +284,6 @@ export default function AreaApp() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default AreaApp;

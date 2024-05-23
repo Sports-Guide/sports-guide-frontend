@@ -1,34 +1,58 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../YandexMap/YandexMap.scss';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { areaOptions } from '../../constants/OptionsConstants';
 import WelcomeBanner from '../WelcomeBanner/WelcomeBanner';
 import MobileMenu from '../MobileMenu/MobileMenu';
-import { categoryList } from '../../services/selectors/areaSelector';
+import {
+	categoryList,
+	isCardListShowStatus,
+	areasList,
+} from '../../services/selectors/areaSelector';
 import InputSuggest from '../Inputs/InputSuggest';
-
-interface SearchBarProps {
-	// eslint-disable-next-line no-unused-vars
-	handleCategoryChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-	// eslint-disable-next-line no-unused-vars
-	handleAreaChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-	setIsCardListShow: React.Dispatch<React.SetStateAction<boolean>>;
-	isCardListShow: boolean;
-	setIsPolygonShow: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const SearchBar: React.FC<SearchBarProps> = ({
-	handleCategoryChange,
-	handleAreaChange,
+import {
 	setIsCardListShow,
-	isCardListShow,
 	setIsPolygonShow,
-}) => {
+	setSelectedArea,
+	setAreasToShow,
+} from '../../services/slices/areaSlice';
+import { AppDispatch } from '../../services/store';
+
+const SearchBar: React.FC = () => {
 	const location = useLocation();
 	const areaPath = location.pathname === '/app-area';
+	const areas = useSelector(areasList);
 	const categories = useSelector(categoryList);
-	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+	const isCardListShow = useSelector(isCardListShowStatus);
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+	const dispatch: AppDispatch = useDispatch();
+
+	const handleAreaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		if (isCardListShow) {
+			return;
+		}
+		dispatch(setIsPolygonShow(true));
+		const selectedCurrentArea = event.target.value;
+		if (selectedCurrentArea === 'Все округа') {
+			dispatch(setSelectedArea('город Москва'));
+			return;
+		}
+		dispatch(setSelectedArea(selectedCurrentArea));
+	};
+
+	const handleCategoryChange = (
+		event: React.ChangeEvent<HTMLSelectElement>
+	) => {
+		const selectedCategory = event.target.value;
+		if (selectedCategory === 'Вид спорта') {
+			return dispatch(setAreasToShow(areas));
+		}
+		const filteredAreas = areas.filter((area) =>
+			area.categories.some((category) => category.name === selectedCategory)
+		);
+		return dispatch(setAreasToShow(filteredAreas));
+	};
 
 	return (
 		<div className="map__search">
@@ -46,8 +70,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
 							}`}
 							aria-label="Переключатель отображения"
 							onClick={() => {
-								setIsCardListShow(!isCardListShow);
-								setIsPolygonShow(false);
+								dispatch(setIsCardListShow(!isCardListShow));
+								dispatch(setIsPolygonShow(false));
 							}}
 						/>
 						<select
@@ -87,7 +111,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
 						isMobileMenuOpen={isMobileMenuOpen}
 						handleAreaChange={handleAreaChange}
 						handleCategoryChange={handleCategoryChange}
-						setIsPolygonShow={setIsPolygonShow}
 					/>
 				</div>
 			)}

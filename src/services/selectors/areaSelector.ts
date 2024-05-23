@@ -14,5 +14,10 @@ export const coordsForAreaErrorMessage = (state: RootState) =>
 	state.getCoordsForArea.errorCoordsForArea;
 export const isAreaAddedStatus = (state: RootState) => state.area.isAreaAdded;
 export const isAreaAddedError = (state: RootState) => state.area.isAreaError;
+export const isCardListShowStatus = (state: RootState) =>
+	state.area.isCardListShow;
+export const isPolygonShowStatus = (state: RootState) =>
+	state.area.isPolygonShow;
+export const selectedAreaStatus = (state: RootState) => state.area.selectedArea;
 export const favoriteAreaList = (state: RootState) =>
 	state.favoriteAreas.favoriteAreasList;

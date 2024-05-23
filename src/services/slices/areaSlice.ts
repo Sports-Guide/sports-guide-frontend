@@ -17,6 +17,9 @@ export const initialState: TAreaState = {
 	address: '',
 	coordinates: [],
 	areasToShow: [],
+	isCardListShow: false,
+	isPolygonShow: false,
+	selectedArea: '',
 	isAreaAdded: false,
 	isAreaLoading: false,
 	isAreaError: false,
@@ -49,6 +52,15 @@ const areaSlice = createSlice({
 		},
 		setAreasToShow: (state, action: PayloadAction<SportGrounds>) => {
 			state.areasToShow = action.payload;
+		},
+		setIsCardListShow: (state, action: PayloadAction<boolean>) => {
+			state.isCardListShow = action.payload;
+		},
+		setIsPolygonShow: (state, action: PayloadAction<boolean>) => {
+			state.isPolygonShow = action.payload;
+		},
+		setSelectedArea: (state, action: PayloadAction<string>) => {
+			state.selectedArea = action.payload;
 		},
 		setIsAreaAdded: (state, action: PayloadAction<boolean>) => {
 			state.isAreaAdded = action.payload;
@@ -122,7 +134,6 @@ const areaSlice = createSlice({
 				fetchGetAreaComments.fulfilled,
 				(state, action: PayloadAction<Comments>) => {
 					state.areaInfo = action.payload;
-					console.log(action.payload);
 					state.isLoadingAreaInfo = false;
 					state.errorAreaInfo = false;
 				}
@@ -145,6 +156,9 @@ export const {
 	setAddress,
 	setCoordinates,
 	setAreasToShow,
+	setIsCardListShow,
+	setIsPolygonShow,
+	setSelectedArea,
 	setIsAreaAdded,
 	setIsAreaError,
 } = areaSlice.actions;

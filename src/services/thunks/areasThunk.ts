@@ -35,7 +35,7 @@ export const fetchAddArea = createAsyncThunk<void, AddAreaRequestData>(
 		dataArea.append('description', description);
 		dataArea.append('latitude', latitude);
 		dataArea.append('longitude', longitude);
-		dataArea.append('categories', categories);
+		dataArea.append('categories', categories.join(','));
 		images.forEach((foto) => {
 			dataArea.append('images', foto);
 		});

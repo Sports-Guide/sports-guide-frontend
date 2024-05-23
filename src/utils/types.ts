@@ -111,7 +111,7 @@ export interface AddAreaRequestData {
 	description: string;
 	latitude: string;
 	longitude: string;
-	categories: string;
+	categories: string[];
 	images: File[];
 }
 
@@ -119,6 +119,9 @@ export type TAreaState = {
 	address: string;
 	coordinates: CoordinatesArray;
 	areasToShow: SportGrounds;
+	isCardListShow: boolean;
+	isPolygonShow: boolean;
+	selectedArea: string;
 	isAreaAdded: boolean;
 	isAreaLoading: boolean;
 	isAreaError: boolean;

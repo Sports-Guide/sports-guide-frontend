@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Main.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { setAreasToShow } from '../../services/slices/areaSlice';
 import {
 	areasList,
 	areasErrorMessage,
+	isCardListShowStatus,
 } from '../../services/selectors/areaSelector';
 import { AppDispatch } from '../../services/store';
 
@@ -19,16 +20,7 @@ const Main: React.FC = () => {
 	const dispatch: AppDispatch = useDispatch();
 	const areas = useSelector(areasList);
 	const areasError = useSelector(areasErrorMessage);
-
-	const [selectedArea, setSelectedArea] = useState<string>('');
-	const [isPolygonShow, setIsPolygonShow] = useState<boolean>(false);
-	const [isCardListShow, setIsCardListShow] = useState<boolean>(false);
-
-	useEffect(() => {
-		if (areasError) {
-			dispatch(openModal('getAreasError'));
-		}
-	}, [areasError, dispatch]);
+	const isCardListShow = useSelector(isCardListShowStatus);
 
 	useEffect(() => {
 		if (uid && token) {
@@ -37,31 +29,11 @@ const Main: React.FC = () => {
 		}
 	}, [uid, token, dispatch]);
 
-	const handleCategoryChange = (
-		event: React.ChangeEvent<HTMLSelectElement>
-	) => {
-		const selectedCategory = event.target.value;
-		if (selectedCategory === 'Вид спорта') {
-			return dispatch(setAreasToShow(areas));
+	useEffect(() => {
+		if (areasError) {
+			dispatch(openModal('getAreasError'));
 		}
-		const filteredAreas = areas.filter((area) =>
-			area.categories.some((category) => category.name === selectedCategory)
-		);
-		return dispatch(setAreasToShow(filteredAreas));
-	};
-
-	const handleAreaChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		if (isCardListShow) {
-			return;
-		}
-		setIsPolygonShow(true);
-		const selectedCurrentArea = event.target.value;
-		if (selectedCurrentArea === 'Все округа') {
-			setSelectedArea('город Москва');
-			return;
-		}
-		setSelectedArea(selectedCurrentArea);
-	};
+	}, [areasError, dispatch]);
 
 	useEffect(() => {
 		dispatch(setAreasToShow(areas));
@@ -69,23 +41,8 @@ const Main: React.FC = () => {
 
 	return (
 		<main className="main">
-			<SearchBar
-				handleCategoryChange={handleCategoryChange}
-				handleAreaChange={handleAreaChange}
-				setIsCardListShow={setIsCardListShow}
-				isCardListShow={isCardListShow}
-				setIsPolygonShow={setIsPolygonShow}
-			/>
-			{isCardListShow ? (
-				<CardList />
-			) : (
-				<YandexMap
-					selectedArea={selectedArea}
-					isPolygonShow={isPolygonShow}
-					setIsPolygonShow={setIsPolygonShow}
-					isCardListShow={isCardListShow}
-				/>
-			)}
+			<SearchBar />
+			{isCardListShow ? <CardList /> : <YandexMap />}
 		</main>
 	);
 };
