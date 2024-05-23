@@ -11,13 +11,23 @@ import {
 	renderImageForSportsGround,
 	renderImage,
 } from '../../utils/renderImage';
+import { SportGround } from '../../utils/types';
 
-export default function SportsGround() {
+interface MapState {
+	center: number[];
+	zoom: number;
+	controls: string[];
+	[key: string]: any;
+}
+
+const SportsGround: React.FC = () => {
 	const { id } = useParams();
 	const areas = useSelector(areasList);
-	const [mapState, setMapState] = useState(defaultState);
+	const [mapState, setMapState] = useState<MapState>(defaultState);
 
-	const selectedArea = areas.find((area) => area.id.toString() === id);
+	const selectedArea: SportGround | undefined = areas.find(
+		(area) => area.id.toString() === id
+	);
 
 	useEffect(() => {
 		if (selectedArea) {
@@ -138,7 +148,6 @@ export default function SportsGround() {
 						}}
 						options={{
 							preset: 'islands#blueSportIcon',
-							controls: [],
 							visible: true,
 							cursor: 'pointer',
 						}}
@@ -147,4 +156,6 @@ export default function SportsGround() {
 			</div>
 		</main>
 	);
-}
+};
+
+export default SportsGround;
