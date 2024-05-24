@@ -1,84 +1,44 @@
-.login-form__container {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	width: 425px;
-}
+@import '../../scss/variables.scss';
+@import '../../scss/mixins.scss';
 
 .login-form {
-	margin: 0;
+	@include flex-column;
 	margin-top: 16px;
-	display: flex;
-	flex-direction: column;
 	width: 100%;
-}
 
-.login-form__down_group {
-	margin: 0;
-	height: 44px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+	&__container {
+		@include form-container;
+	}
 
-.login-form__error-container {
-	text-align: center;
-	min-height: 18px;
-	max-height: 44px;
-	margin: 4px 0 8px;
-}
+	&__down_group {
+		margin: 0;
+		height: 44px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-.login-form__server-error {
-	min-height: 18px;
-	max-height: 32px;
-	color: #f92e2e;
-	font-size: 13px;
-	font-weight: 400;
-	line-height: 14px;
-}
+	&__error-container {
+		@include input-help-text;
+		color: $modal-btn-red;
+		text-align: start;
+		min-height: 18px;
+		max-height: 32px;
+		margin: 4px 0px 8px 0px;
+	}
 
-.login-form__mail_activate {
-	text-align: center;
-	font-size: 13px;
-	font-weight: 400;
-	line-height: 14px;
-	border: none;
-	color: var(--Primary-Black-light, #515151);
-	text-decoration-line: underline;
-	background-color: inherit;
-}
+	&__btn-resend-activate {
+		border: none;
+		background-color: inherit;
+		color: $main-black-light;
+		text-decoration-line: underline;
+		padding: 0px 6px;
+	}
 
-.login-form__button-signin {
-	margin: 0;
-	border-radius: 8px;
-	background: var(--Accent-Blue, #1478ff);
-	padding: 0;
-	width: 100%;
-	height: 44px;
-	color: var(--Primary-White, #fcfcfc);
-	font-family: Roboto;
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 700;
-	line-height: 20px;
-	text-align: center;
-	align-self: center;
-	cursor: pointer;
+	&__button-signin {
+		width: 100%;
+	}
 }
-
-// .login-form__paragraph {
-// 	margin: 0;
-// 	padding: 16px 0px;
-// 	color: var(--Primary-Gray-blue-dark, #737a8e);
-// 	font-family: Roboto;
-// 	font-size: 16px;
-// 	font-style: normal;
-// 	font-weight: 700;
-// 	line-height: 20px;
-// 	display: flex;
-// 	gap: 4px;
-// 	align-self: center;
-// }
 
 @media screen and (max-width: 648px) {
 	.login-form__container {

@@ -63,7 +63,7 @@ function FormComponent() {
 			<p className="reset-password-form__text">
 				Новый пароль должен отличаться от текущего
 			</p>
-			<InputPassword labelText="Новый пароль" inputId="newPassword" />
+			<InputPassword labelText="Пароль" inputId="newPassword" />
 			<InputPassword labelText="Повторите пароль" inputId="confirmPassword" />
 			<span className="reset-password-form__server-error">
 				{errorMessageConfirmPassword || ''}

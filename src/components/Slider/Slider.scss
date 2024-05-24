@@ -16,11 +16,16 @@
 
 .images-container {
 	height: 100%;
+	width: 593px;
 	display: flex;
 	transition: translate;
 	transition-property: transform;
 	transition-duration: 300ms;
 	transition-timing-function: ease-in-out;
+	-webkit-transition: translate;
+	-moz-transition: translate;
+	-ms-transition: translate;
+	-o-transition: translate;
 }
 
 .arrow {
@@ -55,18 +60,18 @@
 	background-image: url('../../images/icn_right-arrow.svg');
 }
 
-@media screen and (max-width: 964px) {
-	.slider-container {
-		width: 761px;
-		align-self: center;
-	}
-}
+// @media screen and (max-width: 964px) {
+// 	.slider-container {
+// 		width: 761px;
+// 		align-self: center;
+// 	}
+// }
 
-@media screen and (max-width: 856px) {
-	.slider-container {
-		width: 661px;
-	}
-}
+// @media screen and (max-width: 856px) {
+// 	.slider-container {
+// 		width: 661px;
+// 	}
+// }
 
 @media screen and (max-width: 756px) {
 	.slider-container {
