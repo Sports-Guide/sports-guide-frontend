@@ -7,6 +7,7 @@ import { Slider } from '../../components/Slider/Slider';
 import { bordersOfRussia, defaultState } from '../../constants/MapConstants';
 import { areasList } from '../../services/selectors/areaSelector';
 import ButtonLike from '../../components/Button/ButtonLike';
+import { Button } from '../../components/Button/Button';
 import {
 	renderImageForSportsGround,
 	renderImage,
@@ -29,6 +30,9 @@ const SportsGround: React.FC = () => {
 		(area) => area.id.toString() === id
 	);
 
+	// стейт для управления содержимым слайдера
+	const [selectedSliderImage, setSelectedSliderImage] = useState(null);
+
 	useEffect(() => {
 		if (selectedArea) {
 			const latitude = parseFloat(selectedArea.latitude);
@@ -43,6 +47,10 @@ const SportsGround: React.FC = () => {
 	if (!selectedArea) {
 		return <div className="sports-ground__not-found">Площадка не найдена</div>;
 	}
+
+	const handleImageClick = (selectedImage) => {
+		setSelectedSliderImage(selectedImage);
+	};
 
 	return (
 		<main className="sports-ground">
@@ -66,18 +74,30 @@ const SportsGround: React.FC = () => {
 						<img
 							key={area.id}
 							className="sports-ground__photo"
-							src={area.image}
+							src={selectedSliderImage || area.image}
 							alt="Площадка"
 						/>
 					))}
 				</Slider>
 				<div className="sports-ground__gallery">
 					{renderImageForSportsGround(selectedArea).map((area) => (
-						<img
+						<Button
 							key={area.id}
-							className="sports-ground__gallery-item"
+							customStyle="sports-ground__gallery-item"
 							src={area.image}
 							alt="Площадка"
+							onClick={() =>
+								handleImageClick(area.image || selectedSliderImage)
+							}
+							aria-label="Слайдер с изображениями площадок"
+							tabIndex="0"
+							startIcon={
+								<img
+									src={area.image}
+									alt="Площадка"
+									className="sports-ground__gallery-item"
+								/>
+							}
 						/>
 					))}
 				</div>
