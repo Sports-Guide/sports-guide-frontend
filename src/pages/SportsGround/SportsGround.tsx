@@ -31,7 +31,9 @@ const SportsGround: React.FC = () => {
 	);
 
 	// стейт для управления содержимым слайдера
-	const [selectedSliderImage, setSelectedSliderImage] = useState(null);
+	const [selectedSliderImage, setSelectedSliderImage] = useState<string | null>(
+		null
+	);
 
 	useEffect(() => {
 		if (selectedArea) {
@@ -48,9 +50,11 @@ const SportsGround: React.FC = () => {
 		return <div className="sports-ground__not-found">Площадка не найдена</div>;
 	}
 
-	const handleImageClick = (selectedImage) => {
+	const handleImageClick = (selectedImage: string | null) => {
+		console.log(selectedImage);
 		setSelectedSliderImage(selectedImage);
 	};
+	console.log(selectedArea);
 
 	return (
 		<main className="sports-ground">
@@ -84,13 +88,13 @@ const SportsGround: React.FC = () => {
 						<Button
 							key={area.id}
 							customStyle="sports-ground__gallery-item"
-							src={area.image}
-							alt="Площадка"
+							// src={area.image}
+							// alt="Площадка"
 							onClick={() =>
 								handleImageClick(area.image || selectedSliderImage)
 							}
 							aria-label="Слайдер с изображениями площадок"
-							tabIndex="0"
+							// tabIndex="0"
 							startIcon={
 								<img
 									src={area.image}
