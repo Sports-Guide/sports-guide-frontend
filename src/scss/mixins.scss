@@ -227,3 +227,7 @@
 	align-items: center;
 	width: 384px;
 }
+
+@mixin width-100 {
+	width: 100%;
+}

@@ -1,182 +1,176 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+
 .map {
-	width: 100%;
+	@include width-100;
 	height: 100%;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
+	@include flex-column-center;
 	margin-bottom: 70px;
-}
 
-.map__container {
-	width: 1040px;
-	height: 500px;
-	padding-top: 32px;
-}
-
-.map__baloon {
-	background-color: black;
-	width: 150px;
-	height: 150px;
-	background-image: url(../../images/location.png);
-}
-
-.map__inputs {
-	display: flex;
-	justify-content: center;
-	width: 1040px;
-	gap: 8px;
-	background: #fcfcfc;
-	padding: 0 36px 24px 36px;
-	border-bottom-left-radius: 12px;
-	border-bottom-right-radius: 12px;
-}
-
-.map__button {
-	padding: 0;
-	border: 0;
-	width: 104px;
-	height: 52px;
-	background-image: url(../../images/buttonMap.png);
-	border-radius: 8px;
-	background-size: cover;
-}
-
-.map__button:hover {
-	cursor: pointer;
-}
-
-.map__button_active {
-	background-image: url(../../images/buttonCards.png);
-}
-
-.map__search-bar {
-	border: none;
-	width: 203.5px;
-	height: 52px;
-	border: 1px solid #c9d1e5;
-	background: #fcfcfc;
-	border-radius: 8px;
-	padding-left: 10px;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 15px;
-	line-height: 20px;
-}
-
-.map__search-bar::placeholder {
-	color: #898787;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 15px;
-	line-height: 20px;
-}
-
-.map__search-bar_type_search {
-	width: 45%;
-}
-.map__search-bar_type_search-area {
-	width: 100%;
-}
-
-.map__filter-button {
-	display: none;
+	&__container {
+		width: 1040px;
+		height: 500px;
+		padding-top: 32px;
+	}
+	&__baloon {
+		background-color: black;
+		width: 150px;
+		height: 150px;
+		background-image: url(../../images/location.png);
+	}
+	&__inputs {
+		display: flex;
+		justify-content: center;
+		width: 1040px;
+		gap: 8px;
+		background: $main-white;
+		padding: 0 36px 24px 36px;
+		border-bottom-left-radius: 12px;
+		border-bottom-right-radius: 12px;
+	}
+	&__button {
+		padding: 0;
+		border: 0;
+		width: 104px;
+		height: 52px;
+		background-image: url(../../images/buttonMap.png);
+		border-radius: 8px;
+		background-size: cover;
+	}
+	&__button:hover {
+		cursor: pointer;
+	}
+	&__button_active {
+		background-image: url(../../images/buttonCards.png);
+	}
+	&__search-bar {
+		border: none;
+		width: 203.5px;
+		height: 52px;
+		border: 1px solid $main-gray-blue-light;
+		background: $main-white;
+		border-radius: 8px;
+		padding-left: 10px;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 15px;
+		line-height: 20px;
+	}
+	&__search-bar::placeholder {
+		color: #898787;
+		@include input-text;
+	}
+	&__search-bar_type_search {
+		width: 45%;
+	}
+	&__search-bar_type_search-area {
+		@include width-100;
+	}
+	&__filter-button {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 1060px) {
-	.map__container {
-		width: 100%;
-	}
-	.map__inputs {
-		width: 100%;
-		padding: 0 44px 24px 44px;
-	}
-	.map__search-bar_area {
-		width: 170px;
-	}
-	.map__search-bar_kinds-of-sports {
-		width: 170px;
-	}
-	.map__search-bar_type_search {
-		width: 270px;
+	.map {
+		&__container {
+			@include width-100;
+		}
+		&__inputs {
+			@include width-100;
+			padding: 0 44px 24px 44px;
+		}
+		&__search-bar_area {
+			width: 170px;
+		}
+		&__search-bar_kinds-of-sports {
+			width: 170px;
+		}
+		&__search-bar_type_search {
+			width: 270px;
+		}
 	}
 }
 
 @media screen and (max-width: 866px) {
-	.map__inputs {
-		padding: 0 18px 16px 18px;
-		display: grid;
-		grid-template-rows: auto auto;
-		grid-template-columns: 1fr 2fr;
-		grid-template-areas:
-			'button search'
-			'area kinds';
-	}
-	.map__button {
-		grid-area: button;
-	}
-	.map__search-bar_area {
-		grid-area: area;
-		width: 100%;
-	}
-	.map__search-bar_kinds-of-sports {
-		grid-area: kinds;
-		width: 100%;
-	}
-	.map__search-bar_type_search {
-		grid-area: search;
-		width: 100%;
+	.map {
+		&__inputs {
+			padding: 0 18px 16px 18px;
+			display: grid;
+			grid-template-rows: auto auto;
+			grid-template-columns: 1fr 2fr;
+			grid-template-areas:
+				'button search'
+				'area kinds';
+		}
+		&__button {
+			grid-area: button;
+		}
+		&__search-bar_area {
+			grid-area: area;
+			@include width-100;
+		}
+		&__search-bar_kinds-of-sports {
+			grid-area: kinds;
+			@include width-100;
+		}
+		&__search-bar_type_search {
+			grid-area: search;
+			@include width-100;
+		}
 	}
 }
 
 @media screen and (max-width: 495px) {
-	.map__inputs {
-		display: flex;
-		flex-direction: row;
-	}
-	.map__button {
-		display: none;
-	}
-	.map__button-mobile {
-		display: block;
-		width: 93px;
-		height: 32px;
-		border-radius: 40px;
-		position: fixed;
-		bottom: 5%;
-		left: 37.6%;
-		background: rgba(81, 81, 81, 0.95);
-		z-index: 1;
-		background-image: url(../../images/ButtonList.svg);
-		background-position: center;
-	}
+	.map {
+		&__inputs {
+			display: flex;
+			flex-direction: row;
+		}
+		&__button {
+			display: none;
+		}
+		&__button-mobile {
+			display: block;
+			width: 93px;
+			height: 32px;
+			border-radius: 40px;
+			position: fixed;
+			bottom: 5%;
+			left: 37.6%;
+			background: rgba(81, 81, 81, 0.95);
+			z-index: 1;
+			background-image: url(../../images/ButtonList.svg);
+			background-position: center;
+		}
 
-	.map__button-mobile_active {
-		background-image: url(../../images/ButtonMap.svg);
-	}
+		&__button-mobile_active {
+			background-image: url(../../images/ButtonMap.svg);
+		}
 
-	.map__search-bar_kinds-of-sports {
-		display: none;
-	}
-	.map__search-bar_area {
-		display: none;
-	}
-	.map__search-bar_type_search {
-		height: 36px;
-	}
-	.map__filter-button {
-		border: none;
-		padding: 0;
-		display: block;
-		background-image: url(../../images/Button-filter.svg);
-		width: 40px;
-		height: 36px;
-		background-size: cover;
-		background-position: center;
-		border-radius: 6px;
-	}
-	.map__filter-button {
-		cursor: pointer;
+		&__search-bar_kinds-of-sports {
+			display: none;
+		}
+		&__search-bar_area {
+			display: none;
+		}
+		&__search-bar_type_search {
+			height: 36px;
+		}
+		&__filter-button {
+			border: none;
+			padding: 0;
+			display: block;
+			background-image: url(../../images/Button-filter.svg);
+			width: 40px;
+			height: 36px;
+			background-size: cover;
+			background-position: center;
+			border-radius: 6px;
+		}
+		&__filter-button {
+			cursor: pointer;
+		}
 	}
 }
 
@@ -198,122 +192,112 @@
 .yandex {
 	display: flex;
 	width: 318px;
-}
 
-.yandex__contetn {
-	margin-left: 10px;
-	width: 218px;
-}
-
-.yandex__categories {
-	display: grid;
-	width: 200px;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-	justify-content: end;
-	row-gap: 6px;
-}
-
-.yandex__category {
-	min-height: 100%;
-	margin-right: 10px;
-	height: 20px;
-	background: rgba(229, 240, 255, 1);
-	display: flex;
-	align-items: center;
-	border-radius: 6px;
-	justify-content: start;
-	color: #153e8c;
-}
-
-.yandex__small-img {
-	width: 12px;
-	height: 12px;
-	margin-left: 8px;
-}
-
-.yandex__small-text {
-	font-family: Roboto;
-	font-size: 10px;
-	font-weight: 400;
-	line-height: 12px;
-	letter-spacing: 0em;
-	text-align: left;
-	margin: 0;
-	margin-left: 8px;
-	margin-right: 8px;
-}
-
-.yandex__images {
-	width: 88px;
-	height: 88px;
-	border-radius: 8px;
-}
-
-.yandex__title {
-	font-family: Roboto Flex;
-	font-size: 14px;
-	font-weight: 900;
-	line-height: 16px;
-	letter-spacing: 0.01em;
-	text-align: left;
-}
-
-.yandex__subtitle {
-	font-family: Roboto;
-	font-size: 10px;
-	font-weight: 400;
-	line-height: 12px;
-	letter-spacing: 0em;
-	text-align: left;
-	margin-bottom: 5px;
+	&__content {
+		margin-left: 10px;
+		width: 218px;
+	}
+	&__categories {
+		display: grid;
+		width: 200px;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+		justify-content: end;
+		row-gap: 6px;
+	}
+	&__category {
+		min-height: 100%;
+		margin-right: 10px;
+		height: 20px;
+		background: rgba(229, 240, 255, 1);
+		display: flex;
+		align-items: center;
+		border-radius: 6px;
+		justify-content: start;
+		color: $accent-dark-blue;
+	}
+	&__small-img {
+		width: 12px;
+		height: 12px;
+		margin-left: 8px;
+	}
+	&__small-text {
+		font-family: $font-family-roboto;
+		@include small-tag-text;
+		letter-spacing: 0em;
+		text-align: left;
+		margin: 0;
+		margin-left: 8px;
+		margin-right: 8px;
+	}
+	&__images {
+		width: 88px;
+		height: 88px;
+		border-radius: 8px;
+	}
+	&__title {
+		font-family: Roboto Flex;
+		font-size: 14px;
+		font-weight: 900;
+		line-height: 16px;
+		letter-spacing: 0.01em;
+		text-align: left;
+	}
+	&__subtitle {
+		font-family: Roboto;
+		font-size: 10px;
+		font-weight: 400;
+		line-height: 12px;
+		letter-spacing: 0em;
+		text-align: left;
+		margin-bottom: 5px;
+	}
 }
 
 // Карта добавления карточки
 
 .map_area-app {
-	width: 100%;
+	@include width-100;
+	@include flex-column-center;
 	height: 80%;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
 
-	.map__container {
-		width: 724px;
-		height: 340px;
-	}
+	.map {
+		&__container {
+			width: 724px;
+			height: 340px;
+		}
 
-	.map__baloon {
-		width: 150px;
-		height: 150px;
-		background-image: url(../../images/location.png);
-	}
+		&__baloon {
+			width: 150px;
+			height: 150px;
+			background-image: url(../../images/location.png);
+		}
 
-	.map__button_none {
-		display: none;
-	}
+		&__button_none {
+			display: none;
+		}
 
-	.map__inputs_aprea {
-		display: flex;
-		width: 100%;
-		padding: 0;
-	}
+		&__inputs_aprea {
+			display: flex;
+			@include width-100;
+			padding: 0;
+		}
 
-	.map__search-bar {
-		width: 724px;
-		height: 42px;
-		border-radius: 8px;
-		margin-bottom: 10px;
-		border: 1px solid rgba(201, 209, 229, 1);
-	}
+		&__search-bar {
+			width: 724px;
+			height: 42px;
+			border-radius: 8px;
+			margin-bottom: 10px;
+			border: 1px solid rgba(201, 209, 229, 1);
+		}
 
-	.map__search-bar_kinds-of-sports {
-		display: none;
-	}
+		&__search-bar_kinds-of-sports {
+			display: none;
+		}
 
-	.map__search-bar_area {
-		display: none;
+		&__search-bar_area {
+			display: none;
+		}
 	}
 
 	.ymaps-2-1-79-inner-panes {
@@ -327,36 +311,38 @@
 
 @media screen and (max-width: 878px) {
 	.map_area-app {
-		.map__container {
-			width: 100%;
-			padding: 0;
-		}
+		.map {
+			&__container {
+				@include width-100;
+				padding: 0;
+			}
 
-		.map__baloon {
-			width: 150px;
-			height: 150px;
-			background-image: url(../../images/location.png);
-		}
+			&__baloon {
+				width: 150px;
+				height: 150px;
+				background-image: url(../../images/location.png);
+			}
 
-		.map__inputs_aprea {
-			display: flex;
-			width: 100%;
-			padding: 0;
-		}
+			&__inputs_aprea {
+				display: flex;
+				@include width-100;
+				padding: 0;
+			}
 
-		.map__search-bar {
-			width: 724px;
-			height: 42px;
-			border-radius: 8px;
-			border: 1px solid rgba(201, 209, 229, 1);
-		}
+			&__search-bar {
+				width: 724px;
+				height: 42px;
+				border-radius: 8px;
+				border: 1px solid rgba(201, 209, 229, 1);
+			}
 
-		.map__search-bar_kinds-of-sports {
-			display: none;
-		}
+			&__search-bar_kinds-of-sports {
+				display: none;
+			}
 
-		.map__search-bar_area {
-			display: none;
+			&__search-bar_area {
+				display: none;
+			}
 		}
 
 		.ymaps-2-1-79-inner-panes {
@@ -372,7 +358,7 @@
 @media screen and (max-width: 495px) {
 	.map_area-app {
 		.map__search-bar_type_search::placeholder {
-			font-family: Roboto;
+			font-family: $font-family-roboto;
 			font-size: 12px;
 			font-weight: 400;
 			line-height: 14px;
@@ -380,7 +366,7 @@
 			text-align: left;
 		}
 		.map__search-bar_type_search {
-			width: 100%;
+			@include width-100;
 		}
 	}
 }
